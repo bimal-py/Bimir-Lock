@@ -287,6 +287,72 @@ object PasswordStore {
         }
     }
 
+    // ---- fill (read) side ----------------------------------------------------
+
+    class Entry(val id: Long, val title: String, val userName: String)
+
+    private const val MAX_ENTRIES = 500
+
+    // Titles and usernames only. Those are stored in the clear (only passwords are
+    // sealed), so listing them needs no key. Never creates the database.
+    fun listEntries(context: Context): List<Entry> {
+        val db = openForRead(context) ?: return emptyList()
+        return try {
+            val out = ArrayList<Entry>()
+            val sql = "select $COL_ID, ifnull($COL_TITLE, ''), ifnull($COL_USERNAME, '') " +
+                "from $TABLE where ifnull($COL_PASSWORD, '') != '' order by $COL_ID"
+            db.rawQuery(sql, null).use { cursor ->
+                while (cursor.moveToNext() && out.size < MAX_ENTRIES) {
+                    out.add(Entry(cursor.getLong(0), cursor.getString(1), cursor.getString(2)))
+                }
+            }
+            out
+        } catch (t: Throwable) {
+            Log.w(TAG, "list failed: ${t.javaClass.simpleName}")
+            emptyList()
+        } finally {
+            try { db.close() } catch (t: Throwable) { }
+        }
+    }
+
+    // Call ONLY after the user has authenticated. Null on any failure: a fill that
+    // does not happen is fine, a wrong value typed into a login form is not.
+    fun revealPassword(context: Context, id: Long): String? {
+        val db = openForRead(context) ?: return null
+        return try {
+            val stored = db.rawQuery(
+                "select $COL_PASSWORD from $TABLE where $COL_ID = ? limit 1", arrayOf(id.toString())
+            ).use { cursor ->
+                if (cursor.moveToFirst() && !cursor.isNull(0)) cursor.getString(0) else null
+            } ?: return null
+            // INVARIANT K: with no check value nothing in the table was sealed by us, so the
+            // stored value IS the password (a vault the app has not migrated yet).
+            val kcv = try { readMeta(db, KCV_KEY) } catch (t: Throwable) { null }
+                ?: return stored
+            val app = context.applicationContext
+            // Proves this is the vault's key before trusting decode(): under any other key
+            // a real envelope would fail its tag and read back as "plaintext".
+            VaultCrypto.ensureKey(app, kcv)
+            VaultCrypto.decode(app, stored).value
+        } catch (t: Throwable) {
+            Log.w(TAG, "reveal failed: ${t.javaClass.simpleName}")
+            null
+        } finally {
+            try { db.close() } catch (t: Throwable) { }
+        }
+    }
+
+    private fun openForRead(context: Context): SQLiteDatabase? {
+        return try {
+            val file = context.applicationContext.getDatabasePath(DB_NAME)
+            if (!file.exists()) return null
+            SQLiteDatabase.openDatabase(file.path, null, SQLiteDatabase.OPEN_READONLY)
+        } catch (t: Throwable) {
+            Log.w(TAG, "open for read failed: ${t.javaClass.simpleName}")
+            null
+        }
+    }
+
     // Table and column names are compile-time constants; every value is bound.
     private fun findRowId(db: SQLiteDatabase, title: String, userName: String): Long? {
         val sql = "select $COL_ID from $TABLE " +

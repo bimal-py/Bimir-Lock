@@ -52,6 +52,16 @@
              minSdk is 26 and AutofillService is API 26, so nothing here is gated.
              Deliberately no android:process: the service must share the app
              process so its SQLite writes coordinate with sqflite's connection. -->
+        <!-- Asks for fingerprint / screen lock before an autofill fill. Started only by the
+             system through our own PendingIntent, so it is not exported. -->
+        <activity
+            android:name=".autofill.FillAuthActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="false"
+            android:taskAffinity=""
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboard|keyboardHidden|uiMode|density"
+            android:theme="@style/BimirAutofillAuth" />
         <service
             android:name=".autofill.BimirAutofillService"
             android:label="Bimir Lock"
