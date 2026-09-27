@@ -195,8 +195,23 @@ class HomePage extends StatelessWidget {
                 // Fail closed: a write while the key is unusable would either
                 // be impossible to encrypt or would overwrite something we
                 // cannot read back.
-                Get.snackbar("Vault locked",
-                    "Bimir Lock can't unlock your saved passwords on this device, so adding a new one is disabled. Your saved data has not been changed.");
+                // A dialog, not Get.snackbar: that needs GetMaterialApp and
+                // crashed with a null check under this app's MaterialApp.
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("Vault locked"),
+                    content: const Text(
+                      "Bimir Lock can't unlock your saved passwords on this device, so adding a new one is disabled. Your saved data has not been changed.",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text("Ok"),
+                      ),
+                    ],
+                  ),
+                );
                 return;
               }
               if (cc.encryptedPassword == null) {
@@ -230,7 +245,6 @@ class HomePage extends StatelessWidget {
                         ],
                       );
                     });
-                Get.snackbar("Error", "Please set access pin first");
                 return;
               } else {
                 navigatorKey.currentState!.pushNamed(AddPasswordPage.routeName);
