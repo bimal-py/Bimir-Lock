@@ -1,4 +1,5 @@
 import 'package:bimir_lock/controller/autofill/autofill_controller.dart';
+import 'package:bimir_lock/controller/backup/backup_controller.dart';
 import 'package:bimir_lock/controller/biometric/biometric_controller.dart';
 import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/main.dart';
@@ -21,6 +22,7 @@ class BimirLockDrawer extends StatelessWidget {
   final CoreController cc = Get.find<CoreController>();
   final AutofillController ac = Get.find<AutofillController>();
   final BiometricController bc = Get.find<BiometricController>();
+  final BackupController backup = BackupController();
   BimirLockDrawer({
     super.key,
   });
@@ -126,6 +128,26 @@ class BimirLockDrawer extends StatelessWidget {
                                 ) ??
                                 false,
                           ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          backup.backUp();
+                        },
+                        child: DrawerTile(
+                          iconData: Icons.backup_outlined,
+                          title: "Back up passwords",
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          backup.restore();
+                        },
+                        child: DrawerTile(
+                          iconData: Icons.restore,
+                          title: "Restore from backup",
                         ),
                       ),
                       DrawerTile(

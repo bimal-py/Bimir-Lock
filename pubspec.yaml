@@ -31,6 +31,7 @@ dependencies:
   auto_size_text: ^3.0.0
   cupertino_icons: ^1.0.2
   encrypt: ^5.0.3
+  file_picker: ^13.1.0
   flutter:
     sdk: flutter
   flutter_slidable: ^4.0.3
@@ -45,6 +46,7 @@ dependencies:
   local_auth: ^3.0.2
   lottie: ^3.1.2
   pinput: ^6.0.2
+  pointycastle: ^3.9.1
   shared_preferences: ^2.2.0
   sqflite: ^2.3.0
   upgrader: ^13.7.0

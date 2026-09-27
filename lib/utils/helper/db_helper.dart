@@ -199,6 +199,33 @@ class DataBaseHelper {
     }
   }
 
+  /// Restore's bulk insert: one channel round trip per chunk to seal, and each
+  /// chunk written in one transaction, so a chunk lands whole or not at all.
+  /// Same sealing rule as [_rowFor]: every password is encrypted, never raw.
+  /// Returns how many rows were written before any failure (which rethrows).
+  Future<int> insertPasswords(List<PasswordTable> rows) async {
+    const int chunk = 200;
+    int written = 0;
+    final db = await getDatabase;
+    for (int start = 0; start < rows.length; start += chunk) {
+      final List<PasswordTable> part =
+          rows.sublist(start, (start + chunk).clamp(0, rows.length));
+      final List<String> sealed = await VaultCrypto.instance
+          .encryptAll(part.map((PasswordTable r) => r.password ?? '').toList());
+      await db.transaction((txn) async {
+        for (int i = 0; i < part.length; i++) {
+          final Map<String, Object?> row =
+              Map<String, Object?>.from(part[i].toJson());
+          row[DbConstant.password] = sealed[i];
+          row[DbConstant.passwordLegacy] = null;
+          await txn.insert(DbConstant.passwordTableName, row);
+        }
+      });
+      written += part.length;
+    }
+    return written;
+  }
+
   Future<bool> deletePassword(PasswordTable data) async {
     try {
       final db = await getDatabase;
