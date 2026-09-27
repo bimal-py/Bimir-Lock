@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bimir_lock/controller/homePage/home_page_controller.dart';
 
 import 'package:bimir_lock/core/core_controller.dart';
@@ -11,6 +9,7 @@ import 'package:bimir_lock/widgets/empty_state.dart';
 import 'package:bimir_lock/widgets/vault_status_banner.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:bimir_lock/widgets/user_avatar.dart';
 import 'package:get/get.dart';
 import 'package:upgrader/upgrader.dart';
 
@@ -72,24 +71,19 @@ class HomePage extends StatelessWidget {
                     color: theme.colorScheme.onInverseSurface,
                   ),
                   child: ClipOval(
-                    child: cc.currentUser.value?.userAvatar == null
-                        ? const Icon(
-                            Icons.person,
-                            size: 30,
-                          )
-                        : GestureDetector(
-                            onTap: () {
-                              navigatorKey.currentState!.pushNamed(
-                                  AddUserDetailPage.routeName,
-                                  arguments: true);
-                            },
-                            child: Image.file(
-                              File(
-                                cc.currentUser.value!.userAvatar!,
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                    child: GestureDetector(
+                      onTap: () {
+                        navigatorKey.currentState!.pushNamed(
+                            AddUserDetailPage.routeName,
+                            arguments: true);
+                      },
+                      child: Obx(
+                        () => UserAvatar(
+                          file: cc.avatarFile.value,
+                          iconSize: 30,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

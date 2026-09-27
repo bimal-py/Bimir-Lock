@@ -104,12 +104,53 @@ class StorageHelper {
     return newImagePath;
   }
 
-  Future<String> storeImage(File file) async {
-    var newPath = await file.getNewDbFilePath();
-    log("file path ==> $newPath");
-    log(file.path);
-    File newFile = await file.copy(newPath);
-    log("newf ile ==> $newFile");
-    return newFile.path;
+  // The profile photo is stored as a FILE NAME, never a full path. iOS moves the
+  // app's container to a new folder on every update (and every Xcode run), so a
+  // saved absolute path points at a folder that no longer exists, while the photo
+  // itself moved along with the container and is still in imageFolder.
+  static String avatarFileName(String stored) {
+    final int slash = stored.lastIndexOf('/');
+    return slash == -1 ? stored : stored.substring(slash + 1);
+  }
+
+  // The photo as it lives on THIS install, or null when there is none. Accepts a
+  // bare name and the old absolute paths, which is what recovers existing photos.
+  Future<File?> resolveAvatar(String? stored) async {
+    if (stored == null || stored.trim().isEmpty) return null;
+    try {
+      final File file =
+          File("${await getImageLocation()}/${avatarFileName(stored)}");
+      return await file.exists() ? file : null;
+    } catch (e) {
+      log("resolveAvatar failed: ${e.runtimeType}");
+      return null;
+    }
+  }
+
+  // Copies a picked photo in under a fresh name and returns that name. A new name
+  // each time also means Flutter's image cache can never keep showing the old one.
+  // The previous photo is removed only after the new one is safely written.
+  Future<String> storeImage(File file, {String? replacing}) async {
+    final String dir = await getImageLocation();
+    final String name =
+        "avatar_${DateTime.now().millisecondsSinceEpoch}${file.getExtension()}";
+    final File newFile = await file.copy("$dir/$name");
+    if (await newFile.length() == 0) {
+      await newFile.delete();
+      throw const FileSystemException("copied photo is empty");
+    }
+    if (replacing != null && replacing.trim().isNotEmpty) {
+      final String oldName = avatarFileName(replacing);
+      if (oldName != name) {
+        try {
+          final File old = File("$dir/$oldName");
+          if (await old.exists()) await old.delete();
+        } catch (e) {
+          // A leftover old photo wastes a little space; it is never an error.
+          log("old avatar cleanup failed: ${e.runtimeType}");
+        }
+      }
+    }
+    return name;
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bimir_lock/utils/helper/storage_helper.dart';
 import 'package:intl/intl.dart';
 
 extension DateFormatter on DateTime {
@@ -11,12 +10,9 @@ extension DateFormatter on DateTime {
 
 extension GetExtension on File {
   String getExtension() {
-    return path.substring(path.lastIndexOf('.'), path.length);
-  }
-
-  Future<String> getNewDbFilePath() async {
-    var newPath = await StorageHelper().getImageLocation();
-    var ext = getExtension();
-    return "$newPath/image$ext";
+    final int dot = path.lastIndexOf('.');
+    // No dot, or a dot in a folder name: fall back rather than throw.
+    if (dot == -1 || dot < path.lastIndexOf('/')) return ".jpg";
+    return path.substring(dot, path.length);
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bimir_lock/controller/autofill/autofill_controller.dart';
 import 'package:bimir_lock/controller/biometric/biometric_controller.dart';
 import 'package:bimir_lock/core/core_controller.dart';
@@ -13,6 +11,7 @@ import 'package:bimir_lock/widgets/contact_link_widget.dart';
 import 'package:bimir_lock/widgets/drawer_tile.dart';
 import 'package:bimir_lock/widgets/pin_input_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:bimir_lock/widgets/user_avatar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -53,17 +52,10 @@ class BimirLockDrawer extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           child: GetBuilder<CoreController>(
                             init: cc,
-                            builder: (cont) => cc.isUserLoggedIn()
-                                ? Image.file(
-                                    File(cc.currentUser.value!.userAvatar!),
-                                    fit: BoxFit.cover,
-                                  )
-                                : FittedBox(
-                                    child: Icon(
-                                      Icons.person_rounded,
-                                      color: theme.colorScheme.onSurfaceVariant,
-                                    ),
-                                  ),
+                            builder: (cont) => UserAvatar(
+                              file: cc.avatarFile.value,
+                              iconColor: theme.colorScheme.onSurfaceVariant,
+                            ),
                           ),
                         ),
                       ),

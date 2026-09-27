@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bimir_lock/utils/extensions.dart';
 import 'package:bimir_lock/utils/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:bimir_lock/widgets/user_avatar.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -98,18 +99,11 @@ class _AddUserDetailPageState extends State<AddUserDetailPage> {
                                               .colorScheme.surfaceContainerHighest,
                                           height: 122,
                                           width: 122,
-                                          child: c.userAvatar == null
-                                              ? FittedBox(
-                                                  child: Icon(
-                                                    Icons.person_rounded,
-                                                    color: theme
-                                                        .colorScheme.surface,
-                                                  ),
-                                                )
-                                              : Image.file(
-                                                  c.userAvatar!,
-                                                  fit: BoxFit.cover,
-                                                ),
+                                          child: UserAvatar(
+                                            file: c.userAvatar,
+                                            iconColor:
+                                                theme.colorScheme.surface,
+                                          ),
                                         );
                                       }),
                                   // : CachedNetworkImage(

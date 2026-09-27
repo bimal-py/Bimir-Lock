@@ -38,13 +38,13 @@ class AddUserDetailController extends GetxController {
   Future<void> initialfetch() async {
     isPageLoading.value = true;
     if (cc.isUserLoggedIn()) {
-      String userName = cc.currentUser.value!.userName!;
-      String dob = cc.currentUser.value!.dob!;
+      String userName = cc.currentUser.value?.userName ?? '';
+      String dob = cc.currentUser.value?.dob ?? '';
       userNameController = TextEditingController(text: userName);
       dobController = TextEditingController(text: dob);
-      userAvatar = cc.currentUser.value?.userAvatar != null
-          ? File(cc.currentUser.value!.userAvatar!)
-          : null;
+      // Already resolved for this install and known to exist, so a stale path
+      // from an older version shows as "no photo" and asks for a new one.
+      userAvatar = cc.avatarFile.value;
       initialUserAvatar = userAvatar;
     } else {
       userNameController = TextEditingController();
@@ -79,19 +79,36 @@ class AddUserDetailController extends GetxController {
   }
 
   Future<void> onSaveUserDetail(BuildContext context) async {
-    FocusManager.instance.primaryFocus!.unfocus();
-    if (userAvatar == null) {
+    FocusManager.instance.primaryFocus?.unfocus();
+    final File? avatar = userAvatar;
+    if (avatar == null || !await avatar.exists()) {
+      // Includes a picked photo whose temporary file the OS has since cleared.
+      userAvatar = null;
+      update();
       Fluttertoast.showToast(msg: "Upload Profile Image to save user",
           backgroundColor: Colors.black, textColor: Colors.white);
       return;
     }
-    if (formKey.currentState!.validate()) {
-      isLoading.value = true;
-      String imagePath = "";
-      if (initialUserAvatar?.path == userAvatar?.path) {
-        imagePath = userAvatar!.path;
+    if (!formKey.currentState!.validate()) return;
+
+    isLoading.value = true;
+    try {
+      String imagePath;
+      if (initialUserAvatar?.path == avatar.path) {
+        // Unchanged: keep the stored name.
+        imagePath = StorageHelper.avatarFileName(avatar.path);
       } else {
-        imagePath = await StorageHelper().storeImage(userAvatar!);
+        try {
+          imagePath = await StorageHelper().storeImage(avatar,
+              replacing: cc.currentUser.value?.userAvatar);
+        } catch (e) {
+          log("storeImage failed: ${e.runtimeType}");
+          Fluttertoast.showToast(
+              msg: "Couldn't save the photo. Please pick it again.",
+              backgroundColor: Colors.black,
+              textColor: Colors.white);
+          return;
+        }
       }
 
       User userModel = User(
@@ -125,8 +142,9 @@ class AddUserDetailController extends GetxController {
           log("============>>>Error while loading initial quotes");
         }
       }
+    } finally {
+      // Always, so a failed save can never leave the button spinning.
+      isLoading.value = false;
     }
-
-    isLoading.value = false;
   }
 }

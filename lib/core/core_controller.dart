@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:bimir_lock/models/quote_model.dart';
 import 'package:bimir_lock/utils/helper/db_helper.dart';
@@ -25,8 +26,21 @@ class CoreController extends GetxController {
     super.onInit();
   }
 
+  // The profile photo resolved for THIS install. Widgets read this, never
+  // userAvatar directly: the stored value is only a file name.
+  Rxn<File> avatarFile = Rxn<File>();
+
   Future<void> loadCurrentUser() async {
-    currentUser.value = await storageHelper.getUser();
+    final User? user = await storageHelper.getUser();
+    final String? stored = user?.userAvatar;
+    if (user != null && stored != null && stored.contains('/')) {
+      // One-time upgrade from the old absolute path. Harmless to repeat.
+      user.userAvatar = StorageHelper.avatarFileName(stored);
+      await storageHelper.setUser(user);
+    }
+    avatarFile.value = await storageHelper.resolveAvatar(user?.userAvatar);
+    currentUser.value = user;
+    update();
   }
 
   Future loadInitQuote() async {
