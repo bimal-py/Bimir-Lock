@@ -33,7 +33,6 @@ object PasswordStore {
     private const val COL_META_KEY = "key"
     private const val COL_META_VALUE = "value"
     private const val KCV_KEY = "kcv_v1"
-    private const val ENVELOPE_LIKE = "v1:%"
 
     private const val MAX_FIELD_LENGTH = 512
 
@@ -49,29 +48,29 @@ object PasswordStore {
         if (password.isEmpty()) return Result.SKIPPED
         if (title.isEmpty() && userName.isEmpty()) return Result.SKIPPED
 
-        // Seal BEFORE the database is opened. A Keystore stall must never hold the SQLite
-        // write lock inside the system's ~5 s save budget, and a Keystore failure must cost
-        // exactly one skipped save. There is deliberately NO plaintext fallback: a skipped
-        // save is recoverable by the user in seconds, a surprise plaintext row is a silent
-        // security regression nobody would ever notice. After this line the local `password`
-        // must not reach any ContentValues.
-        val sealed = try {
-            VaultCrypto.encrypt(context.applicationContext, password)
-        } catch (t: Throwable) {
-            Log.w(TAG, "encrypt failed: ${t.javaClass.simpleName}")
-            return Result.FAILED
-        }
-
         var db: SQLiteDatabase? = null
         return try {
             db = open(context) ?: return Result.FAILED
             db.beginTransaction()
             try {
                 ensureSchema(db)
-                // INVARIANT K and the proof that the key we just sealed under is the vault's
+                // INVARIANT K, and the proof that the key we are about to seal under is the vault's
                 // key. False means we return without marking the transaction successful, so
                 // nothing at all is written.
                 if (!kcvGate(db, context)) return Result.FAILED
+                // Seal only now. VaultCrypto.encrypt() never creates a key, so on a first run
+                // it needs the key kcvGate() just established; sealing earlier is what used
+                // to leave an orphan key behind whenever the gate then refused. Keystore work
+                // inside the transaction costs milliseconds, and the key check above already
+                // runs here. There is deliberately NO plaintext fallback: a skipped save is
+                // recoverable by the user in seconds, a surprise plaintext row is a silent
+                // security regression nobody would notice.
+                val sealed = try {
+                    VaultCrypto.encrypt(context.applicationContext, password)
+                } catch (t: Throwable) {
+                    Log.w(TAG, "encrypt failed: ${t.javaClass.simpleName}")
+                    return Result.FAILED
+                }
                 // An empty userName is not an identity. The parser legitimately fails to
                 // find one (password-only screens, unrecognised fields), so (title, "")
                 // would collide across unrelated accounts and the update below would
@@ -238,20 +237,11 @@ object PasswordStore {
         }
 
         if (stored == null) {
-            val encrypted = try {
-                countEnvelopeRows(db)
-            } catch (t: Throwable) {
-                Log.w(TAG, "kcv scan failed: ${t.javaClass.simpleName}")
-                return false
-            }
-            if (encrypted > 0) {
-                // Encrypted rows with no key check value: the vault was sealed under a key
-                // we can no longer prove we hold. Writing a fresh check value here would
-                // make every existing envelope look like legacy plaintext to the migration,
-                // which would then re-encrypt it and destroy it. Refuse, permanently.
-                Log.w(TAG, "kcv missing with encrypted rows; refusing to write")
-                return false
-            }
+            // INVARIANT K: every writer (this one and the Dart gate) stores the check value
+            // before or together with its first envelope. So with no check value, nothing in
+            // the table was sealed by us, and a "v1:..." value there is a user's password
+            // that merely looks like an envelope, e.g. an API token. Refusing here (as a
+            // prefix count once did) would block saves on a perfectly ordinary vault.
             val fresh = try {
                 VaultCrypto.ensureKey(app, null)
             } catch (t: Throwable) {
@@ -294,13 +284,6 @@ object PasswordStore {
         val sql = "select $COL_META_VALUE from $META_TABLE where $COL_META_KEY = ? limit 1"
         db.rawQuery(sql, arrayOf(key)).use { cursor ->
             return if (cursor.moveToFirst() && !cursor.isNull(0)) cursor.getString(0) else null
-        }
-    }
-
-    private fun countEnvelopeRows(db: SQLiteDatabase): Long {
-        val sql = "select count(*) from $TABLE where $COL_PASSWORD like ?"
-        db.rawQuery(sql, arrayOf(ENVELOPE_LIKE)).use { cursor ->
-            return if (cursor.moveToFirst()) cursor.getLong(0) else 0L
         }
     }
 

@@ -11,6 +11,7 @@ import java.io.RandomAccessFile
 import java.nio.channels.FileLock
 import java.security.KeyStore
 import java.util.Arrays
+import javax.crypto.AEADBadTagException
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -27,10 +28,18 @@ import javax.crypto.spec.GCMParameterSpec
  */
 class KeyUnavailable(val code: String, cause: Throwable? = null) : Exception(code, cause)
 
-/** Tri-state classification of a stored password column value. Never the prefix alone. */
-enum class Kind { OK, PLAIN, DAMAGED }
+/**
+ * Classification of a stored password column value. Never the prefix alone.
+ *
+ * There is deliberately no "damaged" state. decode() is only ever called under a key the
+ * caller has verified against the stored key check value, so a value whose GCM tag fails
+ * under it was never sealed by us: it is a legacy password that merely looks like an
+ * envelope ("v1:" + valid base64, e.g. an API token). Hiding it would lock the user out of
+ * a real password; treating it as plaintext keeps every byte and re-seals it losslessly.
+ */
+enum class Kind { OK, PLAIN }
 
-/** [value] carries the usable string for OK and PLAIN, and is null for DAMAGED. */
+/** [value] is the opened password for OK, and the stored string unchanged for PLAIN. */
 data class Decoded(val kind: Kind, val value: String?)
 
 /**
@@ -90,8 +99,12 @@ object VaultCrypto {
      *   must fail closed: never regenerate, never re-encrypt, never write.
      */
     fun ensureKey(context: Context, storedKcv: String?): String {
-        val key = key(context)
-        if (storedKcv == null) return encryptWith(key, KCV_PLAINTEXT)
+        // Only a first run may create a key. When a check value exists, a key already sealed
+        // this vault: if it is gone, making a new one fixes nothing, and if containsAlias() is
+        // merely having a bad moment, generateKey() would OVERWRITE the real key. Either way
+        // the answer is "not the vault's key", without touching the Keystore alias.
+        if (storedKcv == null) return encryptWith(loadOrCreateKey(context), KCV_PLAINTEXT)
+        val key = existingKey(context) ?: throw KeyUnavailable("kcv_mismatch")
         val decoded = decodeUnder(key, storedKcv)
         if (decoded.kind != Kind.OK || decoded.value != KCV_PLAINTEXT) {
             throw KeyUnavailable("kcv_mismatch")
@@ -106,7 +119,8 @@ object VaultCrypto {
      */
     fun securityLevel(context: Context): String {
         return try {
-            val key = key(context)
+            // Diagnostics must never be the thing that creates a key.
+            val key = existingKey(context) ?: return "unknown"
             val factory = SecretKeyFactory.getInstance(key.algorithm, PROVIDER)
             val info = factory.getKeySpec(key, KeyInfo::class.java) as KeyInfo
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -125,21 +139,21 @@ object VaultCrypto {
     }
 
     /** Seals [plaintext] into a fresh envelope. Throws [KeyUnavailable]; never returns plaintext. */
-    fun encrypt(context: Context, plaintext: String): String = encryptWith(key(context), plaintext)
+    fun encrypt(context: Context, plaintext: String): String =
+        encryptWith(requireKey(context), plaintext)
 
     /**
-     * Classifies a stored column value. The three states are what stop the two catastrophes:
-     * a real user password that literally starts with "v1:" is PLAIN and migrates losslessly,
-     * and a corrupted ciphertext is DAMAGED, never re-encrypted into oblivion.
+     * Classifies a stored column value. A real user password that starts with "v1:" is PLAIN
+     * and migrates losslessly, whether or not the rest of it happens to be valid base64.
      */
     fun decode(context: Context, stored: String): Decoded {
         // Rules 1-3 need no key at all, so a value that cannot possibly be one of ours is
         // classified without ever touching the Keystore.
         if (!stored.startsWith(PREFIX)) return Decoded(Kind.PLAIN, stored)
         val blob = decodeBody(stored) ?: return Decoded(Kind.PLAIN, stored)
-        // key() throws KeyUnavailable, which must propagate: "the key is broken" is not
-        // the same claim as "this row is damaged", and only the first one is recoverable.
-        return openBlob(key(context), blob)
+        // requireKey() throws KeyUnavailable, which must propagate: "the key is broken" is a
+        // different claim from "this value is not ours".
+        return openBlob(requireKey(context), blob, stored)
     }
 
     // ------------------------------------------------------------------- envelope
@@ -202,10 +216,10 @@ object VaultCrypto {
     private fun decodeUnder(key: SecretKey, stored: String): Decoded {
         if (!stored.startsWith(PREFIX)) return Decoded(Kind.PLAIN, stored)
         val blob = decodeBody(stored) ?: return Decoded(Kind.PLAIN, stored)
-        return openBlob(key, blob)
+        return openBlob(key, blob, stored)
     }
 
-    private fun openBlob(key: SecretKey, blob: ByteArray): Decoded {
+    private fun openBlob(key: SecretKey, blob: ByteArray, stored: String): Decoded {
         val cipher = try {
             Cipher.getInstance(TRANSFORM)
         } catch (t: Throwable) {
@@ -216,25 +230,53 @@ object VaultCrypto {
             cipher.updateAAD(AAD)
         } catch (t: Throwable) {
             // init has not looked at the ciphertext yet, so this can only be the key or the
-            // provider failing. Reporting it as DAMAGED would tell the user their row is
-            // lost when in fact the whole Keystore is having a bad day and next launch is fine.
+            // provider failing: a bad Keystore day, not a property of this value.
             throw KeyUnavailable("key_unreadable", t)
         }
         val plain = try {
             cipher.doFinal(blob, IV_BYTES, blob.size - IV_BYTES)
         } catch (t: Throwable) {
-            // AEADBadTagException and everything else: the tag did not verify under a key we
-            // do hold. Do NOT display it, do NOT re-encrypt it, do NOT write it back.
-            return Decoded(Kind.DAMAGED, null)
+            // Only a tag mismatch says anything about the VALUE: under the verified key it
+            // means we never sealed it. Anything else is the Keystore failing and must not
+            // be mistaken for plaintext, or a good envelope would be re-sealed as text.
+            if (isTagMismatch(t)) return Decoded(Kind.PLAIN, stored)
+            throw KeyUnavailable("vault_crypto_failed", t)
         }
         val value = String(plain, Charsets.UTF_8)
         Arrays.fill(plain, 0)
         return Decoded(Kind.OK, value)
     }
 
+    private fun isTagMismatch(t: Throwable): Boolean {
+        var cause: Throwable? = t
+        var depth = 0
+        while (cause != null && depth < 8) {
+            if (cause is AEADBadTagException) return true
+            cause = cause.cause
+            depth++
+        }
+        return false
+    }
+
     // --------------------------------------------------------------- key lifecycle
 
-    private fun key(context: Context): SecretKey {
+    /** The key, or null when the alias does not exist. Never creates one. */
+    private fun existingKey(context: Context): SecretKey? {
+        cachedKey?.let { return it }
+        synchronized(jvmLock) {
+            cachedKey?.let { return it }
+            val loaded = existingOrNull() ?: return null
+            cachedKey = loaded
+            return loaded
+        }
+    }
+
+    /** For encrypt and decode, which only run after ensureKey() has proven the key. */
+    private fun requireKey(context: Context): SecretKey =
+        existingKey(context) ?: throw KeyUnavailable("key_unreadable")
+
+    /** First run ONLY (no stored check value): see ensureKey(). */
+    private fun loadOrCreateKey(context: Context): SecretKey {
         cachedKey?.let { return it }
         synchronized(jvmLock) {
             cachedKey?.let { return it }

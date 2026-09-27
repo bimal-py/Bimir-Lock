@@ -15,8 +15,7 @@ import java.util.concurrent.Executors
  *   ensureKey     {"kcv": String?}      -> {"kcv": String, "securityLevel": String}
  *   encryptBatch  {"values": [String]}  -> [String], same length and order
  *   decryptBatch  {"values": [String]}  -> [ {"status":"ok","value":String}
- *                                         |  {"status":"plain","value":String}
- *                                         |  {"status":"damaged"} ], same length and order
+ *                                         |  {"status":"plain","value":String} ], same length and order
  *
  * Every Keystore call is a binder round trip, so a 300 row batch on the platform thread is a
  * visible stall and, at the wrong moment, an ANR. All work runs on a single background daemon
@@ -116,7 +115,6 @@ object VaultCryptoChannel {
         // so a future change cannot turn a readable row into a null on the Dart side.
         Kind.OK -> mapOf("status" to "ok", "value" to (decoded.value ?: ""))
         Kind.PLAIN -> mapOf("status" to "plain", "value" to (decoded.value ?: ""))
-        Kind.DAMAGED -> mapOf("status" to "damaged")
     }
 
     private fun submit(result: MethodChannel.Result, work: () -> Any?) {

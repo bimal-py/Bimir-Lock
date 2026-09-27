@@ -84,8 +84,6 @@ import UIKit
                 return ["status": "ok", "value": decoded.value ?? ""]
               case .plain:
                 return ["status": "plain", "value": decoded.value ?? ""]
-              case .damaged:
-                return ["status": "damaged"]
               }
             }
 

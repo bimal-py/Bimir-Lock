@@ -35,18 +35,19 @@ enum VaultCrypto {
 
     // MARK: - Types
 
-    /// Tri-state classification (SHARED CONTRACT S4). The "v1:" prefix is a cheap PRE-FILTER and
-    /// never a decision — that is what makes a real user password literally spelled "v1:abc"
-    /// migrate losslessly, and what stops a corrupted ciphertext from being silently re-encrypted.
+    /// Classification (SHARED CONTRACT S4). The "v1:" prefix is a cheap PRE-FILTER and never a
+    /// decision. There is deliberately no "damaged" state: decode() only runs under a key already
+    /// verified against the stored check value, so a value whose tag fails under it was never
+    /// sealed by us. It is a legacy password that merely looks like an envelope ("v1:" + valid
+    /// base64, e.g. an API token), and hiding it would lock the user out of a real password.
     enum Kind {
         case ok       // structurally valid AND the GCM tag authenticates
-        case plain    // no prefix, or prefix with invalid base64 / blob < 28 bytes -> legacy
-        case damaged  // structurally valid but the tag FAILS under a verified key -> do not touch
+        case plain    // anything we did not seal: kept byte for byte, re-sealed losslessly
     }
 
     struct Decoded {
         let kind: Kind
-        /// Non-nil for .ok and .plain. Always nil for .damaged.
+        /// The opened password for .ok, the stored string unchanged for .plain.
         let value: String?
     }
 
@@ -65,13 +66,13 @@ enum VaultCrypto {
     private static let keyLock = NSLock()
     private static var cachedKey: SymmetricKey?
 
-    /// The single, serialised load-or-create path.
+    /// Load-or-create. FIRST RUN ONLY (no stored check value): see ensureKey(storedKcv:).
     ///
     /// DATA-LOSS GUARD (checklist 3 + 4): `readKey()` returns nil IF AND ONLY IF the keychain
     /// answered errSecItemNotFound. Every other status throws. A transient keychain error must
     /// NEVER be read as "absent, make a new one" — that is the fastest possible route to
     /// destroying every password.
-    private static func key() throws -> SymmetricKey {
+    private static func loadOrCreateKey() throws -> SymmetricKey {
         keyLock.lock()
         defer { keyLock.unlock() }
 
@@ -85,6 +86,25 @@ enum VaultCrypto {
         }
         cachedKey = resolved
         return resolved
+    }
+
+    /// The key, or nil when the keychain answered errSecItemNotFound. Never creates one.
+    private static func existingKey() throws -> SymmetricKey? {
+        keyLock.lock()
+        defer { keyLock.unlock() }
+
+        if let cached = cachedKey { return cached }
+        guard let existing = try readKey() else { return nil }
+        cachedKey = existing
+        return existing
+    }
+
+    /// For encrypt and decode, which only run after ensureKey(storedKcv:) has proven the key.
+    private static func requireKey() throws -> SymmetricKey {
+        guard let existing = try existingKey() else {
+            throw Failure.keyUnavailable("key_unreadable")
+        }
+        return existing
     }
 
     private static func baseQuery() -> [String: Any] {
@@ -177,10 +197,14 @@ enum VaultCrypto {
     ///                          "kcv_mismatch" is what converts silent, total corruption into a
     ///                          loud, detectable, non-destructive halt (checklist 5).
     static func ensureKey(storedKcv: String?) throws -> String {
-        let resolved = try key()
-
+        // Only a first run may create a key. With a stored check value a key already sealed this
+        // vault: if it is gone a new one fixes nothing, and minting one would leave the vault with
+        // rows under two keys. Answer "not the vault's key" without touching the keychain item.
         guard let stored = storedKcv else {
-            return try seal(kcvPlaintext, using: resolved)
+            return try seal(kcvPlaintext, using: try loadOrCreateKey())
+        }
+        guard let resolved = try existingKey() else {
+            throw Failure.keyUnavailable("kcv_mismatch")
         }
 
         let decoded = try decode(stored, using: resolved)
@@ -191,11 +215,11 @@ enum VaultCrypto {
     }
 
     static func encrypt(_ plaintext: String) throws -> String {
-        return try seal(plaintext, using: try key())
+        return try seal(plaintext, using: try requireKey())
     }
 
     static func decode(_ stored: String) throws -> Decoded {
-        return try decode(stored, using: try key())
+        return try decode(stored, using: try requireKey())
     }
 
     // MARK: - Envelope
@@ -245,6 +269,7 @@ enum VaultCrypto {
         }
 
         // 4. structurally valid: the tag is now the only authority
+        let opened: Data
         do {
             let nonceData = Data(blob.prefix(nonceBytes))
             let tagData = Data(blob.suffix(tagBytes))
@@ -255,15 +280,19 @@ enum VaultCrypto {
                 ciphertext: ciphertext,
                 tag: tagData
             )
-            let opened = try AES.GCM.open(box, using: key, authenticating: aad)
-            guard let text = String(data: opened, encoding: .utf8) else {
-                return Decoded(kind: .damaged, value: nil)
-            }
-            return Decoded(kind: .ok, value: text)
+            opened = try AES.GCM.open(box, using: key, authenticating: aad)
+        } catch CryptoKitError.authenticationFailure {
+            // 5. the tag does not verify under the verified key: we never sealed this value.
+            return Decoded(kind: .plain, value: stored)
         } catch {
-            // 5. authentication failed. This is NOT a legacy plaintext. Re-encrypting it would
-            //    destroy the last recoverable trace of the row (checklist 7).
-            return Decoded(kind: .damaged, value: nil)
+            // Anything else is the crypto layer failing, not a property of the value. Reading it
+            // as plaintext would re-seal a good envelope as text.
+            throw Failure.keyUnavailable("vault_crypto_failed")
         }
+        // Everything we seal is UTF-8, so an authentic value that is not is impossible in practice.
+        guard let text = String(data: opened, encoding: .utf8) else {
+            throw Failure.invalidEnvelope("utf8")
+        }
+        return Decoded(kind: .ok, value: text)
     }
 }

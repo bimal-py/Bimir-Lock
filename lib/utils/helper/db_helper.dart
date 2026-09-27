@@ -120,8 +120,15 @@ class DataBaseHelper {
     );
     if (!hasLegacyColumn) {
       // No DEFAULT: that keeps it an O(1) metadata only change.
-      await db.execute('alter table ${DbConstant.passwordTableName} '
-          'add column ${DbConstant.passwordLegacy} text');
+      try {
+        await db.execute('alter table ${DbConstant.passwordTableName} '
+            'add column ${DbConstant.passwordLegacy} text');
+      } on DatabaseException catch (e) {
+        // The Android autofill service runs the same check on its own
+        // connection and can add the column between our PRAGMA and ALTER.
+        // Losing that race is success; anything else is a real failure.
+        if (!e.toString().contains('duplicate column')) rethrow;
+      }
     }
   }
 

@@ -105,15 +105,16 @@ class VaultMigration {
       final String? storedKcv = await _readMeta(db, kcvMetaKey);
 
       if (storedKcv == null || storedKcv.isEmpty) {
-        if (liveEnvelopes > 0) {
-          // CASE 1 - INVARIANT K VIOLATED. Encrypted rows exist but the key
-          // check value is gone. Creating a key here would make every real
-          // envelope fail its tag, be classified as legacy and be
-          // RE-ENCRYPTED: total, silent, permanent destruction. HALT.
-          _setHealth(VaultKeyHealth.keyLost);
-          return;
-        }
-        // CASE 2 - first run. Nothing is encrypted yet, so a fresh key is safe.
+        // CASE 1/2 - first run. INVARIANT K: every writer (this gate, and the
+        // Android autofill service in the same transaction as its row) stores
+        // the check value before its first envelope, so with no check value
+        // nothing here was sealed by us. Any "v1:"+base64 row is a user's
+        // password that only LOOKS like an envelope (an API token, say).
+        // Halting on it once locked the whole vault; now it is plaintext.
+        //
+        // Still safe if a key survives without its check value: ensureKey()
+        // with no check value LOADS an existing key and only creates one when
+        // none exists, so rows it sealed still open and are recognised.
         final VaultKeyProbe probe = await VaultCrypto.instance.ensureKey();
         await _writeMeta(db, kcvMetaKey, probe.newKeyCheckValue);
         _setHealth(VaultKeyHealth.ok);
