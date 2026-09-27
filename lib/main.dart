@@ -1,3 +1,5 @@
+import 'package:bimir_lock/controller/autofill/autofill_controller.dart';
+import 'package:bimir_lock/controller/biometric/biometric_controller.dart';
 import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/utils/app_theme.dart';
 import 'package:bimir_lock/utils/pages.dart';
@@ -22,6 +24,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 class BimirLock extends StatelessWidget {
   BimirLock({super.key});
   final CoreController cc = Get.put(CoreController());
+  final AutofillController ac = Get.put(AutofillController(), permanent: true);
+  final BiometricController bc =
+      Get.put(BiometricController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Bimir Lock is a password manager. Its SharedPreferences (access PIN) and its sqflite
+  database (saved credentials) must never leave the device via Android Auto Backup or
+  Android 12+ device-to-device transfer.
+
+  android:allowBackup="false" already disables cloud backup on every supported API level,
+  but on targetSdk 31+ it does NOT disable device-to-device transfer, so the
+  <device-transfer> section below is required to close that path.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+        <exclude domain="device_root" />
+        <exclude domain="device_file" />
+        <exclude domain="device_database" />
+        <exclude domain="device_sharedpref" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root" />
+        <exclude domain="file" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+        <exclude domain="device_root" />
+        <exclude domain="device_file" />
+        <exclude domain="device_database" />
+        <exclude domain="device_sharedpref" />
+    </device-transfer>
+</data-extraction-rules>

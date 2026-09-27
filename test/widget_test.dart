@@ -1,30 +1,64 @@
-// This is a basic Flutter widget test.
+// Basic smoke tests for Bimir Lock.
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// The app itself boots through SplashPage and immediately touches sqflite and
+// shared_preferences, which are not available in a plain widget test, so these
+// tests cover the pure pieces (models, validators, extensions) plus a smoke
+// pump of the app theme.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:bimir_lock/main.dart';
+import 'package:bimir_lock/models/password_table.dart';
+import 'package:bimir_lock/utils/app_theme.dart';
+import 'package:bimir_lock/utils/extensions.dart';
+import 'package:bimir_lock/utils/validators.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(BimirLock());
+  test('DateFormatter formats a date as yyyy-MM-dd', () {
+    expect(DateTime(2023, 7, 9).formatDate(), '2023-07-09');
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test('PasswordTable.toJson never carries a plaintext password', () {
+    PasswordTable passwordTable = PasswordTable(
+      id: 1,
+      title: "Facebook",
+      userName: "bimal",
+      password: "password",
+    );
+    final Map<String, dynamic> json = passwordTable.toJson();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // THE regression test for the write invariant: the password column can
+    // only ever be filled in by DataBaseHelper, which always encrypts. If
+    // toJson ever carries it again, a write path can smuggle plaintext onto
+    // disk without touching the crypto at all.
+    expect(json.containsKey('password'), isFalse);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    PasswordTable decoded = PasswordTable.fromJson(json);
+    expect(decoded.title, "Facebook");
+    expect(decoded.userName, "bimal");
+    expect(decoded.password, isNull);
+    expect(decoded.locked, isFalse);
+  });
+
+  test('Validators flag empty and short input', () {
+    expect(Validators.checkFieldEmpty(""), 'This field is required');
+    expect(Validators.checkFieldEmpty("Facebook"), null);
+    expect(Validators.checkPinField("123"), 'Invalid pin');
+    expect(Validators.checkPinField("1234"), null);
+    expect(Validators.checkConfirmPin("1234", "1235"), "Pin does not match");
+    expect(Validators.checkConfirmPin("1234", "1234"), null);
+  });
+
+  testWidgets('App theme builds a light and a dark MaterialApp',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        home: const Scaffold(body: Text("Bimir Lock")),
+      ),
+    );
+
+    expect(find.text("Bimir Lock"), findsOneWidget);
   });
 }

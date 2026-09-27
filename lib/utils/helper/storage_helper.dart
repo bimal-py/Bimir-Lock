@@ -21,7 +21,7 @@ class StorageHelper {
   //   return _sharedPreferences!;
   // }
 
-  setUser(User user) async {
+  Future<void> setUser(User user) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs
@@ -32,7 +32,7 @@ class StorageHelper {
     }
   }
 
-  getUser() async {
+  Future<User?> getUser() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       return User.fromJson(await jsonDecode(prefs.getString(StorageKey.user)!));
@@ -47,7 +47,7 @@ class StorageHelper {
     return prefs.clear();
   }
 
-  saveTheme(bool darkMode) async {
+  Future<void> saveTheme(bool darkMode) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(StorageKey.userThemeKey, darkMode);
   }
@@ -57,7 +57,17 @@ class StorageHelper {
     return prefs.getBool(StorageKey.userThemeKey) ?? false;
   }
 
-  setEncryptedPassword(String password) async {
+  Future<void> saveBiometricUnlock(bool enabled) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(StorageKey.biometricUnlockKey, enabled);
+  }
+
+  Future<bool> readBiometricUnlock() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(StorageKey.biometricUnlockKey) ?? false;
+  }
+
+  Future<void> setEncryptedPassword(String password) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs
@@ -90,16 +100,16 @@ class StorageHelper {
     String newImagePath = "$imageDir/imageFolder";
     bool isDirExist = await Directory(newImagePath).exists();
     if (!isDirExist) await Directory(newImagePath).create();
-    print("image Location: $newImagePath");
+    log("image Location: $newImagePath");
     return newImagePath;
   }
 
   Future<String> storeImage(File file) async {
     var newPath = await file.getNewDbFilePath();
-    print("file path ==> $newPath");
-    print(file.path);
+    log("file path ==> $newPath");
+    log(file.path);
     File newFile = await file.copy(newPath);
-    print("newf ile ==> $newFile");
+    log("newf ile ==> $newFile");
     return newFile.path;
   }
 }

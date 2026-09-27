@@ -12,7 +12,7 @@ class SetAccessPinPageController extends GetxController {
   final formKey = GlobalKey<FormState>();
   RxBool isButtonLoading = false.obs;
 
-  onChangeAccessPinTap() async {
+  Future<void> onChangeAccessPinTap() async {
     if (formKey.currentState!.validate()) {
       isButtonLoading.value = true;
 
@@ -21,7 +21,8 @@ class SetAccessPinPageController extends GetxController {
       isButtonLoading.value = false;
       await cc.loadEncryptedPassword().whenComplete(() {
         navigatorKey.currentState!.pop();
-        Fluttertoast.showToast(msg: "Access pin set successfully");
+        Fluttertoast.showToast(msg: "Access pin set successfully",
+            backgroundColor: Colors.black, textColor: Colors.white);
       });
       isButtonLoading.value = false;
     }

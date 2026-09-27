@@ -115,7 +115,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 SizedBox(
                     // height: 10,
                     child: LoadingAnimationWidget.fourRotatingDots(
-                  color: theme.colorScheme.onSurface.withOpacity(0.8),
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
                   size: 50,
                 )),
                 const SizedBox(

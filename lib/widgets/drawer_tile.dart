@@ -8,11 +8,19 @@ class DrawerTile extends StatelessWidget {
   final bool hasSwitch;
   final IconData iconData;
   final String title;
+
+  // Optional switch source. When these are null the switch stays the theme
+  // switch it has always been, so the existing tiles are unchanged.
+  final RxBool? switchValue;
+  final ValueChanged<bool>? onSwitchChanged;
+
   DrawerTile({
     super.key,
     this.hasSwitch = false,
     required this.iconData,
     required this.title,
+    this.switchValue,
+    this.onSwitchChanged,
   });
 
   @override
@@ -53,12 +61,15 @@ class DrawerTile extends StatelessWidget {
                     child: Obx(() => Switch(
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
-                          value: cc.themeMode.value == ThemeMode.dark,
-                          onChanged: (value) {
-                            cc.toggleThemeMode(
-                              value ? ThemeMode.dark : ThemeMode.light,
-                            );
-                          },
+                          value: switchValue != null
+                              ? switchValue!.value
+                              : cc.themeMode.value == ThemeMode.dark,
+                          onChanged: onSwitchChanged ??
+                              (value) {
+                                cc.toggleThemeMode(
+                                  value ? ThemeMode.dark : ThemeMode.light,
+                                );
+                              },
                           // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         )),
                   ),

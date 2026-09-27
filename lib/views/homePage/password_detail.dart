@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bimir_lock/controller/homePage/home_page_controller.dart';
 import 'package:bimir_lock/controller/homePage/password_detail_controller.dart';
 import 'package:bimir_lock/models/password_table.dart';
@@ -40,12 +38,22 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
         if (_passwordDetailPageArgument != null) {
           c.isEdit.value = _passwordDetailPageArgument!.isEdit;
           passwordTable.value = _passwordDetailPageArgument!.passwordTable;
-          c.titleController.text = passwordTable.value!.title!;
-          c.userNameController.text = passwordTable.value!.userName!;
-          c.passwordController.text = passwordTable.value!.password!;
+          c.titleController.text = passwordTable.value!.title ?? "";
+          c.userNameController.text = passwordTable.value!.userName ?? "";
+          // A locked row is one whose stored value could not be opened. Its
+          // bytes are left exactly as they are: the field stays empty, editing
+          // is forced off, and onSaveTap refuses. Putting the value straight
+          // into the controller (and letting Save write it back) is how the
+          // only copy of an unreadable password used to get replaced with "".
+          c.locked.value = passwordTable.value!.locked;
+          if (passwordTable.value!.locked) {
+            c.isEdit.value = false;
+            c.passwordController.text = "";
+          } else {
+            c.passwordController.text = passwordTable.value!.password ?? "";
+          }
           c.id = passwordTable.value!.id;
         }
-        log("=======>>> $_passwordDetailPageArgument");
       }
     });
   }
@@ -202,178 +210,202 @@ class _PasswordDetailPageState extends State<PasswordDetailPage> {
           //   )
           // ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            top: 20,
-          ),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Form(
-                key: c.formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35.0),
-                      ),
-                      elevation: 10,
-                      semanticContainer: false,
-                      surfaceTintColor: theme.colorScheme.surfaceTint,
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Obx(
-                              () => Text(
-                                "${passwordTable.value?.title.toString().capitalizeFirst}",
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: c.formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35.0),
+                        ),
+                        elevation: 10,
+                        semanticContainer: false,
+                        surfaceTintColor: theme.colorScheme.surfaceTint,
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Obx(
+                                () => Text(
+                                  "${passwordTable.value?.title.toString().capitalizeFirst}",
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Obx(
-                              () => BimirLockTextField(
-                                label: "Media Title",
-                                controller: c.titleController,
-                                readOnly: !c.isEdit.value,
-                                validator: Validators.checkFieldEmpty,
-                                // readOnly: false,
+                              const SizedBox(
+                                height: 40,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Obx(
-                              () => BimirLockTextField(
-                                label: "User Name/ Email",
-                                controller: c.userNameController,
-                                readOnly: !c.isEdit.value,
-                                hasCopy: true,
-                                validator: Validators.checkFieldEmpty,
+                              Obx(
+                                () => BimirLockTextField(
+                                  label: "Media Title",
+                                  controller: c.titleController,
+                                  readOnly: !c.isEdit.value,
+                                  validator: Validators.checkFieldEmpty,
+                                  // readOnly: false,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Obx(
-                              () => BimirLockTextField(
-                                label: "Password",
-                                controller: c.passwordController,
-                                readOnly: !c.isEdit.value,
-                                hasCopy: true,
-                                validator: Validators.checkPasswordField,
+                              const SizedBox(
+                                height: 40,
                               ),
-                            ),
-                          ],
+                              Obx(
+                                () => BimirLockTextField(
+                                  label: "User Name/ Email",
+                                  controller: c.userNameController,
+                                  readOnly: !c.isEdit.value,
+                                  hasCopy: true,
+                                  validator: Validators.checkFieldEmpty,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              Obx(
+                                () => BimirLockTextField(
+                                  label: "Password",
+                                  controller: c.passwordController,
+                                  readOnly: !c.isEdit.value || c.locked.value,
+                                  hasCopy: true,
+                                  canCopy: !c.locked.value,
+                                  validator: c.locked.value
+                                      ? null
+                                      : Validators.checkPasswordField,
+                                ),
+                              ),
+                              Obx(
+                                () => c.locked.value
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(top: 16),
+                                        child: Text(
+                                          "This entry can't be unlocked on this "
+                                          "device. It has not been changed or "
+                                          "deleted. You'll need to reset this "
+                                          "password with the provider.",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: theme.colorScheme.error,
+                                          ),
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 80,
-                    ),
-                    Obx(
-                      () => c.isEdit.value
-                          ? Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  FloatingActionButton.extended(
-                                    heroTag: "editpassword",
-                                    onPressed: () async {
-                                      if (c.formKey.currentState!.validate()) {
-                                        bool? result = await showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text(
-                                                  "Consent required!!!"),
-                                              content: const Text(
-                                                "Do you want to edit this password detial.",
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(true);
-                                                  },
-                                                  child: const Text(
-                                                    "Ok",
-                                                  ),
+                      const SizedBox(
+                        height: 80,
+                      ),
+                      Obx(
+                        () => c.isEdit.value && !c.readOnly
+                            ? Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    FloatingActionButton.extended(
+                                      heroTag: "editpassword",
+                                      onPressed: () async {
+                                        if (c.formKey.currentState!.validate()) {
+                                          bool? result = await showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                    "Consent required!!!"),
+                                                content: const Text(
+                                                  "Do you want to edit this password detial.",
                                                 ),
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context)
-                                                        .pop(false);
-                                                  },
-                                                  child: const Text(
-                                                    "Cancel",
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop(true);
+                                                    },
+                                                    child: const Text(
+                                                      "Ok",
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        if (result != null && result) {
-                                          var success = await c.onSaveTap();
-                                          if (success) {
-                                            HomePageController hpc = Get.find();
-                                            await hpc.loadPasswords();
-                                            Fluttertoast.showToast(
-                                                msg:
-                                                    "Password updated successfully");
-                                            if (context.mounted) {
-                                              Navigator.of(context).pop();
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop(false);
+                                                    },
+                                                    child: const Text(
+                                                      "Cancel",
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          if (result != null && result) {
+                                            var success = await c.onSaveTap();
+                                            if (success) {
+                                              HomePageController hpc = Get.find();
+                                              await hpc.loadPasswords();
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Password updated successfully",
+                                                  backgroundColor: Colors.black, textColor: Colors.white);
+                                              if (context.mounted) {
+                                                Navigator.of(context).pop();
+                                              }
+                                            } else {
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Error encountered while deleting password",
+                                                  backgroundColor: Colors.black, textColor: Colors.white);
                                             }
-                                          } else {
-                                            Fluttertoast.showToast(
-                                                msg:
-                                                    "Error encountered while deleting password");
                                           }
                                         }
-                                      }
-                                    },
-                                    label: const Text(
-                                      "Update detail",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                      },
+                                      label: const Text(
+                                        "Update detail",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  // FloatingActionButton.extended(
-                                  //   heroTag: "editpasswordCancel",
-                                  //   onPressed: () {
-                                  //     c.onCancelTap();
-                                  //   },
-                                  //   label: const Text(
-                                  //     "Cancel",
-                                  //     style: TextStyle(
-                                  //       fontSize: 18,
-                                  //       fontWeight: FontWeight.w500,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                ],
-                              ),
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                  ],
+                                    // FloatingActionButton.extended(
+                                    //   heroTag: "editpasswordCancel",
+                                    //   onPressed: () {
+                                    //     c.onCancelTap();
+                                    //   },
+                                    //   label: const Text(
+                                    //     "Cancel",
+                                    //     style: TextStyle(
+                                    //       fontSize: 18,
+                                    //       fontWeight: FontWeight.w500,
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                              )
+                            : const SizedBox.shrink(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

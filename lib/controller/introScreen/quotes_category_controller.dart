@@ -4,6 +4,7 @@ import 'package:bimir_lock/main.dart';
 import 'package:bimir_lock/models/quote_category_model.dart';
 import 'package:bimir_lock/models/quote_model.dart';
 import 'package:bimir_lock/utils/helper/db_helper.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -39,35 +40,38 @@ class QuotesCategoryController extends GetxController {
     "success"
   ];
   RxList<String> selectedList = RxList();
-  categoryTap(String value) {
+  void categoryTap(String value) {
     if (selectedList.contains(value)) {
       selectedList.remove(value);
     } else {
       if (selectedList.length < 6) {
         selectedList.add(value);
       } else {
-        Fluttertoast.showToast(msg: "You cannot select more than 6 categories");
+        Fluttertoast.showToast(msg: "You cannot select more than 6 categories",
+            backgroundColor: Colors.black, textColor: Colors.white);
       }
     }
     update();
   }
 
-  isSelected(String value) {
+  bool isSelected(String value) {
     if (selectedList.contains(value)) return true;
     return false;
   }
 
-  onGoTap() async {
+  Future<void> onGoTap() async {
     await saveQuoteCategory();
     // save the category
     if (selectedList.isEmpty) {
-      return Fluttertoast.showToast(msg: "Please select at least 1 quote category");
+      Fluttertoast.showToast(msg: "Please select at least 1 quote category",
+          backgroundColor: Colors.black, textColor: Colors.white);
+      return;
     } else {
       navigatorKey.currentState!.pushNamed(AddUserDetailPage.routeName);
     }
   }
 
-  saveQuoteCategory() async {
+  Future<void> saveQuoteCategory() async {
     DataBaseHelper databaseHelper = DataBaseHelper();
     await databaseHelper.deleteAllQuoteCategory();
     try {
@@ -80,7 +84,7 @@ class QuotesCategoryController extends GetxController {
     }
   }
 
-  loadQuotes() async {
+  Future<void> loadQuotes() async {
     DataBaseHelper databaseHelper = DataBaseHelper();
 
     List<int> quotesToLoadList = getQuotesNumberToLoad(selectedList.length);

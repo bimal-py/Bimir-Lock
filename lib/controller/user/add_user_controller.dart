@@ -35,7 +35,7 @@ class AddUserDetailController extends GetxController {
     super.onInit();
   }
 
-  initialfetch() async {
+  Future<void> initialfetch() async {
     isPageLoading.value = true;
     if (cc.isUserLoggedIn()) {
       String userName = cc.currentUser.value!.userName!;
@@ -78,10 +78,12 @@ class AddUserDetailController extends GetxController {
     }
   }
 
-  onSaveUserDetail(BuildContext context) async {
+  Future<void> onSaveUserDetail(BuildContext context) async {
     FocusManager.instance.primaryFocus!.unfocus();
     if (userAvatar == null) {
-      return Fluttertoast.showToast(msg: "Upload Profile Image to save user");
+      Fluttertoast.showToast(msg: "Upload Profile Image to save user",
+          backgroundColor: Colors.black, textColor: Colors.white);
+      return;
     }
     if (formKey.currentState!.validate()) {
       isLoading.value = true;

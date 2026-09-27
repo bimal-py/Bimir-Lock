@@ -14,7 +14,7 @@ extension GetExtension on File {
     return path.substring(path.lastIndexOf('.'), path.length);
   }
 
-  getNewDbFilePath() async {
+  Future<String> getNewDbFilePath() async {
     var newPath = await StorageHelper().getImageLocation();
     var ext = getExtension();
     return "$newPath/image$ext";

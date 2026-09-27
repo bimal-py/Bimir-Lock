@@ -4,9 +4,12 @@ import 'package:bimir_lock/controller/homePage/home_page_controller.dart';
 
 import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/main.dart';
+import 'package:bimir_lock/utils/helper/vault_crypto.dart';
 import 'package:bimir_lock/views/homePage/add_password.dart';
 import 'package:bimir_lock/views/pin/set_access_pin.dart';
 import 'package:bimir_lock/widgets/empty_state.dart';
+import 'package:bimir_lock/widgets/vault_status_banner.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:upgrader/upgrader.dart';
@@ -95,87 +98,97 @@ class HomePage extends StatelessWidget {
             //drawr
             //profile pic
           ),
-          body: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-            child: Column(
-              children: [
-                BimirLockTextField(
-                  focusNode: _focusNode,
-                  prefixIcon: const Icon(Icons.search),
-                  controller: c.searchEditingController,
-                  label: "Search",
-                  hint: "Facebook || name || email",
-                  onValueChange: (value) {
-                    return c.searchPassword(value);
-                  },
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-
-                Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      FocusManager.instance.primaryFocus!.unfocus();
-                      await c.loadPasswords();
-                      c.searchEditingController.clear();
-                      c.searchPassword("");
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: Column(
+                children: [
+                  VaultStatusBanner(controller: c),
+                  BimirLockTextField(
+                    focusNode: _focusNode,
+                    prefixIcon: const Icon(Icons.search),
+                    controller: c.searchEditingController,
+                    label: "Search",
+                    hint: "Facebook || name || email",
+                    onValueChange: (value) {
+                      return c.searchPassword(value);
                     },
-                    child: Obx(
-                      () => c.loading
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : c.searchedValue.isNotEmpty
-                              ? c.searchedPasswords.isNotEmpty
-                                  ? ListView.builder(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(),
-                                      shrinkWrap: false,
-                                      itemCount: c.searchedPasswords.length + 1,
-                                      itemBuilder: (context, index) {
-                                        print(c.searchedPasswords.length);
-                                        if (c.searchedPasswords.length ==
-                                            index) {
-                                          return const SizedBox(
-                                            height: 100,
-                                          );
-                                        }
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
 
-                                        return SlidableListTile(
-                                          passwordTable:
-                                              c.searchedPasswords[index],
-                                        );
-                                      },
-                                    )
-                                  : const EmptyState(
-                                      description:
-                                          "Password you are searching cannot be found.\nPlease add passwords")
-                              : c.passwords!.isEmpty
-                                  ? const EmptyState(
-                                      description:
-                                          "Password cannot be found.\nPlease add passwords")
-                                  : ListView.builder(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(),
-                                      shrinkWrap: false,
-                                      itemCount: c.passwords!.length + 1,
-                                      itemBuilder: (context, index) {
-                                        if (c.passwords!.length == index) {
-                                          return const SizedBox(
-                                            height: 100,
+                  Expanded(
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        FocusManager.instance.primaryFocus!.unfocus();
+                        await c.loadPasswords();
+                        c.searchEditingController.clear();
+                        c.searchPassword("");
+                      },
+                      child: Obx(
+                        () => c.loading
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : c.searchedValue.isNotEmpty
+                                ? c.searchedPasswords.isNotEmpty
+                                    ? ListView.builder(
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        shrinkWrap: false,
+                                        itemCount: c.searchedPasswords.length + 1,
+                                        itemBuilder: (context, index) {
+                                          if (kDebugMode) {
+                                            print(c.searchedPasswords.length);
+                                          }
+                                          if (c.searchedPasswords.length ==
+                                              index) {
+                                            return const SizedBox(
+                                              height: 100,
+                                            );
+                                          }
+
+                                          return SlidableListTile(
+                                            passwordTable:
+                                                c.searchedPasswords[index],
                                           );
-                                        }
-                                        return SlidableListTile(
-                                          passwordTable: c.passwords![index],
-                                        );
-                                      },
-                                    ),
+                                        },
+                                      )
+                                    : const EmptyState(
+                                        description:
+                                            "Password you are searching cannot be found.\nPlease add passwords")
+                                : c.passwords!.isEmpty
+                                    ? EmptyState(
+                                        description: c.vaultError.value != null
+                                            // Never let a read failure read as
+                                            // "you have no passwords": that is
+                                            // what makes a frightened user
+                                            // clear app data.
+                                            ? "Your saved passwords are still on this device,\nbut they can't be read right now.\nDo not uninstall the app or clear its data."
+                                            : "Password cannot be found.\nPlease add passwords")
+                                    : ListView.builder(
+                                        physics:
+                                            const AlwaysScrollableScrollPhysics(),
+                                        shrinkWrap: false,
+                                        itemCount: c.passwords!.length + 1,
+                                        itemBuilder: (context, index) {
+                                          if (c.passwords!.length == index) {
+                                            return const SizedBox(
+                                              height: 100,
+                                            );
+                                          }
+                                          return SlidableListTile(
+                                            passwordTable: c.passwords![index],
+                                          );
+                                        },
+                                      ),
+                      ),
                     ),
                   ),
-                ),
-                // tile
-              ],
+                  // tile
+                ],
+              ),
             ),
           ),
           resizeToAvoidBottomInset: false,
@@ -184,6 +197,14 @@ class HomePage extends StatelessWidget {
           floatingActionButton: FloatingActionButton.extended(
             heroTag: "addPasswordButton",
             onPressed: () {
+              if (c.vaultHealth.value == VaultKeyHealth.keyLost) {
+                // Fail closed: a write while the key is unusable would either
+                // be impossible to encrypt or would overwrite something we
+                // cannot read back.
+                Get.snackbar("Vault locked",
+                    "Bimir Lock can't unlock your saved passwords on this device, so adding a new one is disabled. Your saved data has not been changed.");
+                return;
+              }
               if (cc.encryptedPassword == null) {
                 showDialog(
                     context: context,

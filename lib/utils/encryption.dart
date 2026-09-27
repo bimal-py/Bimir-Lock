@@ -5,7 +5,7 @@ class EncryptData {
 
   final key = 'Taal ko panni m@cchi le kh@nii..';
 
-  Encrypted encryptAES(plainText) {
+  Encrypted encryptAES(String plainText) {
     final cipherKey = Key.fromUtf8(key);
     // final iv = IV.fromLength(16);
     final iv = IV.fromUtf8("d@dB0dy311@??t!L");

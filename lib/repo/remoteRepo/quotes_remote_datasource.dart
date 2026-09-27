@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bimir_lock/models/quote_model.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,15 +26,18 @@ class QuotesRemoteDatasource {
       } else {
         var responseMessage = jsonDecode(response.body);
         if (responseMessage is Map && responseMessage.containsKey("error")) {
-          Fluttertoast.showToast(msg: responseMessage["error"]);
+          Fluttertoast.showToast(msg: responseMessage["error"],
+              backgroundColor: Colors.black, textColor: Colors.white);
         } else {
           Fluttertoast.showToast(
-              msg: "Something went wrong when fetching quotes data");
+              msg: "Something went wrong when fetching quotes data",
+              backgroundColor: Colors.black, textColor: Colors.white);
         }
       }
     } catch (e) {
       log("==============>>>>> Error while fetching quotes: $e");
       return null;
     }
+    return null;
   }
 }

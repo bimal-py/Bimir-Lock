@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:bimir_lock/models/password_table.dart';
 import 'package:bimir_lock/utils/helper/db_helper.dart';
+import 'package:bimir_lock/utils/helper/vault_crypto.dart';
+import 'package:bimir_lock/utils/helper/vault_migration.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class HomePageController extends GetxController {
+class HomePageController extends GetxController with WidgetsBindingObserver {
   TextEditingController searchEditingController = TextEditingController();
   DataBaseHelper dbHelper = DataBaseHelper();
   RxList<PasswordTable>? passwords = RxList();
@@ -15,13 +17,48 @@ class HomePageController extends GetxController {
   final RxBool _isLoading = false.obs;
   bool get loading => _isLoading.value;
 
+  /// Set when the vault could not be read. The existing list is NEVER cleared
+  /// when this happens: showing "no passwords" to a user whose passwords are
+  /// still on disk is what makes them clear app data, and that is what turns a
+  /// transient problem into permanent loss.
+  final RxnString vaultError = RxnString();
+  Rx<VaultKeyHealth> get vaultHealth => VaultMigration.instance.health;
+  Rxn<MigrationResult> get migrationResult => VaultMigration.instance.lastResult;
+
   Timer? debounce;
   final RxString _searchedValue = "".obs;
   String get searchedValue => _searchedValue.value;
+
+  bool _observerAdded = false;
+
   @override
   void onInit() {
+    if (!_observerAdded) {
+      WidgetsBinding.instance.addObserver(this);
+      _observerAdded = true;
+    }
     loadPasswords();
     super.onInit();
+  }
+
+  // GetX calls onClose, not dispose, so the cleanup has to live here.
+  @override
+  void onClose() {
+    if (_observerAdded) {
+      WidgetsBinding.instance.removeObserver(this);
+      _observerAdded = false;
+    }
+    debounce?.cancel();
+    super.onClose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    // A password may have been saved by the autofill service while we were away.
+    if (state == AppLifecycleState.resumed) {
+      loadPasswords();
+    }
   }
 
   @override
@@ -32,11 +69,27 @@ class HomePageController extends GetxController {
 
   Future loadPasswords() async {
     _isLoading.value = true;
-    passwords?.value = await dbHelper.getAllPassword();
-    _isLoading.value = false;
+    try {
+      passwords?.value = await dbHelper.getAllPassword();
+      vaultError.value = null;
+    } on VaultKeyUnavailable catch (e) {
+      // Fail closed and stay honest: keep whatever is already on screen and
+      // say what happened. Never replace it with an empty list.
+      vaultError.value = e.code;
+    } catch (e) {
+      vaultError.value = e.runtimeType.toString();
+    } finally {
+      _isLoading.value = false;
+    }
   }
 
-  searchPassword(String value) {
+  /// Re-probes the key after a transient failure and reloads.
+  Future<void> retryVault() async {
+    await VaultMigration.instance.retry();
+    await loadPasswords();
+  }
+
+  void searchPassword(String value) {
     _isLoading.value = true;
     _searchedValue.value = value.toLowerCase();
     if (debounce?.isActive ?? false) debounce?.cancel();

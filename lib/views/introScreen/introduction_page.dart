@@ -18,72 +18,74 @@ class IntroductionPage extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(25),
-          child: IntroductionScreen(
-            key: introKey,
-            allowImplicitScrolling: false,
-            pages: [
-              PageViewModel(
-                  title: "Robust Authentication",
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: IntroductionScreen(
+              key: introKey,
+              allowImplicitScrolling: false,
+              pages: [
+                PageViewModel(
+                    title: "Robust Authentication",
+                    body:
+                        "Bimir-Lock employs a robust authentication system to ensure that only authorized users can access your passwords.",
+                    image: SvgPicture.asset(
+                      ImagePath.intro1Path,
+                      width: width * 0.5,
+                    )
+                    // decoration: pageDecoration,
+                    ),
+                PageViewModel(
+                  title: "Anytime Access",
                   body:
-                      "Bimir-Lock employs a robust authentication system to ensure that only authorized users can access your passwords.",
+                      "Access your passwords anytime, anywhere with Bimir-Lock's mobile accessibility. Whether you're on the go or at home, our app puts your security in your hands, allowing you to manage your passwords with ease and convenience.",
                   image: SvgPicture.asset(
-                    ImagePath.intro1Path,
+                    ImagePath.intro2Path,
                     width: width * 0.5,
-                  )
-                  // decoration: pageDecoration,
                   ),
-              PageViewModel(
-                title: "Anytime Access",
-                body:
-                    "Access your passwords anytime, anywhere with Bimir-Lock's mobile accessibility. Whether you're on the go or at home, our app puts your security in your hands, allowing you to manage your passwords with ease and convenience.",
-                image: SvgPicture.asset(
-                  ImagePath.intro2Path,
-                  width: width * 0.5,
                 ),
-              ),
-              PageViewModel(
-                title: "Regular Updates",
-                body:
-                    "Benefit from regular updates and enhancements with Bimir-Lock. Our team is committed to staying ahead of emerging threats, ensuring that your data is protected with the latest security measures.",
-                image: SvgPicture.asset(
-                  ImagePath.intro3Path,
-                  width: width * 0.5,
+                PageViewModel(
+                  title: "Regular Updates",
+                  body:
+                      "Benefit from regular updates and enhancements with Bimir-Lock. Our team is committed to staying ahead of emerging threats, ensuring that your data is protected with the latest security measures.",
+                  image: SvgPicture.asset(
+                    ImagePath.intro3Path,
+                    width: width * 0.5,
+                  ),
                 ),
-              ),
-              PageViewModel(
-                title: "Performance Optimization",
-                body:
-                    "Enjoy optimal performance with Bimir-Lock's efficient design. Our app minimizes resource usage while maximizing security and usability, providing you with a seamless and responsive experience.",
-                image: SvgPicture.asset(
-                  ImagePath.intro4Path,
-                  width: width * 0.5,
+                PageViewModel(
+                  title: "Performance Optimization",
+                  body:
+                      "Enjoy optimal performance with Bimir-Lock's efficient design. Our app minimizes resource usage while maximizing security and usability, providing you with a seamless and responsive experience.",
+                  image: SvgPicture.asset(
+                    ImagePath.intro4Path,
+                    width: width * 0.5,
+                  ),
                 ),
-              ),
-            ],
-            onDone: () => c.onIntroEnd(),
-            onSkip: () => c.onIntroEnd(), // You can override onSkip callback
-            showSkipButton: true,
-            skipOrBackFlex: 0,
-            nextFlex: 0,
-            showBackButton: false,
+              ],
+              onDone: () => c.onIntroEnd(),
+              onSkip: () => c.onIntroEnd(), // You can override onSkip callback
+              showSkipButton: true,
+              skipOrBackFlex: 0,
+              nextFlex: 0,
+              showBackButton: false,
 
-            back: const Icon(Icons.arrow_back),
-            skip: const Text('Skip',
-                style: TextStyle(fontWeight: FontWeight.w600)),
-            next: const Icon(Icons.arrow_forward),
-            done: const Text('Done',
-                style: TextStyle(fontWeight: FontWeight.w600)),
-            curve: Curves.fastLinearToSlowEaseIn,
-            controlsMargin: const EdgeInsets.all(16),
-            controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-            dotsDecorator: const DotsDecorator(
-              size: Size(10.0, 10.0),
-              color: Color(0xFFBDBDBD),
-              activeSize: Size(22.0, 10.0),
-              activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(25.0)),
+              back: const Icon(Icons.arrow_back),
+              skip: const Text('Skip',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
+              next: const Icon(Icons.arrow_forward),
+              done: const Text('Done',
+                  style: TextStyle(fontWeight: FontWeight.w600)),
+              curve: Curves.fastLinearToSlowEaseIn,
+              controlsMargin: const EdgeInsets.all(16),
+              controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
+              dotsDecorator: const DotsDecorator(
+                size: Size(10.0, 10.0),
+                color: Color(0xFFBDBDBD),
+                activeSize: Size(22.0, 10.0),
+                activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                ),
               ),
             ),
           ),

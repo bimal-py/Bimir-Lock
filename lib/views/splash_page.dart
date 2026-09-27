@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
   }
 
-  navigation() async {
+  Future<void> navigation() async {
     Future.delayed(const Duration(seconds: 3), () {
       if (c.isUserLoggedIn()) {
         navigatorKey.currentState!.pushNamedAndRemoveUntil(WelcomePage.routeName, (route) => false);
@@ -50,7 +50,7 @@ class _SplashPageState extends State<SplashPage> {
         key: UniqueKey(),
         // height: 10,
         child: LoadingAnimationWidget.staggeredDotsWave(
-          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
           // color: Colors.blue,
           size: 50,
         ),

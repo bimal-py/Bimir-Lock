@@ -4,6 +4,8 @@ import 'package:bimir_lock/main.dart';
 import 'package:bimir_lock/models/password_table.dart';
 import 'package:bimir_lock/views/homePage/password_detail.dart';
 import 'package:bimir_lock/widgets/pin_input_dialog.dart';
+import 'package:bimir_lock/controller/biometric/biometric_controller.dart';
+import 'package:bimir_lock/utils/helper/biometric_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -65,7 +67,8 @@ class SlidableListTile extends StatelessWidget {
                                         Navigator.pop(context, true);
                                       } else {
                                         Fluttertoast.showToast(
-                                            msg: "invalid pin");
+                                            msg: "invalid pin",
+                                            backgroundColor: Colors.black, textColor: Colors.white);
                                       }
                                     },
                                   );
@@ -129,7 +132,8 @@ class SlidableListTile extends StatelessWidget {
                                           Navigator.pop(context, true);
                                         } else {
                                           Fluttertoast.showToast(
-                                              msg: "invalid pin");
+                                              msg: "invalid pin",
+                                              backgroundColor: Colors.black, textColor: Colors.white);
                                           // Navigator.pop(context, false);
                                         }
                                       },
@@ -202,7 +206,8 @@ class SlidableListTile extends StatelessWidget {
                                         Navigator.pop(context, true);
                                       } else {
                                         Fluttertoast.showToast(
-                                            msg: "invalid pin");
+                                            msg: "invalid pin",
+                                            backgroundColor: Colors.black, textColor: Colors.white);
                                       }
                                     },
                                   );
@@ -222,7 +227,8 @@ class SlidableListTile extends StatelessWidget {
               bool success = await hc.deletePassword(passwordTable);
               if (success) {
                 hc.passwords?.remove(passwordTable);
-                Fluttertoast.showToast(msg: "Passowrd deleted successfully");
+                Fluttertoast.showToast(msg: "Passowrd deleted successfully",
+                    backgroundColor: Colors.black, textColor: Colors.white);
               }
             },
           ),
@@ -259,7 +265,8 @@ class SlidableListTile extends StatelessWidget {
                                           Navigator.pop(context, true);
                                         } else {
                                           Fluttertoast.showToast(
-                                              msg: "invalid pin");
+                                              msg: "invalid pin",
+                                              backgroundColor: Colors.black, textColor: Colors.white);
                                         }
                                         // if (pin == "1234") {
                                         //   Navigator.pop(context, true);
@@ -313,7 +320,7 @@ class SlidableListTile extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0),
             ),
-            tileColor: theme.colorScheme.surfaceVariant,
+            tileColor: theme.colorScheme.surfaceContainerHighest,
             leading: Checkbox(
               value: true,
               onChanged: (value) {},
@@ -361,7 +368,8 @@ class SlidableListTile extends StatelessWidget {
                                   ),
                                 );
                               } else {
-                                Fluttertoast.showToast(msg: "invalid pin");
+                                Fluttertoast.showToast(msg: "invalid pin",
+                                    backgroundColor: Colors.black, textColor: Colors.white);
                               }
                             },
                           );
@@ -384,8 +392,42 @@ class SlidableListTile extends StatelessWidget {
                   width: 5,
                 ),
                 IconButton(
-                  onPressed: () {
-                    Fluttertoast.showToast(msg: "Feature comming soon.");
+                  onPressed: () async {
+                    final BiometricController bc =
+                        Get.find<BiometricController>();
+                    await bc.refreshStatus();
+                    if (!bc.isAvailable.value) {
+                      Fluttertoast.showToast(
+                          msg:
+                              "Set up ${bc.label.value} in your phone's settings first.",
+                          backgroundColor: Colors.black,
+                          textColor: Colors.white);
+                      return;
+                    }
+                    if (!bc.isEnabled.value) {
+                      Fluttertoast.showToast(
+                          msg:
+                              "Turn on ${bc.label.value} unlock in the menu first.",
+                          backgroundColor: Colors.black,
+                          textColor: Colors.white);
+                      return;
+                    }
+                    final BiometricOutcome outcome = await bc.helper
+                        .authenticate("Unlock your password with ${bc.label.value}");
+                    if (outcome == BiometricOutcome.success) {
+                      navigatorKey.currentState!.pushNamed(
+                        PasswordDetailPage.routeName,
+                        arguments: PasswordDetailPageArgument(
+                          passwordTable: passwordTable,
+                          isEdit: false,
+                        ),
+                      );
+                    } else if (outcome == BiometricOutcome.lockedOut) {
+                      Fluttertoast.showToast(
+                          msg: "Too many attempts. Use your PIN instead.",
+                          backgroundColor: Colors.black,
+                          textColor: Colors.white);
+                    }
                   },
                   icon: const Icon(
                     Icons.fingerprint,

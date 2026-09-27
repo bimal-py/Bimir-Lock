@@ -55,136 +55,138 @@ class _AddPasswordPageState extends State<AddPasswordPage> {
           ),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            top: 20,
-          ),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                    elevation: 10,
-                    semanticContainer: false,
-                    surfaceTintColor: theme.colorScheme.surfaceTint,
-                    child: Form(
-                      key: c.formKey,
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              "Add Password",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                      ),
+                      elevation: 10,
+                      semanticContainer: false,
+                      surfaceTintColor: theme.colorScheme.surfaceTint,
+                      child: Form(
+                        key: c.formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                "Add Password",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            BimirLockTextField(
-                              label: "Media Title",
-                              hint: "Facebook",
-                              controller: c.mediaTitleController,
-                              readOnly: false,
-                              validator: Validators.checkFieldEmpty,
-                            ),
-                            // const SizedBox(
-                            //   height: 40,
-                            // ),
-                            // BimirLockTextField(
-                            //   label: "Email",
-                            //   hint: "bimal@gmail.com",
-                            //   textInputType: TextInputType.emailAddress,
-                            //   controller: c.emailController,
-                            //   hasCopy: true,
-                            //   validator: Validators.checkEmailField,
-                            // ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            BimirLockTextField(
-                              label: "User Name/ Email",
-                              hint: "Bimir codes",
-                              controller: c.userNameController,
-                              hasCopy: true,
-                              validator: Validators.checkFieldEmpty,
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Obx(() => BimirLockTextField(
-                                  label: "Password",
-                                  controller: c.passwordController,
-                                  obscure: c.hidePassword.value,
-                                  hasCopy: true,
-                                  isPass: true,
-                                  onEyeTap: c.togglePassword,
-                                  validator: Validators.checkPasswordField,
-                                )),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            Obx(() => BimirLockTextField(
-                                  label: "Retype Password",
-                                  controller: c.reTypePasswordController,
-                                  obscure: c.hideRetypePassword.value,
-                                  hasCopy: true,
-                                  isPass: true,
-                                  onEyeTap: c.toggleRetypePassword,
-                                  validator: (fieldContent) {
-                                    return Validators.checkConfirmPassword(
-                                        password: c.passwordController.text,
-                                        fieldContent: fieldContent);
-                                  },
-                                )),
-                          ],
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              BimirLockTextField(
+                                label: "Media Title",
+                                hint: "Facebook",
+                                controller: c.mediaTitleController,
+                                readOnly: false,
+                                validator: Validators.checkFieldEmpty,
+                              ),
+                              // const SizedBox(
+                              //   height: 40,
+                              // ),
+                              // BimirLockTextField(
+                              //   label: "Email",
+                              //   hint: "bimal@gmail.com",
+                              //   textInputType: TextInputType.emailAddress,
+                              //   controller: c.emailController,
+                              //   hasCopy: true,
+                              //   validator: Validators.checkEmailField,
+                              // ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              BimirLockTextField(
+                                label: "User Name/ Email",
+                                hint: "Bimir codes",
+                                controller: c.userNameController,
+                                hasCopy: true,
+                                validator: Validators.checkFieldEmpty,
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              Obx(() => BimirLockTextField(
+                                    label: "Password",
+                                    controller: c.passwordController,
+                                    obscure: c.hidePassword.value,
+                                    hasCopy: true,
+                                    isPass: true,
+                                    onEyeTap: c.togglePassword,
+                                    validator: Validators.checkPasswordField,
+                                  )),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              Obx(() => BimirLockTextField(
+                                    label: "Retype Password",
+                                    controller: c.reTypePasswordController,
+                                    obscure: c.hideRetypePassword.value,
+                                    hasCopy: true,
+                                    isPass: true,
+                                    onEyeTap: c.toggleRetypePassword,
+                                    validator: (fieldContent) {
+                                      return Validators.checkConfirmPassword(
+                                          password: c.passwordController.text,
+                                          fieldContent: fieldContent);
+                                    },
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Obx(
-                    () => c.isButtonLoading.value
-                        ? const FloatingActionButton.extended(
-                            heroTag: "savePasswordButtonLoading",
-                            onPressed: null,
-                            label: SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(),
-                            ),
-                          )
-                        : FloatingActionButton.extended(
-                            heroTag: "savePasswordButton",
-                            key: UniqueKey(),
-                            onPressed: c.onSavePassword,
-                            label: const Text(
-                              "Save",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Obx(
+                      () => c.isButtonLoading.value
+                          ? const FloatingActionButton.extended(
+                              heroTag: "savePasswordButtonLoading",
+                              onPressed: null,
+                              label: SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(),
+                              ),
+                            )
+                          : FloatingActionButton.extended(
+                              heroTag: "savePasswordButton",
+                              key: UniqueKey(),
+                              onPressed: c.onSavePassword,
+                              label: const Text(
+                                "Save",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                          ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                ],
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

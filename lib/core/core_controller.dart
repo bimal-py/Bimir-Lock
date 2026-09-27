@@ -1,12 +1,8 @@
 import 'dart:developer';
-import 'dart:typed_data';
 
 import 'package:bimir_lock/models/quote_model.dart';
-import 'package:bimir_lock/repo/remoteRepo/quotes_remote_datasource.dart';
-import 'package:bimir_lock/utils/encryption.dart';
 import 'package:bimir_lock/utils/helper/db_helper.dart';
 import 'package:bimir_lock/utils/helper/storage_helper.dart';
-import 'package:encrypt/encrypt.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,7 +25,7 @@ class CoreController extends GetxController {
     super.onInit();
   }
 
-  loadCurrentUser() async {
+  Future<void> loadCurrentUser() async {
     currentUser.value = await storageHelper.getUser();
   }
 
@@ -55,9 +51,9 @@ class CoreController extends GetxController {
 
   Rx<ThemeMode> themeMode = ThemeMode.light.obs;
 
-  loadInitialTheme() async {
+  Future<void> loadInitialTheme() async {
     bool darkMode = await storageHelper.readTheme();
-    print("dark mode: $darkMode");
+    log("dark mode: $darkMode");
     if (darkMode) {
       toggleThemeMode(ThemeMode.dark);
     } else {
@@ -70,12 +66,12 @@ class CoreController extends GetxController {
     encryptedPassword = pass;
   }
 
-  toggleThemeMode(ThemeMode theme) {
+  void toggleThemeMode(ThemeMode theme) {
     themeMode.value = theme;
     saveTheme(theme);
   }
 
-  saveTheme(ThemeMode mode) async {
+  Future<void> saveTheme(ThemeMode mode) async {
     bool darkMode = (mode == ThemeMode.dark);
     await storageHelper.saveTheme(darkMode);
   }

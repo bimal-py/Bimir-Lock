@@ -32,13 +32,32 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>app needs permission for the camera.</string>
+	<string>Bimir Lock uses the camera so you can take a profile photo for your account.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Why is my app authenticating using face id?</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>app needs permission for the microphone.</string>
+	<string>Bimir Lock uses Face ID to confirm it's you before unlocking your saved passwords.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>app needs permission for the photo library.</string>
+	<string>Bimir Lock accesses your photo library so you can choose a profile photo for your account.</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneClassName</key>
+					<string>UIWindowScene</string>
+					<key>UISceneConfigurationName</key>
+					<string>flutter</string>
+					<key>UISceneDelegateClassName</key>
+					<string>FlutterSceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

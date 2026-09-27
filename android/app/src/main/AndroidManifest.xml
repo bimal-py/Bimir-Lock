@@ -1,9 +1,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <!-- Required in release builds too: the upgrader version check and the quotes
+         API call are runtime features. debug/profile manifests add this for the
+         Flutter tool only and are not merged into release. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- The autofill service names a saved credential after the app it came from.
+         Resolving another app's label needs package visibility on API 30+: the
+         automatic exemptions do not apply here, because the system server binds
+         our service, not the app the user is typing into. This MAIN/LAUNCHER
+         filter is the narrow form, deliberately NOT QUERY_ALL_PACKAGES. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:label="Bimir Lock"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -25,6 +44,27 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Android Autofill, save only. The system server binds this from outside
+             our uid, so it has to be exported; android:permission is what keeps
+             anything but the platform from binding it, and without that attribute
+             the platform rejects the service and it never appears in the picker.
+             minSdk is 26 and AutofillService is API 26, so nothing here is gated.
+             Deliberately no android:process: the service must share the app
+             process so its SQLite writes coordinate with sqflite's connection. -->
+        <service
+            android:name=".autofill.BimirAutofillService"
+            android:label="Bimir Lock"
+            android:exported="true"
+            android:permission="android.permission.BIND_AUTOFILL_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.autofill.AutofillService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.autofill"
+                android:resource="@xml/bimir_autofill_service" />
+        </service>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

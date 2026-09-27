@@ -28,10 +28,15 @@ class BimirLockTextField extends StatelessWidget {
   final String? label;
   final bool enabled;
   final bool hasCopy;
+
+  /// False for a row whose stored value could not be opened. Copying would put
+  /// an empty string (or, worse, a raw envelope) on the clipboard and the user
+  /// would believe it was their password.
+  final bool canCopy;
   final bool isPass;
 
   const BimirLockTextField({
-    Key? key,
+    super.key,
     this.hint,
     this.prefixIcon,
     this.suffixIcon,
@@ -56,8 +61,9 @@ class BimirLockTextField extends StatelessWidget {
     this.label,
     this.enabled = true,
     this.hasCopy = false,
+    this.canCopy = true,
     this.isPass = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -95,12 +101,26 @@ class BimirLockTextField extends StatelessWidget {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(50),
-                    onTap: () => Clipboard.setData(
-                            ClipboardData(text: controller != null ? controller!.text : ""))
-                        .then((value) =>
-                            Fluttertoast.showToast(msg: "Text copied", gravity: ToastGravity.TOP)),
-                    child: const Icon(
+                    onTap: () {
+                      final String text = controller?.text ?? "";
+                      if (!canCopy || text.isEmpty) {
+                        Fluttertoast.showToast(
+                            msg: "Nothing to copy",
+                            gravity: ToastGravity.TOP,
+                            backgroundColor: Colors.black,
+                            textColor: Colors.white);
+                        return;
+                      }
+                      Clipboard.setData(ClipboardData(text: text)).then(
+                          (value) => Fluttertoast.showToast(
+                              msg: "Text copied",
+                              gravity: ToastGravity.TOP,
+                              backgroundColor: Colors.black,
+                              textColor: Colors.white));
+                    },
+                    child: Icon(
                       Icons.copy,
+                      color: canCopy ? null : theme.disabledColor,
                     ),
                   ),
                   if (isPass)

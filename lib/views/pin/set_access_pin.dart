@@ -55,84 +55,86 @@ class _SetAccessPinPageState extends State<SetAccessPinPage> {
           ),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35.0),
-                    ),
-                    elevation: 10,
-                    semanticContainer: false,
-                    surfaceTintColor: theme.colorScheme.surfaceTint,
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Form(
-                        key: c.formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              "Enter your access pin:",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(35.0),
+                      ),
+                      elevation: 10,
+                      semanticContainer: false,
+                      surfaceTintColor: theme.colorScheme.surfaceTint,
+                      child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Form(
+                          key: c.formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                "Enter your access pin:",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            AccessPinWidget(
-                              pinController: c.accessPinController,
-                              validator: Validators.checkPinField,
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            const Text(
-                              "Re-Enter your access pin:",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                              const SizedBox(
+                                height: 15,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            AccessPinWidget(
-                                pinController: c.reAccessPinController,
-                                onCompleted: (p0) {},
-                                validator: (value) =>
-                                    Validators.checkConfirmPin(
-                                        c.accessPinController.text, value)),
-                          ],
+                              AccessPinWidget(
+                                pinController: c.accessPinController,
+                                validator: Validators.checkPinField,
+                              ),
+                              const SizedBox(
+                                height: 40,
+                              ),
+                              const Text(
+                                "Re-Enter your access pin:",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              AccessPinWidget(
+                                  pinController: c.reAccessPinController,
+                                  onCompleted: (p0) {},
+                                  validator: (value) =>
+                                      Validators.checkConfirmPin(
+                                          c.accessPinController.text, value)),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  FloatingActionButton.extended(
-                      heroTag: "saveButton",
-                      onPressed: () {
-                        c.onChangeAccessPinTap();
-                      },
-                      label: const Text(
-                        "Save",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )),
-                ],
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    FloatingActionButton.extended(
+                        heroTag: "saveButton",
+                        onPressed: () {
+                          c.onChangeAccessPinTap();
+                        },
+                        label: const Text(
+                          "Save",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )),
+                  ],
+                ),
               ),
             ),
           ),

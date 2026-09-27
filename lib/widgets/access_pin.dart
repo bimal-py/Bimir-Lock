@@ -34,7 +34,7 @@ class AccessPinWidget extends StatelessWidget {
       height: 56,
       textStyle: TextStyle(
         fontSize: 22,
-        color: theme.colorScheme.onBackground.withOpacity(0.8),
+        color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(19),
@@ -45,6 +45,8 @@ class AccessPinWidget extends StatelessWidget {
       controller: pinController,
       focusNode: focusNode,
       length: 4,
+      // pinput 6 no longer forces this off, which enabled copy/cut of the pin
+      enableInteractiveSelection: false,
       keyboardType: TextInputType.number,
       textInputAction: textInputAction,
       inputFormatters: [

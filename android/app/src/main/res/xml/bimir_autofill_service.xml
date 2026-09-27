@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Metadata for BimirAutofillService.
+
+  No android:settingsActivity. The app has no autofill settings screen to point
+  at: MainActivity is a PIN gated splash, and the attribute has to name a real
+  exported activity as a FULLY qualified class name (Settings builds
+  ComponentName(pkg, value), which does not expand a leading dot), so a wrong
+  value gives a gear icon that dead ends.
+
+  No <compatibility-package>. Compatibility mode is the accessibility based
+  fallback for browsers that never implemented the autofill APIs. Its documented
+  limitation is that node text values may be missing in onSaveRequest, which is
+  the one thing this service depends on, and Chrome dropped support for it.
+
+  supportsInlineSuggestions is false because we never fill, so there is nothing
+  to render inline. Read on API 30+, ignored below that.
+-->
+<autofill-service
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:supportsInlineSuggestions="false" />
