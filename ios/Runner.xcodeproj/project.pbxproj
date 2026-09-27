@@ -12,6 +12,7 @@
 		2AB827F5305989570066628F /* AutofillExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2AB827E8305989560066628F /* AutofillExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3A7F1C0C2B4D4E5F60718295 /* VaultCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7F1C0B2B4D4E5F60718294 /* VaultCrypto.swift */; };
+		3A7F1C0D2B4D4E5F60718296 /* VaultCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7F1C0B2B4D4E5F60718294 /* VaultCrypto.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
@@ -465,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A7F1C0D2B4D4E5F60718296 /* VaultCrypto.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
