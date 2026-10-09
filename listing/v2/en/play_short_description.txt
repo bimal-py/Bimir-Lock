@@ -1,0 +1,1 @@
+Offline password manager & vault: no account, no cloud. Fingerprint & autofill.

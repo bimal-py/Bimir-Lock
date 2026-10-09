@@ -85,8 +85,8 @@ Optional badges you can still show: "No data shared with third parties", "No dat
 
 | Field | Value |
 |---|---|
-| App category | **Tools** — see `research/categories.md` |
-| Tags (up to 5) | Pick the closest available: **Password manager**, **Security**, **Privacy**, **Utilities**, **Encryption** |
+| App category | **Productivity** (move from Tools) — 34 of 49 password managers on Play sit there, including the big offline vaults; see `research/categories.md` |
+| Tags (up to 5) | **Password manager**, **Privacy & security** (add others only if they truly apply) |
 | Contact email | khattribimal90@gmail.com (already set) |
 | Phone | Already set. It is shown publicly on the listing — remove it if you'd rather not |
 | Website | change to `https://bimalkhatri.com.np/bimir-lock` (today: the home page) |
