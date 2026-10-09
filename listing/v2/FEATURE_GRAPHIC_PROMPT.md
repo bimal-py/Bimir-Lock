@@ -12,10 +12,11 @@ Upload it with `cd android && bundle exec fastlane upload_images`.
 
 The two ways it can be regenerated:
 
-## A. Built from the real app (recommended first)
+## A. Built from the real app
 
 ```sh
-../marketing/.venv/bin/python tool/make_feature_graphic.py --install
+../marketing/.venv/bin/python tool/make_feature_graphic.py            # writes listing/shots/out/
+../marketing/.venv/bin/python tool/make_feature_graphic.py --install  # REPLACES the graphic above
 ```
 
 Uses the real logo (`assets/brand/mark.png`), the real vault capture

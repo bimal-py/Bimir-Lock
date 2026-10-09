@@ -15,7 +15,7 @@ uses. Neither file is in git.
 
 ## 1. Bump the version
 
-`pubspec.yaml`, e.g. `1.1.0+4` → `1.1.1+5`. The number after `+` is the Play
+`pubspec.yaml`, e.g. `1.1.1+5` → `1.1.2+6`. The number after `+` is the Play
 version code and must always go up. `assemble_listing.py` names the Play
 changelog file after it.
 
@@ -25,7 +25,7 @@ changelog file after it.
 python3 tool/new_release.py v3      # copies listing/v2 -> listing/v3
 ```
 
-`listing/v2` then stops being touched — it is the record of what 1.1.0 shipped
+`listing/v2` then stops being touched — it is the record of what 1.1.1 shipped
 with, the way `listing/v1` is the record of 1.0.1.
 
 ## 3. Write the English "What's New"

@@ -9,7 +9,7 @@ listing/                       the source of truth a human edits
   v1/                          the listing as it stood at 1.0.1 (Play) — a snapshot, never edited
     android/                   downloaded from Play 2026-10-10: text, icon, feature graphic, 21 screenshots
     ios/                       downloaded from App Store Connect: the empty 1.0 draft
-  v2/                          the listing for 1.1.0 — first iOS release, full Play rewrite
+  v2/                          the listing for 1.1.1 — first iOS release, full Play rewrite
     MASTER_EN.md               what the app is, the search data, the rules for every locale
     STORE_SETUP.md             every Console / App Store Connect field fastlane cannot set
     PRIVACY_POLICY.md          the policy text the website must carry before submission
@@ -94,7 +94,7 @@ cd ../android && bundle exec fastlane upload_listing validate:true
 # 7. upload
 cd ../android && bundle exec fastlane upload_listing      # text only
 cd ../android && bundle exec fastlane upload_images       # icon, feature graphic, screenshots
-cd ../ios     && bundle exec fastlane ensure_edit_version version:1.1.0
+cd ../ios     && bundle exec fastlane ensure_edit_version version:1.1.1
 cd ../ios     && bundle exec fastlane upload_listing      # text + screenshots
 ```
 
@@ -116,15 +116,15 @@ invisible or committed and in review. `hold:true` maps to the Play API's
 app in good standing Google accepts the parameter, ignores it, and sends the
 change to review anyway. Managed publishing is the control that actually works,
 and it is Console-only. Turn it on before the v2 upload if you want the listing
-and the 1.1.0 build to go live together.
+and the 1.1.1 build to go live together.
 
 **`supply` is destructive to screenshots.** `sync_image_upload` defaults to
 false, so `upload_images` deletes the remote set for a locale before uploading
 the local one. Whatever is on disk becomes live. Locales with no local
 screenshots are skipped rather than wiped.
 
-**The first iOS version is "1.0" in App Store Connect; the binary is 1.1.0.**
-Run `ensure_edit_version version:1.1.0` once — it renames the draft so the build
+**The first iOS version is "1.0" in App Store Connect; the binary is 1.1.1.**
+Run `ensure_edit_version version:1.1.1` once — it renames the draft so the build
 you upload matches.
 
 **A name or subtitle change goes through review with the binary.** On iOS, use
