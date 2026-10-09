@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Je wachtwoorden, op je telefoon",
+    "sub": "Offline kluis. Geen account, geen cloud."
+  },
+  "autofill": {
+    "head": "Wachtwoorden invullen in apps",
+    "sub": "Na Face ID, vingerafdruk of je schermvergrendeling"
+  },
+  "generator": {
+    "head": "Sterke wachtwoorden in één tik",
+    "sub": "Kies de lengte, cijfers en symbolen"
+  },
+  "checkup": {
+    "head": "Zwakke en dubbele wachtwoorden",
+    "sub": "De wachtwoordcontrole toont wat je eerst aanpakt"
+  },
+  "unlock": {
+    "head": "Elk wachtwoord alleen voor jou",
+    "sub": "6-cijferige pincode, vingerafdruk of Face ID"
+  },
+  "alerts": {
+    "head": "Zie wie het heeft geprobeerd",
+    "sub": "Optionele foto na 7 foute pincodes, blijft op je telefoon"
+  },
+  "backup": {
+    "head": "Een back-up die alleen jij opent",
+    "sub": "Versleuteld bestand met eigen wachtwoord, waar je maar wilt"
+  },
+  "dark": {
+    "head": "Zacht voor je ogen in het donker",
+    "sub": "Licht en donker thema"
+  }
+}

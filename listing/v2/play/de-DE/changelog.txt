@@ -1,0 +1,8 @@
+Bimir Lock 1.1 – von Grund auf neu gebaut.
+• Passwörter sind jetzt verschlüsselt, mit einem Schlüssel im sicheren Speicher deines Handys
+• Autofill: gespeicherte Logins in anderen Apps ausfüllen und neue speichern
+• Der Passwort-Check findet schwache und mehrfach genutzte Passwörter
+• Passwort-Generator und Stärkeanzeige
+• Verschlüsselte Backup-Datei mit eigenem Passwort
+• 6-stellige PINs, Fingerabdruck und Warnungen bei falscher PIN
+• Neues Design mit hellem und dunklem Modus

@@ -1,0 +1,8 @@
+Bimir Lock 1.1 is volledig vernieuwd.
+• Wachtwoorden zijn nu versleuteld met een sleutel in de beveiligde opslag van je telefoon
+• Automatisch invullen: gebruik opgeslagen inloggegevens in andere apps en sla nieuwe op
+• Wachtwoordcontrole vindt zwakke en hergebruikte wachtwoorden
+• Wachtwoordgenerator en sterktemeter
+• Versleuteld back-upbestand met een eigen wachtwoord
+• 6-cijferige pincodes, vingerafdruk en meldingen bij een verkeerde pincode
+• Nieuw ontwerp met licht en donker thema

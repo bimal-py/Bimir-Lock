@@ -1,0 +1,8 @@
+Bimir Lock is er nu voor iPhone en iPad.
+• Wachtwoorden versleuteld met een sleutel in de iOS Keychain, alleen op dit apparaat
+• Wachtwoordaanbieder voor Automatisch invullen in Safari en andere apps
+• Wachtwoordcontrole vindt zwakke en hergebruikte wachtwoorden
+• Wachtwoordgenerator en sterktemeter
+• Versleuteld back-upbestand met een eigen wachtwoord
+• 6-cijferige pincode, Face ID en meldingen bij een verkeerde pincode
+• Licht en donker thema

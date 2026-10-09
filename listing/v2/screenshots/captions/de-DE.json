@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Passwörter bleiben auf dem Handy",
+    "sub": "Offline-Tresor. Ohne Konto, ohne Cloud."
+  },
+  "autofill": {
+    "head": "Logins in anderen Apps ausfüllen",
+    "sub": "Nach Face ID, Fingerabdruck oder Displaysperre"
+  },
+  "generator": {
+    "head": "Starke Passwörter mit einem Tipp",
+    "sub": "Länge, Zahlen und Sonderzeichen nach Wahl"
+  },
+  "checkup": {
+    "head": "Schwache und doppelte Passwörter",
+    "sub": "Der Passwort-Check zeigt, was zuerst dran ist"
+  },
+  "unlock": {
+    "head": "Jedes Passwort nur für dich",
+    "sub": "6-stellige PIN, Fingerabdruck oder Face ID"
+  },
+  "alerts": {
+    "head": "Sieh, wer es versucht hat",
+    "sub": "Optionales Foto nach 7 falschen PINs, bleibt auf dem Handy"
+  },
+  "backup": {
+    "head": "Ein Backup, das nur du öffnest",
+    "sub": "Verschlüsselte Datei mit eigenem Passwort, wo du willst"
+  },
+  "dark": {
+    "head": "Schont nachts die Augen",
+    "sub": "Helles und dunkles Design"
+  }
+}

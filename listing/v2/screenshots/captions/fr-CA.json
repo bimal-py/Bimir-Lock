@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Tout reste sur votre cellulaire",
+    "sub": "Coffre-fort hors ligne. Sans compte, sans nuage."
+  },
+  "autofill": {
+    "head": "Remplissage auto dans vos applis",
+    "sub": "Après Face ID, empreinte ou verrouillage de l'écran"
+  },
+  "generator": {
+    "head": "Mots de passe forts en un clic",
+    "sub": "Choisissez la longueur, les chiffres et les symboles"
+  },
+  "checkup": {
+    "head": "Mots de passe faibles repérés",
+    "sub": "Faibles ou réutilisés : voyez quoi corriger d'abord"
+  },
+  "unlock": {
+    "head": "Rien ne s'ouvre sans vous",
+    "sub": "NIP à 6 chiffres, empreinte ou Face ID"
+  },
+  "alerts": {
+    "head": "Voyez qui a tenté d'entrer",
+    "sub": "Photo facultative après 7 erreurs, gardée sur le cellulaire"
+  },
+  "backup": {
+    "head": "Une sauvegarde rien qu'à vous",
+    "sub": "Un fichier chiffré, avec son mot de passe. Où vous voulez."
+  },
+  "dark": {
+    "head": "Doux pour les yeux, la nuit",
+    "sub": "Thèmes clair et sombre"
+  }
+}
