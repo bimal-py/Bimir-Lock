@@ -1,7 +1,7 @@
 {
   "vault": {
     "head": "Your passwords, locked on your phone",
-    "sub": "Offline vault. No account, no cloud, no ads."
+    "sub": "Offline vault. No account, no cloud."
   },
   "autofill": {
     "head": "Fill passwords into other apps",

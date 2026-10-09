@@ -37,7 +37,7 @@ ENCRYPTED BACKUP FILE
 
 A SIMPLE PASSWORD BOOK
 • A clean list with search and letter icons, like a password book that cannot be lost in a drawer
-• Site name suggestions as you type, including local banks and wallets
+• Site name suggestions as you type, and it remembers the names you add
 • The username field adapts: email, phone number, customer ID or Wi-Fi network
 • Light and dark themes
 • A short security quote each time you open it
