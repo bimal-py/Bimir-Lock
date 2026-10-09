@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Hasła pod kluczem, w telefonie",
+    "sub": "Sejf offline. Bez konta, bez chmury."
+  },
+  "autofill": {
+    "head": "Autouzupełnianie w aplikacjach",
+    "sub": "Po Face ID, odcisku palca lub blokadzie ekranu"
+  },
+  "generator": {
+    "head": "Silne hasło jednym dotknięciem",
+    "sub": "Wybierz długość, cyfry i symbole"
+  },
+  "checkup": {
+    "head": "Znajdź słabe i powtarzane hasła",
+    "sub": "Kontrola haseł pokazuje, co poprawić najpierw"
+  },
+  "unlock": {
+    "head": "Każde hasło otworzysz tylko ty",
+    "sub": "6-cyfrowy PIN, odcisk palca lub Face ID"
+  },
+  "alerts": {
+    "head": "Zobacz, kto próbował wejść",
+    "sub": "Opcjonalne zdjęcie po 7 błędnych PIN-ach. Tylko w telefonie"
+  },
+  "backup": {
+    "head": "Kopia, którą otworzysz tylko ty",
+    "sub": "Zaszyfrowany plik z własnym hasłem. Trzymaj, gdzie chcesz."
+  },
+  "dark": {
+    "head": "Łagodny dla oczu nocą",
+    "sub": "Jasny i ciemny motyw"
+  }
+}

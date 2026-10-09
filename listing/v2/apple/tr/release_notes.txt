@@ -1,0 +1,8 @@
+Bimir Lock artık iPhone ve iPad'de.
+• Şifreler, yalnızca bu cihazda iOS Keychain'de tutulan bir anahtarla şifrelenir
+• Safari ve diğer uygulamalar için Otomatik Doldurma şifre sağlayıcısı
+• Şifre Kontrolü zayıf ve tekrar kullanılan şifreleri bulur
+• Şifre oluşturucu ve güç göstergesi
+• Kendi şifresi olan şifreli yedek dosyası
+• 6 haneli PIN, Face ID ve yanlış PIN uyarıları
+• Açık ve koyu tema

@@ -1,0 +1,1 @@
+parola,saklama,internetsiz,oluşturucu,kaydetme,defteri,güçlü,yedekleme,otomatik,doldurma,pin

@@ -1,0 +1,1 @@
+generator,hasła,przechowywania,menadżer,autouzupełnianie,kopia,zapasowa,mocne,pin,lokalny
