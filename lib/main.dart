@@ -3,6 +3,7 @@ import 'package:bimir_lock/controller/biometric/biometric_controller.dart';
 import 'package:bimir_lock/core/core.dart';
 import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/modules/notes/notes_bootstrap.dart';
+import 'package:bimir_lock/utils/helper/review_prompt.dart';
 import 'package:bimir_lock/utils/helper/storage_helper.dart';
 import 'package:bimir_lock/utils/pages.dart';
 import 'package:bimir_lock/views/splash_page.dart';
@@ -18,6 +19,8 @@ void main() async {
     await Upgrader.clearSavedSettings();
   }
   await bootstrapNotes();
+  // Counts this launch toward the rating sheet's "5 opens" rule.
+  await ReviewPrompt.init();
   CoreController.launchTheme = CoreController.themeModeFrom(
     await StorageHelper().readThemeMode(),
   );

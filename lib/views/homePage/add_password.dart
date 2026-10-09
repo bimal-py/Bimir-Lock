@@ -12,6 +12,7 @@ import 'package:bimir_lock/utils/helper/site_book.dart';
 import 'package:bimir_lock/utils/helper/vault_crypto.dart';
 import 'package:bimir_lock/utils/validators.dart';
 import 'package:bimir_lock/views/homePage/entry_actions.dart';
+import 'package:bimir_lock/utils/helper/review_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:get/get.dart';
@@ -179,6 +180,9 @@ class _AddPasswordPageState extends State<AddPasswordPage> {
     showNote(_editing == null ? 'Saved' : 'Changes saved');
     _initial = _snapshot;
     Navigator.of(context).pop(row);
+    // A good moment for the store's rating sheet, if its rules allow (5 opens,
+    // 3 days, 120 days between asks, once a version). Shown over the vault.
+    ReviewPrompt.afterSuccess();
   }
 
   Future<bool> _confirmDiscard() async {

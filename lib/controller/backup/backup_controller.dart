@@ -14,6 +14,7 @@ import 'package:bimir_lock/utils/helper/vault_migration.dart';
 import 'package:bimir_lock/widgets/backup_dialogs.dart';
 import 'package:bimir_lock/ui/unlock.dart';
 import 'package:bimir_lock/ui/widgets.dart';
+import 'package:bimir_lock/utils/helper/review_prompt.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -90,6 +91,8 @@ class BackupController {
           "Keep your backup password somewhere safe. Without it the file can't be opened.",
       type: DialogType.success,
     );
+    // After the confirmation is dismissed, never over it.
+    ReviewPrompt.afterSuccess();
   }
 
   // ---------------------------------------------------------------- restore

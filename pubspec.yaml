@@ -30,6 +30,7 @@ environment:
 dependencies:
   camera: ^0.12.1
   cupertino_icons: ^1.0.2
+  device_info_plus: ^13.3.0
   encrypt: ^5.0.3
   equatable: ^2.0.8
   file_picker: ^13.1.0
@@ -46,10 +47,12 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   image_picker: ^1.0.1
+  in_app_review: ^2.0.12
   intl: ^0.20.2
   local_auth: ^3.0.2
   lucide_icons_flutter: ^3.1.13
   material_color_utilities: ^0.13.0
+  package_info_plus: ^10.2.2
   path_provider: ^2.1.5
   pointycastle: ^3.9.1
   share_plus: ^13.3.1
