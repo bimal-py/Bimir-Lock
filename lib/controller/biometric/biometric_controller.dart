@@ -2,7 +2,7 @@ import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/utils/helper/biometric_helper.dart';
 import 'package:bimir_lock/utils/helper/storage_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:bimir_lock/ui/widgets.dart';
 import 'package:get/get.dart';
 
 // "Enabled" is the user's choice; "available" is what the device can do right
@@ -86,11 +86,7 @@ class BiometricController extends GetxController with WidgetsBindingObserver {
     }
   }
 
-  void _toast(String msg) => Fluttertoast.showToast(
-    msg: msg,
-    backgroundColor: Colors.black,
-    textColor: Colors.white,
-  );
+  void _toast(String msg) => showNote(msg);
 
   String _capital(String s) =>
       s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);

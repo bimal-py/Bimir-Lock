@@ -1,7 +1,6 @@
-import 'dart:developer';
+import 'dart:async';
 import 'dart:io';
 
-import 'package:bimir_lock/models/quote_model.dart';
 import 'package:bimir_lock/utils/helper/db_helper.dart';
 import 'package:bimir_lock/utils/helper/storage_helper.dart';
 import 'package:flutter/material.dart';
@@ -12,18 +11,30 @@ import '../models/user_model.dart';
 class CoreController extends GetxController {
   DataBaseHelper dataBaseHelper = DataBaseHelper();
   StorageHelper storageHelper = StorageHelper();
-  Rx<Quote?> initialQuote = Quote().obs;
   Rx<User?> currentUser = Rxn<User>();
   String? encryptedPassword;
 
+  final Completer<void> _ready = Completer<void>();
+
+  /// Completes once the user, theme, PIN state and database are loaded. The
+  /// launch screen waits on this instead of a fixed delay.
+  Future<void> get ready => _ready.future;
+
   @override
-  void onInit() async {
-    await loadCurrentUser();
-    await loadInitQuote();
-    await loadInitialTheme();
-    await loadEncryptedPassword();
-    await dataBaseHelper.getDatabase;
+  void onInit() {
     super.onInit();
+    _load();
+  }
+
+  Future<void> _load() async {
+    try {
+      await loadCurrentUser();
+      await loadInitialTheme();
+      await loadEncryptedPassword();
+      await dataBaseHelper.getDatabase;
+    } finally {
+      if (!_ready.isCompleted) _ready.complete();
+    }
   }
 
   // The profile photo resolved for THIS install. Widgets read this, never
@@ -43,17 +54,16 @@ class CoreController extends GetxController {
     update();
   }
 
-  Future loadInitQuote() async {
-    initialQuote.value = await dataBaseHelper.getinitialQuotes();
-    return initialQuote.value ??
-        Quote(
-          quote: "The body achieves what the mind believes.",
-          author: "Erin Gray",
-        );
-  }
-
   bool isUserLoggedIn() {
     return currentUser.value != null;
+  }
+
+  /// First word of the user's name, capitalised, or null.
+  String? get firstName {
+    final String name = currentUser.value?.userName?.trim() ?? '';
+    if (name.isEmpty) return null;
+    final String first = name.split(RegExp(r'\s+')).first;
+    return first[0].toUpperCase() + first.substring(1);
   }
 
   void logOut() async {
@@ -63,16 +73,20 @@ class CoreController extends GetxController {
     // route to intro page
   }
 
-  Rx<ThemeMode> themeMode = ThemeMode.light.obs;
+  /// Read in main() before the first frame, so a chosen dark theme does not
+  /// flash light first. Light until one is chosen.
+  static ThemeMode launchTheme = ThemeMode.light;
+
+  static ThemeMode themeModeFrom(String stored) => switch (stored) {
+    "dark" => ThemeMode.dark,
+    "system" => ThemeMode.system,
+    _ => ThemeMode.light,
+  };
+
+  Rx<ThemeMode> themeMode = launchTheme.obs;
 
   Future<void> loadInitialTheme() async {
-    bool darkMode = await storageHelper.readTheme();
-    log("dark mode: $darkMode");
-    if (darkMode) {
-      toggleThemeMode(ThemeMode.dark);
-    } else {
-      toggleThemeMode(ThemeMode.light);
-    }
+    themeMode.value = themeModeFrom(await storageHelper.readThemeMode());
   }
 
   Future<void> loadEncryptedPassword() async {
@@ -82,11 +96,6 @@ class CoreController extends GetxController {
 
   void toggleThemeMode(ThemeMode theme) {
     themeMode.value = theme;
-    saveTheme(theme);
-  }
-
-  Future<void> saveTheme(ThemeMode mode) async {
-    bool darkMode = (mode == ThemeMode.dark);
-    await storageHelper.saveTheme(darkMode);
+    storageHelper.saveThemeMode(theme.name);
   }
 }

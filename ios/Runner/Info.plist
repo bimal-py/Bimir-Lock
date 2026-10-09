@@ -32,7 +32,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Bimir Lock uses the camera so you can take a profile photo for your account.</string>
+	<string>Bimir Lock uses the camera so you can take a profile photo, and, if you turn on Wrong PIN alerts, to photograph whoever enters 7 wrong PINs.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Bimir Lock uses Face ID to confirm it's you before unlocking your saved passwords.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

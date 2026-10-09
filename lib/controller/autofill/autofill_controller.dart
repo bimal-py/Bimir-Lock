@@ -1,6 +1,6 @@
 import 'package:bimir_lock/utils/helper/autofill_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:bimir_lock/ui/widgets.dart';
 import 'package:get/get.dart';
 
 // The enabled state belongs to the OS, not to us. The user can turn us on or off
@@ -58,10 +58,7 @@ class AutofillController extends GetxController with WidgetsBindingObserver {
       if (value) {
         final bool opened = await autofillHelper.openSettings();
         if (!opened) {
-          Fluttertoast.showToast(
-              msg: "Autofill settings are not available on this device.",
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
+          showNote("Autofill settings are not available on this device.");
         }
       } else {
         await autofillHelper.disableService();

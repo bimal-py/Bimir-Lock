@@ -1,19 +1,27 @@
+import 'package:bimir_lock/core/utils/helpers/dialog/dialog.dart';
+import 'package:bimir_lock/ui/tokens.dart';
+import 'package:bimir_lock/ui/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-// Minimal on purpose: the app UI is being redesigned. The rules live here too,
-// so a new design only has to call showBackupPasswordDialog().
+// The backup password rules live here, so every caller gets the same dialog.
 
 const int minBackupPasswordLength = 10;
 
 /// Asks for the backup password. With [confirm] (creating a backup) it asks
 /// twice and explains that a forgotten password cannot be recovered. Returns
 /// null when cancelled.
-Future<String?> showBackupPasswordDialog(BuildContext context,
-    {required bool confirm, String? error}) {
+Future<String?> showBackupPasswordDialog(
+  BuildContext context, {
+  required bool confirm,
+  String? error,
+}) {
   return showDialog<String>(
     context: context,
     barrierDismissible: false,
-    builder: (_) => _BackupPasswordDialog(confirm: confirm, error: error),
+    builder: (_) => CenterPopup(
+      child: _BackupPasswordDialog(confirm: confirm, error: error),
+    ),
   );
 }
 
@@ -24,14 +32,15 @@ void showBackupProgress(BuildContext context, String message) {
     barrierDismissible: false,
     builder: (_) => PopScope(
       canPop: false,
-      child: AlertDialog(
-        content: Row(
-          children: [
-            const SizedBox(
-                width: 24, height: 24, child: CircularProgressIndicator()),
-            const SizedBox(width: 20),
-            Expanded(child: Text(message)),
-          ],
+      child: CenterPopup(
+        child: AppDialog(
+          icon: Icons.lock_outline_rounded,
+          accent: Theme.of(context).colorScheme.primary,
+          title: message,
+          body: const SizedBox(
+            width: 140,
+            child: LinearProgressIndicator(minHeight: 3),
+          ),
         ),
       ),
     ),
@@ -39,19 +48,16 @@ void showBackupProgress(BuildContext context, String message) {
 }
 
 Future<void> showBackupMessage(
-    BuildContext context, String title, String message) {
-  return showDialog<void>(
-    context: context,
-    builder: (dialogContext) => AlertDialog(
-      title: Text(title),
-      content: Text(message),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(dialogContext).pop(),
-          child: const Text("Ok"),
-        ),
-      ],
-    ),
+  BuildContext context,
+  String title,
+  String message, {
+  DialogType type = DialogType.info,
+}) {
+  return DialogUtils.showInformationDialog(
+    context,
+    title: title,
+    message: message,
+    dialogType: type,
   );
 }
 
@@ -87,71 +93,85 @@ class _BackupPasswordDialogState extends State<_BackupPasswordDialog> {
   @override
   Widget build(BuildContext context) {
     final Widget eye = IconButton(
-      icon: Icon(_hidden ? Icons.visibility : Icons.visibility_off),
+      icon: Icon(_hidden ? LucideIcons.eye : LucideIcons.eyeOff),
       onPressed: () => setState(() => _hidden = !_hidden),
     );
-    return AlertDialog(
-      title: Text(widget.confirm ? "Backup password" : "Enter backup password"),
-      content: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (widget.confirm)
-                const Text(
-                  "This password locks the backup file. You'll need it to restore on any phone.\n\n"
-                  "If you forget it, the backup can't be opened by anyone, including you. "
-                  "It is separate from your app PIN.",
-                ),
-              if (widget.error != null) ...[
-                Text(widget.error!,
-                    style: TextStyle(color: Theme.of(context).colorScheme.error)),
-              ],
-              const SizedBox(height: 12),
+    return AppDialog(
+      icon: Icons.key_rounded,
+      accent: Theme.of(context).colorScheme.primary,
+      title: widget.confirm ? "Backup password" : "Enter backup password",
+      message: widget.confirm
+          ? "This password locks the backup file. You'll need it to restore on any phone. It is separate from your app PIN."
+          : null,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (widget.confirm) ...[
+              const Notice(
+                tone: Tone.warning,
+                icon: LucideIcons.info,
+                message:
+                    "If you forget it, the backup can't be opened by anyone, including you.",
+              ),
+              const SizedBox(height: Space.lg),
+            ],
+            if (widget.error != null) ...[
+              Text(
+                widget.error!,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: BimirPalette.of(context).danger),
+              ),
+              const SizedBox(height: Space.md),
+            ],
+            TextFormField(
+              controller: _password,
+              obscureText: _hidden,
+              autofocus: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: InputDecoration(
+                labelText: "Backup password",
+                suffixIcon: eye,
+              ),
+              validator: (value) {
+                final String v = value ?? '';
+                if (v.isEmpty) return "Enter a password";
+                if (widget.confirm && v.length < minBackupPasswordLength) {
+                  return "Use at least $minBackupPasswordLength characters";
+                }
+                return null;
+              },
+              onChanged: (_) => setState(() {}),
+              onFieldSubmitted: (_) => widget.confirm ? null : _submit(),
+            ),
+            if (widget.confirm) ...[
+              const SizedBox(height: Space.md),
+              StrengthMeter(password: _password.text),
+              const SizedBox(height: Space.lg),
               TextFormField(
-                controller: _password,
+                controller: _repeat,
                 obscureText: _hidden,
-                autofocus: true,
                 enableSuggestions: false,
                 autocorrect: false,
-                decoration: InputDecoration(labelText: "Backup password", suffixIcon: eye),
-                validator: (value) {
-                  final String v = value ?? '';
-                  if (v.isEmpty) return "Enter a password";
-                  if (widget.confirm && v.length < minBackupPasswordLength) {
-                    return "Use at least $minBackupPasswordLength characters";
-                  }
-                  return null;
-                },
-                onFieldSubmitted: (_) => widget.confirm ? null : _submit(),
-              ),
-              if (widget.confirm)
-                TextFormField(
-                  controller: _repeat,
-                  obscureText: _hidden,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: const InputDecoration(labelText: "Repeat password"),
-                  validator: (value) =>
-                      value == _password.text ? null : "Passwords don't match",
-                  onFieldSubmitted: (_) => _submit(),
+                decoration: const InputDecoration(
+                  labelText: "Repeat password",
                 ),
+                validator: (value) =>
+                    value == _password.text ? null : "Passwords don't match",
+                onFieldSubmitted: (_) => _submit(),
+              ),
             ],
-          ),
+          ],
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Text("Cancel"),
-        ),
-        TextButton(
-          onPressed: _submit,
-          child: Text(widget.confirm ? "Create backup" : "Restore"),
-        ),
-      ],
+      actions: DialogActions(
+        confirmText: widget.confirm ? "Create backup" : "Restore",
+        onConfirm: _submit,
+        cancelText: "Cancel",
+      ),
     );
   }
 }

@@ -57,6 +57,23 @@ class StorageHelper {
     return prefs.getBool(StorageKey.userThemeKey) ?? false;
   }
 
+  /// "system", "light" or "dark"; "light" until one is chosen. Installs from
+  /// before the System option kept only a dark on/off flag; that choice is
+  /// carried over as light or dark.
+  Future<String> readThemeMode() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? mode = prefs.getString(StorageKey.themeModeKey);
+    if (mode != null) return mode;
+    final bool? legacy = prefs.getBool(StorageKey.userThemeKey);
+    if (legacy == null) return "light";
+    return legacy ? "dark" : "light";
+  }
+
+  Future<void> saveThemeMode(String mode) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(StorageKey.themeModeKey, mode);
+  }
+
   Future<void> saveBiometricUnlock(bool enabled) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(StorageKey.biometricUnlockKey, enabled);

@@ -1,0 +1,2412 @@
+[
+  {
+    "text": "Trust, but verify.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "A chatterbox is a treasure for a spy.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "God keeps those safe who keep themselves safe.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "Measure seven times, cut once.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "The word is not a sparrow: if it flies out, you won't catch it.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "Don't wade into a river without knowing a ford.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "Repetition is the mother of learning.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "What we own, we don't safekeep properly; when we lose it, we cry.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "Don't be afraid of the dog who barks, but be afraid of the one who is silent and wags its tail.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "On the tongue there's honey, and on the heart there's ice.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "You cannot hide an awl in a sack.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "Beware of the goat from its front side, of the horse from its back side, and the evil man from any side.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "Only he who does nothing makes no mistakes.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "It's better to see once than hear a hundred times.",
+    "author": "Russian proverb"
+  },
+  {
+    "text": "Where the fence is lowest, everyone jumps over.",
+    "author": "German proverb"
+  },
+  {
+    "text": "A gift from an enemy is not well-intentioned.",
+    "author": "German proverb"
+  },
+  {
+    "text": "Into a closed mouth no flies ever entered.",
+    "author": "Italian proverb"
+  },
+  {
+    "text": "One can never be too careful.",
+    "author": "Italian proverb"
+  },
+  {
+    "text": "Let God protect me from those I trust, I'll protect myself from those I don't.",
+    "author": "Italian proverb"
+  },
+  {
+    "text": "A scalded cat is afraid of cold water.",
+    "author": "Portuguese proverb"
+  },
+  {
+    "text": "He who looks at the face doesn't see the heart.",
+    "author": "Portuguese proverb"
+  },
+  {
+    "text": "The walls have ears.",
+    "author": "Swedish proverb"
+  },
+  {
+    "text": "Wisdom has long ears and short tongue.",
+    "author": "Swedish proverb"
+  },
+  {
+    "text": "Don't let the wolf guard the sheep.",
+    "author": "Swedish proverb"
+  },
+  {
+    "text": "What is hidden in snow is revealed at thaw.",
+    "author": "Swedish proverb"
+  },
+  {
+    "text": "One time, no time — two times, a habit.",
+    "author": "Swedish proverb"
+  },
+  {
+    "text": "Don't complain about lack of wind – learn to sail.",
+    "author": "Swedish proverb"
+  },
+  {
+    "text": "He who always knows best never learns.",
+    "author": "Swedish proverb"
+  },
+  {
+    "text": "Hear, see, be silent, if you wish to live in peace.",
+    "author": "Latin proverb"
+  },
+  {
+    "text": "When in doubt, abstain.",
+    "author": "Latin proverb"
+  },
+  {
+    "text": "It will not always be summer.",
+    "author": "Latin proverb"
+  },
+  {
+    "text": "Men's deceit brings ruin, and integrity brings security.",
+    "author": "Latin proverb"
+  },
+  {
+    "text": "You know not what nightfall may bring.",
+    "author": "Latin proverb"
+  },
+  {
+    "text": "Look before you sign.",
+    "author": "Spanish proverb"
+  },
+  {
+    "text": "When you see your neighbour's beard being cut, put yours in water.",
+    "author": "Spanish proverb"
+  },
+  {
+    "text": "Fall down seven times, get up eight.",
+    "author": "Japanese proverb"
+  },
+  {
+    "text": "Even the mutterings of a man in a well are widely known after three years.",
+    "author": "Japanese proverb"
+  },
+  {
+    "text": "Good medicine is bitter to the mouth.",
+    "author": "Japanese proverb"
+  },
+  {
+    "text": "Even if you know the way, ask one more time.",
+    "author": "Korean proverb"
+  },
+  {
+    "text": "Birds listen to day-words and rats listen to night-words.",
+    "author": "Korean proverb"
+  },
+  {
+    "text": "Even monkeys may fall from trees.",
+    "author": "Korean proverb"
+  },
+  {
+    "text": "One word beforehand is better than ten afterwards.",
+    "author": "Danish proverb"
+  },
+  {
+    "text": "What you talk in the pub you'll hear in the village.",
+    "author": "Estonian proverb"
+  },
+  {
+    "text": "Better word behind teeth than on the tongue.",
+    "author": "Estonian proverb"
+  },
+  {
+    "text": "The mouth must have a lock.",
+    "author": "Finnish proverb"
+  },
+  {
+    "text": "Better a mile of detour than an inch of a dangerous way.",
+    "author": "Finnish proverb"
+  },
+  {
+    "text": "Don't say everything you know, but know everything you say!",
+    "author": "Finnish proverb"
+  },
+  {
+    "text": "The friend tells friend, the friend the whole village.",
+    "author": "Finnish proverb"
+  },
+  {
+    "text": "Better a bitter truth than a sweet lie.",
+    "author": "Finnish proverb"
+  },
+  {
+    "text": "A stranger sees the mistake.",
+    "author": "Finnish proverb"
+  },
+  {
+    "text": "Once a person cheats in an exam, forever people will distrust him.",
+    "author": "Indonesian proverb"
+  },
+  {
+    "text": "A leopard skin is beautiful to see, but inside there is an enemy.",
+    "author": "Swahili proverb"
+  },
+  {
+    "text": "A foundation that is not level is not strong; don't blame the wall if it falls down.",
+    "author": "Swahili proverb"
+  },
+  {
+    "text": "Knowledge is wealth that can't be stolen.",
+    "author": "Filipino proverb"
+  },
+  {
+    "text": "If the head-man and the village watch-man are in league, they can steal till daybreak.",
+    "author": "Tamil proverb"
+  },
+  {
+    "text": "Does a thief steal expecting that he will be caught?",
+    "author": "Tamil proverb"
+  },
+  {
+    "text": "He that keeks through a keyhole may see what will vex him.",
+    "author": "Scottish proverb"
+  },
+  {
+    "text": "It's a foolish sheep that makes the wolf his confessor.",
+    "author": "French proverb"
+  },
+  {
+    "text": "What children hear at home, soon flies abroad.",
+    "author": "French proverb"
+  },
+  {
+    "text": "Better safe than sorry.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Forewarned, forearmed.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Look before you leap.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Keep your mouth shut and your eyes open.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Love laughs at locksmiths.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Opportunity makes the thief.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Set a thief to catch a thief.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Fool me once, shame on you. Fool me twice, shame on me.",
+    "author": "English proverb"
+  },
+  {
+    "text": "If you trust before you try, you may repent before you die.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Away goes the devil if he finds the door shut against him.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Hope for the best, but prepare for the worst.",
+    "author": "English proverb"
+  },
+  {
+    "text": "All are not friends who speak one fair.",
+    "author": "English proverb"
+  },
+  {
+    "text": "A still tongue makes a wise head.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Truth seeks no corners.",
+    "author": "English proverb"
+  },
+  {
+    "text": "Privacy is not about something to hide. Privacy is about something to protect.",
+    "author": "Edward Snowden",
+    "source": "NPR TED Radio Hour, \"Why Does Online Privacy Matter?\""
+  },
+  {
+    "text": "Gentlemen do not read each other's mail.",
+    "author": "Henry L. Stimson",
+    "source": "On Active Service in Peace and War, 1948"
+  },
+  {
+    "text": "Who could deny that privacy is a jewel?",
+    "author": "Phyllis McGinley",
+    "source": "The Province of the Heart, 1959"
+  },
+  {
+    "text": "Every man should know that his conversations, his correspondence, and his personal life are private.",
+    "author": "Lyndon B. Johnson",
+    "source": "Remarks at the swearing-in of Ramsey Clark, 1967"
+  },
+  {
+    "text": "Civilization is the progress toward a society of privacy.",
+    "author": "Ayn Rand",
+    "source": "The Fountainhead, 1943"
+  },
+  {
+    "text": "Three may keep a secret, if two of them are dead.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1735"
+  },
+  {
+    "text": "If you would keep your secret from an enemy, tell it not to a friend.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1741"
+  },
+  {
+    "text": "Nothing circulates so rapidly as a secret.",
+    "author": "Letitia Elizabeth Landon",
+    "source": "Romance and Reality"
+  },
+  {
+    "text": "Only puny secrets need protection. Big discoveries are protected by public incredulity.",
+    "author": "Marshall McLuhan",
+    "source": "Take Today: The Executive as Dropout, 1972"
+  },
+  {
+    "text": "There are no secrets except the secrets that keep themselves.",
+    "author": "George Bernard Shaw",
+    "source": "Back to Methuselah, 1921"
+  },
+  {
+    "text": "Do nothing secretly; for Time sees and hears all things, and discloses all.",
+    "author": "Sophocles",
+    "source": "Hipponous, fragment 280"
+  },
+  {
+    "text": "When a secret is revealed, it is the fault of the man who confided it.",
+    "author": "Jean de La Bruyère",
+    "source": "Les Caractères"
+  },
+  {
+    "text": "He who gives up the smallest part of a secret has the rest no longer in his power.",
+    "author": "Jean Paul",
+    "source": "Titan"
+  },
+  {
+    "text": "If you wish another to keep your secret, first keep it yourself.",
+    "author": "Seneca",
+    "source": "Hippolytus"
+  },
+  {
+    "text": "When we desire to confine our words, we commonly say they are spoken under the rose.",
+    "author": "Thomas Browne",
+    "source": "Pseudodoxia Epidemica (Vulgar Errors)"
+  },
+  {
+    "text": "You may be deceived if you trust too much, but you will live in torment if you do not trust enough.",
+    "author": "Frank Crane",
+    "source": "Business Education World, 1935"
+  },
+  {
+    "text": "To be trusted is a greater compliment than to be loved.",
+    "author": "George MacDonald",
+    "source": "The Marquis of Lossie, 1877"
+  },
+  {
+    "text": "Let every eye negotiate for itself, and trust no agent.",
+    "author": "William Shakespeare",
+    "source": "Much Ado About Nothing, Act II, scene 1"
+  },
+  {
+    "text": "Evidently you do not trust me. This does not predispose me to trust you.",
+    "author": "Jack Vance",
+    "source": "The Dirdir, 1969"
+  },
+  {
+    "text": "The greatest trust between man and man is the trust of giving counsel.",
+    "author": "Francis Bacon",
+    "source": "Essays, \"Of Counsel\""
+  },
+  {
+    "text": "Trust men, and they will be true to you; treat them greatly, and they will show themselves great.",
+    "author": "Ralph Waldo Emerson",
+    "source": "Essays, \"Prudence\""
+  },
+  {
+    "text": "You may trust him in the dark.",
+    "author": "Roman proverb",
+    "source": "cited by Cicero"
+  },
+  {
+    "text": "No one can build his security upon the nobleness of another person.",
+    "author": "Willa Cather",
+    "source": "Alexander's Bridge, 1912"
+  },
+  {
+    "text": "Security is mostly a superstition.",
+    "author": "Helen Keller",
+    "source": "The Open Door, 1957"
+  },
+  {
+    "text": "More firm and sure the hand of courage strikes, when it obeys the watchful eye of caution.",
+    "author": "James Thomson"
+  },
+  {
+    "text": "The enlightened ruler is heedful, and the good general full of caution.",
+    "author": "Sun Tzu",
+    "source": "The Art of War, ch. 12"
+  },
+  {
+    "text": "The truth. It is a beautiful and terrible thing, and should therefore be treated with great caution.",
+    "author": "J. K. Rowling",
+    "source": "Harry Potter and the Philosopher's Stone, 1997"
+  },
+  {
+    "text": "If you ever drop your keys into a river of molten lava, let 'em go, because man, they're gone.",
+    "author": "Jack Handey",
+    "source": "Deeper Thoughts, 1993"
+  },
+  {
+    "text": "LOCK-AND-KEY, n. The distinguishing device of civilization and enlightenment.",
+    "author": "Ambrose Bierce",
+    "source": "The Devil's Dictionary, 1911"
+  },
+  {
+    "text": "If you think cryptography is the answer to your problem, then you don't know what your problem is.",
+    "author": "Peter G. Neumann",
+    "source": "quoted in The New York Times, 2001"
+  },
+  {
+    "text": "Data is the pollution problem of the information age, and protecting privacy is the environmental challenge.",
+    "author": "Bruce Schneier",
+    "source": "Data and Goliath, 2015"
+  },
+  {
+    "text": "A man must get a thing before he can forget it.",
+    "author": "Oliver Wendell Holmes Sr.",
+    "source": "Medical Essays"
+  },
+  {
+    "text": "Mistakes remember'd are not faults forgot.",
+    "author": "Robert Henry Newell",
+    "source": "The Orpheus C. Kerr Papers"
+  },
+  {
+    "text": "The pyramids themselves, doting with age, have forgotten the names of their founders.",
+    "author": "Thomas Fuller",
+    "source": "The Holy State and the Profane State, 1642"
+  },
+  {
+    "text": "Discretion is the best form of calculation.",
+    "author": "Honoré de Balzac",
+    "source": "The Girl with the Golden Eyes, 1835"
+  },
+  {
+    "text": "The better part of valour is discretion; in the which better part I have saved my life.",
+    "author": "William Shakespeare",
+    "source": "Henry IV, Part 1, Act V, scene 4"
+  },
+  {
+    "text": "Let your own discretion be your tutor: suit the action to the word, the word to the action.",
+    "author": "William Shakespeare",
+    "source": "Hamlet, Act III, scene 2"
+  },
+  {
+    "text": "Discretion is a perfection of reason, and a guide to us in all the duties of life.",
+    "author": "Joseph Addison",
+    "source": "The Spectator"
+  },
+  {
+    "text": "Chance fights ever on the side of the prudent.",
+    "author": "Euripides",
+    "source": "Pirithous"
+  },
+  {
+    "text": "Cautious silence is where prudence takes refuge.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 3"
+  },
+  {
+    "text": "Nothing can be done at once hastily and prudently.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 557"
+  },
+  {
+    "text": "Prudence is the knowledge of things to be sought, and those to be shunned.",
+    "author": "Cicero",
+    "source": "De Officiis, I, 43"
+  },
+  {
+    "text": "I prefer silent prudence to loquacious folly.",
+    "author": "Cicero",
+    "source": "De Oratore, III, 35"
+  },
+  {
+    "text": "One has no protecting power save prudence.",
+    "author": "Juvenal",
+    "source": "Satires, X"
+  },
+  {
+    "text": "Prevention is the daughter of intelligence.",
+    "author": "Walter Raleigh",
+    "source": "Letter to Sir Robert Cecil, 1593"
+  },
+  {
+    "text": "That should be considered long which can be decided but once.",
+    "author": "Publilius Syrus",
+    "source": "Sentences"
+  },
+  {
+    "text": "It is well to moor your bark with two anchors.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 119"
+  },
+  {
+    "text": "We accomplish more by prudence than by force.",
+    "author": "Tacitus",
+    "source": "Annals, II, 26"
+  },
+  {
+    "text": "Forethought and prudence are the proper qualities of a leader.",
+    "author": "Tacitus",
+    "source": "Annals, XIII, 20"
+  },
+  {
+    "text": "Keep close to the shore: let others venture on the deep.",
+    "author": "Virgil",
+    "source": "Aeneid, V"
+  },
+  {
+    "text": "HABIT, n. A shackle for the free.",
+    "author": "Ambrose Bierce",
+    "source": "The Devil's Dictionary, 1911"
+  },
+  {
+    "text": "Habit is, as it were, a second nature.",
+    "author": "Cicero",
+    "source": "De Finibus, V, 25"
+  },
+  {
+    "text": "A nail is driven out by another nail, habit is overcome by habit.",
+    "author": "Erasmus",
+    "source": "Diluculum"
+  },
+  {
+    "text": "Nothing is stronger than habit.",
+    "author": "Ovid",
+    "source": "Ars Amatoria, II"
+  },
+  {
+    "text": "Ill habits gather by unseen degrees, as brooks make rivers, rivers run to seas.",
+    "author": "Ovid",
+    "source": "Metamorphoses, XV (tr. Dryden)"
+  },
+  {
+    "text": "The diminutive chains of habit are seldom heavy enough to be felt, till they are too strong to be broken.",
+    "author": "Samuel Johnson"
+  },
+  {
+    "text": "Every habit makes our hand more witty and our wit less handy.",
+    "author": "Friedrich Nietzsche",
+    "source": "The Gay Science, 1882"
+  },
+  {
+    "text": "Simplicity is prerequisite for reliability.",
+    "author": "Edsger W. Dijkstra",
+    "source": "How do we tell truths that might hurt?, 1975"
+  },
+  {
+    "text": "Keep it simple, stupid.",
+    "author": "Kelly Johnson"
+  },
+  {
+    "text": "Simplicity is the shortest path to a solution.",
+    "author": "Ward Cunningham",
+    "source": "The Simplest Thing that Could Possibly Work, 2004"
+  },
+  {
+    "text": "Fools ignore complexity. Pragmatists suffer it. Some can avoid it. Geniuses remove it.",
+    "author": "Alan Perlis",
+    "source": "Epigrams on Programming, 1982"
+  },
+  {
+    "text": "Simplicity is the keynote of all true elegance.",
+    "author": "Coco Chanel",
+    "source": "Harper's Bazaar, 1923"
+  },
+  {
+    "text": "Our life is frittered away by detail.",
+    "author": "Henry David Thoreau",
+    "source": "Walden, 1854"
+  },
+  {
+    "text": "Plurality ought never be posited without necessity.",
+    "author": "William of Ockham",
+    "source": "Quaestiones et decisiones"
+  },
+  {
+    "text": "I would have written a shorter letter, but I did not have the time.",
+    "author": "Blaise Pascal",
+    "source": "Provincial Letters, XVI"
+  },
+  {
+    "text": "Nothing is more simple than greatness; indeed, to be simple is to be great.",
+    "author": "Ralph Waldo Emerson",
+    "source": "Literary Ethics, 1838"
+  },
+  {
+    "text": "The wolf dreads the pitfall, the hawk suspects the snare, and the kite the covered hook.",
+    "author": "Horace",
+    "source": "Epistles, I, 16"
+  },
+  {
+    "text": "Suspicion always haunts the guilty mind; the thief doth fear each bush an officer.",
+    "author": "William Shakespeare",
+    "source": "Henry VI, Part 3, Act V, scene 6"
+  },
+  {
+    "text": "There is nothing more deceptive than an obvious fact.",
+    "author": "Arthur Conan Doyle",
+    "source": "The Boscombe Valley Mystery, 1891"
+  },
+  {
+    "text": "The robb'd that smiles steals something from the thief; he robs himself that spends a bootless grief.",
+    "author": "William Shakespeare",
+    "source": "Othello, Act I, scene 3"
+  },
+  {
+    "text": "Out of this nettle, danger, we pluck this flower, safety.",
+    "author": "William Shakespeare",
+    "source": "Henry IV, Part 1, Act II, scene 3"
+  },
+  {
+    "text": "Man is never watchful enough against dangers that threaten him every hour.",
+    "author": "Horace",
+    "source": "Odes, II, 13"
+  },
+  {
+    "text": "Danger comes the sooner when it is despised.",
+    "author": "Publilius Syrus",
+    "source": "Sentences"
+  },
+  {
+    "text": "Constant exposure to dangers will breed contempt for them.",
+    "author": "Seneca",
+    "source": "De Providentia, IV"
+  },
+  {
+    "text": "Be prepared.",
+    "author": "Robert Baden-Powell",
+    "source": "Scout motto, 1907"
+  },
+  {
+    "text": "In all matters, before beginning, a diligent preparation should be made.",
+    "author": "Cicero",
+    "source": "De Officiis, I, 21"
+  },
+  {
+    "text": "In the fields of observation chance favors only the prepared mind.",
+    "author": "Louis Pasteur",
+    "source": "Lecture at the University of Lille, 1854"
+  },
+  {
+    "text": "A fence to wisdom is silence.",
+    "author": "Rabbi Akiva",
+    "source": "Pirkei Avot"
+  },
+  {
+    "text": "Well-timed silence hath more eloquence than speech.",
+    "author": "Martin Farquhar Tupper",
+    "source": "Proverbial Philosophy, \"Of Discretion\""
+  },
+  {
+    "text": "Be silent always when you doubt your sense.",
+    "author": "Alexander Pope",
+    "source": "An Essay on Criticism, 1711"
+  },
+  {
+    "text": "Wise men say nothing in dangerous times.",
+    "author": "John Selden",
+    "source": "Table Talk"
+  },
+  {
+    "text": "Be silent and safe — silence never betrays you.",
+    "author": "John Boyle O'Reilly",
+    "source": "Rules of the Road"
+  },
+  {
+    "text": "There is likewise a reward for faithful silence.",
+    "author": "Horace",
+    "source": "Odes, III, 2"
+  },
+  {
+    "text": "Blessed is the man who, having nothing to say, abstains from giving us wordy evidence of the fact.",
+    "author": "George Eliot",
+    "source": "Impressions of Theophrastus Such, 1879"
+  },
+  {
+    "text": "Memory is the thing you forget with.",
+    "author": "Alexander Chase",
+    "source": "Perspectives, 1966"
+  },
+  {
+    "text": "We have all forgot more than we remember.",
+    "author": "Thomas Fuller",
+    "source": "Gnomologia, 1732"
+  },
+  {
+    "text": "Human memory is one of the worst data-collection devices in the world.",
+    "author": "Jonah Keri",
+    "source": "Baseball Between the Numbers, 2007"
+  },
+  {
+    "text": "If you wish to forget anything on the spot, make a note that this thing is to be remembered.",
+    "author": "Edgar Allan Poe",
+    "source": "Marginalia"
+  },
+  {
+    "text": "Memory itself is an internal rumour.",
+    "author": "George Santayana",
+    "source": "Reason in Science, 1906"
+  },
+  {
+    "text": "Memory... is the diary that we all carry about with us.",
+    "author": "Oscar Wilde",
+    "source": "The Importance of Being Earnest, 1895"
+  },
+  {
+    "text": "Memory is the treasury and guardian of all things.",
+    "author": "Cicero",
+    "source": "De Oratore, I, 5"
+  },
+  {
+    "text": "Many a man fails to become a thinker for the sole reason that his memory is too good.",
+    "author": "Friedrich Nietzsche"
+  },
+  {
+    "text": "Remember thee! Yea, from the table of my memory I'll wipe away all trivial fond records.",
+    "author": "William Shakespeare",
+    "source": "Hamlet, Act I, scene 5"
+  },
+  {
+    "text": "Show me a liar, and I will show thee a thief.",
+    "author": "George Herbert",
+    "source": "Jacula Prudentum, 1651"
+  },
+  {
+    "text": "A lie never lives to be old.",
+    "author": "Sophocles",
+    "source": "Acrisius, fragment 59"
+  },
+  {
+    "text": "Who is not sure of his memory should not attempt lying.",
+    "author": "Michel de Montaigne",
+    "source": "Essays, \"Of Liars\""
+  },
+  {
+    "text": "Sin has many tools, but a lie is the handle which fits them all.",
+    "author": "Oliver Wendell Holmes Sr.",
+    "source": "The Autocrat of the Breakfast-Table, 1858"
+  },
+  {
+    "text": "And he that does one fault at first, and lies to hide it, makes it two.",
+    "author": "Isaac Watts",
+    "source": "Divine Songs, Song XV"
+  },
+  {
+    "text": "Tell a lie and then tell the truth: it will be considered a lie.",
+    "author": "Sumerian proverb"
+  },
+  {
+    "text": "It is a capital mistake to theorise before one has data.",
+    "author": "Arthur Conan Doyle",
+    "source": "A Scandal in Bohemia, 1891"
+  },
+  {
+    "text": "The greatest mistake you can make in life is to be continually fearing you will make one.",
+    "author": "Elbert Hubbard",
+    "source": "The Note Book of Elbert Hubbard, 1927"
+  },
+  {
+    "text": "The only real mistake is the one from which we learn nothing.",
+    "author": "John Powell",
+    "source": "The Secret of Staying in Love"
+  },
+  {
+    "text": "Experience is the name everyone gives to their mistakes.",
+    "author": "Oscar Wilde",
+    "source": "Lady Windermere's Fan, 1892"
+  },
+  {
+    "text": "The cautious seldom err.",
+    "author": "Confucius",
+    "source": "Analects, IV"
+  },
+  {
+    "text": "Mistake, error, is the discipline through which we advance.",
+    "author": "William Ellery Channing",
+    "source": "The Present Age"
+  },
+  {
+    "text": "In general, pride is at the bottom of all great mistakes.",
+    "author": "John Ruskin",
+    "source": "Modern Painters"
+  },
+  {
+    "text": "There is the greatest practical benefit in making a few failures early in life.",
+    "author": "Thomas Henry Huxley",
+    "source": "On Medical Education, 1870"
+  },
+  {
+    "text": "It is hard to fail, but it is worse never to have tried to succeed.",
+    "author": "Theodore Roosevelt",
+    "source": "Speech at the Hamilton Club, Chicago, 1899"
+  },
+  {
+    "text": "Failure is an event, not a person. Yesterday ended last night.",
+    "author": "Zig Ziglar",
+    "source": "See You at the Top"
+  },
+  {
+    "text": "Half the failures in life arise from pulling in one's horse as he is leaping.",
+    "author": "Julius and Augustus Hare",
+    "source": "Guesses at Truth, 1827"
+  },
+  {
+    "text": "We have scotch'd the snake, not killed it.",
+    "author": "William Shakespeare",
+    "source": "Macbeth, Act III, scene 2"
+  },
+  {
+    "text": "We should never believe anything we have not dared to doubt.",
+    "author": "Christina, Queen of Sweden",
+    "source": "Maxims"
+  },
+  {
+    "text": "To have doubted one's own first principles is the mark of a civilized man.",
+    "author": "Oliver Wendell Holmes Jr.",
+    "source": "Ideals and Doubts, 1915"
+  },
+  {
+    "text": "Modest doubt is call'd the beacon of the wise.",
+    "author": "William Shakespeare",
+    "source": "Troilus and Cressida, Act II, scene 2"
+  },
+  {
+    "text": "Our doubts are traitors and make us lose the good we oft might win by fearing to attempt.",
+    "author": "William Shakespeare",
+    "source": "Measure for Measure, Act I, scene 4"
+  },
+  {
+    "text": "Doubt comes in at the window when inquiry is denied at the door.",
+    "author": "Benjamin Jowett"
+  },
+  {
+    "text": "Doubt is not a pleasant condition, but certainty is an absurd one.",
+    "author": "Voltaire",
+    "source": "Letter to Frederick William, Prince of Prussia, 1770"
+  },
+  {
+    "text": "No man is wise or safe, but he that is honest.",
+    "author": "Walter Raleigh",
+    "source": "Advice to the Earl of Rutland, 1596"
+  },
+  {
+    "text": "An honest tale speeds best being plainly told.",
+    "author": "William Shakespeare",
+    "source": "Richard III, Act IV, scene 4"
+  },
+  {
+    "text": "Honesty needs no disguise nor ornament; be plain.",
+    "author": "Thomas Otway",
+    "source": "The Orphan, 1680"
+  },
+  {
+    "text": "A good reputation is more valuable than money.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 108"
+  },
+  {
+    "text": "A lost good name is ne'er retriev'd.",
+    "author": "John Gay",
+    "source": "Fables, 1727"
+  },
+  {
+    "text": "It is a maxim with me that no man was ever written out of reputation but by himself.",
+    "author": "Richard Bentley"
+  },
+  {
+    "text": "Many strokes, though with a little axe, hew down and fell the hardest-timber'd oak.",
+    "author": "William Shakespeare",
+    "source": "Henry VI, Part 3, Act II, scene 1"
+  },
+  {
+    "text": "With ordinary talent and extraordinary perseverance, all things are attainable.",
+    "author": "Thomas Fowell Buxton"
+  },
+  {
+    "text": "Perseverance is not a long race; it is many short races one after another.",
+    "author": "Walter Elliott",
+    "source": "The Spiritual Life, 1918"
+  },
+  {
+    "text": "On the Internet, nobody knows you're a dog.",
+    "author": "Peter Steiner",
+    "source": "Cartoon caption, The New Yorker, 1993"
+  },
+  {
+    "text": "All the free stuff that you take for granted online is only free because you are the product.",
+    "author": "John Oliver",
+    "source": "Last Week Tonight, \"Data Brokers\", 2022"
+  },
+  {
+    "text": "Computers are good at following instructions, but not at reading your mind.",
+    "author": "Donald Knuth"
+  },
+  {
+    "text": "If you lie to the computer, it will get you.",
+    "author": "Perry Farrar",
+    "source": "quoted in Jon Bentley, \"Bumper-Sticker Computer Science\", 1985"
+  },
+  {
+    "text": "There are two ways to write error-free programs; only the third one works.",
+    "author": "Alan Perlis",
+    "source": "Epigrams on Programming, 1982"
+  },
+  {
+    "text": "Software and cathedrals are much the same – first we build them, then we pray.",
+    "author": "Sam Redwine",
+    "source": "4th International Software Process Workshop, 1988"
+  },
+  {
+    "text": "When done well, software is invisible.",
+    "author": "Bjarne Stroustrup",
+    "source": "Wired, 2010"
+  },
+  {
+    "text": "Every failure is a step to success.",
+    "author": "William Whewell",
+    "source": "Lectures on the History of Moral Philosophy in England, 1852"
+  },
+  {
+    "text": "If you want to be thought a liar, always tell the truth.",
+    "author": "Logan Pearsall Smith",
+    "source": "Afterthoughts, 1931"
+  },
+  {
+    "text": "Not being known doesn't stop the truth from being true.",
+    "author": "Richard Bach",
+    "source": "There's No Such Place As Far Away, 1978"
+  },
+  {
+    "text": "What is truth? said jesting Pilate, and would not stay for an answer.",
+    "author": "Francis Bacon",
+    "source": "Essays, \"Of Truth\""
+  },
+  {
+    "text": "It is as much an error to take truth for lies, as lies for truth.",
+    "author": "Lois McMaster Bujold",
+    "source": "The Hallowed Hunt, 2005"
+  },
+  {
+    "text": "A very great deal more truth can become known than can be proven.",
+    "author": "Richard Feynman",
+    "source": "Nobel Lecture, 1965"
+  },
+  {
+    "text": "Truth is always late, last to arrive, limping along with time.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 146"
+  },
+  {
+    "text": "All truths are not to be told.",
+    "author": "George Herbert",
+    "source": "Jacula Prudentum, 1651"
+  },
+  {
+    "text": "That which can be destroyed by the truth should be.",
+    "author": "P. C. Hodgell",
+    "source": "Seeker's Mask, 1994"
+  },
+  {
+    "text": "The truth of a proposition has nothing to do with its credibility. And vice versa.",
+    "author": "Robert A. Heinlein",
+    "source": "Time Enough for Love, 1973"
+  },
+  {
+    "text": "Truth is generally the best vindication against slander.",
+    "author": "Abraham Lincoln",
+    "source": "Letter to Edwin Stanton, 1864"
+  },
+  {
+    "text": "Accept the truth from whatever source it comes.",
+    "author": "Maimonides",
+    "source": "Introduction to the Shemonah Peraqim"
+  },
+  {
+    "text": "To see what is in front of one's nose needs a constant struggle.",
+    "author": "George Orwell",
+    "source": "In Front of Your Nose, 1946"
+  },
+  {
+    "text": "The truth hurts, but not as much as the consequences of willful ignorance.",
+    "author": "Charles Stross",
+    "source": "Iron Sunrise, 2004"
+  },
+  {
+    "text": "It takes two to speak the truth — one to speak, and another to hear.",
+    "author": "Henry David Thoreau",
+    "source": "A Week on the Concord and Merrimack Rivers, 1849"
+  },
+  {
+    "text": "Truth is the most valuable thing we have. Let us economize it.",
+    "author": "Mark Twain",
+    "source": "Following the Equator, 1897"
+  },
+  {
+    "text": "Truth was the only daughter of Time.",
+    "author": "Leonardo da Vinci",
+    "source": "Notebooks"
+  },
+  {
+    "text": "There is nothing so powerful as truth, and often nothing so strange.",
+    "author": "Daniel Webster",
+    "source": "Argument on the murder of Captain White, 1830"
+  },
+  {
+    "text": "If one tells the truth, one is sure, sooner or later, to be found out.",
+    "author": "Oscar Wilde",
+    "source": "Phrases and Philosophies for the Use of the Young, 1894"
+  },
+  {
+    "text": "Truth never was indebted to a lie.",
+    "author": "Edward Young",
+    "source": "Night Thoughts"
+  },
+  {
+    "text": "Truth is confirmed by inspection and delay: falsehood by haste and uncertainty.",
+    "author": "Tacitus",
+    "source": "Annals, II, 39"
+  },
+  {
+    "text": "Truth like a torch, the more 'tis shook, it shines.",
+    "author": "William Hamilton",
+    "source": "Discussions on Philosophy"
+  },
+  {
+    "text": "Lest men suspect your tale untrue, keep probability in view.",
+    "author": "John Gay",
+    "source": "Fables, \"The Painter who Pleased Nobody and Everybody\""
+  },
+  {
+    "text": "It is said that truth is often eclipsed but never extinguished.",
+    "author": "Livy",
+    "source": "History of Rome, XXII, 39"
+  },
+  {
+    "text": "The language of truth is unadorned and always simple.",
+    "author": "Ammianus Marcellinus",
+    "source": "Res Gestae, XIV, 10"
+  },
+  {
+    "text": "Who ever knew truth put to the worse in a free and open encounter?",
+    "author": "John Milton",
+    "source": "Areopagitica, 1644"
+  },
+  {
+    "text": "Repetition does not transform a lie into a truth.",
+    "author": "Franklin D. Roosevelt",
+    "source": "Radio address, 1939"
+  },
+  {
+    "text": "Truth is truth to the end of reckoning.",
+    "author": "William Shakespeare",
+    "source": "Measure for Measure, Act V, scene 1"
+  },
+  {
+    "text": "Truth can never be told so as to be understood, and not be believed.",
+    "author": "William Blake",
+    "source": "The Marriage of Heaven and Hell"
+  },
+  {
+    "text": "If it is not right, do not do it; if it is not true, do not say it.",
+    "author": "Marcus Aurelius",
+    "source": "Meditations, XII, 17"
+  },
+  {
+    "text": "Let no act be done at haphazard, nor otherwise than according to the finished rules that govern its kind.",
+    "author": "Marcus Aurelius",
+    "source": "Meditations, IV, 2"
+  },
+  {
+    "text": "Look to the essence of a thing, whether it be a point of doctrine, of practice, or of interpretation.",
+    "author": "Marcus Aurelius",
+    "source": "Meditations, VIII, 22"
+  },
+  {
+    "text": "No carelessness in your actions.",
+    "author": "Marcus Aurelius",
+    "source": "Meditations, VIII, 51 (tr. Hays)"
+  },
+  {
+    "text": "The best revenge is not to be like your enemy.",
+    "author": "Marcus Aurelius",
+    "source": "Meditations, VI, 6"
+  },
+  {
+    "text": "Blot out vain pomp; check impulse; quench appetite; keep reason under its own control.",
+    "author": "Marcus Aurelius",
+    "source": "Meditations, IX, 7"
+  },
+  {
+    "text": "If a man is mistaken, instruct him kindly and show him his error.",
+    "author": "Marcus Aurelius",
+    "source": "Meditations, X, 4"
+  },
+  {
+    "text": "Practice yourself, for heaven's sake, in little things; and thence proceed to greater.",
+    "author": "Epictetus",
+    "source": "Discourses, I, 18"
+  },
+  {
+    "text": "Little is needed to ruin and upset everything, only a slight aberration from reason.",
+    "author": "Epictetus",
+    "source": "Discourses, IV, 3"
+  },
+  {
+    "text": "If one doesn't know his mistakes, he won't want to correct them.",
+    "author": "Seneca",
+    "source": "Letters to Lucilius, XXVIII"
+  },
+  {
+    "text": "As long as you live, keep learning how to live.",
+    "author": "Seneca",
+    "source": "Letters to Lucilius, LXXVI"
+  },
+  {
+    "text": "But the wise man knows that all things are in store for him. Whatever happens, he says: \"I knew it.\"",
+    "author": "Seneca",
+    "source": "Letters to Lucilius, LXXVI"
+  },
+  {
+    "text": "It is indeed foolish to be unhappy now because you may be unhappy at some future time.",
+    "author": "Seneca",
+    "source": "Letters to Lucilius, XXIV"
+  },
+  {
+    "text": "All warfare is based on deception.",
+    "author": "Sun Tzu",
+    "source": "The Art of War, ch. 1"
+  },
+  {
+    "text": "If your enemy is secure at all points, be prepared for him.",
+    "author": "Sun Tzu",
+    "source": "The Art of War, ch. 1"
+  },
+  {
+    "text": "He who is prudent and lies in wait for an enemy who is not, will be victorious.",
+    "author": "Sun Tzu",
+    "source": "The Art of War, ch. 3"
+  },
+  {
+    "text": "Secret operations are essential in war; upon them the army relies to make its every move.",
+    "author": "Sun Tzu",
+    "source": "The Art of War, ch. 13"
+  },
+  {
+    "text": "Be extremely subtle, even to the point of formlessness.",
+    "author": "Sun Tzu",
+    "source": "The Art of War, ch. 6"
+  },
+  {
+    "text": "The general who wins the battle makes many calculations in his temple before the battle is fought.",
+    "author": "Sun Tzu",
+    "source": "The Art of War, ch. 1"
+  },
+  {
+    "text": "Distrust and caution are the parents of security.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1733"
+  },
+  {
+    "text": "The way to be safe is never to be secure.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1757"
+  },
+  {
+    "text": "'Tis easy to see, hard to foresee.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1736"
+  },
+  {
+    "text": "In a discreet man's mouth, a publick thing is private.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1736"
+  },
+  {
+    "text": "There's none deceived but he that trusts.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1736"
+  },
+  {
+    "text": "To whom thy secret thou dost tell, to him thy freedom thou dost sell.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1737"
+  },
+  {
+    "text": "Sloth, like rust, consumes faster than labour wears, while the used key is always bright.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1758"
+  },
+  {
+    "text": "Beware of little expences, a small leak will sink a great ship.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1745"
+  },
+  {
+    "text": "'Tis easier to prevent bad habits than to break them.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1745"
+  },
+  {
+    "text": "Neglect mending a small fault, and 'twill soon be a great one.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1755"
+  },
+  {
+    "text": "Half the truth is often a great lie.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1758"
+  },
+  {
+    "text": "A lie stands on one leg, the truth on two.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1735"
+  },
+  {
+    "text": "Let all men know thee, but no man know thee thoroughly: men freely ford that see the shallows.",
+    "author": "Benjamin Franklin",
+    "source": "Poor Richard's Almanack, 1743"
+  },
+  {
+    "text": "Learning without thought is labor lost; thought without learning is perilous.",
+    "author": "Confucius",
+    "source": "Analects, II (tr. Legge)"
+  },
+  {
+    "text": "Fine words and an insinuating appearance are seldom associated with true virtue.",
+    "author": "Confucius",
+    "source": "Analects, I (tr. Legge)"
+  },
+  {
+    "text": "When you have faults, do not fear to abandon them.",
+    "author": "Confucius",
+    "source": "Analects, I"
+  },
+  {
+    "text": "The superior man, when resting in safety, does not forget that danger may come.",
+    "author": "Confucius",
+    "source": "I Ching, Great Commentary"
+  },
+  {
+    "text": "There is nothing more visible than what is secret, and nothing more manifest than what is minute.",
+    "author": "Confucius",
+    "source": "The Doctrine of the Mean"
+  },
+  {
+    "text": "Anyone can hold the helm when the sea is calm.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 358"
+  },
+  {
+    "text": "Treat your friend as if he might become an enemy.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 401"
+  },
+  {
+    "text": "Practice is the best of all instructors.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 439"
+  },
+  {
+    "text": "Better to be ignorant of a matter than half know it.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 865"
+  },
+  {
+    "text": "I have often regretted my speech, never my silence.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 1070"
+  },
+  {
+    "text": "We may with advantage at times forget what we know.",
+    "author": "Publilius Syrus",
+    "source": "Sentences, maxim 234"
+  },
+  {
+    "text": "Everyone complains about his memory, and no one complains about his judgment.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims, 89"
+  },
+  {
+    "text": "The truest way to be deceived is to think oneself more knowing than others.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims, 127"
+  },
+  {
+    "text": "There is great skill in knowing how to conceal one's skill.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims, 245"
+  },
+  {
+    "text": "We should not be upset that others hide the truth from us, when we hide it so often from ourselves.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims"
+  },
+  {
+    "text": "It is easier to be wise for others than for oneself.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims, 132"
+  },
+  {
+    "text": "Silence is the surest resolve for him who distrusts himself.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims, 79"
+  },
+  {
+    "text": "It is more disgraceful to distrust than to be deceived by our friends.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims, 84"
+  },
+  {
+    "text": "To hear a prince's secrets is not a privilege but a burden.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 237"
+  },
+  {
+    "text": "The ear is the second door of truth and the first door for lies.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 80"
+  },
+  {
+    "text": "Lying is ordinary; let belief be extraordinary.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 154"
+  },
+  {
+    "text": "The tongue is a wild animal, and once it breaks loose, it is hard to return to its cage.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 222"
+  },
+  {
+    "text": "The wise do sooner what fools do later.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 268"
+  },
+  {
+    "text": "Some ponder things backward, paying much attention to what matters little and little to what matters much.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 35"
+  },
+  {
+    "text": "Truth will sooner come out from error than from confusion.",
+    "author": "Francis Bacon",
+    "source": "Novum Organum, II, 20"
+  },
+  {
+    "text": "Hope is a good breakfast, but it is a bad supper.",
+    "author": "Francis Bacon",
+    "source": "Apophthegms, 36"
+  },
+  {
+    "text": "They are ill discoverers that think there is no land, when they can see nothing but sea.",
+    "author": "Francis Bacon",
+    "source": "The Advancement of Learning, II"
+  },
+  {
+    "text": "He who knows does not speak; he who speaks does not know.",
+    "author": "Lao Tzu",
+    "source": "Tao Te Ching, ch. 56"
+  },
+  {
+    "text": "To attain knowledge, add things every day. To attain wisdom, remove things every day.",
+    "author": "Lao Tzu",
+    "source": "Tao Te Ching, ch. 48"
+  },
+  {
+    "text": "Knowing others is intelligence; knowing yourself is true wisdom.",
+    "author": "Lao Tzu",
+    "source": "Tao Te Ching, ch. 33 (tr. Stephen Mitchell)"
+  },
+  {
+    "text": "Block the passages, shut the doors, and till the end your strength shall not fail.",
+    "author": "Lao Tzu",
+    "source": "Tao Te Ching, ch. 52 (tr. Arthur Waley)"
+  },
+  {
+    "text": "Act before there is a problem; bring order before there is disorder.",
+    "author": "Lao Tzu",
+    "source": "Tao Te Ching, ch. 64 (tr. Victor H. Mair)"
+  },
+  {
+    "text": "Heaven's net is vast; though its meshes are wide, nothing escapes.",
+    "author": "Lao Tzu",
+    "source": "Tao Te Ching, ch. 73 (tr. Victor H. Mair)"
+  },
+  {
+    "text": "Appearances often are deceiving.",
+    "author": "Aesop",
+    "source": "The Wolf in Sheep's Clothing"
+  },
+  {
+    "text": "Better be wise by the misfortunes of others than by your own.",
+    "author": "Aesop",
+    "source": "The Lion, the Ass, and the Fox Hunting"
+  },
+  {
+    "text": "Enemies' promises were made to be broken.",
+    "author": "Aesop",
+    "source": "The Nurse and the Wolf (tr. Joseph Jacobs)"
+  },
+  {
+    "text": "I will have nought to do with a man who can blow hot and cold with the same breath.",
+    "author": "Aesop",
+    "source": "The Man and the Satyr"
+  },
+  {
+    "text": "It is thrifty to prepare today for the wants of tomorrow.",
+    "author": "Aesop",
+    "source": "The Ant and the Grasshopper"
+  },
+  {
+    "text": "Never trust the advice of a man in difficulties.",
+    "author": "Aesop",
+    "source": "The Fox and the Goat"
+  },
+  {
+    "text": "While I see many hoof marks going in, I see none coming out.",
+    "author": "Aesop",
+    "source": "The Lion, the Fox, and the Beasts"
+  },
+  {
+    "text": "But who will guard the guardians themselves?",
+    "author": "Juvenal",
+    "source": "Satires, VI, 347"
+  },
+  {
+    "text": "No man ever became extremely wicked all at once.",
+    "author": "Juvenal",
+    "source": "Satires, II, 83"
+  },
+  {
+    "text": "The traveller with empty pockets will sing even in the robber's face.",
+    "author": "Juvenal",
+    "source": "Satires, X, 22"
+  },
+  {
+    "text": "Do not trust the horse, Trojans. Whatever it is, I fear the Greeks even when they bring gifts.",
+    "author": "Virgil",
+    "source": "Aeneid, II, 48"
+  },
+  {
+    "text": "A snake lurks in the grass.",
+    "author": "Virgil",
+    "source": "Eclogues, III, 93"
+  },
+  {
+    "text": "Vice thrives and lives by concealment.",
+    "author": "Virgil",
+    "source": "Georgics, III, 454"
+  },
+  {
+    "text": "Prepared for either alternative.",
+    "author": "Virgil",
+    "source": "Aeneid, II, 61"
+  },
+  {
+    "text": "Yield not to misfortunes, but advance all the more boldly against them.",
+    "author": "Virgil",
+    "source": "Aeneid, VI, 95"
+  },
+  {
+    "text": "Some day, perhaps, remembering even this will be a pleasure.",
+    "author": "Virgil",
+    "source": "Aeneid, I, 203 (tr. Robert Fitzgerald)"
+  },
+  {
+    "text": "Practice and thought might gradually forge many an art.",
+    "author": "Virgil",
+    "source": "Georgics, I, 133"
+  },
+  {
+    "text": "He who has begun has half done. Dare to be wise; begin!",
+    "author": "Horace",
+    "source": "Epistles, I, 2"
+  },
+  {
+    "text": "It is your concern when your neighbor's wall is on fire.",
+    "author": "Horace",
+    "source": "Epistles, I, 18"
+  },
+  {
+    "text": "Arms are of little value in the field unless there is wise counsel at home.",
+    "author": "Cicero",
+    "source": "De Officiis, I, 76"
+  },
+  {
+    "text": "We must not say that every mistake is a foolish one.",
+    "author": "Cicero",
+    "source": "De Divinatione, II, 90"
+  },
+  {
+    "text": "It is right to learn even from an enemy.",
+    "author": "Ovid",
+    "source": "Metamorphoses, IV, 428"
+  },
+  {
+    "text": "You will be safest in the middle.",
+    "author": "Ovid",
+    "source": "Metamorphoses, II, 137"
+  },
+  {
+    "text": "A prating barber asked Archelaus how he would be trimmed. He answered, \"In silence.\"",
+    "author": "Plutarch",
+    "source": "Apophthegms of Kings and Commanders"
+  },
+  {
+    "text": "One truly is the protector of oneself; who else could the protector be?",
+    "author": "Gautama Buddha",
+    "source": "Dhammapada, 160 (tr. Acharya Buddharakkhita)"
+  },
+  {
+    "text": "The waking have one world in common; sleepers have each a private world of his own.",
+    "author": "Heraclitus",
+    "source": "Fragment 89"
+  },
+  {
+    "text": "The people must fight for its law as for its walls.",
+    "author": "Heraclitus",
+    "source": "Fragment 44"
+  },
+  {
+    "text": "I am more afraid of our own blunders than of the enemy's devices.",
+    "author": "Thucydides",
+    "source": "History of the Peloponnesian War, I"
+  },
+  {
+    "text": "We must make up our minds to look for our protection not to legal terrors but to careful administration.",
+    "author": "Thucydides",
+    "source": "History of the Peloponnesian War, III, 46"
+  },
+  {
+    "text": "The least initial deviation from the truth is multiplied later a thousandfold.",
+    "author": "Aristotle",
+    "source": "On the Heavens, I, 5"
+  },
+  {
+    "text": "The wisdom which knows what are and are not dangers is opposed to the ignorance of them.",
+    "author": "Plato",
+    "source": "Protagoras, 360d (tr. Jowett)"
+  },
+  {
+    "text": "Anyone who holds a true opinion without understanding is like a blind man on the right road.",
+    "author": "Plato",
+    "source": "Republic, 506c"
+  },
+  {
+    "text": "A wise man never loses anything, if he has himself.",
+    "author": "Michel de Montaigne",
+    "source": "Essays, I, 38"
+  },
+  {
+    "text": "If we do not secure the foundation, we cannot secure the edifice.",
+    "author": "Blaise Pascal",
+    "source": "The Art of Persuasion"
+  },
+  {
+    "text": "The best is the enemy of the good.",
+    "author": "Voltaire",
+    "source": "La Bégueule, 1772"
+  },
+  {
+    "text": "Love truth, but pardon error.",
+    "author": "Voltaire",
+    "source": "Sept Discours en Vers sur l'Homme, 1738"
+  },
+  {
+    "text": "The secret of being a bore is to tell everything.",
+    "author": "Voltaire",
+    "source": "Sept Discours en Vers sur l'Homme, 1738"
+  },
+  {
+    "text": "A witty saying proves nothing.",
+    "author": "Voltaire",
+    "source": "Le dîner du comte de Boulainvilliers, 1767"
+  },
+  {
+    "text": "What does not kill me, makes me stronger.",
+    "author": "Friedrich Nietzsche",
+    "source": "Twilight of the Idols, 1888"
+  },
+  {
+    "text": "The hearing ear is always found close to the speaking tongue.",
+    "author": "Ralph Waldo Emerson",
+    "source": "English Traits, 1856"
+  },
+  {
+    "text": "All is riddle, and the key to a riddle is another riddle.",
+    "author": "Ralph Waldo Emerson",
+    "source": "The Conduct of Life, 1860"
+  },
+  {
+    "text": "Some circumstantial evidence is very strong, as when you find a trout in the milk.",
+    "author": "Henry David Thoreau",
+    "source": "Journal"
+  },
+  {
+    "text": "Any fool can make a rule, and every fool will mind it.",
+    "author": "Henry David Thoreau",
+    "source": "Journal, 1860"
+  },
+  {
+    "text": "Whoever wishes to keep a secret must hide from us that he possesses one.",
+    "author": "Johann Wolfgang von Goethe",
+    "source": "Wilhelm Meister's Travels, I, 5"
+  },
+  {
+    "text": "Investigate what is, and not what pleases.",
+    "author": "Johann Wolfgang von Goethe",
+    "source": "Der Versuch als Vermittler von Objekt und Subjekt, 1792"
+  },
+  {
+    "text": "Nothing is more damaging to a new truth than an old error.",
+    "author": "Johann Wolfgang von Goethe",
+    "source": "Maxims and Reflections, 715"
+  },
+  {
+    "text": "Everything is simpler than one can imagine, at the same time more involved than can be comprehended.",
+    "author": "Johann Wolfgang von Goethe",
+    "source": "Maxims and Reflections, 1209"
+  },
+  {
+    "text": "You really only know when you know little. Doubt grows with knowledge.",
+    "author": "Johann Wolfgang von Goethe",
+    "source": "Maxims and Reflections, 281"
+  },
+  {
+    "text": "If you tell the truth you don't have to remember anything.",
+    "author": "Mark Twain",
+    "source": "Notebook, 1894"
+  },
+  {
+    "text": "As I slowly grow wise I briskly grow cautious.",
+    "author": "Mark Twain",
+    "source": "English as She Is Taught, 1887"
+  },
+  {
+    "text": "When in doubt, tell the truth.",
+    "author": "Mark Twain",
+    "source": "Following the Equator, 1897"
+  },
+  {
+    "text": "The truth is rarely pure and never simple.",
+    "author": "Oscar Wilde",
+    "source": "The Importance of Being Earnest, 1895"
+  },
+  {
+    "text": "We are inclined to believe those whom we do not know, because they have never deceived us.",
+    "author": "Samuel Johnson",
+    "source": "The Idler, No. 80, 1759"
+  },
+  {
+    "text": "He is no wise man that will quit a certainty for an uncertainty.",
+    "author": "Samuel Johnson",
+    "source": "The Idler, No. 57, 1759"
+  },
+  {
+    "text": "There are, in every age, new errors to be rectified, and new prejudices to be opposed.",
+    "author": "Samuel Johnson",
+    "source": "The Rambler, No. 86, 1751"
+  },
+  {
+    "text": "Few things are impossible to diligence and skill.",
+    "author": "Samuel Johnson",
+    "source": "Rasselas, 1759"
+  },
+  {
+    "text": "Security is a process, not a product.",
+    "author": "Bruce Schneier",
+    "source": "Crypto-Gram, May 2000"
+  },
+  {
+    "text": "Security is a chain; the weakest link breaks it.",
+    "author": "Bruce Schneier",
+    "source": "Crypto-Gram, May 2000"
+  },
+  {
+    "text": "The future of computers is complexity, and complexity is anathema to security.",
+    "author": "Bruce Schneier",
+    "source": "Crypto-Gram, May 2000"
+  },
+  {
+    "text": "You know your network; your attacker doesn't.",
+    "author": "Bruce Schneier",
+    "source": "Crypto-Gram, May 2000"
+  },
+  {
+    "text": "Only amateurs attack machines; professionals target people.",
+    "author": "Bruce Schneier",
+    "source": "Crypto-Gram, October 2000"
+  },
+  {
+    "text": "There's no such thing as absolute security, and any gain in security always involves some sort of trade-off.",
+    "author": "Bruce Schneier",
+    "source": "The Psychology of Security, 2008"
+  },
+  {
+    "text": "The security mindset is a valuable skill that everyone can benefit from, regardless of career path.",
+    "author": "Bruce Schneier",
+    "source": "The Security Mindset, 2008"
+  },
+  {
+    "text": "Attacks always get better, they never get worse.",
+    "author": "Bruce Schneier",
+    "source": "Crypto-Gram, 2009"
+  },
+  {
+    "text": "Well-designed security systems fail gracefully.",
+    "author": "Bruce Schneier",
+    "source": "Schneier on Security, 2006"
+  },
+  {
+    "text": "The human factor is truly security's weakest link.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "Security training needs to emphasize: When in doubt, verify, verify, verify.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "Deploying more technology is not going to solve the human security problem.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "The truth of the matter is that no one is immune to being duped by a good social engineer.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "Using an obvious, easily guessed password is only very slightly better than having no password at all.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "People just lose all creativity when it comes to choosing passwords.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "You should never tell anybody your password, not even tech support.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "Remember that you never know when someone else knows your password.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "Those who fail to plan for a security incident are planning for failure.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "An un-patched computer system represents one of the greatest security threats to the enterprise.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "Failure to change default passwords is a grave mistake that places the company at risk.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "Security through obscurity does not have any effect in blocking social engineering attacks.",
+    "author": "Kevin Mitnick",
+    "source": "The Art of Deception, 2002"
+  },
+  {
+    "text": "To make the problem mathematically tractable we shall assume that the enemy knows the system being used.",
+    "author": "Claude Shannon",
+    "source": "Communication Theory of Secrecy Systems, 1949"
+  },
+  {
+    "text": "It should not require secrecy, and it should not be a problem if it falls into enemy hands.",
+    "author": "Auguste Kerckhoffs",
+    "source": "La Cryptographie militaire, 1883"
+  },
+  {
+    "text": "Privacy is necessary for an open society in the electronic age.",
+    "author": "Eric Hughes",
+    "source": "A Cypherpunk's Manifesto, 1993"
+  },
+  {
+    "text": "Privacy is not secrecy.",
+    "author": "Eric Hughes",
+    "source": "A Cypherpunk's Manifesto, 1993"
+  },
+  {
+    "text": "Privacy is the power to selectively reveal oneself to the world.",
+    "author": "Eric Hughes",
+    "source": "A Cypherpunk's Manifesto, 1993"
+  },
+  {
+    "text": "We must defend our own privacy if we expect to have any.",
+    "author": "Eric Hughes",
+    "source": "A Cypherpunk's Manifesto, 1993"
+  },
+  {
+    "text": "If I say something, I want it heard only by those for whom I intend it.",
+    "author": "Eric Hughes",
+    "source": "A Cypherpunk's Manifesto, 1993"
+  },
+  {
+    "text": "Cypherpunks write code.",
+    "author": "Eric Hughes",
+    "source": "A Cypherpunk's Manifesto, 1993"
+  },
+  {
+    "text": "If privacy is outlawed, only outlaws will have privacy.",
+    "author": "Phil Zimmermann",
+    "source": "Why I Wrote PGP, 1991"
+  },
+  {
+    "text": "The natural flow of technology tends to move in the direction of making surveillance easier.",
+    "author": "Phil Zimmermann",
+    "source": "Interview with Om Malik, 2013"
+  },
+  {
+    "text": "Privacy is the right to a free mind.",
+    "author": "Edward Snowden",
+    "source": "Discussion with Chomsky and Greenwald, 2016"
+  },
+  {
+    "text": "Life was simple before World War II. After that, we had systems.",
+    "author": "Grace Hopper",
+    "source": "The Wit and Wisdom of Grace Hopper, 1987"
+  },
+  {
+    "text": "From then on, when anything went wrong with a computer, we said it had bugs in it.",
+    "author": "Grace Hopper"
+  },
+  {
+    "text": "Secure web servers are the equivalent of heavy armored cars.",
+    "author": "Gene Spafford",
+    "source": "Web Security & Commerce, 1997"
+  },
+  {
+    "text": "Program testing can be used to show the presence of bugs, but never to show their absence!",
+    "author": "Edsger W. Dijkstra",
+    "source": "Notes on Structured Programming, 1970"
+  },
+  {
+    "text": "Simplicity is a great virtue but it requires hard work to achieve it and education to appreciate it.",
+    "author": "Edsger W. Dijkstra",
+    "source": "On the nature of Computing Science, 1984"
+  },
+  {
+    "text": "Beware of bugs in the above code; I have only proved it correct, not tried it.",
+    "author": "Donald Knuth",
+    "source": "Notes on the van Emde Boas construction of priority deques, 1977"
+  },
+  {
+    "text": "You can't trust code that you did not totally create yourself.",
+    "author": "Ken Thompson",
+    "source": "Reflections on Trusting Trust, 1984"
+  },
+  {
+    "text": "I have learned more from my failures than can ever be revealed in the cold print of a scientific article.",
+    "author": "C. A. R. Hoare",
+    "source": "The Emperor's Old Clothes, 1981"
+  },
+  {
+    "text": "Given enough eyeballs, all bugs are shallow.",
+    "author": "Eric S. Raymond",
+    "source": "The Cathedral and the Bazaar, 1997"
+  },
+  {
+    "text": "The complexity of software is an essential property, not an accidental one.",
+    "author": "Fred Brooks",
+    "source": "No Silver Bullet, 1986"
+  },
+  {
+    "text": "Even perfect program verification can only establish that a program meets its specification.",
+    "author": "Fred Brooks",
+    "source": "No Silver Bullet, 1986"
+  },
+  {
+    "text": "Talk is cheap. Show me the code.",
+    "author": "Linus Torvalds",
+    "source": "Linux kernel mailing list, 2000"
+  },
+  {
+    "text": "I think people can generally trust me, but they can trust me exactly because they know they don't have to.",
+    "author": "Linus Torvalds",
+    "source": "Linux kernel mailing list, 2006"
+  },
+  {
+    "text": "On the internet nobody can hear you being subtle.",
+    "author": "Linus Torvalds",
+    "source": "LinuxCon Europe, 2014"
+  },
+  {
+    "text": "If the users don't control the program, the program controls the users.",
+    "author": "Richard Stallman",
+    "source": "Free Software Is Even More Important Now, 2013"
+  },
+  {
+    "text": "Value your freedom or you will lose it, teaches history.",
+    "author": "Richard Stallman",
+    "source": "Linux, GNU, and freedom, 2002"
+  },
+  {
+    "text": "I trust, and nothing that happens disturbs my trust.",
+    "author": "Helen Keller",
+    "source": "Optimism, 1903"
+  },
+  {
+    "text": "Sunlight is said to be the best of disinfectants; electric light the most efficient policeman.",
+    "author": "Louis Brandeis",
+    "source": "Other People's Money, 1914"
+  },
+  {
+    "text": "The first principle is that you must not fool yourself — and you are the easiest person to fool.",
+    "author": "Richard Feynman",
+    "source": "Cargo Cult Science, 1974"
+  },
+  {
+    "text": "We've learned from experience that the truth will out.",
+    "author": "Richard Feynman",
+    "source": "Cargo Cult Science, 1974"
+  },
+  {
+    "text": "Since then I never pay attention to anything by \"experts\". I calculate everything myself.",
+    "author": "Richard Feynman",
+    "source": "Surely You're Joking, Mr. Feynman!, 1985"
+  },
+  {
+    "text": "Human beings have a demonstrated talent for self-deception when their emotions are stirred.",
+    "author": "Carl Sagan",
+    "source": "Cosmos, 1980"
+  },
+  {
+    "text": "No matter how outrageous a lie may be, it will be accepted if stated loudly enough and often enough.",
+    "author": "Isaac Asimov",
+    "source": "The Near East, 1968"
+  },
+  {
+    "text": "Everything is important till proven otherwise.",
+    "author": "Isaac Asimov",
+    "source": "The Naked Sun, 1957"
+  },
+  {
+    "text": "The cure for advanced gullibility is to go to sleep and consider matters again the next day.",
+    "author": "Isaac Asimov",
+    "source": "Prelude to Foundation, 1988"
+  },
+  {
+    "text": "You can prove anything you want by coldly logical reason — if you pick the proper postulates.",
+    "author": "Isaac Asimov",
+    "source": "I, Robot, 1950"
+  },
+  {
+    "text": "There is no problem so complicated that you can't find a very simple answer to it if you look at it right.",
+    "author": "Douglas Adams",
+    "source": "The Salmon of Doubt, 2002"
+  },
+  {
+    "text": "You see, but you do not observe. The distinction is clear.",
+    "author": "Arthur Conan Doyle",
+    "source": "A Scandal in Bohemia, 1891"
+  },
+  {
+    "text": "I never guess. It is a shocking habit — destructive to the logical faculty.",
+    "author": "Arthur Conan Doyle",
+    "source": "The Sign of the Four, 1890"
+  },
+  {
+    "text": "Never trust to general impressions, my boy, but concentrate yourself upon details.",
+    "author": "Arthur Conan Doyle",
+    "source": "A Case of Identity, 1891"
+  },
+  {
+    "text": "We must look for consistency. Where there is a want of it we must suspect deception.",
+    "author": "Arthur Conan Doyle",
+    "source": "The Problem of Thor Bridge, 1922"
+  },
+  {
+    "text": "Any truth is better than indefinite doubt.",
+    "author": "Arthur Conan Doyle",
+    "source": "The Yellow Face, 1893"
+  },
+  {
+    "text": "Let us hear the suspicions. I will look after the proofs.",
+    "author": "Arthur Conan Doyle",
+    "source": "The Adventure of the Three Students, 1904"
+  },
+  {
+    "text": "My name is Sherlock Holmes. It is my business to know what other people don't know.",
+    "author": "Arthur Conan Doyle",
+    "source": "The Adventure of the Blue Carbuncle, 1892"
+  },
+  {
+    "text": "Believe nothing you hear, and only one half that you see.",
+    "author": "Edgar Allan Poe",
+    "source": "The System of Doctor Tarr and Professor Fether, 1845"
+  },
+  {
+    "text": "To observe attentively is to remember distinctly.",
+    "author": "Edgar Allan Poe",
+    "source": "The Murders in the Rue Morgue, 1841"
+  },
+  {
+    "text": "Human ingenuity cannot concoct a cipher which human ingenuity cannot resolve.",
+    "author": "Edgar Allan Poe",
+    "source": "A Few Words on Secret Writing, 1841"
+  },
+  {
+    "text": "Do remember that dishonesty and cowardice always have to be paid for.",
+    "author": "George Orwell",
+    "source": "As I Please, 1944"
+  },
+  {
+    "text": "For the first time he perceived that if you want to keep a secret you must also hide it from yourself.",
+    "author": "George Orwell",
+    "source": "Nineteen Eighty-Four, 1949"
+  },
+  {
+    "text": "The strongest of all warriors are these two — Time and Patience.",
+    "author": "Leo Tolstoy",
+    "source": "War and Peace"
+  },
+  {
+    "text": "A box without hinges, key, or lid, yet golden treasure inside is hid.",
+    "author": "J. R. R. Tolkien",
+    "source": "The Hobbit, 1937"
+  },
+  {
+    "text": "Never laugh at live dragons, Bilbo you fool!",
+    "author": "J. R. R. Tolkien",
+    "source": "The Hobbit, 1937"
+  },
+  {
+    "text": "Find out thy own mistakes, and failings, in order to amend them. A disease known is half cured.",
+    "author": "Thomas Fuller",
+    "source": "Introductio ad Prudentiam, 1731"
+  },
+  {
+    "text": "Antiquity cannot privilege an error, nor novelty prejudice a truth.",
+    "author": "Thomas Fuller",
+    "source": "Gnomologia, 1732"
+  },
+  {
+    "text": "Beware of no man more than thy self.",
+    "author": "Thomas Fuller",
+    "source": "Gnomologia, 1732"
+  },
+  {
+    "text": "It is wit to pick a lock, and steal a horse; but it is wisdom to let it alone.",
+    "author": "Thomas Fuller",
+    "source": "Gnomologia, 1732"
+  },
+  {
+    "text": "That, which proves too much, proves nothing.",
+    "author": "Thomas Fuller",
+    "source": "Gnomologia, 1732"
+  },
+  {
+    "text": "They say so, is half a lie.",
+    "author": "Thomas Fuller",
+    "source": "Gnomologia, 1732"
+  },
+  {
+    "text": "Trust him no further than you can throw him.",
+    "author": "Thomas Fuller",
+    "source": "Gnomologia, 1732"
+  },
+  {
+    "text": "The hole calls the thief.",
+    "author": "George Herbert",
+    "source": "Jacula Prudentum, 1651"
+  },
+  {
+    "text": "He that once deceives is ever suspected.",
+    "author": "George Herbert",
+    "source": "Jacula Prudentum, 1651"
+  },
+  {
+    "text": "Trust not one night's ice.",
+    "author": "George Herbert",
+    "source": "Jacula Prudentum, 1651"
+  },
+  {
+    "text": "Your thoughts close and your countenance loose.",
+    "author": "George Herbert",
+    "source": "Jacula Prudentum, 1651"
+  },
+  {
+    "text": "Speak fitly, or be silent wisely.",
+    "author": "George Herbert",
+    "source": "Jacula Prudentum, 1651"
+  },
+  {
+    "text": "Confidant, Confidante, n. One entrusted by A with the secrets of B, confided by him to C.",
+    "author": "Ambrose Bierce",
+    "source": "The Devil's Dictionary, 1911"
+  },
+  {
+    "text": "Positive, adj. Mistaken at the top of one's voice.",
+    "author": "Ambrose Bierce",
+    "source": "The Devil's Dictionary, 1911"
+  },
+  {
+    "text": "Defenceless, adj. Unable to attack.",
+    "author": "Ambrose Bierce",
+    "source": "The Devil's Dictionary, 1911"
+  },
+  {
+    "text": "My enemy is not the man who wrongs me, but the man who means to wrong me.",
+    "author": "Democritus",
+    "source": "The Golden Sayings of Democritus"
+  },
+  {
+    "text": "Fame and wealth without wisdom are unsafe possessions.",
+    "author": "Democritus",
+    "source": "The Golden Sayings of Democritus"
+  },
+  {
+    "text": "Not to let one's tongue outrun one's sense.",
+    "author": "Chilon of Sparta",
+    "source": "as reported by Diogenes Laërtius"
+  },
+  {
+    "text": "To keep a watch upon oneself.",
+    "author": "Chilon of Sparta",
+    "source": "as reported by Diogenes Laërtius"
+  },
+  {
+    "text": "The mouse that always trusts to one poor hole can never be a mouse of any soul.",
+    "author": "Alexander Pope",
+    "source": "The Wife of Bath Her Prologue, 1713"
+  },
+  {
+    "text": "To err is human, to forgive divine.",
+    "author": "Alexander Pope",
+    "source": "An Essay on Criticism, 1711"
+  },
+  {
+    "text": "I said the thing which was not.",
+    "author": "Jonathan Swift",
+    "source": "Gulliver's Travels, 1726"
+  },
+  {
+    "text": "What some invent the rest enlarge.",
+    "author": "Jonathan Swift",
+    "source": "The Journal of a Modern Lady"
+  },
+  {
+    "text": "Discipline in war counts more than fury.",
+    "author": "Niccolò Machiavelli",
+    "source": "The Art of War, 1521, Book VII"
+  },
+  {
+    "text": "Examine your environment.",
+    "author": "Miyamoto Musashi",
+    "source": "The Book of Five Rings, Fire Book"
+  },
+  {
+    "text": "To get wealth and security by guile is like one who pours water into a pot of unbaked clay.",
+    "author": "Thiruvalluvar",
+    "source": "Tirukkural, verse 660"
+  },
+  {
+    "text": "Not every light is a true light; to the wise the light of truth is light itself.",
+    "author": "Thiruvalluvar",
+    "source": "Tirukkural, verse 299"
+  },
+  {
+    "text": "Who despises an insignificant enemy resembles him who is careless about fire.",
+    "author": "Saadi",
+    "source": "Gulistan, 1258 (tr. Richard Burton)"
+  },
+  {
+    "text": "Use a sweet tongue, courtesy, and gentleness, and thou mayst manage to guide an elephant with a hair.",
+    "author": "Saadi",
+    "source": "Gulistan, 1258 (tr. James Ross)"
+  },
+  {
+    "text": "Scepticism is the first step towards truth.",
+    "author": "Denis Diderot",
+    "source": "Pensées philosophiques, 1746"
+  },
+  {
+    "text": "There is no harm in doubt and skepticism, for it is through these that new discoveries are made.",
+    "author": "Richard Feynman",
+    "source": "Letter to Armando Garcia J., 1985"
+  },
+  {
+    "text": "Cunning is the art of concealing our own defects, and discovering other people's weaknesses.",
+    "author": "William Hazlitt",
+    "source": "Characteristics, 1823"
+  },
+  {
+    "text": "Extraordinary claims require extraordinary evidence.",
+    "author": "Carl Sagan",
+    "source": "Cosmos, episode 12, 1980"
+  },
+  {
+    "text": "The first and worst of all frauds is to cheat one's self.",
+    "author": "Philip James Bailey",
+    "source": "Festus"
+  },
+  {
+    "text": "There is no error so monstrous that it fails to find defenders among the ablest men.",
+    "author": "Lord Acton",
+    "source": "Letter to Mary Gladstone, 1881"
+  },
+  {
+    "text": "For the robust, an error is information.",
+    "author": "Nassim Nicholas Taleb",
+    "source": "The Bed of Procrustes, 2010"
+  },
+  {
+    "text": "He who thinks little, errs much.",
+    "author": "Leonardo da Vinci",
+    "source": "Notebooks"
+  },
+  {
+    "text": "Sometimes we may learn more from a man's errors than from his virtues.",
+    "author": "Henry Wadsworth Longfellow",
+    "source": "Hyperion, 1839"
+  },
+  {
+    "text": "Flatterers are the worst kind of enemies.",
+    "author": "Tacitus",
+    "source": "Agricola, XLI"
+  },
+  {
+    "text": "In all cases the best antidote to rumour is the truth, however painful.",
+    "author": "Edward Glover",
+    "source": "The Psychology of Fear and Courage, 1940"
+  },
+  {
+    "text": "Rumor is rarely more interesting than fact, but it is always more readily available.",
+    "author": "Stephen L. Carter",
+    "source": "The Emperor of Ocean Park, 2002"
+  },
+  {
+    "text": "When a disaster happens, every report confirming it obtains ready credence.",
+    "author": "Publilius Syrus",
+    "source": "Sentences"
+  },
+  {
+    "text": "Danger breeds best on too much confidence.",
+    "author": "Pierre Corneille",
+    "source": "Le Cid, 1636"
+  },
+  {
+    "text": "Where men are the most sure and arrogant, they are commonly the most mistaken.",
+    "author": "David Hume",
+    "source": "An Enquiry Concerning the Principles of Morals, 1751"
+  },
+  {
+    "text": "Confidence is nowhere safe.",
+    "author": "Virgil",
+    "source": "Aeneid, IV, 373"
+  },
+  {
+    "text": "Don't lie, but don't tell the whole truth.",
+    "author": "Baltasar Gracián",
+    "source": "The Art of Worldly Wisdom, 1647, maxim 181"
+  },
+  {
+    "text": "When we risk no contradiction, it prompts the tongue to deal in fiction.",
+    "author": "John Gay",
+    "source": "Fables, \"The Elephant and the Bookseller\""
+  },
+  {
+    "text": "Who makes the fairest show means most deceit.",
+    "author": "William Shakespeare",
+    "source": "Pericles, Act I, scene 4"
+  },
+  {
+    "text": "We are never deceived; we deceive ourselves.",
+    "author": "Johann Wolfgang von Goethe",
+    "source": "Sprüche in Prosa"
+  },
+  {
+    "text": "One may outwit another, but not all the others.",
+    "author": "François de La Rochefoucauld",
+    "source": "Maxims, 394"
+  },
+  {
+    "text": "One is easily fooled by that which one loves.",
+    "author": "Molière",
+    "source": "Tartuffe, 1664"
+  },
+  {
+    "text": "Deadly poisons are concealed under sweet honey.",
+    "author": "Ovid",
+    "source": "Amores, I, 8"
+  },
+  {
+    "text": "The smooth speeches of the wicked are full of treachery.",
+    "author": "Phaedrus",
+    "source": "Fables, I, 19"
+  },
+  {
+    "text": "He carries a stone in one hand, and offers bread with the other.",
+    "author": "Plautus",
+    "source": "Aulularia"
+  },
+  {
+    "text": "You think him to be your dupe; if he feigns to be so who is the greater dupe, he or you?",
+    "author": "Jean de La Bruyère",
+    "source": "Les Caractères"
+  },
+  {
+    "text": "I have many names, and none of them matter.",
+    "author": "Roger Zelazny",
+    "source": "Lord of Light, 1967"
+  },
+  {
+    "text": "By time and toil we sever what strength and rage could never.",
+    "author": "Jean de La Fontaine",
+    "source": "Fables, II, 11"
+  },
+  {
+    "text": "How prone to doubt, how cautious are the wise!",
+    "author": "Homer",
+    "source": "Odyssey, XIII (tr. Alexander Pope)"
+  },
+  {
+    "text": "The doorstep to the temple of wisdom is a knowledge of our own ignorance.",
+    "author": "Charles Spurgeon",
+    "source": "Gleanings among the Sheaves"
+  },
+  {
+    "text": "Experience teaches slowly, and at the cost of mistakes.",
+    "author": "James Anthony Froude",
+    "source": "Short Studies on Great Subjects"
+  },
+  {
+    "text": "Who heeds not experience, trust him not.",
+    "author": "John Boyle O'Reilly",
+    "source": "Rules of the Road"
+  },
+  {
+    "text": "When the wind changes direction, some people build walls while others build windmills.",
+    "author": "Chinese proverb"
+  },
+  {
+    "text": "It is dark one inch ahead of you.",
+    "author": "Japanese proverb"
+  },
+  {
+    "text": "To continue is power.",
+    "author": "Japanese proverb"
+  },
+  {
+    "text": "Mistaking red for ripe.",
+    "author": "Vietnamese proverb"
+  },
+  {
+    "text": "If you put in the work to sharpen the steel, it will eventually turn into needles.",
+    "author": "Vietnamese proverb"
+  },
+  {
+    "text": "What is the use of crying when the birds ate the whole farm?",
+    "author": "Hindi proverb"
+  },
+  {
+    "text": "As a rule, the more bizarre a thing is the less mysterious it proves to be.",
+    "author": "Arthur Conan Doyle",
+    "source": "The Red-Headed League, 1891"
+  },
+  {
+    "text": "Let us not underrate the value of a fact; it will one day flower in a truth.",
+    "author": "Henry David Thoreau",
+    "source": "Natural History of Massachusetts, 1842"
+  },
+  {
+    "text": "Words are fleeting; writing remains.",
+    "author": "Latin proverb"
+  }
+]

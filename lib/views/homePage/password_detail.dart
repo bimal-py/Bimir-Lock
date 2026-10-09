@@ -1,423 +1,18 @@
+import 'dart:async';
+
 import 'package:bimir_lock/controller/homePage/home_page_controller.dart';
-import 'package:bimir_lock/controller/homePage/password_detail_controller.dart';
 import 'package:bimir_lock/models/password_table.dart';
-import 'package:bimir_lock/utils/validators.dart';
+import 'package:bimir_lock/ui/coach_marks.dart';
+import 'package:bimir_lock/ui/password_tools.dart';
+import 'package:bimir_lock/ui/secret.dart';
+import 'package:bimir_lock/ui/tokens.dart';
+import 'package:bimir_lock/ui/widgets.dart';
+import 'package:bimir_lock/utils/helper/vault_crypto.dart';
+import 'package:bimir_lock/utils/helper/vault_health.dart';
+import 'package:bimir_lock/views/homePage/entry_actions.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-
-import '../../widgets/custom/custom_text_field.dart';
-
-//this class require argument
-class PasswordDetailPage extends StatefulWidget {
-  static const String routeName = "/passwordDetailPage";
-  const PasswordDetailPage({
-    super.key,
-  });
-
-  @override
-  State<PasswordDetailPage> createState() => _PasswordDetailPageState();
-}
-
-class _PasswordDetailPageState extends State<PasswordDetailPage> {
-  late PasswordDetailController c;
-  PasswordDetailPageArgument? _passwordDetailPageArgument;
-  Rxn<PasswordTable> passwordTable = Rxn();
-
-  @override
-  void initState() {
-    c = Get.put(PasswordDetailController());
-
-    super.initState();
-    WidgetsFlutterBinding.ensureInitialized();
-    final widgetsBinding = WidgetsBinding.instance;
-    widgetsBinding.addPostFrameCallback((callback) {
-      if (ModalRoute.of(context)?.settings.arguments != null) {
-        _passwordDetailPageArgument = ModalRoute.of(context)!.settings.arguments
-            as PasswordDetailPageArgument;
-        if (_passwordDetailPageArgument != null) {
-          c.isEdit.value = _passwordDetailPageArgument!.isEdit;
-          passwordTable.value = _passwordDetailPageArgument!.passwordTable;
-          c.titleController.text = passwordTable.value!.title ?? "";
-          c.userNameController.text = passwordTable.value!.userName ?? "";
-          // A locked row is one whose stored value could not be opened. Its
-          // bytes are left exactly as they are: the field stays empty, editing
-          // is forced off, and onSaveTap refuses. Putting the value straight
-          // into the controller (and letting Save write it back) is how the
-          // only copy of an unreadable password used to get replaced with "".
-          c.locked.value = passwordTable.value!.locked;
-          if (passwordTable.value!.locked) {
-            c.isEdit.value = false;
-            c.passwordController.text = "";
-          } else {
-            c.passwordController.text = passwordTable.value!.password ?? "";
-          }
-          c.id = passwordTable.value!.id;
-        }
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    Get.delete<PasswordDetailController>();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              highlightColor: Colors.transparent,
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                color: theme.colorScheme.onSurfaceVariant,
-                size: 30,
-              ),
-            ),
-          ),
-          automaticallyImplyLeading: false,
-          title: const Text(
-            "Detail page",
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          centerTitle: true,
-          // actions: [
-          //   PopupMenuButton(
-          //     splashRadius: 0,
-          //     // shadowColor: AppColor.tertiaryTextColor,
-          //     padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 60),
-          //     position: PopupMenuPosition.under,
-          //     shape: const RoundedRectangleBorder(
-          //       borderRadius: BorderRadius.all(
-          //         Radius.circular(4.0),
-          //       ),
-          //     ),
-          //     constraints: const BoxConstraints(minWidth: 119, minHeight: 123),
-          //     onSelected: (value) async {
-          //       if (value == "Edit") {
-          //         c.onEditTap();
-          //       } else if (value == "Delete") {
-          //         bool? result = await showDialog(
-          //           context: context,
-          //           builder: (context) {
-          //             return AlertDialog(
-          //               title: const Text("Consent required!!!"),
-          //               content: const Text(
-          //                 "Do you really want to delete this password detial. Once deleted you cannot recover it back.",
-          //               ),
-          //               actions: [
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop(true);
-          //                   },
-          //                   child: const Text(
-          //                     "Ok",
-          //                   ),
-          //                 ),
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop(false);
-          //                   },
-          //                   child: const Text(
-          //                     "Cancel",
-          //                   ),
-          //                 ),
-          //               ],
-          //             );
-          //           },
-          //         );
-          //         if (result != null && result) {
-          //           var success = await c.onDeleteTap(passwordTable!);
-          //           if (success) {
-          //             HomePageController hpc = Get.find();
-          //             await hpc.loadPasswords();
-          //             Fluttertoast.showToast(
-          //                 msg: "Password deleted successfully");
-          //             if (context.mounted) {
-          //               Navigator.of(context).pop();
-          //             }
-          //           } else {
-          //             Fluttertoast.showToast(
-          //                 msg: "Error encountered while deleting password");
-          //           }
-          //         }
-          //       }
-          //     },
-          //     offset: const Offset(-20, 0),
-          //     itemBuilder: (BuildContext context) => [
-          //       PopupMenuItem(
-          //         value: "Edit",
-          //         child: Row(
-          //           children: [
-          //             Icon(
-          //               Icons.edit,
-          //               color: theme.colorScheme.onSurfaceVariant,
-          //             ),
-          //             const SizedBox(
-          //               width: 5,
-          //             ),
-          //             Text(
-          //               "Edit",
-          //               style: TextStyle(
-          //                 fontSize: 16,
-          //                 fontWeight: FontWeight.w400,
-          //                 color: theme.colorScheme.onSurfaceVariant,
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //       PopupMenuItem(
-          //         value: "Delete",
-          //         child: Row(
-          //           children: [
-          //             Icon(
-          //               Icons.delete,
-          //               color: theme.colorScheme.error,
-          //             ),
-          //             const SizedBox(
-          //               width: 5,
-          //             ),
-          //             Text(
-          //               "Delete",
-          //               style: TextStyle(
-          //                 fontSize: 16,
-          //                 fontWeight: FontWeight.w400,
-          //                 color: theme.colorScheme.error,
-          //               ),
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //     child: const Padding(
-          //       padding: EdgeInsets.only(right: 24),
-          //       child: Icon(
-          //         Icons.more_vert_rounded,
-          //       ),
-          //     ),
-          //   )
-          // ],
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 20,
-              right: 20,
-              top: 20,
-            ),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Form(
-                  key: c.formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(35.0),
-                        ),
-                        elevation: 10,
-                        semanticContainer: false,
-                        surfaceTintColor: theme.colorScheme.surfaceTint,
-                        child: Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Obx(
-                                () => Text(
-                                  "${passwordTable.value?.title.toString().capitalizeFirst}",
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              Obx(
-                                () => BimirLockTextField(
-                                  label: "Media Title",
-                                  controller: c.titleController,
-                                  readOnly: !c.isEdit.value,
-                                  validator: Validators.checkFieldEmpty,
-                                  // readOnly: false,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              Obx(
-                                () => BimirLockTextField(
-                                  label: "User Name/ Email",
-                                  controller: c.userNameController,
-                                  readOnly: !c.isEdit.value,
-                                  hasCopy: true,
-                                  validator: Validators.checkFieldEmpty,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              Obx(
-                                () => BimirLockTextField(
-                                  label: "Password",
-                                  controller: c.passwordController,
-                                  readOnly: !c.isEdit.value || c.locked.value,
-                                  hasCopy: true,
-                                  canCopy: !c.locked.value,
-                                  validator: c.locked.value
-                                      ? null
-                                      : Validators.checkPasswordField,
-                                ),
-                              ),
-                              Obx(
-                                () => c.locked.value
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(top: 16),
-                                        child: Text(
-                                          "This entry can't be unlocked on this "
-                                          "device. It has not been changed or "
-                                          "deleted. You'll need to reset this "
-                                          "password with the provider.",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: theme.colorScheme.error,
-                                          ),
-                                        ),
-                                      )
-                                    : const SizedBox.shrink(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      Obx(
-                        () => c.isEdit.value && !c.readOnly
-                            ? Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    FloatingActionButton.extended(
-                                      heroTag: "editpassword",
-                                      onPressed: () async {
-                                        if (c.formKey.currentState!.validate()) {
-                                          bool? result = await showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                    "Consent required!!!"),
-                                                content: const Text(
-                                                  "Do you want to edit this password detial.",
-                                                ),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop(true);
-                                                    },
-                                                    child: const Text(
-                                                      "Ok",
-                                                    ),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop(false);
-                                                    },
-                                                    child: const Text(
-                                                      "Cancel",
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                          if (result != null && result) {
-                                            var success = await c.onSaveTap();
-                                            if (success) {
-                                              HomePageController hpc = Get.find();
-                                              await hpc.loadPasswords();
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Password updated successfully",
-                                                  backgroundColor: Colors.black, textColor: Colors.white);
-                                              if (context.mounted) {
-                                                Navigator.of(context).pop();
-                                              }
-                                            } else {
-                                              Fluttertoast.showToast(
-                                                  msg:
-                                                      "Error encountered while deleting password",
-                                                  backgroundColor: Colors.black, textColor: Colors.white);
-                                            }
-                                          }
-                                        }
-                                      },
-                                      label: const Text(
-                                        "Update detail",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                    // FloatingActionButton.extended(
-                                    //   heroTag: "editpasswordCancel",
-                                    //   onPressed: () {
-                                    //     c.onCancelTap();
-                                    //   },
-                                    //   label: const Text(
-                                    //     "Cancel",
-                                    //     style: TextStyle(
-                                    //       fontSize: 18,
-                                    //       fontWeight: FontWeight.w500,
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                              )
-                            : const SizedBox.shrink(),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        // floatingActionButton: FloatingActionButton.extended(onPressed: () {}, label: Text("Save")),
-        // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      ),
-    );
-  }
-}
+import 'package:get/get.dart' hide ContextExtensionss;
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class PasswordDetailPageArgument {
   PasswordDetailPageArgument({
@@ -426,4 +21,307 @@ class PasswordDetailPageArgument {
   });
   final PasswordTable passwordTable;
   final bool isEdit;
+}
+
+/// One entry, after the PIN. The password starts hidden, shows with a tap,
+/// and hides itself again after 30 seconds so it is not left on screen.
+class PasswordDetailPage extends StatefulWidget {
+  static const String routeName = "/passwordDetailPage";
+  const PasswordDetailPage({super.key});
+
+  @override
+  State<PasswordDetailPage> createState() => _PasswordDetailPageState();
+}
+
+class _PasswordDetailPageState extends State<PasswordDetailPage>
+    with WidgetsBindingObserver {
+  static const Duration _showFor = Duration(seconds: 30);
+
+  final HomePageController _home = Get.find<HomePageController>();
+  PasswordTable? _entry;
+  bool _revealed = false;
+  Timer? _hideTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || (_entry?.locked ?? true)) return;
+      CoachMarks.showOnce(
+        context,
+        tourId: CoachTours.entryDetail,
+        steps: const [
+          CoachStep(
+            targetId: 'detail.fields',
+            title: 'Unlocked',
+            body:
+                'Tap the password to show it; it hides again after 30 seconds. A copied password is wiped from the clipboard after 30 seconds too.',
+          ),
+        ],
+      );
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_entry != null) return;
+    final Object? args = ModalRoute.of(context)?.settings.arguments;
+    if (args is PasswordDetailPageArgument) _entry = args.passwordTable;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _hideTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Leaving the app hides the password, so the app switcher's snapshot and
+    // whoever picks the phone up next do not see it.
+    if (state != AppLifecycleState.resumed && _revealed) _setRevealed(false);
+  }
+
+  void _setRevealed(bool on) {
+    _hideTimer?.cancel();
+    setState(() => _revealed = on);
+    if (on) {
+      _hideTimer = Timer(_showFor, () {
+        if (mounted) _setRevealed(false);
+      });
+    }
+  }
+
+  Future<void> _edit() async {
+    final PasswordTable? saved = await editEntry(
+      context,
+      _entry!,
+      verified: true,
+    );
+    if (saved != null && mounted) {
+      setState(() {
+        _entry = saved;
+        _revealed = false;
+      });
+    }
+  }
+
+  Future<void> _delete() async {
+    if (await deleteEntry(context, _entry!, verified: true) && mounted) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final PasswordTable? e = _entry;
+    if (e == null) return const Scaffold();
+    final BimirPalette p = BimirPalette.of(context);
+    final TextTheme t = Theme.of(context).textTheme;
+    final bool locked = e.locked;
+    final bool readOnly =
+        locked || _home.vaultHealth.value == VaultKeyHealth.keyLost;
+    final String password = e.password ?? '';
+    final String user = (e.userName ?? '').trim();
+    final String note = (e.note ?? '').trim();
+    final VaultHealth health = _home.health.value;
+    final int shared = health.sharedWith(e);
+    final Strength strength = estimateStrength(password);
+
+    final ColorScheme sc = Theme.of(context).colorScheme;
+    return Scaffold(
+      appBar: AppBar(),
+      body: PageBody(
+        top: false,
+        child: ListView(
+          children: [
+            const SizedBox(height: Space.sm),
+            Row(
+              children: [
+                Monogram(entryTitle(e), size: 56),
+                const SizedBox(width: Space.lg),
+                Expanded(child: Text(entryTitle(e), style: t.headlineMedium)),
+              ],
+            ),
+            const SizedBox(height: Space.xl),
+            if (locked)
+              const Notice(
+                tone: Tone.danger,
+                icon: LucideIcons.lock,
+                title: "This entry can't be unlocked on this device",
+                message:
+                    "It has not been changed or deleted. You'll need to reset this password with the provider.",
+              )
+            else ...[
+              CoachTarget(
+                id: 'detail.fields',
+                child: RowGroup(
+                  children: [
+                    _Field(
+                      label: 'Username',
+                      value: Text(
+                        user.isEmpty ? 'None' : user,
+                        style: t.bodyLarge?.copyWith(color: user.isEmpty ? p.muted : null),
+                      ),
+                      actions: [
+                        if (user.isNotEmpty)
+                          IconButton(
+                            tooltip: 'Copy username',
+                            icon: const Icon(LucideIcons.copy, size: 20),
+                            onPressed: () => copyValue(user, what: 'Username'),
+                          ),
+                      ],
+                    ),
+                    _Field(
+                      label: 'Password',
+                      value: GestureDetector(
+                        onTap: () => _setRevealed(!_revealed),
+                        child: SecretText(value: password, revealed: _revealed, size: 17),
+                      ),
+                      actions: [
+                        IconButton(
+                          tooltip: _revealed ? 'Hide' : 'Show',
+                          icon: Icon(_revealed ? LucideIcons.eyeOff : LucideIcons.eye, size: 20),
+                          onPressed: () => _setRevealed(!_revealed),
+                        ),
+                        IconButton(
+                          tooltip: 'Copy password',
+                          icon: const Icon(LucideIcons.copy, size: 20),
+                          onPressed: () => copyValue(password, what: 'Password', sensitive: true),
+                        ),
+                      ],
+                    ),
+                    if (e.noteLocked)
+                      _Field(
+                        label: 'Note',
+                        value: Text(
+                          "Can't be opened on this device",
+                          style: t.bodyLarge?.copyWith(color: p.muted),
+                        ),
+                      )
+                    else if (note.isNotEmpty)
+                      _Field(
+                        label: 'Note',
+                        value: SelectableText(note, style: t.bodyLarge),
+                        actions: [
+                          IconButton(
+                            tooltip: 'Copy note',
+                            icon: const Icon(LucideIcons.copy, size: 20),
+                            // Notes hold recovery codes: wiped like a password.
+                            onPressed: () => copyValue(note, what: 'Note', sensitive: true),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: Space.sm),
+              AnimatedOpacity(
+                opacity: _revealed ? 1 : 0,
+                duration: Motion.base,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: Space.xs),
+                  child: Text('Hides again after 30 seconds.', style: t.bodySmall),
+                ),
+              ),
+              const SizedBox(height: Space.lg),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Space.xs),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Strength', style: t.labelLarge?.copyWith(color: p.muted)),
+                    const SizedBox(height: Space.sm),
+                    StrengthMeter(password: password),
+                  ],
+                ),
+              ),
+              if (shared > 0) ...[
+                const SizedBox(height: Space.lg),
+                Notice(
+                  tone: Tone.danger,
+                  icon: LucideIcons.repeat2,
+                  title: 'Used on ${shared + 1} sites',
+                  message:
+                      'If any one of them leaks, all of them are exposed. Give this account its own password.',
+                ),
+              ] else if (strength.segments <= 1) ...[
+                const SizedBox(height: Space.lg),
+                const Notice(
+                  tone: Tone.warning,
+                  icon: LucideIcons.triangleAlert,
+                  title: 'Easy to guess',
+                  message:
+                      'Short, common or patterned passwords fall quickly. A generated one takes a second.',
+                ),
+              ],
+            ],
+            const SizedBox(height: Space.xl),
+            Row(
+              children: [
+                if (!readOnly) ...[
+                  Expanded(
+                    child: FilledButton.tonalIcon(
+                      onPressed: _edit,
+                      icon: const Icon(LucideIcons.pencil, size: 18),
+                      label: const Text('Edit'),
+                    ),
+                  ),
+                  const SizedBox(width: Space.md),
+                ],
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: _delete,
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: sc.error,
+                      side: BorderSide(color: sc.error.withValues(alpha: 0.5)),
+                    ),
+                    icon: const Icon(LucideIcons.trash2, size: 18),
+                    label: const Text('Delete'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: Space.xxl),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Field extends StatelessWidget {
+  const _Field({required this.label, required this.value, this.actions = const []});
+
+  final String label;
+  final Widget value;
+  final List<Widget> actions;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme t = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(Space.lg, Space.md, Space.xs, Space.md),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(label, style: t.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                )),
+                const SizedBox(height: 2),
+                value,
+              ],
+            ),
+          ),
+          ...actions,
+        ],
+      ),
+    );
+  }
 }

@@ -1,9 +1,23 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <!-- Required in release builds too: the upgrader version check and the quotes
          API call are runtime features. debug/profile manifests add this for the
          Flutter tool only and are not merged into release. -->
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Wrong PIN alerts: the front camera photographs whoever enters 7 wrong
+         PINs, only after the owner switched it on (which is when this is asked
+         for). The camera plugin also declares the microphone and old storage
+         permissions for video, which Bimir Lock never records, and marks the
+         camera as required, which would hide the app from phones without one. -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"/>
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="false"
+        tools:replace="android:required"/>
 
     <!-- The autofill service names a saved credential after the app it came from.
          Resolving another app's label needs package visibility on API 30+: the

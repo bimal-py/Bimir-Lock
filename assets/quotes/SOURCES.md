@@ -1,0 +1,215 @@
+# Launch-screen quotes: sources
+
+`quotes.json` holds 500 short quotes (at most 110 characters each) for the Bimir Lock launch screen. Each one was checked against the page listed below before it was included.
+
+## Method
+
+- Wikiquote pages were downloaded as raw wikitext through the MediaWiki API and parsed by section. Quotes were taken only from sourced sections. Anything under *Disputed*, *Misattributed*, *Attributed*, *Unsourced* or *Quotes about …* headings was dropped automatically. On topic pages (Privacy, Secrecy, Trust, Caution, Prudence, Memory, Lying, Truth and others), the citation line under each quote gave the author and work. Many of those citations come from Hoyt's *New Cyclopedia of Practical Quotations* (1922).
+- Security quotes with thin Wikiquote coverage were checked against primary texts: Schneier's Crypto-Gram and essays on schneier.com, the full text of Mitnick's *The Art of Deception*, Shannon's 1949 BSTJ paper, Eric Hughes' *A Cypherpunk's Manifesto*, Poe's essay on Wikisource and Kerckhoffs' rules via Wikipedia.
+- Translations are the ones printed on the source page, such as Giles for Sun Tzu, Legge for Confucius, Maurer for Gracián and the Wikiquote translations of the proverb collections. Nothing was re-translated. Foreign proverbs use the page's literal *Translation*, never its *English equivalent*.
+- Text is verbatim. Allowed edits are limited to trimming to a complete sentence, dropping bracketed editorial insertions, normalising verse line breaks and capitals, and using `and` for `&`. Two exceptions are a leading clause dropped from Poe ("Yet it may be roundly asserted that") and a leading vocative dropped from Goethe ("My son,"). The Mitnick weakest-link quote drops a leading "Because".
+- Left out on purpose: quotes whose only attribution was a quote site (for example the Nappo "20 years to build a reputation" line, Einstein lines and the Spafford powered-off line, which runs past 110 characters), near-duplicate ideas, and anything violent, partisan or gloomy.
+- `source` is omitted whenever the verified page gave no specific work. Two different men named Thomas Fuller appear: the churchman (*Holy State*, 1642) and the physician (*Gnomologia*, 1732).
+
+## Proverbs
+
+- Russian proverb (14): https://en.wikiquote.org/wiki/Russian_proverbs
+- German proverb (2): https://en.wikiquote.org/wiki/German_proverbs
+- Italian proverb (3): https://en.wikiquote.org/wiki/Italian_proverbs
+- Portuguese proverb (2): https://en.wikiquote.org/wiki/Portuguese_proverbs
+- Swedish proverb (7): https://en.wikiquote.org/wiki/Swedish_proverbs
+- Latin proverb (6): https://en.wikiquote.org/wiki/Latin_proverbs
+- Spanish proverb (2): https://en.wikiquote.org/wiki/Spanish_proverbs
+- Japanese proverb (5): https://en.wikiquote.org/wiki/Japanese_proverbs
+- Korean proverb (3): https://en.wikiquote.org/wiki/Korean_proverbs
+- Danish proverb (1): https://en.wikiquote.org/wiki/Danish_proverbs
+- Estonian proverb (2): https://en.wikiquote.org/wiki/Estonian_proverbs
+- Finnish proverb (6): https://en.wikiquote.org/wiki/Finnish_proverbs
+- Indonesian proverb (1): https://en.wikiquote.org/wiki/Indonesian_proverbs
+- Swahili proverb (2): https://en.wikiquote.org/wiki/Swahili_proverbs
+- Filipino proverb (1): https://en.wikiquote.org/wiki/Filipino_proverbs
+- Tamil proverb (2): https://en.wikiquote.org/wiki/Tamil_proverbs
+- Scottish proverb (1): https://en.wikiquote.org/wiki/Scottish_proverbs
+- French proverb (2): https://en.wikiquote.org/wiki/French_proverbs
+- English proverb (14): https://en.wikiquote.org/wiki/English_proverbs
+- Roman proverb (1): https://en.wikiquote.org/wiki/Trust
+- Sumerian proverb (1): https://en.wikiquote.org/wiki/Lying
+- Chinese proverb (1): https://en.wikiquote.org/wiki/Chinese_proverbs
+- Vietnamese proverb (2): https://en.wikiquote.org/wiki/Vietnamese_proverbs
+- Hindi proverb (1): https://en.wikiquote.org/wiki/Hindi_proverbs
+
+## Authors
+
+- Lord Acton (1): https://en.wikiquote.org/wiki/Error
+- Douglas Adams (1): https://en.wikiquote.org/wiki/Douglas_Adams
+- Joseph Addison (1): https://en.wikiquote.org/wiki/Discretion
+- Aesop (7): https://en.wikiquote.org/wiki/Aesop
+- Rabbi Akiva (1): https://en.wikiquote.org/wiki/Silence
+- Aristotle (1): https://en.wikiquote.org/wiki/Aristotle
+- Isaac Asimov (4): https://en.wikiquote.org/wiki/Isaac_Asimov
+- Marcus Aurelius (7): https://en.wikiquote.org/wiki/Marcus_Aurelius
+- Richard Bach (1): https://en.wikiquote.org/wiki/Truth
+- Francis Bacon (6): https://en.wikiquote.org/wiki/Francis_Bacon, https://en.wikiquote.org/wiki/Trust, https://en.wikiquote.org/wiki/Truth, https://en.wikisource.org/wiki/Essays,_civil_and_moral_(Harvard_Classics)/Of_Truth ("jesting Pilate" wording)
+- Robert Baden-Powell (1): https://en.wikiquote.org/wiki/Preparation
+- Philip James Bailey (1): https://en.wikiquote.org/wiki/Fraud
+- Honoré de Balzac (1): https://en.wikiquote.org/wiki/Discretion
+- Richard Bentley (1): https://en.wikiquote.org/wiki/Reputation
+- Ambrose Bierce (5): https://en.wikiquote.org/wiki/Habit_%28psychology%29, https://en.wikiquote.org/wiki/Lock, https://en.wikiquote.org/wiki/The_Devil%27s_Dictionary
+- William Blake (1): https://en.wikiquote.org/wiki/Truth
+- Louis Brandeis (1): https://en.wikiquote.org/wiki/Louis_Brandeis
+- Fred Brooks (2): https://en.wikiquote.org/wiki/Fred_Brooks
+- Thomas Browne (1): https://en.wikiquote.org/wiki/Secrecy
+- Jean de La Bruyère (2): https://en.wikiquote.org/wiki/Dishonesty, https://en.wikiquote.org/wiki/Secrecy
+- Gautama Buddha (1): https://en.wikiquote.org/wiki/Dhammapada
+- Lois McMaster Bujold (1): https://en.wikiquote.org/wiki/Truth
+- Thomas Fowell Buxton (1): https://en.wikiquote.org/wiki/Perseverance
+- Stephen L. Carter (1): https://en.wikiquote.org/wiki/Rumor
+- Willa Cather (1): https://en.wikiquote.org/wiki/Security
+- Coco Chanel (1): https://en.wikiquote.org/wiki/Simplicity
+- William Ellery Channing (1): https://en.wikiquote.org/wiki/Mistakes
+- Alexander Chase (1): https://en.wikiquote.org/wiki/Memory
+- Cicero (7): https://en.wikiquote.org/wiki/Cicero, https://en.wikiquote.org/wiki/Habit_%28psychology%29, https://en.wikiquote.org/wiki/Memory, https://en.wikiquote.org/wiki/Preparation, https://en.wikiquote.org/wiki/Prudence
+- Confucius (6): https://en.wikiquote.org/wiki/Confucius, https://en.wikiquote.org/wiki/Mistakes
+- Pierre Corneille (1): https://en.wikiquote.org/wiki/Confidence
+- Frank Crane (1): https://en.wikiquote.org/wiki/Trust
+- Ward Cunningham (1): https://en.wikiquote.org/wiki/Simplicity
+- Democritus (2): https://en.wikiquote.org/wiki/Democritus
+- Denis Diderot (1): https://en.wikiquote.org/wiki/Skepticism
+- Edsger W. Dijkstra (3): https://en.wikiquote.org/wiki/Edsger_W._Dijkstra, https://en.wikiquote.org/wiki/Simplicity
+- Arthur Conan Doyle (10): https://en.wikiquote.org/wiki/Deception, https://en.wikiquote.org/wiki/Mistakes, https://en.wikiquote.org/wiki/Sherlock_Holmes
+- George Eliot (1): https://en.wikiquote.org/wiki/Silence
+- Walter Elliott (1): https://en.wikiquote.org/wiki/Perseverance
+- Ralph Waldo Emerson (4): https://en.wikiquote.org/wiki/Ralph_Waldo_Emerson, https://en.wikiquote.org/wiki/Simplicity, https://en.wikiquote.org/wiki/Trust
+- Epictetus (2): https://en.wikiquote.org/wiki/Epictetus
+- Erasmus (1): https://en.wikiquote.org/wiki/Habit_%28psychology%29
+- Euripides (1): https://en.wikiquote.org/wiki/Prudence
+- Perry Farrar (1): https://en.wikiquote.org/wiki/Programming
+- Richard Feynman (5): https://en.wikiquote.org/wiki/Richard_Feynman, https://en.wikiquote.org/wiki/Skepticism, https://en.wikiquote.org/wiki/Truth
+- Jean de La Fontaine (1): https://en.wikiquote.org/wiki/Patience
+- Benjamin Franklin (15): https://en.wikiquote.org/wiki/Poor_Richard%27s_Almanack, https://en.wikiquote.org/wiki/Secrecy
+- James Anthony Froude (1): https://en.wikiquote.org/wiki/Experience
+- Thomas Fuller (9): https://en.wikiquote.org/wiki/Forgetting, https://en.wikiquote.org/wiki/Memory, https://en.wikiquote.org/wiki/Thomas_Fuller_%28writer%29
+- John Gay (3): https://en.wikiquote.org/wiki/Dishonesty, https://en.wikiquote.org/wiki/Reputation, https://en.wikiquote.org/wiki/Truth
+- Edward Glover (1): https://en.wikiquote.org/wiki/Rumor
+- Johann Wolfgang von Goethe (6): https://en.wikiquote.org/wiki/Dishonesty, https://en.wikiquote.org/wiki/Johann_Wolfgang_von_Goethe
+- Baltasar Gracián (9): https://en.wikiquote.org/wiki/Baltasar_Graci%C3%A1n, https://en.wikiquote.org/wiki/Dishonesty, https://en.wikiquote.org/wiki/Or%C3%A1culo_Manual_y_Arte_de_Prudencia, https://en.wikiquote.org/wiki/Prudence, https://en.wikiquote.org/wiki/Truth
+- William Hamilton (1): https://en.wikiquote.org/wiki/Truth
+- Jack Handey (1): https://en.wikiquote.org/wiki/Key
+- Julius and Augustus Hare (1): https://en.wikiquote.org/wiki/Failure
+- William Hazlitt (1): https://en.wikiquote.org/wiki/Cunning
+- Robert A. Heinlein (1): https://en.wikiquote.org/wiki/Truth
+- Heraclitus (2): https://en.wikiquote.org/wiki/Heraclitus
+- George Herbert (7): https://en.wikiquote.org/wiki/George_Herbert, https://en.wikiquote.org/wiki/Lying, https://en.wikiquote.org/wiki/Truth
+- C. A. R. Hoare (1): https://en.wikiquote.org/wiki/C._A._R._Hoare
+- P. C. Hodgell (1): https://en.wikiquote.org/wiki/Truth
+- Homer (1): https://en.wikiquote.org/wiki/Wisdom
+- Grace Hopper (2): https://en.wikiquote.org/wiki/Grace_Hopper
+- Horace (5): https://en.wikiquote.org/wiki/Danger, https://en.wikiquote.org/wiki/Horace, https://en.wikiquote.org/wiki/Silence, https://en.wikiquote.org/wiki/Suspicion
+- Elbert Hubbard (1): https://en.wikiquote.org/wiki/Mistakes
+- Eric Hughes (6): https://www.activism.net/cypherpunk/manifesto.html
+- David Hume (1): https://en.wikiquote.org/wiki/Confidence
+- Thomas Henry Huxley (1): https://en.wikiquote.org/wiki/Failure
+- Lyndon B. Johnson (1): https://en.wikiquote.org/wiki/Privacy
+- Samuel Johnson (5): https://en.wikiquote.org/wiki/Habit_%28psychology%29, https://en.wikiquote.org/wiki/Samuel_Johnson
+- Kelly Johnson (1): https://en.wikiquote.org/wiki/Simplicity
+- Benjamin Jowett (1): https://en.wikiquote.org/wiki/Doubt
+- Oliver Wendell Holmes Jr. (1): https://en.wikiquote.org/wiki/Doubt
+- Juvenal (4): https://en.wikiquote.org/wiki/Juvenal, https://en.wikiquote.org/wiki/Prudence
+- Helen Keller (2): https://en.wikiquote.org/wiki/Helen_Keller, https://en.wikiquote.org/wiki/Security
+- Auguste Kerckhoffs (1): https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle
+- Jonah Keri (1): https://en.wikiquote.org/wiki/Memory
+- Donald Knuth (2): https://en.wikiquote.org/wiki/Computers, https://en.wikiquote.org/wiki/Donald_Knuth
+- Letitia Elizabeth Landon (1): https://en.wikiquote.org/wiki/Secrecy
+- Abraham Lincoln (1): https://en.wikiquote.org/wiki/Truth
+- Livy (1): https://en.wikiquote.org/wiki/Truth
+- Henry Wadsworth Longfellow (1): https://en.wikiquote.org/wiki/Error
+- George MacDonald (1): https://en.wikiquote.org/wiki/Trust
+- Niccolò Machiavelli (1): https://en.wikiquote.org/wiki/Niccol%C3%B2_Machiavelli
+- Maimonides (1): https://en.wikiquote.org/wiki/Truth
+- Ammianus Marcellinus (1): https://en.wikiquote.org/wiki/Truth
+- Phyllis McGinley (1): https://en.wikiquote.org/wiki/Privacy
+- Marshall McLuhan (1): https://en.wikiquote.org/wiki/Secrecy
+- John Milton (1): https://en.wikiquote.org/wiki/Truth
+- Kevin Mitnick (12): full text of The Art of Deception (2002): https://ylesanded.targaltinternetis.ee/exercises/file/yl_raamatukrypteering/The_Art_of_Deception.pdf (chapter 1 title confirmed at https://www.oreilly.com/library/view/the-art-of/9780764542800/ch01.html)
+- Molière (1): https://en.wikiquote.org/wiki/Dishonesty
+- Michel de Montaigne (2): https://en.wikiquote.org/wiki/Lying, https://en.wikiquote.org/wiki/Michel_de_Montaigne
+- Miyamoto Musashi (1): https://en.wikiquote.org/wiki/Miyamoto_Musashi
+- Peter G. Neumann (1): https://en.wikiquote.org/wiki/Cryptography
+- Robert Henry Newell (1): https://en.wikiquote.org/wiki/Forgetting
+- Friedrich Nietzsche (3): https://en.wikiquote.org/wiki/Friedrich_Nietzsche, https://en.wikiquote.org/wiki/Habit_%28psychology%29, https://en.wikiquote.org/wiki/Memory
+- John Boyle O'Reilly (2): https://en.wikiquote.org/wiki/Experience, https://en.wikiquote.org/wiki/Silence
+- William of Ockham (1): https://en.wikiquote.org/wiki/Simplicity
+- John Oliver (1): https://en.wikiquote.org/wiki/Internet
+- George Orwell (3): https://en.wikiquote.org/wiki/George_Orwell, https://en.wikiquote.org/wiki/Nineteen_Eighty-Four, https://en.wikiquote.org/wiki/Truth
+- Thomas Otway (1): https://en.wikiquote.org/wiki/Honesty
+- Ovid (5): https://en.wikiquote.org/wiki/Dishonesty, https://en.wikiquote.org/wiki/Habit_%28psychology%29, https://en.wikiquote.org/wiki/Ovid
+- Blaise Pascal (2): https://en.wikiquote.org/wiki/Blaise_Pascal, https://en.wikiquote.org/wiki/Simplicity
+- Louis Pasteur (1): https://en.wikiquote.org/wiki/Preparation
+- Jean Paul (1): https://en.wikiquote.org/wiki/Secrecy
+- Alan Perlis (2): https://en.wikiquote.org/wiki/Programming, https://en.wikiquote.org/wiki/Simplicity
+- Phaedrus (1): https://en.wikiquote.org/wiki/Dishonesty
+- Plato (2): https://en.wikiquote.org/wiki/Plato, https://en.wikiquote.org/wiki/Socrates
+- Plautus (1): https://en.wikiquote.org/wiki/Dishonesty
+- Plutarch (1): https://en.wikiquote.org/wiki/Plutarch
+- Edgar Allan Poe (4): https://en.wikiquote.org/wiki/Edgar_Allan_Poe, https://en.wikiquote.org/wiki/Memory, https://en.wikisource.org/wiki/A_Few_Words_on_Secret_Writing
+- Alexander Pope (3): https://en.wikiquote.org/wiki/Alexander_Pope, https://en.wikiquote.org/wiki/Silence
+- John Powell (1): https://en.wikiquote.org/wiki/Mistakes
+- Walter Raleigh (2): https://en.wikiquote.org/wiki/Honesty, https://en.wikiquote.org/wiki/Prudence
+- Ayn Rand (1): https://en.wikiquote.org/wiki/Privacy
+- Eric S. Raymond (1): https://en.wikiquote.org/wiki/Eric_S._Raymond
+- Sam Redwine (1): https://en.wikiquote.org/wiki/Programming
+- François de La Rochefoucauld (8): https://en.wikiquote.org/wiki/Dishonesty, https://en.wikiquote.org/wiki/Fran%C3%A7ois_de_La_Rochefoucauld
+- Theodore Roosevelt (1): https://en.wikiquote.org/wiki/Failure
+- Franklin D. Roosevelt (1): https://en.wikiquote.org/wiki/Truth
+- J. K. Rowling (1): https://en.wikiquote.org/wiki/Caution
+- John Ruskin (1): https://en.wikiquote.org/wiki/Mistakes
+- Saadi (2): https://en.wikiquote.org/wiki/Saadi
+- Carl Sagan (2): https://en.wikiquote.org/wiki/Carl_Sagan, https://en.wikiquote.org/wiki/Evidence
+- George Santayana (1): https://en.wikiquote.org/wiki/Memory
+- Bruce Schneier (10): https://en.wikiquote.org/wiki/Bruce_Schneier, https://en.wikiquote.org/wiki/Surveillance, https://www.schneier.com/blog/archives/2008/03/the_security_mi_1.html, https://www.schneier.com/crypto-gram/archives/2000/0515.html, https://www.schneier.com/essays/archives/2008/01/the_psychology_of_se.html
+- John Selden (1): https://en.wikiquote.org/wiki/Silence
+- Seneca (6): https://en.wikiquote.org/wiki/Danger, https://en.wikiquote.org/wiki/Secrecy, https://en.wikiquote.org/wiki/Seneca_the_Younger
+- William Shakespeare (14): https://en.wikiquote.org/wiki/Danger, https://en.wikiquote.org/wiki/Discretion, https://en.wikiquote.org/wiki/Dishonesty, https://en.wikiquote.org/wiki/Doubt, https://en.wikiquote.org/wiki/Failure, https://en.wikiquote.org/wiki/Honesty, https://en.wikiquote.org/wiki/Memory, https://en.wikiquote.org/wiki/Perseverance, https://en.wikiquote.org/wiki/Suspicion, https://en.wikiquote.org/wiki/Theft, https://en.wikiquote.org/wiki/Trust, https://en.wikiquote.org/wiki/Truth
+- Claude Shannon (1): https://www.cs.virginia.edu/~evans/greatworks/shannon1949.pdf (BSTJ 1949, p. 662)
+- George Bernard Shaw (1): https://en.wikiquote.org/wiki/Secrecy
+- Logan Pearsall Smith (1): https://en.wikiquote.org/wiki/Truth
+- Edward Snowden (2): https://en.wikiquote.org/wiki/Edward_Snowden, https://en.wikiquote.org/wiki/Privacy
+- Sophocles (2): https://en.wikiquote.org/wiki/Lying, https://en.wikiquote.org/wiki/Secrecy
+- Gene Spafford (1): https://en.wikiquote.org/wiki/Gene_Spafford
+- Chilon of Sparta (2): https://en.wikiquote.org/wiki/Chilon_of_Sparta
+- Charles Spurgeon (1): https://en.wikiquote.org/wiki/Wisdom
+- Oliver Wendell Holmes Sr. (2): https://en.wikiquote.org/wiki/Forgetting, https://en.wikiquote.org/wiki/Lying
+- Richard Stallman (2): https://en.wikiquote.org/wiki/Richard_Stallman
+- Peter Steiner (1): https://en.wikiquote.org/wiki/Internet
+- Henry L. Stimson (1): https://en.wikiquote.org/wiki/Privacy
+- Charles Stross (1): https://en.wikiquote.org/wiki/Truth
+- Bjarne Stroustrup (1): https://en.wikiquote.org/wiki/Software
+- Christina, Queen of Sweden (1): https://en.wikiquote.org/wiki/Doubt
+- Jonathan Swift (2): https://en.wikiquote.org/wiki/Jonathan_Swift, https://en.wikiquote.org/wiki/Rumor
+- Publilius Syrus (12): https://en.wikiquote.org/wiki/Danger, https://en.wikiquote.org/wiki/Prudence, https://en.wikiquote.org/wiki/Publilius_Syrus, https://en.wikiquote.org/wiki/Reputation, https://en.wikiquote.org/wiki/Rumor
+- Tacitus (4): https://en.wikiquote.org/wiki/Flattery, https://en.wikiquote.org/wiki/Prudence, https://en.wikiquote.org/wiki/Truth
+- Nassim Nicholas Taleb (1): https://en.wikiquote.org/wiki/Error
+- Thiruvalluvar (2): https://en.wikiquote.org/wiki/Thiruvalluvar
+- Ken Thompson (1): https://en.wikiquote.org/wiki/Ken_Thompson
+- James Thomson (1): https://en.wikiquote.org/wiki/Caution
+- Henry David Thoreau (5): https://en.wikiquote.org/wiki/Henry_David_Thoreau, https://en.wikiquote.org/wiki/Simplicity, https://en.wikiquote.org/wiki/Truth
+- Thucydides (2): https://en.wikiquote.org/wiki/Thucydides
+- J. R. R. Tolkien (2): https://en.wikiquote.org/wiki/The_Hobbit
+- Leo Tolstoy (1): https://en.wikiquote.org/wiki/Leo_Tolstoy
+- Linus Torvalds (3): https://en.wikiquote.org/wiki/Linus_Torvalds
+- Martin Farquhar Tupper (1): https://en.wikiquote.org/wiki/Silence
+- Mark Twain (4): https://en.wikiquote.org/wiki/Mark_Twain, https://en.wikiquote.org/wiki/Truth
+- Sun Tzu (7): https://en.wikiquote.org/wiki/Caution, https://en.wikiquote.org/wiki/Sun_Tzu
+- Lao Tzu (6): https://en.wikiquote.org/wiki/Laozi, https://en.wikiquote.org/wiki/Tao_Te_Ching
+- Jack Vance (1): https://en.wikiquote.org/wiki/Trust
+- Leonardo da Vinci (2): https://en.wikiquote.org/wiki/Error, https://en.wikiquote.org/wiki/Truth
+- Virgil (9): https://en.wikiquote.org/wiki/Confidence, https://en.wikiquote.org/wiki/Prudence, https://en.wikiquote.org/wiki/Virgil
+- Voltaire (5): https://en.wikiquote.org/wiki/Doubt, https://en.wikiquote.org/wiki/Voltaire
+- Isaac Watts (1): https://en.wikiquote.org/wiki/Lying
+- Daniel Webster (1): https://en.wikiquote.org/wiki/Truth
+- William Whewell (1): https://en.wikiquote.org/wiki/Failure
+- Oscar Wilde (4): https://en.wikiquote.org/wiki/Memory, https://en.wikiquote.org/wiki/Mistakes, https://en.wikiquote.org/wiki/Oscar_Wilde, https://en.wikiquote.org/wiki/Truth
+- Edward Young (1): https://en.wikiquote.org/wiki/Truth
+- Roger Zelazny (1): https://en.wikiquote.org/wiki/Anonymity
+- Zig Ziglar (1): https://en.wikiquote.org/wiki/Failure
+- Phil Zimmermann (2): https://en.wikiquote.org/wiki/Phil_Zimmermann

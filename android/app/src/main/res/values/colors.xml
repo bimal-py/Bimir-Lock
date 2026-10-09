@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Matches the Flutter app's background, so launch has no colour flash. -->
+    <color name="launch_background">#F6F6F8</color>
+</resources>

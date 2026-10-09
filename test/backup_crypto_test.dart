@@ -48,6 +48,18 @@ void main() {
         sample.map((BackupEntry e) => e.identity).toList());
   });
 
+  test('notes survive a round trip, and a file without notes still opens', () {
+    const List<BackupEntry> withNotes = <BackupEntry>[
+      BackupEntry(title: 'Bank', userName: 'u', password: 'p', note: 'Recovery: 1234-5678\nMother: Sita'),
+      BackupEntry(title: 'Mail', userName: 'u', password: 'p'),
+    ];
+    final Uint8List file = BackupCrypto.seal(withNotes, 'correct horse battery', params: fast);
+    final List<BackupEntry> opened = BackupCrypto.open(file, 'correct horse battery');
+    expect(opened.map((BackupEntry e) => e.note).toList(), <String>['Recovery: 1234-5678\nMother: Sita', '']);
+    expect(withNotes.last.toJson().containsKey('note'), isFalse);
+    expect(utf8.decode(file).contains('Recovery'), isFalse);
+  });
+
   test('no password or username appears in the file', () {
     final String text = utf8.decode(BackupCrypto.seal(sample, 'correct horse battery', params: fast));
     // Only strings long enough to mean something; a one-letter username

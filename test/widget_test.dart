@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:bimir_lock/models/password_table.dart';
-import 'package:bimir_lock/utils/app_theme.dart';
+import 'package:bimir_lock/core/core.dart';
 import 'package:bimir_lock/utils/extensions.dart';
 import 'package:bimir_lock/utils/validators.dart';
 
@@ -52,10 +52,16 @@ void main() {
   testWidgets('App theme builds a light and a dark MaterialApp',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        home: const Scaffold(body: Text("Bimir Lock")),
+      ScaleKitBuilder(
+        designWidth: 425,
+        designHeight: 691,
+        child: Builder(
+          builder: (BuildContext context) => MaterialApp(
+            theme: ThemeConfigs.lightTheme(context: context),
+            darkTheme: ThemeConfigs.darkTheme(context: context),
+            home: const Scaffold(body: Text("Bimir Lock")),
+          ),
+        ),
       ),
     );
 

@@ -8,6 +8,11 @@ class DbConstant {
   static const String email = "email";
   static const String password = "password";
 
+  // Optional free text kept with an entry (recovery codes, security answers),
+  // so it is sealed with the vault key exactly like the password. Added after
+  // release: older files get it from the guarded ALTER in DataBaseHelper.
+  static const String note = "note";
+
   // Plaintext shadow column used ONLY by the vault migration, for the few
   // microseconds between writing a row's ciphertext and verifying that
   // ciphertext back off disk. Never part of the model, never written by any

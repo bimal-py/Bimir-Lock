@@ -9,6 +9,15 @@ class PasswordTable {
   String? userName;
   String? password;
 
+  /// Optional, multi-line. Sealed like [password], and for the same reason
+  /// absent from [toJson].
+  String? note;
+
+  /// True when the stored note will not open under the verified key. Like
+  /// [locked], the bytes on disk are then left exactly as they are: a save
+  /// does not write the note column at all.
+  bool noteLocked;
+
   /// True when this row's stored value is a structurally valid envelope that
   /// will not open under the verified key. The password is NOT displayed, NOT
   /// copied and NOT written back: the bytes on disk are left exactly as they
@@ -20,7 +29,9 @@ class PasswordTable {
     this.title,
     this.userName,
     this.password,
+    this.note,
     this.locked = false,
+    this.noteLocked = false,
   });
 
   PasswordTable.fromJson(Map<String, dynamic> json)
@@ -28,9 +39,11 @@ class PasswordTable {
         title = json['title'],
         userName = json['userName'],
         password = json['password'],
-        locked = false;
+        note = json['note'],
+        locked = false,
+        noteLocked = false;
 
-  /// NOTE: `password` is deliberately absent.
+  /// NOTE: `password` and `note` are deliberately absent.
   ///
   /// This is the enforcement mechanism for "nothing writes the password column
   /// without encrypting it", not a style choice. Encryption is asynchronous and

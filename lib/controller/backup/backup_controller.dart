@@ -3,7 +3,7 @@ import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:bimir_lock/controller/homePage/home_page_controller.dart';
-import 'package:bimir_lock/core/core_controller.dart';
+import 'package:bimir_lock/core/utils/helpers/dialog/dialog.dart';
 import 'package:bimir_lock/main.dart';
 import 'package:bimir_lock/models/password_table.dart';
 import 'package:bimir_lock/utils/extensions.dart';
@@ -12,10 +12,10 @@ import 'package:bimir_lock/utils/helper/db_helper.dart';
 import 'package:bimir_lock/utils/helper/vault_crypto.dart';
 import 'package:bimir_lock/utils/helper/vault_migration.dart';
 import 'package:bimir_lock/widgets/backup_dialogs.dart';
-import 'package:bimir_lock/widgets/pin_input_dialog.dart';
+import 'package:bimir_lock/ui/unlock.dart';
+import 'package:bimir_lock/ui/widgets.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 /// Back up to / restore from an encrypted file the user puts wherever they like
@@ -67,6 +67,7 @@ class BackupController {
               title: r.title ?? '',
               userName: r.userName ?? '',
               password: r.password ?? '',
+              note: r.note ?? '',
             ))
         .toList();
 
@@ -87,6 +88,7 @@ class BackupController {
       "Backup saved",
       "${entries.length} ${entries.length == 1 ? "password" : "passwords"} backed up.\n\n"
           "Keep your backup password somewhere safe. Without it the file can't be opened.",
+      type: DialogType.success,
     );
   }
 
@@ -167,7 +169,12 @@ class BackupController {
         skipped++;
         continue;
       }
-      toAdd.add(PasswordTable(title: e.title, userName: e.userName, password: e.password));
+      toAdd.add(PasswordTable(
+        title: e.title,
+        userName: e.userName,
+        password: e.password,
+        note: e.note.isEmpty ? null : e.note,
+      ));
     }
 
     int added = 0;
@@ -209,6 +216,7 @@ class BackupController {
       "Added $added ${added == 1 ? "password" : "passwords"}."
           "${skipped > 0 ? "\nSkipped $skipped already in your vault." : ""}"
           "${partial != null ? "\n\n$partial" : ""}",
+      type: partial == null ? DialogType.success : DialogType.warning,
     );
   }
 
@@ -232,27 +240,13 @@ class BackupController {
   }
 
   Future<bool> _confirmPin() async {
-    final CoreController cc = Get.find<CoreController>();
-    if (cc.encryptedPassword == null) {
-      _toast("Set an access PIN first.");
-      return false;
-    }
     final BuildContext? context = _context;
     if (context == null || !context.mounted) return false;
-    final bool? ok = await showDialog<bool>(
-      context: context,
-      builder: (dialogContext) => PinInputMenuDialog(
-        message: "Enter your access pin to back up all your passwords.",
-        onConfirm: (pin) {
-          if (cc.encryptedPassword == pin) {
-            Navigator.pop(dialogContext, true);
-          } else {
-            _toast("invalid pin");
-          }
-        },
-      ),
+    return confirmIdentity(
+      context,
+      title: "Back up all passwords",
+      message: "Every password is about to leave the vault. Confirm it's you.",
     );
-    return ok ?? false;
   }
 
   bool _progressOpen = false;
@@ -270,12 +264,16 @@ class BackupController {
     navigatorKey.currentState?.pop();
   }
 
-  Future<void> _message(String title, String message) async {
+  /// Failures unless said otherwise: most messages here are.
+  Future<void> _message(
+    String title,
+    String message, {
+    DialogType type = DialogType.warning,
+  }) async {
     final BuildContext? context = _context;
     if (context == null || !context.mounted) return;
-    await showBackupMessage(context, title, message);
+    await showBackupMessage(context, title, message, type: type);
   }
 
-  void _toast(String msg) => Fluttertoast.showToast(
-      msg: msg, backgroundColor: Colors.black, textColor: Colors.white);
+  void _toast(String msg) => showNote(msg);
 }

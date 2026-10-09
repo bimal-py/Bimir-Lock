@@ -1,5 +1,5 @@
 name: bimir_lock
-description: A new Flutter project.
+description: Bimir Lock - an offline password vault.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -28,25 +28,31 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  auto_size_text: ^3.0.0
+  camera: ^0.12.1
   cupertino_icons: ^1.0.2
   encrypt: ^5.0.3
+  equatable: ^2.0.8
   file_picker: ^13.1.0
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_quill: ^11.5.1
+  flutter_scale_kit: ^1.5.2
   flutter_slidable: ^4.0.3
-  flutter_svg: ^2.0.7
   fluttertoast: ^10.0.0
+  font_awesome_flutter: ^11.0.0
   get: ^4.6.5
-  http: ^1.1.0
+  get_it: ^9.2.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   image_picker: ^1.0.1
-  intl: ^0.20.3
-  introduction_screen: ^4.0.0
-  loading_animation_widget: ^1.2.0+4
+  intl: ^0.20.2
   local_auth: ^3.0.2
-  lottie: ^3.1.2
-  pinput: ^6.0.2
+  lucide_icons_flutter: ^3.1.13
+  material_color_utilities: ^0.13.0
+  path_provider: ^2.1.5
   pointycastle: ^3.9.1
+  share_plus: ^13.3.1
   shared_preferences: ^2.2.0
   sqflite: ^2.3.0
   upgrader: ^13.7.0
@@ -67,9 +73,26 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/Icons/
-    - assets/lotties/
-    - assets/intro/
+    - assets/brand/
+    - assets/quotes/quotes.json
+    # Notes module (ported from Reminder Note): attachment-thumb placeholder.
+    - assets/images/default_image.png
+  fonts:
+    # Google Sans Flex (SIL OFL, assets/fonts/GoogleSansFlex-OFL.txt): all UI text.
+    - family: GoogleSans
+      fonts:
+        - asset: assets/fonts/GoogleSansFlex-Regular.ttf
+        - asset: assets/fonts/GoogleSansFlex-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/GoogleSansFlex-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/GoogleSansFlex-Bold.ttf
+          weight: 700
+    # JetBrains Mono (SIL OFL): revealed passwords only, where l/1/I and O/0
+    # must be told apart.
+    - family: JetBrainsMono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-Regular.ttf
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,146 +1,117 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:bimir_lock/controller/introScreen/quotes_category_controller.dart';
 import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/main.dart';
+import 'package:bimir_lock/ui/widgets.dart';
 import 'package:bimir_lock/utils/helper/storage_helper.dart';
-
+import 'package:bimir_lock/views/pin/set_access_pin.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../models/user_model.dart';
-import '../../views/introScreen/welcome_page.dart';
 
 class AddUserDetailController extends GetxController {
   CoreController cc = Get.find<CoreController>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   late TextEditingController userNameController = TextEditingController();
-  late TextEditingController dobController = TextEditingController();
-  RxBool isPageLoading = false.obs;
   File? userAvatar;
   File? initialUserAvatar;
   RxBool isLoading = false.obs;
+
+  /// First run (no profile yet): saving continues to PIN setup.
+  bool get isFirstRun => !cc.isUserLoggedIn();
+
   @override
-  void onInit() async {
-    // showProgressIndicator();
-    // String userName =
-    await initialfetch();
-    if (cc.isUserLoggedIn()) {}
-
+  void onInit() {
     super.onInit();
-  }
-
-  Future<void> initialfetch() async {
-    isPageLoading.value = true;
     if (cc.isUserLoggedIn()) {
-      String userName = cc.currentUser.value?.userName ?? '';
-      String dob = cc.currentUser.value?.dob ?? '';
-      userNameController = TextEditingController(text: userName);
-      dobController = TextEditingController(text: dob);
+      userNameController.text = cc.currentUser.value?.userName ?? '';
       // Already resolved for this install and known to exist, so a stale path
       // from an older version shows as "no photo" and asks for a new one.
       userAvatar = cc.avatarFile.value;
       initialUserAvatar = userAvatar;
-    } else {
-      userNameController = TextEditingController();
-      dobController = TextEditingController();
     }
-    isPageLoading.value = false;
-    update();
   }
 
-  // showProgressIndicator() {
-  //   isPageLoading.value = true;
-  //   if (cc.currentUser.value != null) {
-  //     userNameController = TextEditingController(text: cc.currentUser.value!.userName);
-  //     dobController = TextEditingController(text: cc.currentUser.value!.dob);
-  //     userAvatar =
-  //         cc.currentUser.value?.userAvatar != null ? File(cc.currentUser.value!.userAvatar!) : null;
-  //   }
-  //   isPageLoading.value = false;
-  //   update();
-  // }
+  @override
+  void onClose() {
+    userNameController.dispose();
+    super.onClose();
+  }
 
-  Future pickImage(ImageSource source) async {
+  Future<void> pickImage(ImageSource source) async {
     try {
-      XFile? pickedImage = await ImagePicker().pickImage(source: source);
+      final XFile? pickedImage = await ImagePicker().pickImage(
+        source: source,
+        maxWidth: 1024,
+        maxHeight: 1024,
+      );
       if (pickedImage != null) {
         userAvatar = File(pickedImage.path);
       }
       update();
     } catch (e) {
-      log('======>>>Failed to pick image: $e');
+      log('Failed to pick image: ${e.runtimeType}');
+      showNote(
+        "Couldn't open the ${source == ImageSource.camera ? 'camera' : 'photo library'}.",
+      );
     }
+  }
+
+  void removeImage() {
+    userAvatar = null;
+    update();
   }
 
   Future<void> onSaveUserDetail(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final File? avatar = userAvatar;
-    if (avatar == null || !await avatar.exists()) {
-      // Includes a picked photo whose temporary file the OS has since cleared.
-      userAvatar = null;
-      update();
-      Fluttertoast.showToast(msg: "Upload Profile Image to save user",
-          backgroundColor: Colors.black, textColor: Colors.white);
-      return;
-    }
     if (!formKey.currentState!.validate()) return;
 
     isLoading.value = true;
     try {
-      String imagePath;
-      if (initialUserAvatar?.path == avatar.path) {
-        // Unchanged: keep the stored name.
-        imagePath = StorageHelper.avatarFileName(avatar.path);
-      } else {
-        try {
-          imagePath = await StorageHelper().storeImage(avatar,
-              replacing: cc.currentUser.value?.userAvatar);
-        } catch (e) {
-          log("storeImage failed: ${e.runtimeType}");
-          Fluttertoast.showToast(
-              msg: "Couldn't save the photo. Please pick it again.",
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
-          return;
+      // The photo is optional. A picked photo whose temporary file the OS has
+      // since cleared is treated as no photo rather than blocking the save.
+      final File? avatar = userAvatar;
+      String? imagePath;
+      if (avatar != null && await avatar.exists()) {
+        if (initialUserAvatar?.path == avatar.path) {
+          // Unchanged: keep the stored name.
+          imagePath = StorageHelper.avatarFileName(avatar.path);
+        } else {
+          try {
+            imagePath = await StorageHelper().storeImage(
+              avatar,
+              replacing: cc.currentUser.value?.userAvatar,
+            );
+          } catch (e) {
+            log("storeImage failed: ${e.runtimeType}");
+            showNote("Couldn't save the photo. Please pick it again.");
+            return;
+          }
         }
       }
 
-      User userModel = User(
-        dob: dobController.text,
-        userName: userNameController.text,
-        userAvatar: imagePath,
+      final bool firstRun = isFirstRun;
+      await StorageHelper().setUser(
+        User(
+          userName: userNameController.text.trim(),
+          userAvatar: imagePath,
+        ),
       );
+      await cc.loadCurrentUser();
 
-      //if user detail is null then it is first time.
-      if (cc.isUserLoggedIn()) {
-        //save user
-        await StorageHelper().setUser(userModel);
-        await cc.loadCurrentUser();
-        if (context.mounted) Navigator.of(context).pop(true);
-      } else {
-        //save user
-        await StorageHelper().setUser(userModel);
-        //load quotes;
-        try {
-          QuotesCategoryController c = Get.find<QuotesCategoryController>();
-          await c.loadQuotes();
-          await cc.loadCurrentUser();
-        } catch (e) {
-          log("========>>>>>> Error: $e");
-        }
-        try {
-          cc.loadInitQuote().then((value) => navigatorKey.currentState!
-              .pushNamedAndRemoveUntil(
-                  WelcomePage.routeName, (route) => false));
-        } catch (e) {
-          log("============>>>Error while loading initial quotes");
-        }
+      if (firstRun) {
+        navigatorKey.currentState!.pushNamedAndRemoveUntil(
+          SetAccessPinPage.routeName,
+          (route) => false,
+          arguments: const PinSetupArgs(onboarding: true),
+        );
+      } else if (context.mounted) {
+        showNote('Profile saved');
+        Navigator.of(context).pop(true);
       }
     } finally {
       // Always, so a failed save can never leave the button spinning.

@@ -23,16 +23,32 @@ import 'package:pointycastle/export.dart';
 ///
 /// Nothing here logs, and no error message ever carries a value.
 class BackupEntry {
-  const BackupEntry({required this.title, required this.userName, required this.password});
+  const BackupEntry({
+    required this.title,
+    required this.userName,
+    required this.password,
+    this.note = '',
+  });
 
   final String title;
   final String userName;
   final String password;
 
-  Map<String, String> toJson() =>
-      <String, String>{'title': title, 'userName': userName, 'password': password};
+  /// Optional; '' for none. Written only when there is one, so files without
+  /// notes stay byte-compatible with older versions of the app, which ignore
+  /// the extra field anyway.
+  final String note;
 
-  // Exact identity used by restore to skip duplicates.
+  Map<String, String> toJson() => <String, String>{
+    'title': title,
+    'userName': userName,
+    'password': password,
+    if (note.isNotEmpty) 'note': note,
+  };
+
+  // Exact identity used by restore to skip duplicates. The note is left out
+  // on purpose: the same login restored over itself is a duplicate whether or
+  // not one side has a note.
   String get identity => jsonEncode(<String>[title, userName, password]);
 }
 
@@ -161,10 +177,19 @@ class BackupCrypto {
       final Object? title = item['title'];
       final Object? user = item['userName'];
       final Object? pass = item['password'];
+      final Object? note = item['note'];
       if (title is! String || user is! String || pass is! String) {
         throw const BackupFormatException('entry');
       }
-      out.add(BackupEntry(title: title, userName: user, password: pass));
+      if (note != null && note is! String) {
+        throw const BackupFormatException('entry');
+      }
+      out.add(BackupEntry(
+        title: title,
+        userName: user,
+        password: pass,
+        note: note is String ? note : '',
+      ));
     }
     return out;
   }

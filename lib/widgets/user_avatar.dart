@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 // The one place a profile photo is drawn. A missing or unreadable file falls back
 // to the person icon instead of throwing out of the image loader.
@@ -31,7 +32,7 @@ class UserAvatar extends StatelessWidget {
 
   Widget _fallback() {
     final Icon icon = Icon(
-      Icons.person_rounded,
+      LucideIcons.user,
       color: iconColor,
       size: iconSize,
     );

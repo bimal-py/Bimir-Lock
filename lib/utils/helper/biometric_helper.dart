@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io' show Platform;
 
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
@@ -31,14 +32,18 @@ class BiometricHelper {
   }
 
   // "Face ID" on a Face ID iPhone, "fingerprint" everywhere else.
+  // On iPhone: "Face ID", or "Touch ID" on a Touch ID model. Face ID is also
+  // the answer when nothing is enrolled yet, since that is what current
+  // iPhones have. Elsewhere: "fingerprint" (or "face unlock").
   Future<String> label() async {
+    List<BiometricType> types = const <BiometricType>[];
     try {
-      final List<BiometricType> types = await _auth.getAvailableBiometrics();
-      if (types.contains(BiometricType.face) &&
-          !types.contains(BiometricType.fingerprint)) {
-        return "Face ID";
-      }
+      types = await _auth.getAvailableBiometrics();
     } catch (_) {}
+    final bool face = types.contains(BiometricType.face);
+    final bool finger = types.contains(BiometricType.fingerprint);
+    if (Platform.isIOS) return finger && !face ? "Touch ID" : "Face ID";
+    if (face && !finger) return "face unlock";
     return "fingerprint";
   }
 
