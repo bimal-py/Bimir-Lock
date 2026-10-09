@@ -38,6 +38,7 @@ import 'package:bimir_lock/widgets/backup_dialogs.dart';
 import 'package:bimir_lock/views/pin/set_access_pin.dart';
 import 'package:bimir_lock/views/settings_page.dart';
 import 'package:bimir_lock/views/user/add_user_detail.dart';
+import 'package:bimir_lock/views/faq/faq_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -405,6 +406,15 @@ void main() {
         await tester.drag(find.byType(ListView), const Offset(0, -2000));
         await _settle(tester);
         await _shot(tester, '${c.name}-12-settings-end');
+      });
+
+      testWidgets('faq', (WidgetTester tester) async {
+        await _pumpApp(tester, c, route: FaqPage.routeName, user: _user);
+        await _shot(tester, '${c.name}-24-faq');
+        await tester.enterText(find.byType(TextField), 'forgot my pin');
+        await _settle(tester);
+        expect(find.text('Best match'), findsOneWidget);
+        await _shot(tester, '${c.name}-25-faq-search');
       });
 
       testWidgets('vault tour', (WidgetTester tester) async {

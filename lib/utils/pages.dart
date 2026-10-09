@@ -1,4 +1,5 @@
 import 'package:bimir_lock/ui/tokens.dart';
+import 'package:bimir_lock/views/faq/faq_page.dart';
 import 'package:bimir_lock/views/homePage/add_password.dart';
 import 'package:bimir_lock/views/homePage/checkup_page.dart';
 import 'package:bimir_lock/views/homePage/home_page.dart';
@@ -40,6 +41,7 @@ Route<dynamic>? generatedRoute(RouteSettings settings) {
     SettingsPage.routeName => (_) => const SettingsPage(),
     CheckupPage.routeName => (_) => const CheckupPage(),
     IntruderPage.routeName => (_) => const IntruderPage(),
+    FaqPage.routeName => (_) => const FaqPage(),
     _ => null,
   };
   if (builder == null) {
