@@ -1,0 +1,52 @@
+{
+  "_comment": "Store order, first panel first. The first three show in search results, so they carry the pitch: the offline vault, autofill, the generator. Slugs are the raw capture file names in listing/shots/raw/<device>/<slug>.png. App Store: up to 10 per device; Play: up to 8 per form factor.",
+  "sets": {
+    "iphone": [
+      "vault",
+      "autofill",
+      "generator",
+      "checkup",
+      "unlock",
+      "alerts",
+      "backup",
+      "dark"
+    ],
+    "ipad": [
+      "vault",
+      "autofill",
+      "generator",
+      "checkup",
+      "unlock",
+      "alerts",
+      "backup",
+      "dark"
+    ],
+    "play_phone": [
+      "vault",
+      "autofill",
+      "generator",
+      "checkup",
+      "unlock",
+      "alerts",
+      "backup",
+      "dark"
+    ],
+    "play_tablet": [
+      "vault",
+      "autofill",
+      "generator",
+      "checkup",
+      "unlock",
+      "alerts",
+      "backup",
+      "dark"
+    ]
+  },
+  "status_bar": {
+    "_comment": "keep = capture already has a clean bar (simulator override / Android demo mode); replace = paint a clean 9:41 bar over a real-device bar; add = capture has no bar (flutter test harness).",
+    "iphone": "replace",
+    "ipad": "replace",
+    "android_phone": "replace",
+    "android_tablet": "replace"
+  }
+}

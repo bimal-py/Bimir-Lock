@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Your passwords, locked on your phone",
+    "sub": "Offline vault. No account, no cloud, no ads."
+  },
+  "autofill": {
+    "head": "Fill passwords into other apps",
+    "sub": "After Face ID, fingerprint or your screen lock"
+  },
+  "generator": {
+    "head": "Strong passwords in one tap",
+    "sub": "Pick the length, numbers and symbols"
+  },
+  "checkup": {
+    "head": "Find weak and reused passwords",
+    "sub": "Password Checkup shows what to fix first"
+  },
+  "unlock": {
+    "head": "Every password opens only for you",
+    "sub": "6-digit PIN, fingerprint or Face ID"
+  },
+  "alerts": {
+    "head": "See who tried to get in",
+    "sub": "Optional photo after 7 wrong PINs, kept on this phone"
+  },
+  "backup": {
+    "head": "A backup only you can open",
+    "sub": "One encrypted file with its own password. Keep it where you like."
+  },
+  "dark": {
+    "head": "Easy on the eyes at night",
+    "sub": "Light and dark themes"
+  }
+}
