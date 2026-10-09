@@ -1,1 +1,1 @@
-passwort,manager,generator,passwörter,speichern,safe,cloud,abo,anmeldung,lokal,zugangsdaten,app,pin
+passwort,manager,generator,passwörter,speichern,safe,cloud,anmeldung,lokal,zugangsdaten,app,pin

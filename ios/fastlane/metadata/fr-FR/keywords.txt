@@ -1,1 +1,1 @@
-coffre,fort,mot,générateur,sans,compte,abonnement,enregistrer,mdp,identifiant,offline,numérique
+coffre,fort,mot,générateur,sans,compte,enregistrer,mdp,identifiant,offline,numérique
