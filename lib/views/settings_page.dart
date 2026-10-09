@@ -15,8 +15,10 @@ import 'package:bimir_lock/ui/unlock.dart';
 import 'package:bimir_lock/ui/widgets.dart';
 import 'package:bimir_lock/utils/constants.dart';
 import 'package:bimir_lock/utils/helper/app_reset.dart';
+import 'package:bimir_lock/utils/helper/feedback.dart';
 import 'package:bimir_lock/utils/helper/intruder_watch.dart';
 import 'package:bimir_lock/utils/helper/pin_guard.dart';
+import 'package:bimir_lock/views/faq/faq_page.dart';
 import 'package:bimir_lock/views/intruder_page.dart';
 import 'package:bimir_lock/views/pin/change_access_pin.dart';
 import 'package:bimir_lock/views/pin/set_access_pin.dart';
@@ -305,6 +307,35 @@ class _SettingsPageState extends State<SettingsPage> {
               child: RowGroup(
                 title: 'Help',
                 children: [
+                  SettingRow(
+                    icon: LucideIcons.circleQuestionMark,
+                    title: 'FAQ',
+                    subtitle: 'Search any question about Bimir Lock',
+                    onTap: () => Navigator.of(context).pushNamed(FaqPage.routeName),
+                  ),
+                  SettingRow(
+                    icon: LucideIcons.messageSquareWarning,
+                    title: 'Report a problem',
+                    subtitle: 'Email the developer. Never include a password.',
+                    onTap: () async {
+                      if (!await AppFeedback.reportProblem()) {
+                        showNote('No email app found. Write to ${ContactLink.email}');
+                      }
+                    },
+                  ),
+                  SettingRow(
+                    icon: LucideIcons.star,
+                    title: 'Rate Bimir Lock',
+                    subtitle: Platform.isIOS
+                        ? 'On the App Store'
+                        : 'On Google Play',
+                    trailing: Icon(LucideIcons.externalLink, size: 18, color: p.muted),
+                    onTap: () async {
+                      if (!await AppFeedback.openStorePage()) {
+                        showNote("Couldn't open the store.");
+                      }
+                    },
+                  ),
                   SettingRow(
                     icon: LucideIcons.lightbulb,
                     title: 'Show tips again',

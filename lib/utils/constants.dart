@@ -16,3 +16,12 @@ class LegalLink {
   static const String terms =
       "https://bimalkhatri.com.np/bimir-lock/terms-and-conditions";
 }
+
+/// Where Bimir Lock lives on the two stores.
+class StoreLink {
+  /// The App Store Connect Apple ID of the app (not the bundle id).
+  static const String appStoreId = "6821090857";
+  static const String appStore = "https://apps.apple.com/app/id$appStoreId";
+  static const String googlePlay =
+      "https://play.google.com/store/apps/details?id=com.cklamib.bimirLock";
+}
