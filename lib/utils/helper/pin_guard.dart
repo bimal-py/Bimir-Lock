@@ -1,34 +1,92 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Slows down PIN guessing. Six wrong PINs in a row cost nothing (typos
-/// happen); the [attempts]th locks the keypad for 30 seconds, and every wrong
-/// PIN after that locks it for longer, up to [longest]. A correct PIN or a
-/// fingerprint / face scan starts the count again. Stored on disk, so closing
-/// the app does not reset it.
+/// How long a lock lasts, and how many wrong PINs in a row lead to it.
+class PinStage {
+  const PinStage(this.misses, this.lock);
+
+  /// Wrong PINs, counted from the end of the previous lock.
+  final int misses;
+  final Duration lock;
+}
+
+/// Slows down PIN guessing, in stages. The first ten wrong PINs in a row lock
+/// the keypad for 30 seconds (typos happen, so the count only shows from the
+/// fifth). Each lock after that comes sooner and lasts longer: seven more for
+/// a minute, five more for five minutes, then every three for fifteen. A
+/// correct PIN or a fingerprint / face scan starts the count again. Stored on
+/// disk, so closing the app does not reset it.
 class PinGuard {
+  static const List<PinStage> stages = <PinStage>[
+    PinStage(10, Duration(seconds: 30)),
+    PinStage(7, Duration(minutes: 1)),
+    PinStage(5, Duration(minutes: 5)),
+    // The last stage repeats for as long as the guessing goes on.
+    PinStage(3, longest),
+  ];
+
   /// The wrong PIN that first locks the keypad.
-  static const int attempts = 7;
+  static const int attempts = 10;
+
+  /// Before the first lock, how few tries must be left before the keypad
+  /// says how many. After any lock it always says.
+  static const int warnFrom = 5;
 
   /// The longest a single lock lasts.
   static const Duration longest = Duration(minutes: 15);
 
-  static const List<Duration> _steps = <Duration>[
-    Duration(seconds: 30),
-    Duration(minutes: 1),
-    Duration(minutes: 5),
-    longest,
-  ];
-
   static const String _failuresKey = 'pin_failures';
   static const String _untilKey = 'pin_locked_until';
 
-  /// How long the pad stays locked after the given total of wrong PINs.
-  static Duration lockFor(int failures) {
-    if (failures < attempts) return Duration.zero;
-    final int i = failures - attempts;
-    return _steps[i < _steps.length ? i : _steps.length - 1];
+  /// Where [failures] wrong PINs in a row stand: the stage being counted
+  /// down, how many wrong PINs are left in it, and whether the last one
+  /// completed a stage (and so locked the keypad).
+  static ({PinStage stage, int left, bool locked}) position(int failures) {
+    int before = 0; // wrong PINs used up by the stages already passed
+    int i = 0;
+    while (true) {
+      final PinStage stage = stages[i < stages.length ? i : stages.length - 1];
+      final int end = before + stage.misses;
+      if (failures < end) {
+        return (stage: stage, left: end - failures, locked: false);
+      }
+      if (failures == end) {
+        return (stage: stage, left: 0, locked: true);
+      }
+      before = end;
+      i++;
+    }
   }
+
+  /// How long the pad stays locked after the given total of wrong PINs: the
+  /// stage's lock on the wrong PIN that completes it, nothing in between.
+  static Duration lockFor(int failures) {
+    if (failures <= 0) return Duration.zero;
+    final ({PinStage stage, int left, bool locked}) at = position(failures);
+    return at.locked ? at.stage.lock : Duration.zero;
+  }
+
+  /// What the keypad says about the tries left before the next lock, or null
+  /// while it is too early to mention them (before the [warnFrom]th-to-last
+  /// try of the first stage). After a lock it is always shown.
+  static String? triesLeftLine(int failures) {
+    if (failures <= 0) return null;
+    final ({PinStage stage, int left, bool locked}) at = position(failures);
+    // Just locked: the next stage is the one now counting down.
+    final ({PinStage stage, int left, bool locked}) next = at.locked
+        ? position(failures + 1)
+        : at;
+    final int left = at.locked ? next.left + 1 : at.left;
+    final bool firstStage = failures < attempts;
+    if (firstStage && left > warnFrom) return null;
+    return '$left ${left == 1 ? 'try' : 'tries'} left before a '
+        '${span(next.stage.lock)} lock.';
+  }
+
+  /// "30-second", "1-minute", "15-minute": a lock's length as an adjective.
+  static String span(Duration d) => d.inMinutes >= 1
+      ? '${d.inMinutes}-minute'
+      : '${d.inSeconds}-second';
 
   /// Time left before another PIN may be tried, or zero.
   static Future<Duration> remaining({DateTime? now}) async {

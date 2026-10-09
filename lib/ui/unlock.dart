@@ -123,6 +123,18 @@ class _UnlockSheetState extends State<_UnlockSheet> {
     final Duration left = await PinGuard.remaining();
     if (!mounted) return;
     _setLock(left);
+    if (left <= Duration.zero) await _showTriesLeft();
+  }
+
+  /// After a lock (or on opening, when earlier wrong PINs still count), how
+  /// many tries are left before the next lock — once that is worth saying.
+  Future<void> _showTriesLeft() async {
+    final String? line = PinGuard.triesLeftLine(await PinGuard.failures());
+    if (!mounted || line == null) return;
+    setState(() {
+      _statusIsError = false;
+      _status = line;
+    });
   }
 
   void _setLock(Duration left) {
@@ -139,6 +151,7 @@ class _UnlockSheetState extends State<_UnlockSheet> {
           t.cancel();
         }
       });
+      if (_lockedFor == Duration.zero) unawaited(_showTriesLeft());
     });
   }
 
@@ -175,11 +188,11 @@ class _UnlockSheetState extends State<_UnlockSheet> {
     if (!mounted) return false;
     setState(() {
       _statusIsError = true;
-      final int left = PinGuard.attempts - failures;
+      final String? left = PinGuard.triesLeftLine(failures);
       _status = lock > Duration.zero
           ? null
-          : left <= 2
-          ? 'Wrong PIN. $left ${left == 1 ? 'try' : 'tries'} left before a 30-second lock.'
+          : left != null
+          ? 'Wrong PIN. ${left[0].toUpperCase()}${left.substring(1)}'
           : 'Wrong PIN. Try again.';
     });
     if (lock > Duration.zero) _setLock(lock);

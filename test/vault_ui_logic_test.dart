@@ -14,25 +14,71 @@ void main() {
   group('PinGuard', () {
     setUp(() => SharedPreferences.setMockInitialValues(<String, Object>{}));
 
-    test('six wrong PINs are free, the 7th locks, then the lock grows to a cap', () {
-      for (int i = 0; i < PinGuard.attempts; i++) {
-        expect(PinGuard.lockFor(i), Duration.zero);
+    test('10, then 7, 5 and every 3 more: 30 s, 1, 5, 15 minutes', () {
+      // The owner's schedule (2026-10-10). Locks land on the wrong PIN that
+      // completes a stage, and nowhere else.
+      const Map<int, Duration> locks = <int, Duration>{
+        10: Duration(seconds: 30),
+        17: Duration(minutes: 1),
+        22: Duration(minutes: 5),
+        25: Duration(minutes: 15),
+        28: Duration(minutes: 15),
+        31: Duration(minutes: 15),
+      };
+      for (int i = 0; i <= 31; i++) {
+        expect(
+          PinGuard.lockFor(i),
+          locks[i] ?? Duration.zero,
+          reason: 'wrong PIN $i',
+        );
       }
-      expect(PinGuard.attempts, 7);
-      expect(PinGuard.lockFor(7), const Duration(seconds: 30));
-      expect(PinGuard.lockFor(8), const Duration(minutes: 1));
-      expect(PinGuard.lockFor(9), const Duration(minutes: 5));
-      expect(PinGuard.lockFor(10), const Duration(minutes: 15));
-      expect(PinGuard.lockFor(50), PinGuard.longest);
+      expect(PinGuard.attempts, 10);
+      expect(PinGuard.lockFor(1000), anyOf(Duration.zero, PinGuard.longest));
+    });
+
+    test('tries left: from the 5th before the first lock, always after', () {
+      for (int i = 0; i < 5; i++) {
+        expect(PinGuard.triesLeftLine(i), isNull, reason: 'wrong PIN $i');
+      }
+      expect(
+        PinGuard.triesLeftLine(5),
+        '5 tries left before a 30-second lock.',
+      );
+      expect(PinGuard.triesLeftLine(9), '1 try left before a 30-second lock.');
+      // Locked at 10: the next stage is counted in full.
+      expect(
+        PinGuard.triesLeftLine(10),
+        '7 tries left before a 1-minute lock.',
+      );
+      expect(
+        PinGuard.triesLeftLine(11),
+        '6 tries left before a 1-minute lock.',
+      );
+      expect(
+        PinGuard.triesLeftLine(17),
+        '5 tries left before a 5-minute lock.',
+      );
+      expect(
+        PinGuard.triesLeftLine(22),
+        '3 tries left before a 15-minute lock.',
+      );
+      expect(PinGuard.triesLeftLine(24), '1 try left before a 15-minute lock.');
+      expect(
+        PinGuard.triesLeftLine(25),
+        '3 tries left before a 15-minute lock.',
+      );
     });
 
     test('failures persist, lock, and a correct PIN clears them', () async {
       final DateTime now = DateTime(2026, 9, 27, 12);
-      for (int i = 0; i < 6; i++) {
+      for (int i = 0; i < PinGuard.attempts - 1; i++) {
         expect(await PinGuard.recordFailure(now: now), Duration.zero);
       }
       expect(await PinGuard.remaining(now: now), Duration.zero);
-      expect(await PinGuard.recordFailure(now: now), const Duration(seconds: 30));
+      expect(
+        await PinGuard.recordFailure(now: now),
+        const Duration(seconds: 30),
+      );
       expect(await PinGuard.remaining(now: now), const Duration(seconds: 30));
       expect(
         await PinGuard.remaining(now: now.add(const Duration(seconds: 31))),
@@ -45,11 +91,12 @@ void main() {
 
     test('a clock set backwards never means a wait beyond the cap', () async {
       final DateTime now = DateTime(2026, 9, 27, 12);
-      for (int i = 0; i < 7; i++) {
+      for (int i = 0; i < PinGuard.attempts; i++) {
         await PinGuard.recordFailure(now: now);
       }
-      final Duration left =
-          await PinGuard.remaining(now: now.subtract(const Duration(days: 3)));
+      final Duration left = await PinGuard.remaining(
+        now: now.subtract(const Duration(days: 3)),
+      );
       expect(left, PinGuard.longest);
     });
   });
@@ -64,8 +111,17 @@ void main() {
 
     test('rejects guessable PINs', () {
       for (final String pin in <String>[
-        '000000', '777777', '123456', '654321', '345678', '121212',
-        '123123', '909090', '112233', '159753', '696969',
+        '000000',
+        '777777',
+        '123456',
+        '654321',
+        '345678',
+        '121212',
+        '123123',
+        '909090',
+        '112233',
+        '159753',
+        '696969',
       ]) {
         expect(pinWeakness(pin), isNotNull, reason: pin);
       }
@@ -79,7 +135,12 @@ void main() {
     });
 
     test('accepts ordinary PINs', () {
-      for (final String pin in <String>['482619', '905137', '317042', '592806']) {
+      for (final String pin in <String>[
+        '482619',
+        '905137',
+        '317042',
+        '592806',
+      ]) {
         expect(pinWeakness(pin), isNull, reason: pin);
       }
     });
@@ -108,7 +169,10 @@ void main() {
       expect(all.first.name, 'Pokhara Club');
       expect(all.where((Site s) => s.name.toLowerCase() == 'gmail').length, 1);
       // A vault name that is a known site keeps its kind.
-      expect(all.firstWhere((Site s) => s.name == 'Gmail').kind, SiteKind.email);
+      expect(
+        all.firstWhere((Site s) => s.name == 'Gmail').kind,
+        SiteKind.email,
+      );
     });
 
     test('never offers exactly what is typed', () {
@@ -134,27 +198,38 @@ void main() {
   group('IntruderWatch', () {
     setUp(() => SharedPreferences.setMockInitialValues(<String, Object>{}));
 
-    test('a wrong PIN that locks the keypad is logged as an unseen alert', () async {
-      for (int i = 0; i < 6; i++) {
-        expect(await IntruderWatch.recordWrongPin(), Duration.zero);
-      }
-      expect(await IntruderWatch.events(), isEmpty);
-      // Photo is off by default, so no camera is touched.
-      expect(await IntruderWatch.recordWrongPin(), const Duration(seconds: 30));
-      // The log is written without blocking the keypad.
-      await Future<void>.delayed(const Duration(milliseconds: 20));
-      final List<IntruderEvent> events = await IntruderWatch.events();
-      expect(events.single.attempt, 7);
-      expect(events.single.photo, isNull);
-      expect(IntruderWatch.unseen.value, 1);
-      await IntruderWatch.markSeen();
-      expect(IntruderWatch.unseen.value, 0);
-    });
+    test(
+      'a wrong PIN that locks the keypad is logged as an unseen alert',
+      () async {
+        for (int i = 0; i < PinGuard.attempts - 1; i++) {
+          expect(await IntruderWatch.recordWrongPin(), Duration.zero);
+        }
+        expect(await IntruderWatch.events(), isEmpty);
+        // Photo is off by default, so no camera is touched.
+        expect(
+          await IntruderWatch.recordWrongPin(),
+          const Duration(seconds: 30),
+        );
+        // The log is written without blocking the keypad.
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        final List<IntruderEvent> events = await IntruderWatch.events();
+        expect(events.single.attempt, PinGuard.attempts);
+        expect(events.single.photo, isNull);
+        expect(IntruderWatch.unseen.value, 1);
+        await IntruderWatch.markSeen();
+        expect(IntruderWatch.unseen.value, 0);
+      },
+    );
   });
 
   group('VaultHealth', () {
-    PasswordTable e(int id, String pw, {bool locked = false}) =>
-        PasswordTable(id: id, title: 't$id', userName: 'u', password: pw, locked: locked);
+    PasswordTable e(int id, String pw, {bool locked = false}) => PasswordTable(
+      id: id,
+      title: 't$id',
+      userName: 'u',
+      password: pw,
+      locked: locked,
+    );
 
     test('finds weak and reused passwords, ignoring locked entries', () {
       final VaultHealth h = VaultHealth.of(<PasswordTable>[
@@ -192,7 +267,8 @@ void main() {
         markTestSkipped('assets/quotes/quotes.json not present');
         return;
       }
-      final List<dynamic> list = jsonDecode(file.readAsStringSync()) as List<dynamic>;
+      final List<dynamic> list =
+          jsonDecode(file.readAsStringSync()) as List<dynamic>;
       expect(list.length, 500);
       final Set<String> seen = <String>{};
       final Map<String, int> perAuthor = <String, int>{};
@@ -203,7 +279,11 @@ void main() {
         expect(text, isNotEmpty);
         expect(author, isNotEmpty);
         expect(text.length, lessThanOrEqualTo(110), reason: text);
-        expect(seen.add(text.toLowerCase()), isTrue, reason: 'duplicate: $text');
+        expect(
+          seen.add(text.toLowerCase()),
+          isTrue,
+          reason: 'duplicate: $text',
+        );
         perAuthor[author] = (perAuthor[author] ?? 0) + 1;
       }
       for (final MapEntry<String, int> a in perAuthor.entries) {

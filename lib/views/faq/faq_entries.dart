@@ -56,11 +56,25 @@ const List<FaqEntry> faqEntries = <FaqEntry>[
     topic: FaqTopic.unlock,
     question: 'What happens after too many wrong PINs?',
     answer:
-        'After 7 wrong PINs in a row the keypad locks for 30 seconds, then 1, '
-        '5 and 15 minutes. Closing the app does not reset the count; the right '
-        'PIN or your fingerprint or face does. Fingerprint and Face ID still '
-        'work while the keypad is locked.',
-    tags: <String>['locked out', 'wait', 'timer'],
+        '10 wrong PINs in a row lock the keypad for 30 seconds (from the 5th '
+        'it tells you how many tries are left). After that the locks come '
+        'sooner and last longer: 7 more lock it for 1 minute, 5 more for 5 '
+        'minutes, then every 3 more for 15 minutes. After each lock it shows '
+        'the tries left. Closing the app does not reset the count; the right '
+        'PIN or your fingerprint or face does.',
+    tags: <String>['locked out', 'wait', 'timer', 'tries left'],
+  ),
+  FaqEntry(
+    topic: FaqTopic.unlock,
+    question: 'Someone else\'s wrong PINs locked me out. What do I do?',
+    answer:
+        'Wait for the timer on the keypad, then enter your PIN: the lock only '
+        'slows guessing down, it never locks you out of your passwords for '
+        'good, and your correct PIN starts the count again. If fingerprint or '
+        'Face ID unlock is on, it works even while the keypad is locked. '
+        'Settings › Security › Wrong PIN alerts shows when it happened, with a '
+        'photo if Take a photo is on.',
+    tags: <String>['locked', 'someone tried', 'friend', 'kid', 'child', 'cannot open'],
   ),
   FaqEntry(
     topic: FaqTopic.unlock,
@@ -252,8 +266,8 @@ const List<FaqEntry> faqEntries = <FaqEntry>[
     question: 'Why does Bimir Lock ask for the camera?',
     answer:
         'To take a profile photo, and, only if you turn on Wrong PIN alerts › '
-        'Take a photo, to photograph whoever enters 7 wrong PINs in a row. '
-        'Photos stay on your phone.',
+        'Take a photo, to photograph whoever is typing each time wrong PINs '
+        'lock the keypad. Photos stay on your phone.',
     tags: <String>['camera permission'],
   ),
   FaqEntry(

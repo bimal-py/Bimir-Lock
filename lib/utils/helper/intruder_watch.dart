@@ -16,7 +16,7 @@ class IntruderEvent {
 
   final DateTime at;
 
-  /// Which wrong PIN in a row this was: 7 for the first lock, 8 for the next…
+  /// Which wrong PIN in a row this was: 10 for the first lock, 17 for the next…
   final int attempt;
 
   /// File name inside the intruder folder, or null when no photo was taken
@@ -45,8 +45,8 @@ class IntruderEvent {
 }
 
 /// Wrong-PIN alerts, with an optional front-camera photo of whoever typed
-/// them. Every lock of the keypad is recorded (the 7th wrong PIN in a row and
-/// each one after it); the photo is taken only when the owner switched it on,
+/// them. Every lock of the keypad is recorded (see PinGuard.stages: the 10th
+/// wrong PIN in a row, then the 17th, 22nd, 25th…); the photo is taken only when the owner switched it on,
 /// which is also when the camera permission was asked for, so the system
 /// never asks the person at the keypad.
 ///

@@ -6,6 +6,7 @@ import 'package:bimir_lock/ui/tokens.dart';
 import 'package:bimir_lock/ui/widgets.dart';
 import 'package:bimir_lock/utils/helper/intruder_watch.dart';
 import 'package:bimir_lock/utils/helper/pin_guard.dart';
+import 'package:bimir_lock/utils/helper/app_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -50,18 +51,22 @@ class _IntruderPageState extends State<IntruderPage> {
       return;
     }
     setState(() => _checking = true);
-    // Asks for the camera now, while it is the owner holding the phone.
-    final bool ok = await IntruderWatch.checkCamera();
+    // Asks for the camera now, while it is the owner holding the phone; after
+    // a "never", offers Settings. Then opens it once to be sure there is one.
+    final bool allowed = await AppPermissions.camera(
+      context,
+      why: 'Wrong PIN alerts take the photo with the front camera.',
+    );
+    final bool ok = allowed && await IntruderWatch.checkCamera();
     if (ok) await IntruderWatch.setEnabled(true);
     if (!mounted) return;
     setState(() {
       _checking = false;
       _photoOn = ok;
     });
-    if (!ok) {
-      showNote(
-        "Bimir Lock can't use the camera. Allow it in your phone's settings, then try again.",
-      );
+    // A refusal was already explained (and Settings offered) by AppPermissions.
+    if (allowed && !ok) {
+      showNote("This phone's front camera can't be used right now.");
     }
   }
 
@@ -120,7 +125,7 @@ class _IntruderPageState extends State<IntruderPage> {
                 ),
                 title: const Text('Take a photo'),
                 subtitle: Text(
-                  'The front camera quietly photographs whoever enters ${PinGuard.attempts} wrong PINs in a row. Photos stay on this phone.',
+                  'Each time wrong PINs lock the keypad, the front camera photographs whoever is typing. Photos stay on this phone.',
                 ),
                 value: _photoOn ?? false,
                 onChanged: _photoOn == null || _checking ? null : _toggle,
@@ -181,14 +186,22 @@ class _Schedule extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme t = Theme.of(context).textTheme;
     final BimirPalette p = BimirPalette.of(context);
-    const int first = PinGuard.attempts;
-    final List<(String, String)> steps = <(String, String)>[
-      ('1–${first - 1}', 'The keypad shakes. From the ${ordinal(first - 2)}, it says how many tries are left.'),
-      (ordinal(first), 'Locked for ${_span(PinGuard.lockFor(first))}.'),
-      (ordinal(first + 1), 'Locked for ${_span(PinGuard.lockFor(first + 1))}.'),
-      (ordinal(first + 2), 'Locked for ${_span(PinGuard.lockFor(first + 2))}.'),
-      ('${ordinal(first + 3)}+', 'Locked for ${_span(PinGuard.longest)} each time.'),
-    ];
+    // Built from PinGuard.stages, so the screen can never disagree with the
+    // keypad: "1–10  Locked for 30 seconds…", "11–17  Locked for 1 minute…".
+    final List<(String, String)> steps = <(String, String)>[];
+    int from = 1;
+    for (int i = 0; i < PinGuard.stages.length; i++) {
+      final PinStage stage = PinGuard.stages[i];
+      final int to = from + stage.misses - 1;
+      final bool last = i == PinGuard.stages.length - 1;
+      final String when = i == 0
+          ? 'The ${ordinal(to)} locks the keypad for ${_span(stage.lock)}. From the ${ordinal(PinGuard.attempts - PinGuard.warnFrom)}, it says how many tries are left.'
+          : last
+          ? 'Every ${stage.misses} more lock it for ${_span(stage.lock)}, for as long as it goes on.'
+          : '${stage.misses} more lock it for ${_span(stage.lock)}.';
+      steps.add((last ? '$from+' : '$from–$to', when));
+      from = to + 1;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -223,7 +236,7 @@ class _Schedule extends StatelessWidget {
                 const SizedBox(height: Space.md),
               ],
               Text(
-                'Every lock is listed below, with a photo when Take a photo is on. Your correct PIN, fingerprint or face starts the count again; closing the app does not.',
+                'After each lock the keypad says how many tries are left. Every lock is listed below, with a photo when Take a photo is on. Your correct PIN, fingerprint or face starts the count again; closing the app does not.',
                 style: t.bodySmall?.copyWith(color: p.muted),
               ),
             ],

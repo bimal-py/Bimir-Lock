@@ -98,7 +98,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
                     step: '02',
                     title: 'Only you can open it',
                     body:
-                        'Every password opens with a 6-digit PIN you choose, or your fingerprint or face. Seven wrong PINs in a row lock the keypad, and can take a photo of whoever is trying.',
+                        'Every password opens with a 6-digit PIN you choose, or your fingerprint or face. Too many wrong PINs in a row lock the keypad, and can take a photo of whoever is trying.',
                     demo: _LockDemo(),
                   ),
                   _Slide(

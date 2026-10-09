@@ -101,7 +101,15 @@ class _PinSetupViewState extends State<PinSetupView> {
         _lockedFor = next.isNegative ? Duration.zero : next;
         if (_lockedFor == Duration.zero) t.cancel();
       });
+      if (_lockedFor == Duration.zero) unawaited(_showTriesLeft());
     });
+  }
+
+  /// Once a lock ends, how many tries are left before the next one.
+  Future<void> _showTriesLeft() async {
+    final String? line = PinGuard.triesLeftLine(await PinGuard.failures());
+    if (!mounted || line == null || _step != _Step.current) return;
+    setState(() => _error = '${line[0].toUpperCase()}${line.substring(1)}');
   }
 
   void _advance(_Step next) {
@@ -125,8 +133,13 @@ class _PinSetupViewState extends State<PinSetupView> {
           return true;
         }
         final Duration lock = await IntruderWatch.recordWrongPin();
+        final String? left = PinGuard.triesLeftLine(await PinGuard.failures());
         if (!mounted) return false;
-        setState(() => _error = 'That is not your current PIN.');
+        setState(
+          () => _error = left == null || lock > Duration.zero
+              ? 'That is not your current PIN.'
+              : 'That is not your current PIN. ${left[0].toUpperCase()}${left.substring(1)}',
+        );
         if (lock > Duration.zero) _setLock(lock);
         return false;
 
