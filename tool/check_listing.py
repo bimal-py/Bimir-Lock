@@ -98,9 +98,12 @@ def check(store, root, locales, limits, required):
             text = open(path, encoding="utf-8").read().strip()
             if not text:
                 problems.append(f"{store}/{locale}/{field}: empty")
-            n = length(text)
+            # Apple's keyword field is 100 BYTES of UTF-8, not characters: a Japanese,
+            # Hindi or Arabic keyword costs three bytes a letter.
+            n = len(text.encode("utf-8")) if field == "keywords" else length(text)
             if n > limit:
-                problems.append(f"{store}/{locale}/{field}: {n} chars, limit {limit}")
+                unit = "bytes" if field == "keywords" else "chars"
+                problems.append(f"{store}/{locale}/{field}: {n} {unit}, limit {limit}")
             if field in ("title", "name"):
                 if not text.startswith(BRAND):
                     problems.append(f"{store}/{locale}/{field}: {text!r} — must start "
