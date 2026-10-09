@@ -8,6 +8,7 @@ import 'package:bimir_lock/ui/coach_marks.dart';
 import 'package:bimir_lock/ui/tokens.dart';
 import 'package:bimir_lock/ui/unlock.dart';
 import 'package:bimir_lock/ui/widgets.dart';
+import 'package:bimir_lock/ui/intruder_prompt.dart';
 import 'package:bimir_lock/utils/helper/intruder_watch.dart';
 import 'package:bimir_lock/utils/helper/vault_crypto.dart';
 import 'package:bimir_lock/utils/helper/vault_health.dart';
@@ -335,6 +336,10 @@ class _VaultTourState extends State<_VaultTour> {
         await CoachMarks.store.markSeen(CoachTours.vaultBasics);
       }
       if (!mounted) return;
+      // The Wrong PIN alerts photo is offered once, before any tips, so the
+      // two never stack.
+      await IntruderPrompt.maybeShow(context);
+      if (!mounted) return;
       CoachMarks.showParts(
         context,
         delay: const Duration(milliseconds: 900),
@@ -381,7 +386,7 @@ class _VaultTourState extends State<_VaultTour> {
                 circle: true,
                 title: 'Notes',
                 body:
-                    'Somewhere for things that are not passwords: codes, answers, reminders.',
+                    'Everyday notes. They are not encrypted, so keep codes and other secrets in a password\'s own note.',
               ),
               CoachStep(
                 targetId: 'vault.settings',
