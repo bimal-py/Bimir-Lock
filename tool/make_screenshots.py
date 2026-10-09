@@ -64,10 +64,14 @@ FONT_DIR = os.path.join(ROOT, "assets/fonts")
 F_BOLD = os.path.join(FONT_DIR, "GoogleSansFlex-Bold.ttf")
 F_MED = os.path.join(FONT_DIR, "GoogleSansFlex-Medium.ttf")
 
-# Google Sans Flex covers Latin, Greek, Cyrillic and Vietnamese. Other scripts take
+# Google Sans Flex (as bundled) covers Latin and Vietnamese only. Other scripts take
 # the macOS system face for that script, so a localized caption never renders tofu.
-# lang -> (font file candidates, style names for the headline, for the subtitle)
+# lang -> (font file candidates, style names for the headline, for the subtitle).
+# Arabic uses Tahoma: captions mix in "Face ID", "PIN" and digits, and Geeza Pro,
+# SF Arabic and Damascus have no Latin glyphs (they draw boxes).
 _HIRAGINO = "/System/Library/Fonts/\u30d2\u30e9\u30ae\u30ce\u89d2\u30b4\u30b7\u30c3\u30af {}.ttc"
+_TAHOMA = ["/System/Library/Fonts/Supplemental/Tahoma Bold.ttf",
+           "/System/Library/Fonts/Supplemental/Tahoma.ttf"]
 SYSTEM_FONTS = {
     "hi": (["/System/Library/Fonts/Kohinoor.ttc"], ("Bold",), ("Medium",)),
     "ne": (["/System/Library/Fonts/Kohinoor.ttc"], ("Bold",), ("Medium",)),
@@ -79,10 +83,12 @@ SYSTEM_FONTS = {
     "ko": (["/System/Library/Fonts/AppleSDGothicNeo.ttc"], ("Bold",), ("Medium",)),
     "zh": (["/System/Library/Fonts/Hiragino Sans GB.ttc"], ("W6",), ("W3",)),
     "th": (["/System/Library/Fonts/Supplemental/Thonburi.ttc"], ("Bold",), ("Regular",)),
-    "ar": (["/System/Library/Fonts/GeezaPro.ttc"], ("Bold",), ("Regular",)),
-    "fa": (["/System/Library/Fonts/GeezaPro.ttc"], ("Bold",), ("Regular",)),
-    "ur": (["/System/Library/Fonts/GeezaPro.ttc"], ("Bold",), ("Regular",)),
+    "ar": (_TAHOMA, ("Bold",), ("Regular",)),
+    "fa": (_TAHOMA, ("Bold",), ("Regular",)),
+    "ur": (_TAHOMA, ("Bold",), ("Regular",)),
     "he": (["/System/Library/Fonts/ArialHB.ttc"], ("Bold",), ("Regular",)),
+    **{lang: (["/System/Library/Fonts/HelveticaNeue.ttc"], ("Bold",), ("Medium",))
+       for lang in ("ru", "uk", "be", "bg", "sr", "mk", "kk", "ky", "mn", "el")},
     "iw": (["/System/Library/Fonts/ArialHB.ttc"], ("Bold",), ("Regular",)),
 }
 
@@ -363,10 +369,11 @@ def device(canvas, screen, spec):
 
 
 def font_for(locale, bold):
-    """(file, face index) for this locale's headline (bold) or subtitle face."""
+    """(file, face index, variable-font instance or None) for this locale's
+    headline (bold) or subtitle face."""
     lang = locale.split("-")[0]
     if lang not in SYSTEM_FONTS:
-        return (F_BOLD if bold else F_MED), 0
+        return (F_BOLD if bold else F_MED), 0, None
     files, bold_styles, med_styles = SYSTEM_FONTS[lang]
     # styles in priority order, so a subtitle prefers W4 even when the W7 file comes first
     for want in (bold_styles if bold else med_styles):
@@ -375,17 +382,27 @@ def font_for(locale, bold):
                 continue
             for i in range(32):
                 try:
-                    style = ImageFont.truetype(path, 12, index=i).getname()[1]
+                    font = ImageFont.truetype(path, 12, index=i)
                 except OSError:
                     break
-                if style == want:
-                    return path, i
+                if font.getname()[1] == want:
+                    return path, i, None
+                try:   # a variable font names its weights as instances instead
+                    names = [n.decode() if isinstance(n, bytes) else n
+                             for n in font.get_variation_names()]
+                except (OSError, AttributeError):
+                    names = []
+                if want in names:
+                    return path, i, want
     existing = [p for p in files if os.path.isfile(p)]
-    return (existing[0], 0) if existing else ((F_BOLD if bold else F_MED), 0)
+    return (existing[0], 0, None) if existing else ((F_BOLD if bold else F_MED), 0, None)
 
 
 def truetype(face, px):
-    return ImageFont.truetype(face[0], px, index=face[1])
+    font = ImageFont.truetype(face[0], px, index=face[1])
+    if face[2]:
+        font.set_variation_by_name(face[2])
+    return font
 
 
 def _greedy(d, units, joiner, font, max_w):
@@ -404,7 +421,11 @@ def _greedy(d, units, joiner, font, max_w):
 
 def wrap(d, text, font, max_w):
     """Break into as few lines as fit, then even them out: no orphan word or
-    character on the last line ("Strong passwords / in one tap", not "… in / one tap")."""
+    character on the last line ("Strong passwords / in one tap", not "… in / one tap").
+    A "\n" in the caption is a break the author chose (Japanese and Chinese have no
+    spaces, so the balanced split can land mid-word); it is kept as is."""
+    if "\n" in text:
+        return [ln.strip() for ln in text.split("\n") if ln.strip()]
     # CJK and Thai have no spaces between words: break between characters instead.
     if " " not in text.strip():
         units, joiner = list(text), ""
