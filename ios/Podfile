@@ -40,5 +40,46 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      # Only the permissions this app actually asks for are compiled in, as in
+      # the Callbreak Tracker app.
+      #
+      # An unset macro defaults to ON, so every permission_handler permission
+      # would otherwise be compiled: EventKit, Contacts, CoreLocation,
+      # CoreMotion, CoreBluetooth, Speech, App Tracking. That is framework
+      # linkage Apple asks you to justify at review — awkward for a password
+      # manager that says it touches nothing.
+      #
+      # What is actually called: Permission.camera (app_permissions.dart), for
+      # the Wrong PIN alerts photo and a profile photo. Photos stay OFF: the
+      # profile photo comes through the system picker, which needs no access.
+      # See https://github.com/Baseflow/flutter-permission-handler/blob/main/permission_handler_apple/ios/Classes/PermissionHandlerEnums.h
+      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+        '$(inherited)',
+
+        ## Used.
+        'PERMISSION_CAMERA=1',
+
+        ## Not used — compiled out.
+        'PERMISSION_PHOTOS=0',
+        'PERMISSION_PHOTOS_ADD_ONLY=0',
+        'PERMISSION_NOTIFICATIONS=0',
+        'PERMISSION_EVENTS=0',
+        'PERMISSION_EVENTS_FULL_ACCESS=0',
+        'PERMISSION_REMINDERS=0',
+        'PERMISSION_CONTACTS=0',
+        'PERMISSION_MICROPHONE=0',
+        'PERMISSION_SPEECH_RECOGNIZER=0',
+        'PERMISSION_MEDIA_LIBRARY=0',
+        'PERMISSION_SENSORS=0',
+        'PERMISSION_BLUETOOTH=0',
+        'PERMISSION_APP_TRACKING_TRANSPARENCY=0',
+        'PERMISSION_CRITICAL_ALERTS=0',
+        'PERMISSION_ASSISTANT=0',
+        'PERMISSION_LOCATION=0',
+        'PERMISSION_LOCATION_ALWAYS=0',
+        'PERMISSION_LOCATION_WHENINUSE=0',
+      ]
+    end
   end
 end

@@ -37,11 +37,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Bimir Lock uses the camera so you can take a profile photo, and, if you turn on Wrong PIN alerts, to photograph whoever enters 7 wrong PINs.</string>
+	<string>Bimir Lock uses the camera to take your profile photo and, only if you turn on Wrong PIN alerts, to photograph whoever keeps entering wrong PINs. Photos stay on this phone.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Bimir Lock uses Face ID to confirm it's you before unlocking your saved passwords.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Bimir Lock never records sound. It takes still photos only; this message is here because the camera feature it uses can also record video.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Bimir Lock accesses your photo library so you can choose a profile photo for your account.</string>
+	<string>Bimir Lock opens your photo library only when you choose a profile photo, and uses just the photo you pick. It stays on this phone.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

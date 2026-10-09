@@ -3,6 +3,7 @@ import 'package:bimir_lock/ui/tokens.dart';
 import 'package:bimir_lock/ui/widgets.dart';
 import 'package:bimir_lock/utils/validators.dart';
 import 'package:bimir_lock/widgets/user_avatar.dart';
+import 'package:bimir_lock/utils/helper/app_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:get/get.dart';
@@ -69,7 +70,14 @@ class _AddUserDetailPageState extends State<AddUserDetailPage> {
         ),
       ),
     );
-    if (source != null) await c.pickImage(source);
+    if (source == null || !mounted) return;
+    // The library needs no permission (the system picker hands over only the
+    // photo chosen); the camera does, and a "never" needs the way to Settings.
+    if (source == ImageSource.camera &&
+        !await AppPermissions.camera(context, why: 'Taking a profile photo needs the camera.')) {
+      return;
+    }
+    await c.pickImage(source);
   }
 
   @override
