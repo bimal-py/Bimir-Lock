@@ -1,0 +1,8 @@
+Bimir Lock giờ đã có trên iPhone và iPad.
+• Mật khẩu được mã hóa bằng khóa cất trong iOS Keychain, chỉ trên thiết bị này
+• Nhà cung cấp mật khẩu AutoFill cho Safari và các ứng dụng khác
+• Password Checkup tìm mật khẩu yếu và mật khẩu dùng lại
+• Trình tạo mật khẩu và thước đo độ mạnh
+• Tệp sao lưu mã hóa với mật khẩu riêng
+• Mã PIN 6 số, Face ID và cảnh báo sai PIN
+• Giao diện sáng và tối

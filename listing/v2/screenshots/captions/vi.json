@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Mật khẩu chỉ nằm trên máy bạn",
+    "sub": "Két sắt offline. Không cần tài khoản, không đám mây."
+  },
+  "autofill": {
+    "head": "Điền mật khẩu vào ứng dụng khác",
+    "sub": "Sau khi xác nhận Face ID, vân tay hoặc khóa màn hình"
+  },
+  "generator": {
+    "head": "Mật khẩu mạnh chỉ với một chạm",
+    "sub": "Tùy chọn độ dài, số và ký hiệu"
+  },
+  "checkup": {
+    "head": "Tìm mật khẩu yếu và trùng lặp",
+    "sub": "Password Checkup chỉ ra việc cần sửa trước"
+  },
+  "unlock": {
+    "head": "Mỗi mật khẩu chỉ mở cho bạn",
+    "sub": "Mã PIN 6 số, vân tay hoặc Face ID"
+  },
+  "alerts": {
+    "head": "Biết ai đã thử mở trộm",
+    "sub": "Tùy chọn chụp ảnh sau 7 lần sai PIN, lưu trên máy này"
+  },
+  "backup": {
+    "head": "Bản sao lưu chỉ bạn mở được",
+    "sub": "Một tệp mã hóa với mật khẩu riêng. Cất ở đâu tùy bạn."
+  },
+  "dark": {
+    "head": "Dịu mắt khi dùng ban đêm",
+    "sub": "Giao diện sáng và tối"
+  }
+}

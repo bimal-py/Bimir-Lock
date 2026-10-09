@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Kata sandi terkunci di ponsel",
+    "sub": "Brankas offline. Tanpa akun, tanpa cloud."
+  },
+  "autofill": {
+    "head": "Isi sandi di aplikasi lain",
+    "sub": "Setelah Face ID, sidik jari, atau kunci layar"
+  },
+  "generator": {
+    "head": "Sandi kuat sekali ketuk",
+    "sub": "Atur panjang, angka, dan simbol"
+  },
+  "checkup": {
+    "head": "Temukan sandi lemah & berulang",
+    "sub": "Password Checkup menunjukkan yang perlu diperbaiki dulu"
+  },
+  "unlock": {
+    "head": "Hanya Anda yang bisa membukanya",
+    "sub": "PIN 6 digit, sidik jari, atau Face ID"
+  },
+  "alerts": {
+    "head": "Lihat siapa yang mencoba masuk",
+    "sub": "Foto opsional setelah 7 PIN salah, tetap di ponsel ini"
+  },
+  "backup": {
+    "head": "Backup yang hanya bisa Anda buka",
+    "sub": "Satu file terenkripsi bersandi khusus. Simpan di mana saja."
+  },
+  "dark": {
+    "head": "Nyaman di mata saat malam",
+    "sub": "Tema terang dan gelap"
+  }
+}

@@ -1,0 +1,8 @@
+Bimir Lock 1.1 được làm lại hoàn toàn.
+• Mật khẩu giờ được mã hóa bằng khóa cất trong vùng lưu trữ bảo mật của điện thoại
+• Tự động điền: điền thông tin đăng nhập đã lưu vào ứng dụng khác và lưu thông tin mới
+• Password Checkup tìm mật khẩu yếu và mật khẩu dùng lại
+• Trình tạo mật khẩu và thước đo độ mạnh
+• Tệp sao lưu mã hóa với mật khẩu riêng
+• Mã PIN 6 số, mở mật khẩu bằng vân tay và cảnh báo sai PIN
+• Thiết kế mới với giao diện sáng và tối

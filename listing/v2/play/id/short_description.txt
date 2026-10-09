@@ -1,0 +1,1 @@
+Password manager offline untuk menyimpan kata sandi, tanpa akun & tanpa cloud.

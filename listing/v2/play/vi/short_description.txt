@@ -1,0 +1,1 @@
+Lưu mật khẩu offline, mã hóa ngay trên máy. Không cần tài khoản, không đám mây.

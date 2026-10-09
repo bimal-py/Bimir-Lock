@@ -1,0 +1,54 @@
+Bimir Lock adalah password manager offline untuk Android: pengelola kata sandi sekaligus brankas password yang menyimpan semua kata sandi Anda dalam bentuk terenkripsi di ponsel Anda sendiri. Tanpa akun, tanpa cloud, tanpa iklan, tanpa langganan. Simpan kata sandi sekali, buka dengan PIN atau sidik jari, lalu isi otomatis (autofill) ke aplikasi yang sedang Anda pakai.
+
+PENGELOLA KATA SANDI TANPA AKUN
+• Bekerja offline: brankas kata sandi Anda ada di ponsel ini, bukan di server orang lain
+• Tanpa daftar dan tanpa email, jadi tidak ada akun yang bisa dibobol siapa pun
+• Kata sandi beserta catatannya dienkripsi dengan AES-256-GCM sebelum disimpan
+• Kunci enkripsinya disimpan di Android Keystore dan tidak pernah keluar dari perangkat
+• Tanpa iklan, tanpa analitik, tanpa pelacakan
+
+HANYA ANDA YANG BISA MEMBUKA KATA SANDI ANDA
+• Setiap kata sandi tersimpan hanya terbuka dengan PIN 6 digit Anda, atau sidik jari atau wajah jika Anda mengaktifkannya
+• PIN yang mudah ditebak seperti 123456 atau 111111 ditolak
+• Tujuh kali salah PIN berturut-turut mengunci papan tombol: 30 detik, lalu 1, 5, dan 15 menit
+• Peringatan PIN salah mencatat setiap penguncian dan bisa memotret siapa pun yang mencoba menebak (opsional; foto tetap di ponsel Anda)
+• Kata sandi yang ditampilkan tersembunyi lagi setelah 30 detik, dan kata sandi yang disalin dihapus dari clipboard setelah 30 detik
+
+PEMBUAT KATA SANDI
+• Buat kata sandi kuat 8 hingga 64 karakter, dengan angka dan simbol yang bisa dinyalakan atau dimatikan
+• Tidak memakai karakter yang mirip, seperti l, I, O, dan 0
+• Pengukur kekuatan di setiap kata sandi
+• Memperingatkan Anda sebelum memakai ulang kata sandi yang sudah tersimpan
+
+PASSWORD CHECKUP
+• Menemukan kata sandi yang lemah dan yang dipakai di lebih dari satu situs
+• Menunjukkan mana yang perlu diperbaiki lebih dulu, dengan tombol Change di masing-masing
+• Diperiksa di ponsel Anda; tidak ada yang dikirim ke mana pun
+
+AUTOFILL KATA SANDI DI APLIKASI LAIN
+• Isi login tersimpan ke aplikasi dan browser lain yang mendukung autofill Android
+• Simpan login baru saat Anda masuk ke aplikasi atau situs, tanpa membuka pengelola kata sandi
+• Tidak ada yang diisi sebelum Anda konfirmasi dengan sidik jari, wajah, atau kunci layar
+
+FILE CADANGAN TERENKRIPSI
+• Cadangkan kata sandi Anda ke satu file terenkripsi, dikunci dengan kata sandi cadangan tersendiri (Argon2id + AES-256-GCM)
+• Simpan di mana saja: di ponsel, di komputer, atau di drive yang sudah Anda pakai
+• Pulihkan di ponsel baru: yang belum ada akan ditambahkan, dan tidak ada yang dihapus
+
+BUKU PASSWORD YANG SEDERHANA
+• Daftar yang rapi dengan pencarian dan ikon huruf, seperti buku password yang tak mungkin hilang di laci
+• Saran nama situs saat Anda mengetik, mulai dari email dan media sosial hingga layanan populer
+• Kolom nama pengguna menyesuaikan: email, nomor telepon, ID pelanggan, atau jaringan Wi-Fi
+• Tema terang dan gelap
+• Kutipan singkat tentang keamanan setiap kali Anda membukanya
+• Ruang catatan untuk catatan sehari-hari (untuk hal rahasia, pakai catatan terenkripsi di dalam entri kata sandi)
+
+UNTUK SIAPA PENYIMPAN PASSWORD INI
+• Siapa saja yang ingin password manager lokal tanpa harus menyerahkan kata sandinya ke layanan cloud
+• Siapa saja yang lelah dengan buku catatan, aplikasi catatan, atau satu kata sandi untuk semua akun
+• Keluarga dan toko kecil yang menyimpan login bank, email, Wi-Fi, dan dompet digital dalam satu brankas password offline
+
+YANG TIDAK ADA DI BIMIR LOCK
+Tidak ada sinkronisasi cloud dan tidak ada akun, jadi brankas Anda hanya ada di satu ponsel: simpan file cadangan di tempat yang aman. Bimir Lock tidak memeriksa kata sandi terhadap daftar kebocoran data dan tidak membuat kode 2FA. Tampilan aplikasi saat ini dalam bahasa Inggris.
+
+Gratis, tanpa iklan, tanpa langganan, dan tanpa pembelian dalam aplikasi: brankas kata sandi offline buatan satu developer di Pokhara, Nepal.

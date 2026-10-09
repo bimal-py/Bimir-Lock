@@ -1,0 +1,49 @@
+Bimir Lock adalah password manager offline yang menyimpan kata sandi Anda dalam bentuk terenkripsi di iPhone atau iPad Anda sendiri. Tanpa akun yang harus dibuat, tanpa cloud yang harus dipercaya, tanpa iklan. Simpan setiap login sekali, buka dengan PIN atau Face ID, lalu isi dengan AutoFill.
+
+KATA SANDI ANDA TETAP DI PERANGKAT ANDA
+• Kata sandi beserta catatannya dienkripsi dengan AES-256-GCM sebelum disimpan
+• Kunci enkripsinya disimpan di iOS Keychain, hanya di perangkat ini, dan tidak pernah disinkronkan
+• Tanpa daftar, tanpa email, tanpa server: tidak ada akun yang bisa dibobol siapa pun
+• Berfungsi sepenuhnya offline, di pesawat, di luar negeri, atau saat data seluler mati
+• Tanpa iklan, tanpa analitik, tanpa pelacakan
+
+HANYA ANDA YANG BISA MEMBUKANYA
+• Setiap kata sandi tersimpan hanya terbuka dengan PIN 6 digit Anda, atau Face ID atau Touch ID jika Anda mengaktifkannya
+• PIN yang mudah ditebak seperti 123456 atau 111111 ditolak
+• Tujuh kali salah PIN berturut-turut mengunci papan tombol: 30 detik, lalu 1, 5, dan 15 menit
+• Peringatan PIN salah mencatat setiap penguncian dan bisa memotret siapa pun yang mencoba menebak (opsional; foto tetap di perangkat Anda)
+• Kata sandi yang ditampilkan tersembunyi lagi setelah 30 detik, dan kata sandi yang disalin dihapus dari clipboard setelah 30 detik
+
+KATA SANDI KUAT, DIBUATKAN UNTUK ANDA
+• Pembuat kata sandi 8 hingga 64 karakter, dengan angka dan simbol yang bisa dinyalakan atau dimatikan
+• Tidak memakai karakter yang mirip, seperti l, I, O, dan 0
+• Pengukur kekuatan di setiap kata sandi
+• Memperingatkan Anda sebelum memakai ulang kata sandi yang sudah tersimpan
+
+PASSWORD CHECKUP
+• Menemukan kata sandi yang lemah dan yang dipakai di lebih dari satu situs
+• Menunjukkan mana yang perlu diperbaiki lebih dulu, dengan tombol Change di masing-masing
+• Diperiksa di perangkat Anda; tidak ada yang dikirim ke mana pun
+
+AUTOFILL
+• Bimir Lock berfungsi sebagai penyedia kata sandi AutoFill di Safari dan aplikasi lain
+• Aktifkan di Pengaturan iPhone, pada bagian IsiOtomatis & Kata Sandi (AutoFill & Passwords)
+• Tidak ada yang diisi sebelum Anda konfirmasi dengan Face ID, Touch ID, atau kode sandi
+
+CADANGAN DALAM KENDALI ANDA
+• Cadangkan ke satu file terenkripsi, dikunci dengan kata sandi cadangan tersendiri (Argon2id + AES-256-GCM)
+• Simpan di mana saja: di app File, di iCloud Drive, atau di komputer
+• Pulihkan di iPhone baru: yang belum ada akan ditambahkan, dan tidak ada yang dihapus
+
+TENANG DAN MUDAH DIPAKAI
+• Daftar yang rapi dengan pencarian dan ikon huruf
+• Saran nama situs saat Anda mengetik
+• Kolom nama pengguna menyesuaikan: email, nomor telepon, ID pelanggan, atau jaringan Wi-Fi
+• Tema terang dan gelap
+• Kutipan singkat tentang keamanan setiap kali Anda membukanya
+• Ruang catatan untuk catatan sehari-hari (untuk hal rahasia, pakai catatan terenkripsi di dalam entri kata sandi)
+
+YANG TIDAK ADA DI BIMIR LOCK
+Tidak ada sinkronisasi cloud dan tidak ada akun, jadi brankas Anda hanya ada di satu perangkat: simpan file cadangan di tempat yang aman. Bimir Lock tidak memeriksa kata sandi terhadap daftar kebocoran data dan tidak membuat kode 2FA. Tampilan aplikasi saat ini dalam bahasa Inggris.
+
+Gratis, tanpa iklan dan tanpa pembelian dalam aplikasi. Dibuat oleh satu developer di Pokhara, Nepal.

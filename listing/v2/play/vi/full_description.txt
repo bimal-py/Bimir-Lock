@@ -1,0 +1,54 @@
+Bimir Lock là ứng dụng quản lý mật khẩu offline cho Android: vừa là nơi lưu mật khẩu, vừa là két sắt mật khẩu, giữ mọi mật khẩu của bạn ở dạng mã hóa ngay trên điện thoại của chính bạn. Không tài khoản, không đám mây, không quảng cáo, không phí thuê bao. Lưu mật khẩu một lần, mở bằng mã PIN hoặc vân tay, rồi tự động điền vào ứng dụng bạn đang dùng.
+
+QUẢN LÝ MẬT KHẨU KHÔNG CẦN TÀI KHOẢN
+• Hoạt động offline: kho mật khẩu nằm trên điện thoại này, không phải trên máy chủ của ai đó
+• Không đăng ký, không email, nên không có tài khoản nào để kẻ gian xâm nhập
+• Mật khẩu và ghi chú đi kèm được mã hóa bằng AES-256-GCM trước khi lưu
+• Khóa mã hóa nằm trong Android Keystore và không bao giờ rời khỏi thiết bị
+• Không quảng cáo, không phân tích dữ liệu, không theo dõi
+
+CHỈ BẠN MỚI MỞ ĐƯỢC MẬT KHẨU CỦA MÌNH
+• Mỗi mật khẩu đã lưu chỉ mở được bằng mã PIN 6 số, hoặc vân tay hay khuôn mặt nếu bạn bật
+• Mã PIN dễ đoán như 123456 hay 111111 sẽ bị từ chối
+• Nhập sai PIN 7 lần liên tiếp, bàn phím số sẽ bị khóa: 30 giây, rồi 1, 5 và 15 phút
+• Cảnh báo sai PIN ghi lại mỗi lần bị khóa và có thể chụp ảnh người đang đoán mã (tùy chọn; ảnh chỉ nằm trên điện thoại của bạn)
+• Mật khẩu đang hiện sẽ tự ẩn sau 30 giây, mật khẩu đã sao chép sẽ bị xóa khỏi bộ nhớ tạm sau 30 giây
+
+TẠO MẬT KHẨU MẠNH
+• Tạo mật khẩu mạnh từ 8 đến 64 ký tự, bật hoặc tắt số và ký hiệu tùy ý
+• Bỏ qua các ký tự dễ nhầm như l, I, O và 0
+• Thước đo độ mạnh cho từng mật khẩu
+• Cảnh báo trước khi bạn dùng lại một mật khẩu đã lưu
+
+KIỂM TRA MẬT KHẨU (PASSWORD CHECKUP)
+• Tìm mật khẩu yếu và mật khẩu dùng cho nhiều trang
+• Cho biết nên sửa mục nào trước, mỗi mục có nút Change
+• Kiểm tra ngay trên điện thoại; không gửi gì ra ngoài
+
+TỰ ĐỘNG ĐIỀN MẬT KHẨU VÀO ỨNG DỤNG KHÁC
+• Điền thông tin đăng nhập đã lưu vào các ứng dụng và trình duyệt hỗ trợ tự động điền của Android
+• Lưu thông tin đăng nhập mới ngay khi bạn đăng nhập vào ứng dụng hay trang web, không cần mở trình quản lý mật khẩu
+• Không điền gì cho đến khi bạn xác nhận bằng vân tay, khuôn mặt hoặc khóa màn hình
+
+TỆP SAO LƯU MÃ HÓA
+• Sao lưu mật khẩu vào một tệp mã hóa, khóa bằng mật khẩu sao lưu riêng (Argon2id + AES-256-GCM)
+• Cất ở đâu tùy bạn: trên điện thoại, trên máy tính hoặc trong ổ lưu trữ bạn vẫn dùng
+• Khôi phục trên điện thoại mới: chỉ thêm những gì còn thiếu, không bao giờ xóa gì
+
+SỔ MẬT KHẨU GỌN GÀNG
+• Danh sách gọn gàng, có tìm kiếm và biểu tượng chữ cái, như một cuốn sổ mật khẩu không bao giờ thất lạc trong ngăn kéo
+• Gợi ý tên trang khi bạn gõ, từ email, mạng xã hội đến các dịch vụ phổ biến
+• Ô tên đăng nhập tự đổi theo loại: email, số điện thoại, mã khách hàng hoặc mạng Wi-Fi
+• Giao diện sáng và tối
+• Một câu trích dẫn ngắn về bảo mật mỗi lần mở ứng dụng
+• Mục ghi chú cho những ghi chú hằng ngày (điều gì bí mật, hãy để trong ghi chú được mã hóa của từng mật khẩu)
+
+ỨNG DỤNG LƯU MẬT KHẨU NÀY DÀNH CHO AI
+• Người muốn một trình quản lý mật khẩu cục bộ, không phải giao mật khẩu cho dịch vụ đám mây nào
+• Người đã chán ghi mật khẩu ra sổ tay, vào ứng dụng ghi chú hay dùng một mật khẩu cho mọi nơi
+• Gia đình và cửa hàng nhỏ cần giữ đăng nhập ngân hàng, email, Wi-Fi và ví điện tử trong một két sắt mật khẩu offline
+
+NHỮNG GÌ BIMIR LOCK KHÔNG CÓ
+Không có đồng bộ đám mây và không có tài khoản, nên kho mật khẩu chỉ nằm trên một điện thoại: hãy cất tệp sao lưu ở nơi an toàn. Bimir Lock không đối chiếu mật khẩu với danh sách rò rỉ dữ liệu và không tạo mã 2FA. Giao diện ứng dụng hiện chỉ có tiếng Anh.
+
+Miễn phí, không quảng cáo, không phí thuê bao, không mua hàng trong ứng dụng: một két mật khẩu offline do một nhà phát triển ở Pokhara, Nepal làm ra.
