@@ -65,13 +65,20 @@ Only what you choose to send:
   passwords are cleared from the clipboard after 30 seconds if it still holds them.
 - **Notes export.** "Export notes" creates a plain (unencrypted) file and opens your
   phone's share sheet.
+- **Problem reports.** "Report a problem" (Settings › Help) opens your email app with
+  a message addressed to the developer, prefilled with the app version, system
+  version and device model. You can edit or delete any of it, and nothing is sent
+  unless you send the email yourself. If you do, the developer receives your email
+  address and what you wrote, and uses them only to reply and fix the problem.
+- **Ratings.** The rating prompt is Apple's or Google's own. Bimir Lock is never
+  told whether, or how, you rated it.
 
 ## Network use
 
 Bimir Lock does not send any of your data over the internet. It connects only to:
 
 - **Google Play or the App Store**, to check whether a newer version of the app is
-  available. This request contains the app's identifier and your device's country
+  available, and to show the store's own rating prompt or page. This request contains the app's identifier and your device's country
   setting; Google and Apple handle it under their own privacy policies.
 - **Web pages you open yourself** from the app, such as this policy, the terms and
   the developer's links.
