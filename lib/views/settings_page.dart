@@ -23,6 +23,7 @@ import 'package:bimir_lock/views/intruder_page.dart';
 import 'package:bimir_lock/views/pin/change_access_pin.dart';
 import 'package:bimir_lock/views/pin/set_access_pin.dart';
 import 'package:bimir_lock/views/user/add_user_detail.dart';
+import 'package:bimir_lock/views/quotes_page.dart';
 import 'package:bimir_lock/widgets/user_avatar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -217,32 +218,35 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ValueListenableBuilder<int>(
                       valueListenable: IntruderWatch.unseen,
-                      builder: (BuildContext context, int unseen, _) => SettingRow(
-                        icon: LucideIcons.shieldAlert,
-                        title: 'Wrong PIN alerts',
-                        subtitle: _photoOn
-                            ? 'Photo after ${PinGuard.attempts} wrong PINs is on'
-                            : 'Photograph whoever enters ${PinGuard.attempts} wrong PINs',
-                        trailing: unseen == 0
-                            ? null
-                            : Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: Space.sm,
-                                  vertical: 2,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: p.danger,
-                                  borderRadius: BorderRadius.circular(999),
-                                ),
-                                child: Text(
-                                  '$unseen new',
-                                  style: t.labelSmall?.copyWith(
-                                    color: Theme.of(context).colorScheme.onError,
+                      builder: (BuildContext context, int unseen, _) =>
+                          SettingRow(
+                            icon: LucideIcons.shieldAlert,
+                            title: 'Wrong PIN alerts',
+                            subtitle: _photoOn
+                                ? 'Photo when wrong PINs lock the keypad is on'
+                                : 'Photograph whoever keeps entering wrong PINs',
+                            trailing: unseen == 0
+                                ? null
+                                : Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: Space.sm,
+                                      vertical: 2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: p.danger,
+                                      borderRadius: BorderRadius.circular(999),
+                                    ),
+                                    child: Text(
+                                      '$unseen new',
+                                      style: t.labelSmall?.copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onError,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                        onTap: _intruders,
-                      ),
+                            onTap: _intruders,
+                          ),
                     ),
                     SettingRow(
                       icon: _isFace(bc.label.value)
@@ -302,6 +306,19 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             const SizedBox(height: Space.xl),
+            RowGroup(
+              title: 'Quotes',
+              children: [
+                SettingRow(
+                  icon: LucideIcons.quote,
+                  title: 'Recently seen quotes',
+                  subtitle: 'The ones shown when Bimir Lock opens',
+                  onTap: () =>
+                      Navigator.of(context).pushNamed(QuotesPage.routeName),
+                ),
+              ],
+            ),
+            const SizedBox(height: Space.xl),
             CoachTarget(
               id: 'settings.tips',
               child: RowGroup(
@@ -311,7 +328,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     icon: LucideIcons.circleQuestionMark,
                     title: 'FAQ',
                     subtitle: 'Search any question about Bimir Lock',
-                    onTap: () => Navigator.of(context).pushNamed(FaqPage.routeName),
+                    onTap: () =>
+                        Navigator.of(context).pushNamed(FaqPage.routeName),
                   ),
                   SettingRow(
                     icon: LucideIcons.messageSquareWarning,
@@ -319,7 +337,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: 'Email the developer. Never include a password.',
                     onTap: () async {
                       if (!await AppFeedback.reportProblem()) {
-                        showNote('No email app found. Write to ${ContactLink.email}');
+                        showNote(
+                          'No email app found. Write to ${ContactLink.email}',
+                        );
                       }
                     },
                   ),
@@ -329,7 +349,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: Platform.isIOS
                         ? 'On the App Store'
                         : 'On Google Play',
-                    trailing: Icon(LucideIcons.externalLink, size: 18, color: p.muted),
+                    trailing: Icon(
+                      LucideIcons.externalLink,
+                      size: 18,
+                      color: p.muted,
+                    ),
                     onTap: () async {
                       if (!await AppFeedback.openStorePage()) {
                         showNote("Couldn't open the store.");
@@ -355,14 +379,22 @@ class _SettingsPageState extends State<SettingsPage> {
                 SettingRow(
                   icon: LucideIcons.shield,
                   title: 'Privacy policy',
-                  trailing: Icon(LucideIcons.externalLink, size: 18, color: p.muted),
+                  trailing: Icon(
+                    LucideIcons.externalLink,
+                    size: 18,
+                    color: p.muted,
+                  ),
                   onTap: () =>
                       _open(Uri.parse(LegalLink.privacyPolicy), inApp: true),
                 ),
                 SettingRow(
                   icon: LucideIcons.scale,
                   title: 'Terms and conditions',
-                  trailing: Icon(LucideIcons.externalLink, size: 18, color: p.muted),
+                  trailing: Icon(
+                    LucideIcons.externalLink,
+                    size: 18,
+                    color: p.muted,
+                  ),
                   onTap: () => _open(Uri.parse(LegalLink.terms), inApp: true),
                 ),
               ],

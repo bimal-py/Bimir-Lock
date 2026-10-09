@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bimir_lock/controller/homePage/home_page_controller.dart';
 import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/core/theme/colors/app_colors.dart';
@@ -95,6 +97,8 @@ class _WelcomePageState extends State<WelcomePage>
 
   void _show(Quote q) {
     _quote = q;
+    // Readable again later in Settings › Quotes.
+    unawaited(QuoteHistory.add(q));
     // About 2.5 s plus reading time, within 3–7 s.
     final int ms = (2500 + q.text.length * 40).clamp(3000, 7000);
     _timer

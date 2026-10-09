@@ -13,6 +13,7 @@ import 'package:bimir_lock/views/pin/set_access_pin.dart';
 import 'package:bimir_lock/views/settings_page.dart';
 import 'package:bimir_lock/views/splash_page.dart';
 import 'package:bimir_lock/views/user/add_user_detail.dart';
+import 'package:bimir_lock/views/quotes_page.dart';
 import 'package:flutter/material.dart';
 
 /// Launch, quote and first vault screen "fade through" so the brand mark (a
@@ -42,6 +43,7 @@ Route<dynamic>? generatedRoute(RouteSettings settings) {
     CheckupPage.routeName => (_) => const CheckupPage(),
     IntruderPage.routeName => (_) => const IntruderPage(),
     FaqPage.routeName => (_) => const FaqPage(),
+    QuotesPage.routeName => (_) => const QuotesPage(),
     _ => null,
   };
   if (builder == null) {

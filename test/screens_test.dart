@@ -10,6 +10,7 @@
 //   SCREENSHOT_DIR=/tmp/shots FONT_DIR=$FLUTTER_ROOT/bin/cache/artifacts/material_fonts \
 //     flutter test test/screens_test.dart
 
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
@@ -34,11 +35,13 @@ import 'package:bimir_lock/views/introScreen/welcome_page.dart';
 import 'package:bimir_lock/views/intruder_page.dart';
 import 'package:bimir_lock/ui/photo_preview.dart';
 import 'package:bimir_lock/ui/site_field.dart';
+import 'package:bimir_lock/ui/intruder_prompt.dart';
 import 'package:bimir_lock/widgets/backup_dialogs.dart';
 import 'package:bimir_lock/views/pin/set_access_pin.dart';
 import 'package:bimir_lock/views/settings_page.dart';
 import 'package:bimir_lock/views/user/add_user_detail.dart';
 import 'package:bimir_lock/views/faq/faq_page.dart';
+import 'package:bimir_lock/views/quotes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -190,7 +193,13 @@ Future<void> _pumpApp(
   });
 
   Get.reset();
-  SharedPreferences.setMockInitialValues(prefs);
+  IntruderPrompt.debugReset();
+  // The one-time Wrong PIN alerts prompt counts as seen unless a case says
+  // otherwise, so it does not cover every vault render.
+  SharedPreferences.setMockInitialValues(<String, Object>{
+    IntruderPrompt.shownKey: true,
+    ...prefs,
+  });
   final _FakeCore core = _FakeCore(
     user: user,
     pin: pin,
@@ -408,6 +417,67 @@ void main() {
         await _shot(tester, '${c.name}-12-settings-end');
       });
 
+      testWidgets('unlock after a lock says the tries left', (WidgetTester tester) async {
+        // 10 wrong PINs locked the keypad once; that lock has run out.
+        await _pumpApp(
+          tester,
+          c,
+          route: HomePage.routeName,
+          user: _user,
+          prefs: <String, Object>{'pin_failures': 10},
+        );
+        await tester.scrollUntilVisible(find.text('Amazon'), 200,
+            scrollable: find.byType(Scrollable).first);
+        await Scrollable.ensureVisible(tester.element(find.text('Amazon')),
+            alignment: 0.3);
+        await _settle(tester);
+        await tester.tap(find.text('Amazon'));
+        await _settle(tester);
+        expect(find.text('7 tries left before a 1-minute lock.'), findsOneWidget);
+        await _shot(tester, '${c.name}-27-unlock-tries-left');
+      });
+
+      testWidgets('recent quotes', (WidgetTester tester) async {
+        await _pumpApp(
+          tester,
+          c,
+          route: QuotesPage.routeName,
+          user: _user,
+          prefs: <String, Object>{
+            'quote_history': <String>[
+              for (final (String text, String author, String? source, int hoursAgo)
+                  in <(String, String, String?, int)>[
+                    ('Three may keep a secret, if two of them are dead.', 'Benjamin Franklin', "Poor Richard's Almanack, 1735", 1),
+                    ('Amateurs hack systems, professionals hack people.', 'Bruce Schneier', null, 26),
+                    ('Distrust and caution are the parents of security.', 'Benjamin Franklin', null, 80),
+                  ])
+                jsonEncode(<String, Object?>{
+                  'text': text,
+                  'author': author,
+                  'source': source,
+                  'at': DateTime.now()
+                      .subtract(Duration(hours: hoursAgo))
+                      .millisecondsSinceEpoch,
+                }),
+            ],
+          },
+        );
+        expect(find.text('Recent quotes'), findsOneWidget);
+        await _shot(tester, '${c.name}-28-recent-quotes');
+      });
+
+      testWidgets('wrong PIN alerts prompt', (WidgetTester tester) async {
+        await _pumpApp(
+          tester,
+          c,
+          route: HomePage.routeName,
+          user: _user,
+          prefs: <String, Object>{IntruderPrompt.shownKey: false},
+        );
+        expect(find.text('See who tries to get in'), findsOneWidget);
+        await _shot(tester, '${c.name}-26-intruder-prompt');
+      });
+
       testWidgets('faq', (WidgetTester tester) async {
         await _pumpApp(tester, c, route: FaqPage.routeName, user: _user);
         await _shot(tester, '${c.name}-24-faq');
@@ -532,7 +602,7 @@ void main() {
             user: _user,
             prefs: <String, Object>{
               'intruder_log':
-                  '[{"at":$now,"attempt":8,"photo":null},{"at":${now - 60000},"attempt":7,"photo":null}]',
+                  '[{"at":$now,"attempt":17,"photo":null},{"at":${now - 60000},"attempt":10,"photo":null}]',
             });
         await _shot(tester, '${c.name}-19-alerts');
 
