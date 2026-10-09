@@ -187,10 +187,13 @@ protecting passwords. So:
   CSV, due each February, by email), and for **France** Apple may ask for the
   ANSSI declaration — or exclude France from availability.
 
-Add `ITSAppUsesNonExemptEncryption` = `YES` to `ios/Runner/Info.plist` only after
-you have the compliance documentation in App Store Connect; until then answer per
-build. *(This is the common reading for offline password managers — confirm with
-Apple's export compliance documentation if unsure; it is not legal advice.)*
+`ios/Runner/Info.plist` declares `ITSAppUsesNonExemptEncryption` = `YES` (from build 1.1.1
+onward; Callbreak says NO because it only uses the OS's HTTPS). With YES, each new build
+shows "Missing Compliance" in App Store Connect until you answer the questions above —
+it takes a minute. Once Apple has approved compliance documentation you can add the
+`ITSEncryptionExportComplianceCode` it gives you and the prompt stops. *(This is the
+common reading for offline password managers — confirm with Apple's export compliance
+documentation if unsure; it is not legal advice.)*
 
 ### App Store-specific checks before submitting
 
