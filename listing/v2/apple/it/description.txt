@@ -10,7 +10,7 @@ LE TUE PASSWORD RESTANO SUL TUO DISPOSITIVO
 SOLO TU PUOI APRIRLE
 • Ogni password salvata si apre solo con il tuo PIN a 6 cifre, oppure con Face ID o Touch ID se li attivi
 • I PIN troppo facili, come 123456 o 111111, vengono rifiutati
-• Sette PIN sbagliati di fila bloccano il tastierino: 30 secondi, poi 1, 5 e 15 minuti
+• 10 PIN sbagliati di fila bloccano il tastierino per 30 secondi; se si continua a provare, si blocca per 1, 5, poi 15 minuti, e mostra i tentativi rimasti
 • Gli avvisi di PIN errato elencano ogni blocco e possono scattare una foto a chi stava tentando di indovinare (facoltativo; le foto restano sul tuo dispositivo)
 • Una password mostrata si nasconde di nuovo dopo 30 secondi, e una copiata viene cancellata dagli appunti dopo 30 secondi
 

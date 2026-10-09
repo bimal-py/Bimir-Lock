@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Biết ai đã thử mở trộm",
-    "sub": "Tùy chọn chụp ảnh sau 7 lần sai PIN, lưu trên máy này"
+    "sub": "Tùy chọn chụp ảnh khi sai PIN khiến bàn phím bị khóa"
   },
   "backup": {
     "head": "Bản sao lưu chỉ bạn mở được",

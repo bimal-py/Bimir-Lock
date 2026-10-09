@@ -10,7 +10,7 @@ MENEDŻER HASEŁ BEZ KONTA
 TYLKO TY OTWIERASZ SWOJE HASŁA
 • Każde zapisane hasło otwiera się tylko Twoim 6-cyfrowym kodem PIN albo, jeśli to włączysz, odciskiem palca lub twarzą
 • Łatwe kody PIN, takie jak 123456 czy 111111, są odrzucane
-• Siedem błędnych kodów PIN z rzędu blokuje klawiaturę: na 30 sekund, potem na 1, 5 i 15 minut
+• 10 błędnych kodów PIN z rzędu blokuje klawiaturę na 30 sekund; dalsze zgadywanie blokuje ją na 1, 5, potem 15 minut, a klawiatura pokazuje, ile prób zostało
 • Alerty o błędnym PIN-ie pokazują każdą blokadę i mogą zrobić zdjęcie osobie, która zgadywała (opcjonalnie; zdjęcia zostają w telefonie)
 • Odkryte hasło znów się ukrywa po 30 sekundach, a skopiowane znika ze schowka po 30 sekundach
 

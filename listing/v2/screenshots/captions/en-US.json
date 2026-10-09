@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "See who tried to get in",
-    "sub": "Optional photo after 7 wrong PINs, kept on this phone"
+    "sub": "Optional photo when wrong PINs lock the keypad"
   },
   "backup": {
     "head": "A backup only you can open",

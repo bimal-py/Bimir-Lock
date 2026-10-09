@@ -30,7 +30,7 @@ the same story, and set a **6-digit PIN** (the old 4-digit ones show 4 cells and
 | 3 | `generator` | Add password | Site "Spotify", email filled, generator **expanded**, length 20, Numbers + Symbols on, strength bar "Very strong", password revealed | Strong passwords in one tap |
 | 4 | `checkup` | **Password Checkup page** (tap the card) | The list with weak + reused entries visible | Find weak and reused passwords |
 | 5 | `unlock` | Unlock sheet over the vault | Tap an entry → "Open Amazon" sheet, **2 of 6 dots** filled (set a **6-digit** PIN first — a 4-digit PIN shows 4 cells) | Every password opens only for you |
-| 6 | `alerts` | Settings → Wrong PIN alerts | "Take a photo" **ON**, 2–3 recent entries **with photos** (enter 7 wrong PINs a few times on a REAL phone — the simulator has no camera; use your own face or a soft toy) | See who tried to get in |
+| 6 | `alerts` | Settings → Wrong PIN alerts | "Take a photo" **ON**, 2–3 recent entries **with photos** (enter 10 wrong PINs, then 7 more, on a REAL phone — the simulator has no camera; use your own face or a soft toy) | See who tried to get in |
 | 7 | `backup` | Settings → Back up to a file | Backup-password dialog open, password typed (dots), strength bar filled | A backup only you can open |
 | 8 | `dark` | Home (vault list) | Same as #1, **dark theme** | Easy on the eyes at night |
 

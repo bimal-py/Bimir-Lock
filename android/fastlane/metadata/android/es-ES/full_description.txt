@@ -10,7 +10,7 @@ UN GESTOR DE CONTRASEÑAS SIN CUENTA
 SOLO TÚ PUEDES ABRIR TUS CONTRASEÑAS
 • Cada contraseña guardada solo se abre con tu PIN de 6 dígitos, o con tu huella o tu cara si activas esa opción
 • Se rechazan los PIN fáciles como 123456 o 111111
-• Siete PIN incorrectos seguidos bloquean el teclado: 30 segundos, después 1, 5 y 15 minutos
+• 10 PIN incorrectos seguidos bloquean el teclado durante 30 segundos; si alguien sigue probando, se bloquea 1, 5 y después 15 minutos, y muestra los intentos que quedan
 • Las alertas de PIN incorrecto registran cada bloqueo y pueden hacerle una foto a quien intentaba adivinarlo (opcional; las fotos se quedan en tu móvil)
 • Una contraseña visible se vuelve a ocultar a los 30 segundos, y una copiada se borra del portapapeles a los 30 segundos
 

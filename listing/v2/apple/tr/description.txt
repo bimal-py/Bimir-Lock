@@ -10,7 +10,7 @@ Bimir Lock, şifrelerinizi kendi iPhone ya da iPad'inizde şifreli olarak tutan 
 ONLARI YALNIZCA SİZ AÇARSINIZ
 • Kayıtlı her şifre yalnızca 6 haneli PIN kodunuzla açılır; isterseniz Face ID ya da Touch ID'yi de etkinleştirebilirsiniz
 • 123456 veya 111111 gibi kolay PIN'ler kabul edilmez
-• Üst üste yedi yanlış PIN tuş takımını kilitler: önce 30 saniye, sonra 1, 5 ve 15 dakika
+• Üst üste 10 yanlış PIN tuş takımını 30 saniye kilitler; tahmine devam edilirse 1, 5, ardından 15 dakika kilitlenir ve kalan deneme hakkı gösterilir
 • Yanlış PIN uyarıları her kilitlenmeyi listeler ve tahmin etmeye çalışan kişinin fotoğrafını çekebilir (isteğe bağlı; fotoğraflar cihazınızda kalır)
 • Gösterilen bir şifre 30 saniye sonra yeniden gizlenir, kopyalanan şifre de 30 saniye sonra panodan silinir
 

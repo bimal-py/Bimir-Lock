@@ -86,7 +86,8 @@ Bimir Lock does not send any of your data over the internet. It connects only to
 ## Permissions
 
 - **Camera** — to take a profile photo, and, only if you turn on Wrong PIN alerts →
-  Take a photo, to photograph whoever enters 7 wrong PINs in a row. Photos stay on
+  Take a photo, to photograph whoever is typing each time wrong PINs lock the
+  keypad. The camera is asked for only when you switch the photo on. Photos stay on
   your device.
 - **Photos / photo library** — to choose a profile photo.
 - **Face ID / fingerprint** — handled entirely by your phone's operating system. The

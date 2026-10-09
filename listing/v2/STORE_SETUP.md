@@ -34,7 +34,7 @@ seeded the app page), not in this repo.
 - Highlights: **Encrypted on your phone** — AES-256-GCM with a key in Android
   Keystore / iOS Keychain. **Password Checkup** — finds weak and reused passwords on
   the device. **Autofill** — fill passwords into other apps; Android can save new
-  logins too. **Wrong PIN alerts** — the keypad locks after 7 wrong PINs and can
+  logins too. **Wrong PIN alerts** — the keypad locks after 10 wrong PINs (sooner after that) and can
   photograph whoever is guessing.
 - Platforms: Android, iOS · Category: Security
 

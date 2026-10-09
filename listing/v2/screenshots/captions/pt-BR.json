@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Veja quem tentou entrar",
-    "sub": "Foto opcional após 7 PINs errados, só neste celular"
+    "sub": "Foto opcional quando PINs errados bloqueiam o teclado"
   },
   "backup": {
     "head": "Um backup que só você abre",

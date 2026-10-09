@@ -10,7 +10,7 @@ QUẢN LÝ MẬT KHẨU KHÔNG CẦN TÀI KHOẢN
 CHỈ BẠN MỚI MỞ ĐƯỢC MẬT KHẨU CỦA MÌNH
 • Mỗi mật khẩu đã lưu chỉ mở được bằng mã PIN 6 số, hoặc vân tay hay khuôn mặt nếu bạn bật
 • Mã PIN dễ đoán như 123456 hay 111111 sẽ bị từ chối
-• Nhập sai PIN 7 lần liên tiếp, bàn phím số sẽ bị khóa: 30 giây, rồi 1, 5 và 15 phút
+• Nhập sai PIN 10 lần liên tiếp, bàn phím số sẽ bị khóa 30 giây; nếu tiếp tục đoán, bàn phím bị khóa 1, 5, rồi 15 phút, và hiển thị số lần thử còn lại
 • Cảnh báo sai PIN ghi lại mỗi lần bị khóa và có thể chụp ảnh người đang đoán mã (tùy chọn; ảnh chỉ nằm trên điện thoại của bạn)
 • Mật khẩu đang hiện sẽ tự ẩn sau 30 giây, mật khẩu đã sao chép sẽ bị xóa khỏi bộ nhớ tạm sau 30 giây
 

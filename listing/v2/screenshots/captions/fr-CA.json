@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Voyez qui a tenté d'entrer",
-    "sub": "Photo facultative après 7 erreurs, gardée sur le cellulaire"
+    "sub": "Photo facultative si des NIP erronés bloquent le clavier"
   },
   "backup": {
     "head": "Une sauvegarde rien qu'à vous",

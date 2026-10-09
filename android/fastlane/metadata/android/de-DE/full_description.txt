@@ -10,7 +10,7 @@ EIN PASSWORTMANAGER OHNE KONTO
 NUR DU ÖFFNEST DEINE PASSWÖRTER
 • Jedes gespeicherte Passwort öffnet sich nur mit deiner 6-stelligen PIN – oder mit Fingerabdruck oder Gesicht, wenn du das einschaltest
 • Zu einfache PINs wie 123456 oder 111111 werden abgelehnt
-• Sieben falsche PINs hintereinander sperren das Tastenfeld: 30 Sekunden, dann 1, 5 und 15 Minuten
+• 10 falsche PINs hintereinander sperren das Tastenfeld für 30 Sekunden; weiteres Raten sperrt es für 1, 5, dann 15 Minuten – und es zeigt die übrigen Versuche an
 • Warnungen bei falscher PIN listen jede Sperre auf und können ein Foto von der Person machen, die geraten hat (optional; die Fotos bleiben auf deinem Handy)
 • Ein angezeigtes Passwort wird nach 30 Sekunden wieder verborgen, ein kopiertes nach 30 Sekunden aus der Zwischenablage gelöscht
 

@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Lihat siapa yang mencoba masuk",
-    "sub": "Foto opsional setelah 7 PIN salah, tetap di ponsel ini"
+    "sub": "Foto opsional saat PIN salah mengunci papan tombol"
   },
   "backup": {
     "head": "Backup yang hanya bisa Anda buka",

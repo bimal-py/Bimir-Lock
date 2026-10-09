@@ -10,7 +10,7 @@ A PASSWORD MANAGER WITHOUT AN ACCOUNT
 ONLY YOU CAN OPEN YOUR PASSWORDS
 • Every saved password opens only with your 6-digit PIN, or your fingerprint or face if you turn it on
 • Easy PINs like 123456 or 111111 are refused
-• Seven wrong PINs in a row lock the keypad: 30 seconds, then 1, 5 and 15 minutes
+• 10 wrong PINs in a row lock the keypad for 30 seconds; more guessing locks it for 1, 5, then 15 minutes, and it shows the tries left
 • Wrong PIN alerts list every lockout and can photograph whoever was guessing (optional; photos stay on your phone)
 • A revealed password hides again after 30 seconds, and a copied one is cleared from the clipboard after 30 seconds
 

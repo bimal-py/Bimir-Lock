@@ -10,7 +10,7 @@ SUAS SENHAS FICAM NO SEU APARELHO
 SÓ VOCÊ ABRE SUAS SENHAS
 • Cada senha salva só abre com seu PIN de 6 dígitos, ou com Face ID ou Touch ID, se você ativar
 • PINs fáceis como 123456 ou 111111 são recusados
-• Sete PINs errados seguidos bloqueiam o teclado: 30 segundos, depois 1, 5 e 15 minutos
+• 10 PINs errados seguidos bloqueiam o teclado por 30 segundos; se alguém continuar tentando, ele fica bloqueado por 1, 5 e depois 15 minutos, e mostra as tentativas restantes
 • Os alertas de PIN errado listam cada bloqueio e podem tirar uma foto de quem estava tentando adivinhar (opcional; as fotos ficam no seu aparelho)
 • Uma senha revelada volta a ficar oculta após 30 segundos, e uma senha copiada é apagada da área de transferência após 30 segundos
 

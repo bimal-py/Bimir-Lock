@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Sieh, wer es versucht hat",
-    "sub": "Optionales Foto nach 7 falschen PINs, bleibt auf dem Handy"
+    "sub": "Optionales Foto, wenn falsche PINs das Tastenfeld sperren"
   },
   "backup": {
     "head": "Ein Backup, das nur du öffnest",

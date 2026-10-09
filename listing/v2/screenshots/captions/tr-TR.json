@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Kimin denediğini görün",
-    "sub": "7 yanlış PIN'de isteğe bağlı fotoğraf; telefonda kalır"
+    "sub": "Yanlış PIN'ler tuş takımını kilitlerse isteğe bağlı fotoğraf"
   },
   "backup": {
     "head": "Yalnızca sizin açtığınız yedek",

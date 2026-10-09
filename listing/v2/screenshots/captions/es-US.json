@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Mira quién intentó entrar",
-    "sub": "Foto opcional tras 7 PIN incorrectos, solo en tu celular"
+    "sub": "Foto opcional cuando los PIN incorrectos bloquean el teclado"
   },
   "backup": {
     "head": "Un respaldo que solo tú abres",

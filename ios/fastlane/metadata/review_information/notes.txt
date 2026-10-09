@@ -6,7 +6,8 @@ To try it:
 3. Tap the round + button to save a password. Tap any saved entry and enter the PIN (or use Face ID if you turn it on in Settings) to see it.
 
 Features to look at:
-- Settings > Security > Wrong PIN alerts: after 7 wrong PINs in a row the keypad locks. If "Take a photo" is on (off by default, asks for camera permission), the front camera photographs whoever was guessing. Photos stay on the device; nothing is uploaded.
+- The first time the vault opens (once a PIN is set), a dialog offers Wrong PIN alerts photos with a "Take a photo" switch, on by default; the camera permission is asked for only if it stays on. You can also change it in Settings > Security > Wrong PIN alerts.
+- Wrong PINs: 10 in a row lock the keypad for 30 seconds, then 7 more for 1 minute, 5 more for 5 minutes, and every 3 more for 15 minutes. If "Take a photo" is on, the front camera photographs whoever was guessing. Photos stay on the device; nothing is uploaded.
 - Settings > Backup: creates an encrypted file (Argon2id + AES-256-GCM, with its own password) through the system save dialog; Restore adds entries from such a file.
 - AutoFill: the app includes a Credential Provider extension. Turn it on in iOS Settings > General > AutoFill & Passwords > Bimir Lock. In any login field, choose Passwords > Bimir Lock; the list opens after Face ID or the device passcode. The extension fills only (iOS offers no API for third-party save prompts).
 

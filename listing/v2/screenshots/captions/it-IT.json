@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Scopri chi ha provato a entrare",
-    "sub": "Foto facoltativa dopo 7 PIN errati, resta sul telefono"
+    "sub": "Foto facoltativa quando i PIN errati bloccano il tastierino"
   },
   "backup": {
     "head": "Un backup che apri solo tu",

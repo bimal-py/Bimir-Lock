@@ -10,7 +10,7 @@ EEN WACHTWOORDMANAGER ZONDER ACCOUNT
 ALLEEN JIJ OPENT JE WACHTWOORDEN
 • Elk opgeslagen wachtwoord gaat alleen open met je 6-cijferige pincode, of met je vingerafdruk of gezicht als je dat aanzet
 • Makkelijke pincodes zoals 123456 of 111111 worden geweigerd
-• Na zeven verkeerde pincodes op rij gaat het toetsenblok op slot: 30 seconden, daarna 1, 5 en 15 minuten
+• Na 10 verkeerde pincodes op rij gaat het toetsenblok 30 seconden op slot; bij verder raden 1, 5 en daarna 15 minuten, en het toont hoeveel pogingen er nog over zijn
 • Meldingen bij een verkeerde pincode tonen elke blokkering en kunnen een foto maken van wie er probeerde te raden (optioneel; de foto's blijven op je telefoon)
 • Een getoond wachtwoord wordt na 30 seconden weer verborgen, en een gekopieerd wachtwoord wordt na 30 seconden van het klembord gewist
 

@@ -10,7 +10,7 @@ KATA SANDI ANDA TETAP DI PERANGKAT ANDA
 HANYA ANDA YANG BISA MEMBUKANYA
 • Setiap kata sandi tersimpan hanya terbuka dengan PIN 6 digit Anda, atau Face ID atau Touch ID jika Anda mengaktifkannya
 • PIN yang mudah ditebak seperti 123456 atau 111111 ditolak
-• Tujuh kali salah PIN berturut-turut mengunci papan tombol: 30 detik, lalu 1, 5, dan 15 menit
+• 10 kali salah PIN berturut-turut mengunci papan tombol selama 30 detik; jika terus menebak, papan tombol terkunci 1, 5, lalu 15 menit, dan sisa percobaan ditampilkan
 • Peringatan PIN salah mencatat setiap penguncian dan bisa memotret siapa pun yang mencoba menebak (opsional; foto tetap di perangkat Anda)
 • Kata sandi yang ditampilkan tersembunyi lagi setelah 30 detik, dan kata sandi yang disalin dihapus dari clipboard setelah 30 detik
 

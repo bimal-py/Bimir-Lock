@@ -10,7 +10,7 @@ VOS MOTS DE PASSE RESTENT SUR VOTRE APPAREIL
 PERSONNE D'AUTRE NE PEUT LES OUVRIR
 • Chaque mot de passe enregistré ne s'ouvre qu'avec votre code PIN à 6 chiffres, ou avec Face ID ou Touch ID si vous l'activez
 • Les codes trop simples comme 123456 ou 111111 sont refusés
-• Après sept mauvais codes d'affilée, le clavier se bloque : 30 secondes, puis 1, 5 et 15 minutes
+• Après 10 mauvais codes d'affilée, le clavier se bloque 30 secondes ; si quelqu'un insiste, il se bloque 1, 5, puis 15 minutes, et affiche les essais restants
 • Les alertes de code erroné listent chaque blocage et peuvent photographier la personne qui tentait de deviner (en option ; les photos restent sur votre appareil)
 • Un mot de passe affiché se masque de nouveau au bout de 30 secondes, et un mot de passe copié est effacé du presse-papiers au bout de 30 secondes
 

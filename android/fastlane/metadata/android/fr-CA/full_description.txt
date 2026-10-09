@@ -10,7 +10,7 @@ UN GESTIONNAIRE DE MOTS DE PASSE SANS COMPTE
 PERSONNE D'AUTRE N'OUVRE VOS MOTS DE PASSE
 • Chaque mot de passe enregistré ne s'ouvre qu'avec votre NIP à 6 chiffres, ou avec votre empreinte ou votre visage si vous l'activez
 • Les NIP trop simples comme 123456 ou 111111 sont refusés
-• Après sept mauvais NIP d'affilée, le clavier se bloque : 30 secondes, puis 1, 5 et 15 minutes
+• 10 mauvais NIP d'affilée bloquent le clavier 30 s, puis 1, 5 et 15 min; essais restants affichés
 • Les alertes de NIP erroné listent chaque blocage et peuvent photographier qui tentait de deviner (en option; les photos restent sur votre cellulaire)
 • Un mot de passe affiché se masque après 30 secondes; copié, il est effacé du presse-papiers après 30 secondes
 

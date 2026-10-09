@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Zobacz, kto próbował wejść",
-    "sub": "Opcjonalne zdjęcie po 7 błędnych PIN-ach. Tylko w telefonie"
+    "sub": "Opcjonalne zdjęcie, gdy błędne PIN-y zablokują klawiaturę"
   },
   "backup": {
     "head": "Kopia, którą otworzysz tylko ty",

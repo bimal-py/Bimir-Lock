@@ -21,7 +21,7 @@
   },
   "alerts": {
     "head": "Zie wie het heeft geprobeerd",
-    "sub": "Optionele foto na 7 foute pincodes, blijft op je telefoon"
+    "sub": "Optionele foto als foute pincodes het toetsenblok blokkeren"
   },
   "backup": {
     "head": "Een back-up die alleen jij opent",

@@ -10,7 +10,7 @@ UM GESTOR DE PASSWORDS SEM CONTA
 AS SUAS PALAVRAS-PASSE SÓ ABREM PARA SI
 • Cada palavra-passe guardada só abre com o seu PIN de 6 dígitos, ou com a impressão digital ou o rosto, se os ativar
 • PINs fáceis como 123456 ou 111111 são recusados
-• Sete PINs errados seguidos bloqueiam o teclado: 30 segundos, depois 1, 5 e 15 minutos
+• 10 PINs errados seguidos bloqueiam o teclado durante 30 segundos; se alguém continuar a tentar, fica bloqueado 1, 5 e depois 15 minutos, e mostra as tentativas que restam
 • Os alertas de PIN errado registam cada bloqueio e podem fotografar quem estava a tentar adivinhar (opcional; as fotos ficam no seu telemóvel)
 • Uma palavra-passe revelada volta a ficar oculta ao fim de 30 segundos, e uma copiada é apagada da área de transferência ao fim de 30 segundos
 
