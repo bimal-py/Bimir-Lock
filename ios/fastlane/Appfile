@@ -1,0 +1,7 @@
+app_identifier("com.cklamib.bimirLock") # The bundle identifier of your app
+
+# Authentication uses an App Store Connect API key rather than an Apple ID, so
+# `apple_id` / `itc_team_id` are deliberately left unset. The key's id, issuer id
+# and path to the .p8 live in the gitignored `fastlane/appstore_api_key.json` —
+# the same key Callbreak uses, since both apps sit in one App Store Connect team.
+team_id("DBZRMJ85NN")

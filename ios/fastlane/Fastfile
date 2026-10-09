@@ -1,0 +1,409 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+APP_ID = "com.cklamib.bimirLock"
+
+# Authenticate Spaceship with the App Store Connect API key. Same gitignored key file
+# the Deliverfile uses; `__dir__` resolves correctly here because raw lane code runs
+# from the fastlane folder — actions do not, which is why the Deliverfile searches for
+# the file instead of assuming a path.
+def authenticate_asc!
+  cfg = JSON.parse(File.read(File.expand_path("appstore_api_key.json", __dir__)))
+  Spaceship::ConnectAPI.token = Spaceship::ConnectAPI::Token.create(
+    key_id: cfg["key_id"],
+    issuer_id: cfg["issuer_id"],
+    filepath: File.expand_path(cfg["key_filepath"])
+  )
+end
+
+platform :ios do
+  # Pull the App Store listing down into ios/fastlane/metadata/ and
+  # ios/fastlane/screenshots/. Same work as the `fastlane deliver
+  # download_metadata` + `download_screenshots` CLI commands, wrapped in one
+  # lane so a refresh is a single call.
+  #
+  #   bundle exec fastlane download_listing
+  #
+  # Overwrites the local files, so snapshot anything you care about into
+  # listing/<version>/ first.
+  desc "Download the live App Store listing (metadata + screenshots)"
+  lane :download_listing do
+    require 'deliver'
+    require 'deliver/setup'
+    require 'deliver/download_screenshots'
+
+    config = FastlaneCore::Configuration.create(Deliver::Options.available_options, {})
+    config.load_configuration_file("Deliverfile")
+
+    # Runner#initialize authenticates and resolves the app + version.
+    Deliver::Runner.new(config)
+
+    containing = FastlaneCore::Helper.fastlane_enabled_folder_path
+    app = Deliver.cache[:app]
+    platform = Spaceship::ConnectAPI::Platform.map(config[:platform])
+    version = app.get_latest_app_store_version(platform: platform)
+
+    # DownloadScreenshots reads the EDIT version unless told otherwise, and
+    # between releases there is no edit version at all — the listing only exists
+    # on the live one. Point it at whichever actually exists.
+    if app.get_edit_app_store_version(platform: platform).nil?
+      UI.important("No editable version — downloading screenshots from the live version.")
+      config[:use_live_version] = true
+    end
+
+    Deliver::Setup.new.generate_metadata_files(
+      app, version, config[:metadata_path] || File.join(containing, "metadata"), config
+    )
+    Deliver::DownloadScreenshots.run(
+      config, config[:screenshots_path] || File.join(containing, "screenshots")
+    )
+  end
+
+  # deliver writes description, keywords, promotional text and screenshots onto an
+  # EDITABLE version. Between a release and its successor there is no editable
+  # version at all — App Store Connect only holds the live one — and deliver then
+  # fails with "no editable version". This creates one.
+  #
+  #   bundle exec fastlane ensure_edit_version version:1.0.6
+  #
+  # Creating a version is not the same as submitting it: it sits in "Prepare for
+  # Submission" until a human presses Submit. Safe to run repeatedly — if an
+  # editable version already exists it reports it and changes nothing.
+  desc "Create an editable App Store version if there is not one already"
+  lane :ensure_edit_version do |options|
+    authenticate_asc!
+
+    app = Spaceship::ConnectAPI::App.find(APP_ID)
+    UI.user_error!("No app with that bundle id is visible to this API key") if app.nil?
+
+    existing = app.get_edit_app_store_version
+    if existing
+      UI.success("editable version already exists: #{existing.version_string} [#{existing.app_store_state}]")
+      next
+    end
+
+    live = app.get_live_app_store_version
+    wanted = options[:version]
+    if wanted.nil? && live
+      # Bump the last component of the live version, so a forgotten argument
+      # cannot silently create a version number that goes backwards.
+      parts = live.version_string.split(".").map(&:to_i)
+      parts[-1] += 1
+      wanted = parts.join(".")
+    elsif wanted.nil?
+      # First iOS release: nothing live to bump from, so take pubspec's version.
+      pubspec = File.read(File.expand_path("../../pubspec.yaml", __dir__))
+      wanted = pubspec[/^version:\s*([0-9.]+)/, 1]
+      UI.user_error!("pass version: — pubspec.yaml has no version line") if wanted.nil?
+    end
+    UI.message("live: #{live&.version_string || 'none'} -> creating #{wanted}")
+
+    # App#ensure_version! is what deliver itself calls: it creates the version if
+    # there is none and renames the editable one if there is. Returns whether it
+    # changed anything.
+    app.ensure_version!(wanted, platform: Spaceship::ConnectAPI::Platform::IOS)
+
+    version = app.get_edit_app_store_version
+    UI.success("created editable version #{version.version_string} [#{version.app_store_state}]")
+  end
+
+  # Ask App Store Connect which locales THIS app will actually accept, and
+  # compare that against what is sitting in metadata/.
+  #
+  #   bundle exec fastlane locales
+  #
+  # Worth running before any `upload_listing` that adds languages. fastlane's
+  # own ALL_LANGUAGES list is generated from Apple and is usually right, but it
+  # is a snapshot compiled into the gem — and a locale Apple has since dropped,
+  # or never offered for this app, fails PER LOCALE partway through a deliver
+  # run, after the earlier ones have already been written. Read-only.
+  desc "List the App Store locales this app accepts, vs what is on disk"
+  lane :locales do
+    authenticate_asc!
+
+    app = Spaceship::ConnectAPI::App.find(APP_ID)
+    UI.user_error!("No app with that bundle id is visible to this API key") if app.nil?
+
+    # The set Apple will take is the set `deliver` itself validates against.
+    available = FastlaneCore::Languages::ALL_LANGUAGES.sort
+    on_disk = Dir.children(File.expand_path("metadata", __dir__))
+                 .select { |d| File.directory?(File.join(File.expand_path("metadata", __dir__), d)) }
+                 .reject { |d| d == "review_information" }
+                 .sort
+
+    UI.success("#{available.size} locale(s) fastlane will accept")
+    UI.success("#{on_disk.size} locale(s) on disk")
+
+    unknown = on_disk - available
+    if unknown.empty?
+      UI.success("every locale on disk is one Apple accepts")
+    else
+      UI.error("NOT accepted, deliver will fail on these: #{unknown.join(', ')}")
+    end
+
+    version = app.get_edit_app_store_version
+    if version
+      live_locales = version.get_app_store_version_localizations.map(&:locale).sort
+      UI.message("the editable version currently carries #{live_locales.size}: #{live_locales.join(', ')}")
+      UI.message("deliver would ADD #{(on_disk - live_locales).size} new localization(s)")
+    end
+  end
+
+  # Push ios/fastlane/metadata/** and ios/fastlane/screenshots/** back to App
+  # Store Connect. The Deliverfile keeps submit_for_review false, so this lands
+  # as a draft on the editable version for a human to submit.
+  #
+  #   bundle exec fastlane upload_listing            # text + screenshots
+  #   bundle exec fastlane upload_listing text:true  # text only, much faster
+  desc "Upload the App Store listing (no binary)"
+  lane :upload_listing do |options|
+    deliver(
+      force: true, # skip the local HTML preview prompt
+      skip_screenshots: options[:text] == true
+    )
+  end
+
+  # Auth + app-existence probe. Prints what App Store Connect actually holds
+  # without changing anything — run this first when deliver misbehaves, to tell
+  # "bad credentials" apart from "no editable version".
+  desc "Check App Store Connect credentials and show the app's versions"
+  lane :probe do
+    authenticate_asc!
+
+    app = Spaceship::ConnectAPI::App.find(APP_ID)
+    if app.nil?
+      # The App Store Connect API cannot create an app record — that is a one-time
+      # click in the web UI (Apps → + → New App). See listing/v2/STORE_SETUP.md.
+      UI.user_error!("No app with bundle id #{APP_ID} in App Store Connect yet — " \
+                     "create it at appstoreconnect.apple.com (Apps → + → New App)")
+    end
+    UI.success("app: #{app.name} (#{app.bundle_id}) id=#{app.id}")
+
+    edit = app.get_edit_app_store_version
+    live = app.get_live_app_store_version
+    UI.message(edit ? "editable version: #{edit.version_string} [#{edit.app_store_state}]" : "no editable version")
+    UI.message(live ? "live version: #{live.version_string}" : "no live version yet")
+
+    # Read the state back rather than trusting deliver's "Successfully uploaded" —
+    # a partially-applied run reports success for the locales that did land.
+    # fetch_latest_app_info returns whichever record comes back first, which is the
+    # LIVE one once an app has shipped — it will not show pending name/subtitle edits.
+    # The editable record is the one deliver writes to.
+    info = app.fetch_edit_app_info || app.fetch_latest_app_info
+    infos = info&.get_app_info_localizations || []
+    UI.message("app-level name/subtitle, editable record (#{infos.size} locale(s)):")
+    infos.sort_by(&:locale).each do |i|
+      UI.message(format("  %-7s %-32s | %s", i.locale, i.name.to_s, i.subtitle.to_s))
+    end
+
+    locales = (edit || live)&.get_app_store_version_localizations || []
+    UI.message("version-level copy (#{locales.size} locale(s)):")
+    locales.sort_by(&:locale).each do |l|
+      UI.message(format("  %-7s desc %4d  keywords %3d  promo %3d  whatsnew %3d", l.locale,
+                        l.description.to_s.length, l.keywords.to_s.length,
+                        l.promotional_text.to_s.length, l.whats_new.to_s.length))
+    end
+  end
+
+  # Push ios/fastlane/metadata/<locale>/release_notes.txt to the editable version's
+  # "What's New" field, and nothing else.
+  #
+  #   bundle exec fastlane upload_release_notes validate:true   # dry run, changes nothing
+  #   bundle exec fastlane upload_release_notes
+  #
+  # `upload_listing` also carries release notes, but only as part of re-pushing every
+  # description, keyword, name and subtitle in metadata/ — that folder holds the whole
+  # v2 listing, so editing a changelog through deliver would replay the entire v2
+  # upload, name review included. This lane PATCHes the single `whatsNew` attribute per
+  # locale instead.
+  #
+  # Release notes attach to a VERSION, not to the listing: they land on whichever
+  # version is editable and ship with it. Apple requires them on every update except a
+  # first release. A locale with no local file is left untouched rather than blanked —
+  # deliver's behaviour is the same, and blanking would fail submission.
+  desc "Upload What's New (release notes) only - no other metadata, no binary"
+  lane :upload_release_notes do |options|
+    authenticate_asc!
+    dry_run = options[:validate] == true
+
+    app = Spaceship::ConnectAPI::App.find(APP_ID)
+    UI.user_error!("No app with that bundle id is visible to this API key") if app.nil?
+
+    version = app.get_edit_app_store_version
+    UI.user_error!("No editable version - create one in App Store Connect first") if version.nil?
+    UI.success("editable version: #{version.version_string} [#{version.app_store_state}]")
+
+    metadata = File.expand_path("metadata", __dir__)
+    localizations = version.get_app_store_version_localizations.sort_by(&:locale)
+    changed = 0
+
+    localizations.each do |loc|
+      path = File.join(metadata, loc.locale, "release_notes.txt")
+      unless File.exist?(path)
+        UI.important(format("  %-7s no release_notes.txt - left as is", loc.locale))
+        next
+      end
+
+      text = File.read(path).strip
+      if text == loc.whats_new.to_s.strip
+        UI.message(format("  %-7s unchanged (%d chars)", loc.locale, text.length))
+        next
+      end
+
+      if dry_run
+        UI.message(format("  %-7s WOULD SET (%d chars) %s", loc.locale, text.length, text.lines.first.to_s.strip))
+      else
+        loc.update(attributes: { whats_new: text })
+        UI.success(format("  %-7s updated (%d chars)", loc.locale, text.length))
+      end
+      changed += 1
+    end
+
+    # A locale written on disk that this version does not carry gets no release notes at
+    # all, silently. Name it here rather than let it surface at submission.
+    on_disk = Dir.children(metadata).select { |d| File.exist?(File.join(metadata, d, "release_notes.txt")) }
+    orphans = on_disk - localizations.map(&:locale)
+    UI.important("on disk but not a localization on this version: #{orphans.sort.join(', ')}") unless orphans.empty?
+
+    UI.success(dry_run ? "dry run - #{changed} locale(s) would change" : "#{changed} locale(s) updated")
+  end
+
+  # Print the LIVE version's per-locale copy. `probe` reports the EDITABLE
+  # version when one exists, so between a release and its successor the two show
+  # different things — and the text a user currently sees on the App Store is the
+  # live one. Read-only.
+  #
+  #   bundle exec fastlane probe_live
+  desc "Print the LIVE App Store version's copy (read-only)"
+  lane :probe_live do
+    authenticate_asc!
+
+    app = Spaceship::ConnectAPI::App.find(APP_ID)
+    UI.user_error!("No app with that bundle id is visible to this API key") if app.nil?
+
+    live = app.get_live_app_store_version
+    UI.user_error!("No live version") if live.nil?
+    UI.success("live version: #{live.version_string}")
+
+    live.get_app_store_version_localizations.sort_by(&:locale).each do |l|
+      UI.message("── #{l.locale}")
+      UI.message("   promo    (#{l.promotional_text.to_s.length}): #{l.promotional_text}")
+      UI.message("   whatsnew (#{l.whats_new.to_s.length}): #{l.whats_new.to_s.lines.first.to_s.strip}")
+    end
+  end
+
+  # Save the LIVE version's promotional_text and release_notes into
+  # metadata/<locale>/. `download_listing` reads the EDITABLE version, so once a
+  # new version is created in App Store Connect those two fields come down empty
+  # — the copy a user actually sees still lives on the live version. This
+  # recovers it so it can be carried forward instead of retyped.
+  #
+  #   bundle exec fastlane pull_live_copy
+  #
+  # Only touches promotional_text.txt and release_notes.txt. Read-only remotely.
+  desc "Save the LIVE version's promo text and release notes into metadata/"
+  lane :pull_live_copy do
+    authenticate_asc!
+
+    app = Spaceship::ConnectAPI::App.find(APP_ID)
+    UI.user_error!("No app with that bundle id is visible to this API key") if app.nil?
+    live = app.get_live_app_store_version
+    UI.user_error!("No live version to copy from") if live.nil?
+
+    metadata = File.expand_path("metadata", __dir__)
+    live.get_app_store_version_localizations.sort_by(&:locale).each do |l|
+      dir = File.join(metadata, l.locale)
+      FileUtils.mkdir_p(dir)
+      { "promotional_text" => l.promotional_text, "release_notes" => l.whats_new }.each do |field, value|
+        text = value.to_s
+        next if text.empty?
+        File.write(File.join(dir, "#{field}.txt"), text.end_with?("\n") ? text : text + "\n")
+        UI.success(format("  %-7s %-18s %d chars", l.locale, field, text.length))
+      end
+    end
+    UI.success("saved from live version #{live.version_string}")
+  end
+
+  # Push the two VERSION-level copy fields that a new version starts empty:
+  # promotional_text and What's New. Both come from metadata/<locale>/.
+  #
+  #   bundle exec fastlane upload_version_copy validate:true   # dry run
+  #   bundle exec fastlane upload_version_copy
+  #
+  # Why not `upload_listing`: deliver re-pushes every field in metadata/, name and
+  # subtitle included, which sends the app NAME back through review for a change that
+  # is only two text fields. This PATCHes just those two attributes per locale.
+  #
+  # Only updates localizations the version already has. A locale present on disk but
+  # not on the version is reported, not created — creating one is a `deliver` job.
+  desc "Upload promotional text + What's New to the editable version (no name/subtitle replay)"
+  lane :upload_version_copy do |options|
+    authenticate_asc!
+    dry_run = options[:validate] == true
+
+    app = Spaceship::ConnectAPI::App.find(APP_ID)
+    UI.user_error!("No app with that bundle id is visible to this API key") if app.nil?
+
+    version = app.get_edit_app_store_version
+    UI.user_error!("No editable version - create one in App Store Connect first") if version.nil?
+    UI.success("editable version: #{version.version_string} [#{version.app_store_state}]")
+
+    metadata = File.expand_path("metadata", __dir__)
+    localizations = version.get_app_store_version_localizations.sort_by(&:locale)
+    changed = 0
+
+    # field on disk => attribute on the API model
+    fields = { "promotional_text" => :promotional_text, "release_notes" => :whats_new }
+
+    localizations.each do |loc|
+      attributes = {}
+      fields.each do |filename, attribute|
+        path = File.join(metadata, loc.locale, "#{filename}.txt")
+        unless File.exist?(path)
+          UI.important(format("  %-7s %-17s no file - left as is", loc.locale, filename))
+          next
+        end
+        text = File.read(path).strip
+        current = loc.public_send(attribute).to_s.strip
+        if text == current
+          UI.message(format("  %-7s %-17s unchanged (%d chars)", loc.locale, filename, text.length))
+          next
+        end
+        attributes[attribute] = text
+        UI.message(format("  %-7s %-17s %d -> %d chars", loc.locale, filename, current.length, text.length))
+      end
+
+      next if attributes.empty?
+      if dry_run
+        UI.important(format("  %-7s WOULD PATCH %s", loc.locale, attributes.keys.join(", ")))
+      else
+        loc.update(attributes: attributes)
+        UI.success(format("  %-7s patched %s", loc.locale, attributes.keys.join(", ")))
+      end
+      changed += 1
+    end
+
+    on_disk = Dir.children(metadata).select { |d| File.directory?(File.join(metadata, d)) && d =~ /\A[a-z]{2}(-[A-Za-z]{2,4})?\z/ }
+    orphans = on_disk - localizations.map(&:locale)
+    unless orphans.empty?
+      UI.important("on disk but NOT a localization on this version: #{orphans.sort.join(', ')}")
+      UI.important("  creating those needs `upload_listing` (replays name/subtitle -> name review)")
+    end
+
+    UI.success(dry_run ? "dry run - #{changed} locale(s) would change" : "#{changed} locale(s) updated")
+  end
+end

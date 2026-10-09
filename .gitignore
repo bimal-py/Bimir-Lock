@@ -52,3 +52,26 @@ android/app/upload-keystore.jks
 android/key.properties
 # Kotlin 2.x build session artifacts
 .kotlin/
+
+# fastlane — secrets and generated noise. The Play service-account key grants
+# write access to the Console and the .p8 grants App Store Connect access; never
+# commit either. fastlane/metadata/** IS committed — it is the copy supply and
+# deliver upload. Both keys are the shared ones in ../app_keys/ (see FASTLANE.md).
+**/fastlane/play-store-key.json
+**/fastlane/appstore_api_key.json
+**/fastlane/*.p8
+**/fastlane/.env
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/test_output
+**/.bundle/
+**/vendor/bundle/
+
+# Screenshot generator output: rebuilt from listing/shots/raw/ by tool/make_screenshots.py;
+# the installed copies under ios/fastlane and android/fastlane are the ones committed.
+/listing/shots/out/
+# Phone numbers stay out of this public repo: the App Review phone is injected from
+# ios/fastlane/.env by tool/assemble_listing.py; the Play contact phone is read back
+# by download_store_details.
+**/review_information/phone_number.txt
+**/store_details/contact_phone.txt

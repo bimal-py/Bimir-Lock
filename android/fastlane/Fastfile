@@ -1,0 +1,280 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+require 'json'
+
+default_platform(:android)
+
+platform :android do
+  # Upload an app bundle that was ALREADY built (flutter build appbundle) as a
+  # DRAFT release, with the changelogs from metadata/android/<locale>/changelogs/.
+  # This lane never builds: binaries are built and signed by hand.
+  #
+  #   bundle exec fastlane deploy validate:true                 # dry run
+  #   bundle exec fastlane deploy                               # production, draft
+  #   bundle exec fastlane deploy track:internal
+  #   bundle exec fastlane deploy aab:/path/to/app-release.aab
+  #
+  # A draft release is invisible until someone presses "Review release" in the
+  # Console. Listing text and images are left alone — use upload_listing /
+  # upload_images for those.
+  desc "Upload a prebuilt .aab as a draft release (no build, no listing)"
+  lane :deploy do |options|
+    aab = options[:aab] || File.expand_path("../../build/app/outputs/bundle/release/app-release.aab", __dir__)
+    UI.user_error!("No app bundle at #{aab} — build it first (flutter build appbundle)") unless File.exist?(aab)
+
+    upload_to_play_store(
+      track: options[:track] || "production",
+      aab: aab,
+      release_status: "draft",
+      validate_only: options[:validate] == true,
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  # Pull the live Play listing down into fastlane/metadata/android/. Same work as
+  # `fastlane supply init`, except supply refuses to run once the folder exists,
+  # so this deletes it first.
+  #
+  #   bundle exec fastlane download_listing
+  #
+  # Overwrites the local files, so snapshot anything you care about into
+  # listing/<version>/ first.
+  desc "Download the live Play listing (text, graphics, screenshots, changelogs)"
+  lane :download_listing do
+    require 'supply'
+    require 'supply/setup'
+
+    # fastlane runs raw lane code from inside the `fastlane` folder, but actions
+    # (and every path in the Appfile) resolve from its parent. Match the actions.
+    Dir.chdir("..") do
+      Supply.config = FastlaneCore::Configuration.create(Supply::Options.available_options, {})
+      FileUtils.rm_rf(Supply.config[:metadata_path] || "fastlane/metadata/android")
+      Supply::Setup.new.perform_download
+    end
+  end
+
+  # supply only knows about the per-locale listing. The Play Console's "Store
+  # settings → Contact details" (support email, phone, website) and the app's
+  # default language live on the edit's `details` resource instead, so pull those
+  # separately into fastlane/store_details/ — kept out of metadata/ so supply
+  # never tries to interpret them as a locale.
+  # https://developers.google.com/android-publisher/api-ref/rest/v3/edits.details
+  desc "Download Play Console store settings (support email, phone, website)"
+  lane :download_store_details do
+    require 'supply'
+
+    # See download_listing: raw lane code needs the actions' working directory.
+    details = Dir.chdir("..") do
+      Supply.config = FastlaneCore::Configuration.create(Supply::Options.available_options, {})
+      package_name = Supply.config[:package_name]
+
+      client = Supply::Client.make_from_config
+      client.begin_edit(package_name: package_name)
+      begin
+        client.client.get_edit_detail(package_name, client.current_edit.id)
+      ensure
+        client.abort_current_edit
+      end
+    end
+
+    values = {
+      "contact_email" => details.contact_email,
+      "contact_phone" => details.contact_phone,
+      "contact_website" => details.contact_website,
+      "default_language" => details.default_language
+    }
+
+    dir = File.join(FastlaneCore::Helper.fastlane_enabled_folder_path, "store_details")
+    FileUtils.mkdir_p(dir)
+    values.each do |key, value|
+      File.write(File.join(dir, "#{key}.txt"), "#{value}\n")
+      UI.message(format("%-16s %s", key, value.to_s.empty? ? "(empty)" : value))
+    end
+    UI.success("Wrote store details to #{dir}")
+  end
+
+  # Read the live listing back without downloading any images. `supply` prints
+  # "Successfully finished the upload" even when a value did not apply, so the only
+  # trustworthy check after an upload is reading the state back.
+  #
+  #   bundle exec fastlane probe
+  desc "Print the live Play listing — locales, titles and field lengths"
+  lane :probe do
+    require 'supply'
+
+    listings = Dir.chdir("..") do
+      Supply.config = FastlaneCore::Configuration.create(Supply::Options.available_options, {})
+      client = Supply::Client.make_from_config
+      client.begin_edit(package_name: Supply.config[:package_name])
+      begin
+        client.listings.map { |l| [l.language, l.title, l.short_description, l.full_description] }
+      ensure
+        client.abort_current_edit
+      end
+    end
+
+    UI.success("#{listings.size} live locale(s)")
+    listings.sort_by(&:first).each do |lang, title, short, full|
+      UI.message(format("  %-7s %-32s short %3d  full %4d", lang, title.to_s,
+                        short.to_s.length, full.to_s.length))
+    end
+  end
+
+  # Print what is actually in each track, with version codes.
+  #
+  #   bundle exec fastlane tracks
+  #
+  # `supply` refuses to act on a track holding more than one release —
+  # "More than one release found in this track" — and the fix is to name a
+  # version_code. This is how you find out which ones are on offer. Read-only.
+  desc "List the Play tracks and the releases in them"
+  lane :tracks do
+    require 'supply'
+
+    Dir.chdir("..") do
+      Supply.config = FastlaneCore::Configuration.create(Supply::Options.available_options, {})
+      client = Supply::Client.make_from_config
+      client.begin_edit(package_name: Supply.config[:package_name])
+      begin
+        client.tracks.each do |track|
+          UI.success("track #{track.track}")
+          Array(track.releases).each do |release|
+            codes = Array(release.version_codes).join(", ")
+            UI.message(format("  %-12s codes [%s] fraction %s name %s",
+                              release.status, codes,
+                              release.user_fraction || "-",
+                              release.name || "-"))
+          end
+        end
+      ensure
+        client.abort_current_edit
+      end
+    end
+  end
+
+  # Update the store listing TEXT ONLY (title, short & full description) for every
+  # locale under fastlane/metadata/android/. Does not build or upload a binary and
+  # leaves screenshots/graphics untouched.
+  #
+  #   bundle exec fastlane upload_listing validate:true   # dry run, changes nothing
+  #   bundle exec fastlane upload_listing                 # upload AND send for review
+  #   bundle exec fastlane upload_listing hold:true       # see the warning below — does NOT hold
+  #
+  # Committing sends the changes to Google immediately. The Play Edits API has no draft
+  # state for listing text: an edit is either uncommitted and invisible, or committed
+  # and reviewed.
+  #
+  # DO NOT RELY ON `hold:true`. It maps to the Play API's changesNotSentForReview, which
+  # only applies "when a rejection happens" — i.e. it is a rejected-state tool, not a
+  # general "commit but do not submit" switch:
+  # https://developers.google.com/android-publisher/api-ref/rest/v3/edits/commit
+  # On an app in good standing Google ACCEPTS the parameter and IGNORES it. The commit
+  # succeeds, supply prints success, and the changes go to review regardless. Measured
+  # on the 2026-08-17 feature-graphic upload: the flag was sent, no error came back,
+  # rescue_changes_not_sent_for_review never fired, and the edit still went to review —
+  # it had to be cancelled from the Console to recover it.
+  #
+  # (supply's rescue_changes_not_sent_for_review, default true, is a *different* hazard:
+  # if Google answers "changesNotSentForReview must not be set" it silently re-commits
+  # without the flag. That is not what happens here — Google raises no error at all.)
+  #
+  # Managed publishing is the control that actually works, and it is Console-only:
+  # with it on, changes are reviewed straight away but go live only when you press
+  # Publish. supply cannot set it. Use it instead of `hold` to batch a review cycle.
+  #
+  # "What's new" is tied to a release rather than the listing, so it is skipped
+  # here; changelogs go out with the next `deploy` (or `upload_changelogs`).
+  desc "Upload store-listing text only (no binary, no images, no release notes)"
+  lane :upload_listing do |options|
+    upload_to_play_store(
+      track: options[:track] || "production",
+      version_code: options[:version_code],
+      validate_only: options[:validate] == true,
+      changes_not_sent_for_review: options[:hold] == true,
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: false,
+      skip_upload_changelogs: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  # Push fastlane/metadata/android/<locale>/changelogs/<code>.txt onto a release
+  # that is ALREADY on Play, without rebuilding or re-uploading a binary.
+  #
+  #   bundle exec fastlane upload_changelogs version_code:10 validate:true
+  #   bundle exec fastlane upload_changelogs version_code:10
+  #
+  # `deploy` also carries changelogs, but only by building and uploading a new
+  # bundle — and a version code that is already on Play cannot be uploaded
+  # twice. This is the lane for "the build is up there, the notes are not".
+  desc "Upload changelogs onto an existing release (no binary, no listing text)"
+  lane :upload_changelogs do |options|
+    UI.user_error!("pass version_code: — see `fastlane tracks`") if options[:version_code].nil?
+
+    upload_to_play_store(
+      track: options[:track] || "production",
+      version_code: options[:version_code],
+      validate_only: options[:validate] == true,
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  # Upload the graphics from fastlane/metadata/android/<locale>/images/. Split out
+  # from upload_listing because images are the slow part of a supply run and rarely
+  # change, so text-only edits stay fast.
+  #
+  #   bundle exec fastlane upload_images validate:true   # dry run
+  #   bundle exec fastlane upload_images                 # upload AND send for review
+  #   bundle exec fastlane upload_images hold:true       # does NOT hold — see upload_listing
+  #
+  # Two traps, both measured on the 2026-08-17 feature-graphic upload:
+  #
+  # `hold:true` does not work. See the long warning above upload_listing — the Play API
+  # ignores changesNotSentForReview on an app in good standing. Use managed publishing.
+  #
+  # sync_image_upload defaults to FALSE, so this lane is destructive to screenshots:
+  # supply calls clear_screenshots to delete the remote set for a locale before
+  # uploading the local one (uploader.rb:329), and the checksum-skip at uploader.rb:290
+  # never runs. Whatever is on disk becomes the live set. Locales with no local
+  # screenshots are skipped entirely, so they are not wiped. Diff the local screenshots
+  # against a fresh download_listing before running this, or pass sync_image_upload: true.
+  desc "Upload icon, feature graphic and screenshots (no text, no binary)"
+  lane :upload_images do |options|
+    upload_to_play_store(
+      track: options[:track] || "production",
+      version_code: options[:version_code],
+      validate_only: options[:validate] == true,
+      changes_not_sent_for_review: options[:hold] == true,
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+  end
+end

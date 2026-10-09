@@ -1,0 +1,10 @@
+# Appfile — global config shared by every Android lane.
+# Docs: https://docs.fastlane.tools/advanced/#appfile
+
+# The Play service-account JSON that `supply` authenticates with. Kept OUT of
+# the repo: the path comes from android/fastlane/.env (also gitignored), which
+# fastlane auto-loads when run from android/. The same central key publishes
+# every app on this developer account (Callbreak, Bimir Lock, …).
+json_key_file(ENV["SUPPLY_JSON_KEY"] || "fastlane/play-store-key.json")
+
+package_name("com.cklamib.bimirLock")
