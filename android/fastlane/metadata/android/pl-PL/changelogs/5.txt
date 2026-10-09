@@ -1,0 +1,8 @@
+Bimir Lock 1.1 został zbudowany od nowa.
+• Hasła są teraz szyfrowane kluczem przechowywanym w bezpiecznym magazynie telefonu
+• Autouzupełnianie: wpisuj zapisane dane logowania w innych aplikacjach i zapisuj nowe
+• Kontrola haseł wyszukuje słabe i powtarzane hasła
+• Generator haseł i wskaźnik siły
+• Zaszyfrowany plik kopii zapasowej z własnym hasłem
+• 6-cyfrowe kody PIN, otwieranie haseł odciskiem palca i alerty o błędnym PIN-ie
+• Nowy wygląd z jasnym i ciemnym motywem

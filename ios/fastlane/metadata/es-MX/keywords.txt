@@ -1,0 +1,1 @@
+administrador,contraseña,generador,seguras,autocompletar,guardar,claves,respaldo,huella,pin,local

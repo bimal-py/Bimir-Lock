@@ -1,1 +1,15 @@
+Bimir Lock is an offline password manager. There is no account, no sign-in and no server, so no demo account is needed.
 
+To try it:
+1. Open the app, swipe through the three intro slides, tap "Set up Bimir Lock".
+2. Enter any name (a photo is optional), then choose any 6-digit PIN that is not a simple pattern, e.g. 482613.
+3. Tap the round + button to save a password. Tap any saved entry and enter the PIN (or use Face ID if you turn it on in Settings) to see it.
+
+Features to look at:
+- Settings > Security > Wrong PIN alerts: after 7 wrong PINs in a row the keypad locks. If "Take a photo" is on (off by default, asks for camera permission), the front camera photographs whoever was guessing. Photos stay on the device; nothing is uploaded.
+- Settings > Backup: creates an encrypted file (Argon2id + AES-256-GCM, with its own password) through the system save dialog; Restore adds entries from such a file.
+- AutoFill: the app includes a Credential Provider extension. Turn it on in iOS Settings > General > AutoFill & Passwords > Bimir Lock. In any login field, choose Passwords > Bimir Lock; the list opens after Face ID or the device passcode. The extension fills only (iOS offers no API for third-party save prompts).
+
+Network: the only connection the app makes is a version check against the App Store. No analytics, ads, tracking or third-party SDKs.
+
+Encryption: passwords are encrypted with AES-256-GCM using a key stored in the iOS Keychain (this device only).

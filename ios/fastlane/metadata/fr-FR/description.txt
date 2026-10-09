@@ -1,0 +1,49 @@
+Bimir Lock est un gestionnaire de mots de passe hors ligne qui garde vos mots de passe chiffrés sur votre propre iPhone ou iPad. Aucun compte à créer, aucun cloud auquel se fier, aucune publicité. Enregistrez chaque identifiant une seule fois, ouvrez-le avec votre code PIN ou Face ID, et laissez le remplissage automatique faire le reste.
+
+VOS MOTS DE PASSE RESTENT SUR VOTRE APPAREIL
+• Les mots de passe et leurs notes sont chiffrés en AES-256-GCM avant d'être enregistrés
+• La clé est conservée dans l'iOS Keychain, sur cet appareil uniquement, et n'est jamais synchronisée
+• Ni inscription, ni e-mail, ni serveur : il n'existe aucun compte à pirater
+• Fonctionne entièrement hors ligne : en avion, à l'étranger ou sans données mobiles
+• Ni publicité, ni outil d'analyse, ni pistage
+
+PERSONNE D'AUTRE NE PEUT LES OUVRIR
+• Chaque mot de passe enregistré ne s'ouvre qu'avec votre code PIN à 6 chiffres, ou avec Face ID ou Touch ID si vous l'activez
+• Les codes trop simples comme 123456 ou 111111 sont refusés
+• Après sept mauvais codes d'affilée, le clavier se bloque : 30 secondes, puis 1, 5 et 15 minutes
+• Les alertes de code erroné listent chaque blocage et peuvent photographier la personne qui tentait de deviner (en option ; les photos restent sur votre appareil)
+• Un mot de passe affiché se masque de nouveau au bout de 30 secondes, et un mot de passe copié est effacé du presse-papiers au bout de 30 secondes
+
+DES MOTS DE PASSE ROBUSTES, CRÉÉS POUR VOUS
+• Générateur de mots de passe de 8 à 64 caractères, avec ou sans chiffres et symboles
+• Écarte les caractères qui se ressemblent, comme l, I, O et 0
+• Indicateur de robustesse pour chaque mot de passe
+• Vous prévient avant que vous ne réutilisiez un mot de passe déjà enregistré
+
+VÉRIFICATION DES MOTS DE PASSE
+• Repère les mots de passe faibles et ceux utilisés sur plusieurs sites
+• Indique quoi corriger en priorité, avec un bouton pour modifier chacun
+• L'analyse se fait sur votre appareil : rien n'est envoyé nulle part
+
+REMPLISSAGE AUTOMATIQUE
+• Bimir Lock sert de fournisseur de mots de passe pour le remplissage automatique dans Safari et d'autres apps
+• Activez-le dans les Réglages de l'iPhone, sous « Remplissage automatique et mots de passe »
+• Rien n'est rempli avant votre confirmation par Face ID, Touch ID ou code
+
+UNE SAUVEGARDE SOUS VOTRE CONTRÔLE
+• Sauvegardez tout dans un seul fichier chiffré, protégé par son propre mot de passe de sauvegarde (Argon2id + AES-256-GCM)
+• Gardez-le où vous voulez : dans Fichiers, sur iCloud Drive ou sur un ordinateur
+• Restauration sur un nouvel iPhone : elle ajoute ce qui manque et ne supprime jamais rien
+
+SIMPLE ET APAISANT
+• Une liste claire, avec recherche et icônes à initiales
+• Suggestions de noms de sites pendant la saisie
+• Le champ identifiant s'adapte : e-mail, numéro de téléphone, numéro client ou réseau Wi-Fi
+• Thèmes clair et sombre
+• Une courte citation sur la sécurité à chaque ouverture
+• Un espace notes pour les notes du quotidien (gardez vos secrets dans la note chiffrée d'un mot de passe)
+
+CE QUE BIMIR LOCK N'EST PAS
+Il n'y a ni synchronisation cloud ni compte : votre coffre-fort vit sur un seul appareil, alors gardez un fichier de sauvegarde en lieu sûr. Bimir Lock ne compare pas vos mots de passe aux listes de fuites de données et ne génère pas de codes 2FA. Pour l'instant, l'application est en anglais.
+
+Gratuit, sans publicité ni achats intégrés. Créé par un seul développeur à Pokhara, au Népal.

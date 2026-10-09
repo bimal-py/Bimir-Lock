@@ -1,0 +1,8 @@
+Bimir Lock 1.1, entièrement repensé.
+• Mots de passe chiffrés avec une clé gardée dans le stockage sécurisé du téléphone
+• Saisie automatique : remplit vos identifiants dans d'autres applis et enregistre les nouveaux
+• Vérification des mots de passe faibles ou réutilisés
+• Générateur de mots de passe et indicateur de robustesse
+• Fichier de sauvegarde chiffré avec son propre mot de passe
+• Code PIN à 6 chiffres, empreinte et alertes de code erroné
+• Nouveau design, thèmes clair et sombre

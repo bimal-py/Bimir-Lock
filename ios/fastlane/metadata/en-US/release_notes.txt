@@ -1,1 +1,8 @@
-
+Bimir Lock, now on iPhone and iPad.
+• Passwords encrypted with a key kept in the iOS Keychain, on this device only
+• AutoFill password provider for Safari and other apps
+• Password Checkup finds weak and reused passwords
+• Password generator and strength meter
+• Encrypted backup file with its own password
+• 6-digit PIN, Face ID and wrong-PIN alerts
+• Light and dark themes

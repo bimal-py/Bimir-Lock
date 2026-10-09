@@ -1,0 +1,8 @@
+Bimir Lock 1.1 se ha rehecho desde cero.
+• Tus contraseñas ahora se cifran con una clave en el almacenamiento seguro del móvil
+• Autocompletar: rellena tus accesos en otras apps y guarda los nuevos
+• La Revisión de contraseñas encuentra contraseñas débiles y repetidas
+• Generador de contraseñas y medidor de seguridad
+• Copia de seguridad cifrada con su propia contraseña
+• PIN de 6 dígitos, desbloqueo con huella y alertas de PIN incorrecto
+• Nuevo diseño con temas claro y oscuro

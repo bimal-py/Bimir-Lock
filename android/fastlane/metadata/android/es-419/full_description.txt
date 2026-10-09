@@ -1,0 +1,54 @@
+Bimir Lock es un gestor de contraseñas offline para Android: una bóveda de contraseñas que las guarda encriptadas en tu propio celular. Sin cuenta, sin nube, sin anuncios, sin suscripción. Guarda cada contraseña una vez, ábrela con tu PIN o tu huella y autocomplétala en la app que tengas abierta.
+
+UN GESTOR DE CONTRASEÑAS SIN CUENTA
+• Funciona offline: tu bóveda de contraseñas vive en este celular, no en el servidor de alguien más
+• Sin registro y sin correo, así que no hay ninguna cuenta que alguien pueda hackear
+• Cada contraseña, junto con su nota, se encripta con AES-256-GCM antes de guardarse
+• La clave se guarda en Android Keystore y nunca sale del dispositivo
+• Sin anuncios, sin estadísticas de uso, sin rastreo
+
+SOLO TÚ PUEDES ABRIR TUS CONTRASEÑAS
+• Cada contraseña guardada se abre solo con tu PIN de 6 dígitos, o con tu huella o tu rostro si los activas
+• Se rechazan los PIN fáciles como 123456 o 111111
+• Siete PIN incorrectos seguidos bloquean el teclado: 30 segundos, luego 1, 5 y 15 minutos
+• Las alertas de PIN incorrecto registran cada bloqueo y pueden tomarle una foto a quien intentaba adivinarlo (opcional; las fotos se quedan en tu celular)
+• Una contraseña visible se vuelve a ocultar a los 30 segundos, y una copiada se borra del portapapeles a los 30 segundos
+
+GENERADOR DE CONTRASEÑAS
+• Crea contraseñas seguras de 8 a 64 caracteres, con o sin números y símbolos
+• Deja fuera los caracteres que se confunden, como l, I, O y 0
+• Medidor de seguridad en cada contraseña
+• Te avisa antes de que repitas una contraseña que ya guardaste
+
+REVISIÓN DE CONTRASEÑAS
+• Encuentra contraseñas débiles y contraseñas que usas en más de un sitio
+• Te muestra qué arreglar primero, con un botón para cambiar cada una
+• Todo se revisa en tu celular; no se envía nada a ningún lado
+
+AUTOCOMPLETAR CONTRASEÑAS EN OTRAS APPS
+• Completa tus accesos guardados en otras apps y navegadores compatibles con el autocompletado de Android
+• Guarda un acceso nuevo cuando inicias sesión en algún sitio, sin abrir el gestor de contraseñas
+• No se completa nada hasta que confirmas con tu huella, tu rostro o el bloqueo de pantalla
+
+RESPALDO ENCRIPTADO
+• Respalda tus contraseñas en un solo archivo encriptado, protegido con su propia contraseña de respaldo (Argon2id + AES-256-GCM)
+• Guárdalo donde quieras: en el celular, en la computadora o en el drive que ya usas
+• Restaura en un celular nuevo: agrega lo que falta y nunca borra nada
+
+UNA LIBRETA DE CONTRASEÑAS SENCILLA
+• Una lista limpia con búsqueda e íconos con la inicial, como una libreta de contraseñas que no se pierde en un cajón
+• Sugerencias de sitios y apps conocidas mientras escribes
+• El campo de usuario se adapta: correo, número de teléfono, número de cliente o red Wi-Fi
+• Temas claro y oscuro
+• Una breve frase sobre seguridad cada vez que la abres
+• Un espacio para notas del día a día (los secretos, mejor en la nota encriptada de cada contraseña)
+
+¿PARA QUIÉN ES BIMIR LOCK?
+• Para quien quiere un gestor de contraseñas local, sin entregar sus contraseñas a un servicio en la nube
+• Para quien ya se cansó de la libreta, de la app de notas o de usar la misma contraseña en todos lados
+• Para familias y pequeños negocios que quieren guardar las claves del banco, el correo, el Wi-Fi y las billeteras digitales en un solo administrador de contraseñas offline
+
+LO QUE NO ES
+No hay sincronización en la nube ni cuenta, así que tu bóveda vive en un solo celular: guarda un archivo de respaldo en un lugar seguro. Bimir Lock no revisa tus contraseñas contra listas de filtraciones y no genera códigos 2FA. Por ahora, la app está en inglés.
+
+Gratis, sin anuncios, sin suscripción y sin compras dentro de la app: una app offline para guardar contraseñas, creada por un solo desarrollador en Pokhara, Nepal.

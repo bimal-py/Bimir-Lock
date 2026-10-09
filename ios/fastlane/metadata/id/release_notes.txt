@@ -1,0 +1,8 @@
+Bimir Lock kini hadir di iPhone dan iPad.
+• Kata sandi dienkripsi dengan kunci yang disimpan di iOS Keychain, hanya di perangkat ini
+• Penyedia kata sandi AutoFill untuk Safari dan aplikasi lain
+• Password Checkup menemukan kata sandi yang lemah dan dipakai berulang
+• Pembuat kata sandi dan pengukur kekuatan
+• File cadangan terenkripsi dengan kata sandinya sendiri
+• PIN 6 digit, Face ID, dan peringatan PIN salah
+• Tema terang dan gelap

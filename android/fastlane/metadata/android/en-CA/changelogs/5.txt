@@ -1,0 +1,8 @@
+Bimir Lock 1.1 is rebuilt from the ground up.
+• Passwords are now encrypted with a key kept in your phone's secure storage
+• Autofill: fill saved logins into other apps and save new ones
+• Password Checkup finds weak and reused passwords
+• Password generator and strength meter
+• Encrypted backup file with its own password
+• 6-digit PINs, fingerprint unlock and wrong-PIN alerts
+• A new design with light and dark themes

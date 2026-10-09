@@ -1,0 +1,1 @@
+palavras-passe,manager,senhas,guardar,gerador,seguras,backup,pin,biometria,digital,local,nuvem

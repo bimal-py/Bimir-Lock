@@ -1,0 +1,8 @@
+Bimir Lock 1.1 baştan yeniden yazıldı.
+• Şifreler artık telefonunuzun güvenli depolama alanında tutulan bir anahtarla şifreleniyor
+• Otomatik doldurma: kayıtlı girişleri diğer uygulamalara doldurun, yenilerini kaydedin
+• Şifre Kontrolü zayıf ve tekrar kullanılan şifreleri bulur
+• Şifre oluşturucu ve güç göstergesi
+• Kendi şifresi olan şifreli yedek dosyası
+• 6 haneli PIN, parmak iziyle açma ve yanlış PIN uyarıları
+• Açık ve koyu temalı yeni tasarım

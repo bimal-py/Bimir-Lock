@@ -1,0 +1,49 @@
+Bimir Lock ist ein Offline-Passwortmanager, der deine Passwörter verschlüsselt auf deinem eigenen iPhone oder iPad aufbewahrt. Kein Konto, das du anlegen musst, keine Cloud, der du vertrauen musst, keine Werbung. Speichere jeden Login einmal, öffne ihn mit deiner PIN oder Face ID und lass ihn automatisch ausfüllen.
+
+DEINE PASSWÖRTER BLEIBEN AUF DEINEM GERÄT
+• Passwörter und ihre Notizen werden vor dem Speichern mit AES-256-GCM verschlüsselt
+• Der Schlüssel liegt im iOS Keychain, nur auf diesem Gerät, und wird nie synchronisiert
+• Keine Registrierung, keine E-Mail, kein Server: Es gibt kein Konto, in das jemand einbrechen könnte
+• Funktioniert komplett offline – im Flugzeug, im Ausland oder ohne mobile Daten
+• Keine Werbung, keine Analyse-Tools, kein Tracking
+
+NUR DU KANNST SIE ÖFFNEN
+• Jedes gespeicherte Passwort öffnet sich nur mit deiner 6-stelligen PIN – oder mit Face ID oder Touch ID, wenn du das einschaltest
+• Zu einfache PINs wie 123456 oder 111111 werden abgelehnt
+• Sieben falsche PINs hintereinander sperren das Tastenfeld: 30 Sekunden, dann 1, 5 und 15 Minuten
+• Warnungen bei falscher PIN listen jede Sperre auf und können ein Foto von der Person machen, die geraten hat (optional; die Fotos bleiben auf deinem Gerät)
+• Ein angezeigtes Passwort wird nach 30 Sekunden wieder verborgen, ein kopiertes nach 30 Sekunden aus der Zwischenablage gelöscht
+
+STARKE PASSWÖRTER, FÜR DICH ERSTELLT
+• Passwort-Generator für 8 bis 64 Zeichen, mit oder ohne Zahlen und Sonderzeichen
+• Lässt leicht verwechselbare Zeichen wie l, I, O und 0 weg
+• Stärkeanzeige für jedes Passwort
+• Warnt dich, bevor du ein Passwort wiederverwendest, das du schon gespeichert hast
+
+PASSWORT-CHECK
+• Findet schwache Passwörter und Passwörter, die du auf mehreren Seiten nutzt
+• Zeigt, was du zuerst ändern solltest, mit einer Schaltfläche zum Ändern bei jedem Eintrag
+• Geprüft wird auf deinem Gerät; nichts wird irgendwohin gesendet
+
+AUTOMATISCH AUSFÜLLEN
+• Bimir Lock arbeitet als Passwort-Anbieter für das automatische Ausfüllen in Safari und anderen Apps
+• Einschalten in den iPhone-Einstellungen unter „Automatisch ausfüllen & Passwörter“
+• Ausgefüllt wird erst, wenn du mit Face ID, Touch ID oder deinem Code bestätigst
+
+BACKUP UNTER DEINER KONTROLLE
+• Sichere alles in einer einzigen verschlüsselten Datei mit eigenem Backup-Passwort (Argon2id + AES-256-GCM)
+• Bewahre sie auf, wo du willst: in der Dateien-App, in iCloud Drive oder auf einem Computer
+• Wiederherstellen auf einem neuen iPhone: Fehlendes wird ergänzt, gelöscht wird nie etwas
+
+RUHIG UND EINFACH
+• Eine übersichtliche Liste mit Suche und Buchstaben-Symbolen
+• Vorschläge für Seitennamen schon beim Tippen
+• Das Feld für den Benutzernamen passt sich an: E-Mail, Telefonnummer, Kundennummer oder WLAN-Name
+• Helles und dunkles Design
+• Bei jedem Öffnen ein kurzes Zitat zum Thema Sicherheit
+• Ein Notizbereich für alltägliche Notizen (Geheimes gehört in die verschlüsselte Notiz eines Passworts)
+
+WAS BIMIR LOCK NICHT IST
+Es gibt keine Cloud-Synchronisierung und kein Konto. Dein Tresor liegt also auf einem einzigen Gerät: Bewahre eine Backup-Datei an einem sicheren Ort auf. Bimir Lock gleicht Passwörter nicht mit Listen von Datenlecks ab und erzeugt keine 2FA-Codes. Die App selbst ist derzeit auf Englisch.
+
+Kostenlos, ohne Werbung und ohne In-App-Käufe. Entwickelt von einer einzelnen Person in Pokhara, Nepal.

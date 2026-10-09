@@ -1,0 +1,49 @@
+Bimir Lock, şifrelerinizi kendi iPhone ya da iPad'inizde şifreli olarak tutan çevrimdışı bir şifre yöneticisi. Açılacak hesap yok, güvenilecek bulut yok, reklam yok. Her girişi bir kez kaydedin, PIN kodunuz ya da Face ID ile açın, Otomatik Doldurma ile doldurun.
+
+ŞİFRELERİNİZ CİHAZINIZDA KALIR
+• Şifreler ve onlara eklediğiniz notlar, kaydedilmeden önce AES-256-GCM ile şifrelenir
+• Anahtar iOS Keychain'de, yalnızca bu cihazda tutulur ve hiçbir yerle eşitlenmez
+• Kayıt yok, e-posta yok, sunucu yok: kimsenin ele geçirebileceği bir hesap yok
+• Tamamen çevrimdışı çalışır: uçakta, yurt dışında ya da mobil veri kapalıyken
+• Reklam yok, analiz yok, takip yok
+
+ONLARI YALNIZCA SİZ AÇARSINIZ
+• Kayıtlı her şifre yalnızca 6 haneli PIN kodunuzla açılır; isterseniz Face ID ya da Touch ID'yi de etkinleştirebilirsiniz
+• 123456 veya 111111 gibi kolay PIN'ler kabul edilmez
+• Üst üste yedi yanlış PIN tuş takımını kilitler: önce 30 saniye, sonra 1, 5 ve 15 dakika
+• Yanlış PIN uyarıları her kilitlenmeyi listeler ve tahmin etmeye çalışan kişinin fotoğrafını çekebilir (isteğe bağlı; fotoğraflar cihazınızda kalır)
+• Gösterilen bir şifre 30 saniye sonra yeniden gizlenir, kopyalanan şifre de 30 saniye sonra panodan silinir
+
+SİZİN İÇİN GÜÇLÜ ŞİFRELER
+• 8 ile 64 karakter arası şifre oluşturucu; rakamlar ve simgeler açık ya da kapalı
+• l, I, O ve 0 gibi birbirine benzeyen karakterleri kullanmaz
+• Her şifrede bir güç göstergesi
+• Daha önce kaydettiğiniz bir şifreyi yeniden kullanmak üzereyken sizi uyarır
+
+ŞİFRE KONTROLÜ
+• Zayıf şifreleri ve birden fazla sitede kullanılan şifreleri bulur
+• Önce neyi düzeltmeniz gerektiğini gösterir; her birinin yanında bir değiştirme düğmesi vardır
+• Kontrol cihazınızda yapılır; hiçbir yere bir şey gönderilmez
+
+OTOMATİK DOLDURMA
+• Bimir Lock, Safari'de ve diğer uygulamalarda Otomatik Doldurma için şifre sağlayıcısı olarak çalışır
+• iPhone'unuzun Ayarlar uygulamasında, Otomatik Doldurma ve Parolalar bölümünden açın
+• Face ID, Touch ID ya da cihaz parolanızla onaylamadan hiçbir şey doldurulmaz
+
+DENETİMİ SİZDE OLAN YEDEK
+• Kendi yedek şifresiyle kilitlenen tek bir şifreli dosyaya yedekleyin (Argon2id + AES-256-GCM)
+• Dosyayı dilediğiniz yerde saklayın: Dosyalar'da, iCloud Drive'da ya da bir bilgisayarda
+• Yeni bir iPhone'a geri yükleyin: eksik olanları ekler, hiçbir şeyi silmez
+
+SAKİN VE KOLAY KULLANIM
+• Arama ve harf simgeleriyle düzenli bir liste
+• Siz yazarken site adı önerileri
+• Kullanıcı adı alanı ihtiyaca göre değişir: e-posta, telefon numarası, müşteri numarası ya da Wi-Fi ağı
+• Açık ve koyu tema
+• Her açılışta kısa bir güvenlik sözü
+• Gündelik notlar için bir not alanı (gizli bilgileri bir şifrenin şifreli notunda saklayın)
+
+NE DEĞİLDİR?
+Bulut eşitleme de hesap da yok; bu yüzden kasanız tek bir cihazda yaşar: yedek dosyanızı güvenli bir yerde tutun. Bimir Lock şifreleri sızıntı listelerine karşı denetlemez ve 2FA kodu üretmez. Uygulamanın arayüzü şimdilik İngilizcedir.
+
+Ücretsiz; reklam ve uygulama içi satın alma yok. Pokhara, Nepal'de tek bir geliştirici tarafından yapıldı.

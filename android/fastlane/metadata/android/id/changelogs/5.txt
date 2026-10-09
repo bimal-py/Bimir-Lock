@@ -1,0 +1,8 @@
+Bimir Lock 1.1 dibangun ulang dari nol.
+• Kata sandi kini dienkripsi dengan kunci yang disimpan di penyimpanan aman ponsel Anda
+• Autofill: isi login tersimpan ke aplikasi lain dan simpan login baru
+• Password Checkup menemukan kata sandi yang lemah dan dipakai berulang
+• Pembuat kata sandi dan pengukur kekuatan
+• File cadangan terenkripsi dengan kata sandinya sendiri
+• PIN 6 digit, buka dengan sidik jari, dan peringatan PIN salah
+• Desain baru dengan tema terang dan gelap

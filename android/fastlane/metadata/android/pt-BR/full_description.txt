@@ -1,0 +1,54 @@
+O Bimir Lock é um gerenciador de senhas offline para Android: um cofre de senhas que guarda tudo criptografado no seu próprio celular. Sem conta, sem nuvem, sem anúncios, sem assinatura. Salve cada senha uma vez, abra com seu PIN ou sua digital e preencha automaticamente no app que estiver usando.
+
+UM GERENCIADOR DE SENHAS SEM CONTA
+• Funciona offline: seu cofre de senhas fica neste celular, não no servidor de alguém
+• Sem cadastro e sem e-mail: não existe conta nenhuma para alguém invadir
+• Cada senha, junto com a nota dela, é criptografada com AES-256-GCM antes de ser salva
+• A chave fica no Android Keystore e nunca sai do aparelho
+• Sem anúncios, sem estatísticas de uso, sem rastreamento
+
+SÓ VOCÊ ABRE SUAS SENHAS
+• Cada senha salva só abre com seu PIN de 6 dígitos, ou com sua digital ou seu rosto, se você ativar
+• PINs fáceis como 123456 ou 111111 são recusados
+• Sete PINs errados seguidos bloqueiam o teclado: 30 segundos, depois 1, 5 e 15 minutos
+• Os alertas de PIN errado listam cada bloqueio e podem tirar uma foto de quem estava tentando adivinhar (opcional; as fotos ficam no seu celular)
+• Uma senha revelada volta a ficar oculta após 30 segundos, e uma senha copiada é apagada da área de transferência após 30 segundos
+
+GERADOR DE SENHAS
+• Crie senhas fortes de 8 a 64 caracteres, com ou sem números e símbolos
+• Deixa de fora caracteres parecidos, como l, I, O e 0
+• Medidor de força em cada senha
+• Avisa antes de você repetir uma senha que já salvou
+
+VERIFICAÇÃO DE SENHAS
+• Encontra senhas fracas e senhas usadas em mais de um site
+• Mostra o que corrigir primeiro, com um botão para trocar cada uma
+• Tudo é verificado no seu celular; nada é enviado para lugar nenhum
+
+PREENCHIMENTO AUTOMÁTICO EM OUTROS APPS
+• Preencha logins salvos em outros apps e navegadores compatíveis com o preenchimento automático do Android
+• Salve um login novo quando entrar em algum lugar, sem abrir o gerenciador de senhas
+• Nada é preenchido até você confirmar com a digital, o rosto ou o bloqueio de tela
+
+BACKUP CRIPTOGRAFADO
+• Faça backup das suas senhas em um único arquivo criptografado, protegido por uma senha de backup própria (Argon2id + AES-256-GCM)
+• Guarde onde quiser: no celular, no computador ou no drive que você já usa
+• Restaure em um celular novo: ele adiciona o que falta e nunca apaga nada
+
+UM CADERNO DE SENHAS SIMPLES
+• Uma lista limpa, com busca e ícones com a inicial de cada site, como um caderninho de senhas que não se perde na gaveta
+• Sugestões de sites e apps conhecidos enquanto você digita
+• O campo de usuário se adapta: e-mail, telefone, número de cliente ou rede Wi-Fi
+• Temas claro e escuro
+• Uma frase curta sobre segurança sempre que você abre o app
+• Um espaço para anotações do dia a dia (segredos ficam melhor na nota criptografada de cada senha)
+
+PARA QUEM É O BIMIR LOCK
+• Para quem quer um gerenciador de senhas local, sem entregar suas senhas a um serviço na nuvem
+• Para quem cansou do caderninho, do app de notas ou da mesma senha em todo lugar
+• Para famílias e pequenos comércios que querem guardar as senhas do banco, do e-mail, do Wi-Fi e das carteiras digitais num só cofre offline
+
+O QUE ELE NÃO É
+Não há sincronização na nuvem nem conta, então seu cofre fica em um único celular: guarde um arquivo de backup em um lugar seguro. O Bimir Lock não verifica senhas em listas de vazamentos e não gera códigos de 2FA. Por enquanto, o app está em inglês.
+
+Gratuito, sem anúncios, sem assinatura e sem compras no app: um app para guardar senhas offline, feito por um único desenvolvedor em Pokhara, no Nepal.

@@ -1,0 +1,49 @@
+O Bimir Lock é um gestor de palavras-passe offline que guarda as suas palavras-passe encriptadas no seu próprio iPhone ou iPad. Sem conta para criar, sem nuvem em que confiar, sem publicidade. Guarde cada credencial uma vez, abra-a com o PIN ou com Face ID e preencha-a com o preenchimento automático.
+
+AS SUAS PALAVRAS-PASSE FICAM NO SEU DISPOSITIVO
+• Cada palavra-passe, juntamente com a respetiva nota, é encriptada com AES-256-GCM antes de ser guardada
+• A chave fica no iOS Keychain, só neste dispositivo, e nunca é sincronizada
+• Sem registo, sem e-mail, sem servidor: não há nenhuma conta que alguém possa invadir
+• Funciona totalmente offline: num avião, no estrangeiro ou com os dados móveis desligados
+• Sem publicidade, sem estatísticas de utilização, sem rastreio
+
+SÓ ABREM PARA SI
+• Cada palavra-passe guardada só abre com o seu PIN de 6 dígitos, ou com Face ID ou Touch ID, se os ativar
+• PINs fáceis como 123456 ou 111111 são recusados
+• Sete PINs errados seguidos bloqueiam o teclado: 30 segundos, depois 1, 5 e 15 minutos
+• Os alertas de PIN errado registam cada bloqueio e podem fotografar quem estava a tentar adivinhar (opcional; as fotos ficam no seu dispositivo)
+• Uma palavra-passe revelada volta a ficar oculta ao fim de 30 segundos, e uma copiada é apagada da área de transferência ao fim de 30 segundos
+
+PALAVRAS-PASSE FORTES, CRIADAS PARA SI
+• Gerador de palavras-passe de 8 a 64 caracteres, com ou sem números e símbolos
+• Deixa de fora caracteres parecidos, como l, I, O e 0
+• Medidor de força em cada palavra-passe
+• Avisa-o antes de reutilizar uma palavra-passe que já guardou
+
+VERIFICAÇÃO DE PALAVRAS-PASSE
+• Encontra palavras-passe fracas e palavras-passe usadas em mais de um site
+• Mostra o que deve corrigir primeiro, com um botão para alterar cada uma
+• Tudo é verificado no seu dispositivo; nada é enviado para lado nenhum
+
+PREENCHIMENTO AUTOMÁTICO
+• O Bimir Lock funciona como fornecedor de palavras-passe para o preenchimento automático no Safari e noutras apps
+• Ative-o nas Definições do iPhone, em Preenchimento automático e palavras-passe
+• Nada é preenchido até confirmar com Face ID, Touch ID ou o código do iPhone
+
+CÓPIA DE SEGURANÇA SOB O SEU CONTROLO
+• Faça uma cópia de segurança num único ficheiro encriptado, protegido por uma palavra-passe própria (Argon2id + AES-256-GCM)
+• Guarde-o onde quiser: na app Ficheiros, no iCloud Drive ou num computador
+• Restaure num iPhone novo: acrescenta o que falta e nunca apaga nada
+
+SIMPLES E TRANQUILO
+• Uma lista limpa, com pesquisa e ícones com a inicial
+• Sugestões de nomes de sites à medida que escreve
+• O campo de utilizador adapta-se: e-mail, número de telefone, número de cliente ou rede Wi-Fi
+• Temas claro e escuro
+• Uma pequena citação sobre segurança sempre que abre a app
+• Um espaço para notas do dia a dia (os segredos ficam melhor na nota encriptada de cada palavra-passe)
+
+O QUE NÃO É
+Não há sincronização na nuvem nem conta, por isso o seu cofre vive num único dispositivo: guarde um ficheiro de cópia de segurança num lugar seguro. O Bimir Lock não verifica palavras-passe em listas de fugas de dados e não gera códigos 2FA. Por agora, a aplicação está em inglês.
+
+Gratuito, sem publicidade e sem compras na app. Feito por um único programador em Pokhara, no Nepal.

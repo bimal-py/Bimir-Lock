@@ -1,0 +1,49 @@
+Bimir Lock è un gestore password offline che conserva le tue password cifrate sul tuo iPhone o iPad. Nessun account da creare, nessun cloud di cui fidarsi, nessuna pubblicità. Salva ogni accesso una volta, aprilo con il PIN o con Face ID e inseriscilo con l'inserimento automatico.
+
+LE TUE PASSWORD RESTANO SUL TUO DISPOSITIVO
+• Ogni password, insieme alla sua nota, viene cifrata con AES-256-GCM prima di essere salvata
+• La chiave è custodita in iOS Keychain, solo su questo dispositivo, e non viene mai sincronizzata
+• Nessuna registrazione, nessuna email, nessun server: non c'è alcun account che qualcuno possa violare
+• Funziona completamente offline: in aereo, all'estero o con i dati mobili disattivati
+• Niente pubblicità, niente statistiche d'uso, niente tracciamento
+
+SOLO TU PUOI APRIRLE
+• Ogni password salvata si apre solo con il tuo PIN a 6 cifre, oppure con Face ID o Touch ID se li attivi
+• I PIN troppo facili, come 123456 o 111111, vengono rifiutati
+• Sette PIN sbagliati di fila bloccano il tastierino: 30 secondi, poi 1, 5 e 15 minuti
+• Gli avvisi di PIN errato elencano ogni blocco e possono scattare una foto a chi stava tentando di indovinare (facoltativo; le foto restano sul tuo dispositivo)
+• Una password mostrata si nasconde di nuovo dopo 30 secondi, e una copiata viene cancellata dagli appunti dopo 30 secondi
+
+PASSWORD ROBUSTE, CREATE PER TE
+• Generatore di password da 8 a 64 caratteri, con o senza numeri e simboli
+• Esclude i caratteri che si confondono, come l, I, O e 0
+• Indicatore di sicurezza su ogni password
+• Ti avvisa prima che tu riutilizzi una password già salvata
+
+CONTROLLO PASSWORD
+• Trova le password deboli e quelle usate su più di un sito
+• Ti mostra cosa sistemare per primo, con un pulsante per cambiare ciascuna
+• Il controllo avviene sul dispositivo; non viene inviato nulla da nessuna parte
+
+INSERIMENTO AUTOMATICO
+• Bimir Lock funziona come fornitore di password per l'inserimento automatico in Safari e nelle altre app
+• Attivalo nelle Impostazioni dell'iPhone, in Inserimento automatico e password
+• Non viene inserito nulla finché non confermi con Face ID, Touch ID o il codice
+
+UN BACKUP CHE CONTROLLI TU
+• Salva il backup in un unico file cifrato, protetto da una password di backup dedicata (Argon2id + AES-256-GCM)
+• Conservalo dove vuoi: in File, su iCloud Drive o su un computer
+• Ripristina su un nuovo iPhone: aggiunge ciò che manca e non cancella mai nulla
+
+SEMPLICE E RILASSANTE
+• Un elenco pulito con ricerca e icone con l'iniziale
+• Suggerimenti dei nomi dei siti mentre scrivi
+• Il campo utente si adatta: email, numero di telefono, codice cliente o rete Wi-Fi
+• Tema chiaro e scuro
+• Una breve citazione sulla sicurezza ogni volta che la apri
+• Uno spazio per le note di tutti i giorni (i segreti mettili nella nota cifrata di ogni password)
+
+COSA NON È
+Non c'è sincronizzazione cloud e non c'è un account, quindi la tua cassaforte vive su un solo dispositivo: tieni un file di backup in un posto sicuro. Bimir Lock non controlla le password nelle liste di violazioni di dati e non genera codici 2FA. Per ora l'app è in inglese.
+
+Gratis, senza pubblicità e senza acquisti in-app. Creata da un unico sviluppatore a Pokhara, in Nepal.

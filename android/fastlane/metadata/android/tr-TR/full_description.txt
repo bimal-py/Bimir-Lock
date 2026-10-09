@@ -1,0 +1,54 @@
+Bimir Lock, Android için çevrimdışı bir şifre yöneticisi: şifrelerinizi kendi telefonunuzda şifreli olarak tutan bir şifre saklama uygulaması ve şifre kasası. Hesap yok, bulut yok, reklam yok, abonelik yok. Şifrenizi bir kez kaydedin, PIN kodunuz ya da parmak izinizle açın, karşınızdaki uygulamaya otomatik doldurun.
+
+HESAP İSTEMEYEN BİR ŞİFRE YÖNETİCİSİ
+• İnternetsiz çalışır: şifre kasanız birilerinin sunucusunda değil, bu telefonda durur
+• Kayıt yok, e-posta yok; yani kimsenin ele geçirebileceği bir hesap da yok
+• Şifreler ve onlara eklediğiniz notlar, kaydedilmeden önce AES-256-GCM ile şifrelenir
+• Anahtar Android Keystore'da tutulur ve cihazdan asla çıkmaz
+• Reklam yok, analiz yok, takip yok
+
+ŞİFRELERİNİZİ YALNIZCA SİZ AÇARSINIZ
+• Kayıtlı her şifre yalnızca 6 haneli PIN kodunuzla açılır; isterseniz parmak izi ya da yüz tanımayı da etkinleştirebilirsiniz
+• 123456 veya 111111 gibi kolay PIN'ler kabul edilmez
+• Üst üste yedi yanlış PIN tuş takımını kilitler: önce 30 saniye, sonra 1, 5 ve 15 dakika
+• Yanlış PIN uyarıları her kilitlenmeyi listeler ve tahmin etmeye çalışan kişinin fotoğrafını çekebilir (isteğe bağlı; fotoğraflar telefonunuzda kalır)
+• Gösterilen bir şifre 30 saniye sonra yeniden gizlenir, kopyalanan şifre de 30 saniye sonra panodan silinir
+
+ŞİFRE OLUŞTURUCU
+• 8 ile 64 karakter arasında güçlü şifreler oluşturun; rakamları ve simgeleri açıp kapatın
+• l, I, O ve 0 gibi birbirine benzeyen karakterleri kullanmaz
+• Her şifrede bir güç göstergesi
+• Daha önce kaydettiğiniz bir şifreyi yeniden kullanmak üzereyken sizi uyarır
+
+ŞİFRE KONTROLÜ
+• Zayıf şifreleri ve birden fazla sitede kullanılan şifreleri bulur
+• Önce neyi düzeltmeniz gerektiğini gösterir; her birinin yanında bir değiştirme düğmesi vardır
+• Kontrol telefonunuzda yapılır; hiçbir yere bir şey gönderilmez
+
+DİĞER UYGULAMALARDA ŞİFRELERİ OTOMATİK DOLDURUN
+• Kayıtlı giriş bilgilerinizi, Android otomatik doldurmayı destekleyen uygulama ve tarayıcılara doldurun
+• Bir yerde oturum açtığınızda yeni giriş bilgisini şifre yöneticisini açmadan kaydedin
+• Parmak iziniz, yüzünüz ya da ekran kilidinizle onaylamadan hiçbir şey doldurulmaz
+
+ŞİFRELİ YEDEK DOSYASI
+• Şifrelerinizi, kendi yedek şifresiyle kilitlenen tek bir şifreli dosyaya yedekleyin (Argon2id + AES-256-GCM)
+• Dosyayı dilediğiniz yerde saklayın: telefonda, bilgisayarda ya da zaten kullandığınız depolama alanında
+• Yeni bir telefona geri yükleyin: eksik olanları ekler, hiçbir şeyi silmez
+
+SADE BİR ŞİFRE DEFTERİ
+• Arama ve harf simgeleriyle düzenli bir liste; çekmecede kaybolmayan bir şifre defteri gibi
+• Siz yazarken site adı önerileri: popüler siteler ve daha önce kaydettiğiniz adlar
+• Kullanıcı adı alanı ihtiyaca göre değişir: e-posta, telefon numarası, müşteri numarası ya da Wi-Fi ağı
+• Açık ve koyu tema
+• Her açılışta kısa bir güvenlik sözü
+• Gündelik notlar için bir not alanı (gizli bilgileri bir şifrenin şifreli notunda saklayın)
+
+BU ŞİFRE SAKLAMA UYGULAMASI KİMİN İÇİN?
+• Şifrelerini bir bulut hizmetine teslim etmeden yerel bir şifre yöneticisi kullanmak isteyen herkes
+• Defterden, not uygulamasından ya da her yerde aynı şifreyi kullanmaktan bıkmış herkes
+• Banka, e-posta, Wi-Fi ve cüzdan girişlerini tek bir çevrimdışı şifre kasasında toplayan aileler ve küçük işletmeler
+
+NE DEĞİLDİR?
+Bulut eşitleme de hesap da yok; bu yüzden kasanız tek bir telefonda yaşar: yedek dosyanızı güvenli bir yerde tutun. Bimir Lock şifreleri sızıntı listelerine karşı denetlemez ve 2FA kodu üretmez. Uygulamanın arayüzü şimdilik İngilizcedir.
+
+Ücretsiz; reklam, abonelik ya da uygulama içi satın alma yok. Pokhara, Nepal'de tek bir geliştiricinin yaptığı çevrimdışı bir şifre kasası.

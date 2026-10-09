@@ -1,0 +1,54 @@
+Bimir Lock ist ein Offline-Passwortmanager für Android: ein Passwort-Tresor, der deine Passwörter verschlüsselt auf deinem eigenen Handy aufbewahrt. Ohne Konto, ohne Cloud, ohne Werbung, ohne Abo. Passwörter speichern, mit PIN oder Fingerabdruck öffnen und per Autofill direkt in die App eintragen, die du gerade nutzt – mehr braucht es nicht.
+
+EIN PASSWORTMANAGER OHNE KONTO
+• Funktioniert offline: Dein Passwort-Tresor liegt auf diesem Handy, nicht auf einem fremden Server
+• Keine Anmeldung, keine E-Mail-Adresse – also auch kein Konto, in das jemand einbrechen könnte
+• Passwörter und ihre Notizen werden vor dem Speichern mit AES-256-GCM verschlüsselt
+• Der Schlüssel liegt im Android Keystore und verlässt das Gerät nie
+• Keine Werbung, keine Analyse-Tools, kein Tracking
+
+NUR DU ÖFFNEST DEINE PASSWÖRTER
+• Jedes gespeicherte Passwort öffnet sich nur mit deiner 6-stelligen PIN – oder mit Fingerabdruck oder Gesicht, wenn du das einschaltest
+• Zu einfache PINs wie 123456 oder 111111 werden abgelehnt
+• Sieben falsche PINs hintereinander sperren das Tastenfeld: 30 Sekunden, dann 1, 5 und 15 Minuten
+• Warnungen bei falscher PIN listen jede Sperre auf und können ein Foto von der Person machen, die geraten hat (optional; die Fotos bleiben auf deinem Handy)
+• Ein angezeigtes Passwort wird nach 30 Sekunden wieder verborgen, ein kopiertes nach 30 Sekunden aus der Zwischenablage gelöscht
+
+PASSWORT-GENERATOR
+• Erstelle starke Passwörter mit 8 bis 64 Zeichen, mit oder ohne Zahlen und Sonderzeichen
+• Lässt leicht verwechselbare Zeichen wie l, I, O und 0 weg
+• Stärkeanzeige für jedes Passwort
+• Warnt dich, bevor du ein Passwort wiederverwendest, das du schon gespeichert hast
+
+PASSWORT-CHECK
+• Findet schwache Passwörter und Passwörter, die du auf mehreren Seiten nutzt
+• Zeigt, was du zuerst ändern solltest, mit einer Schaltfläche zum Ändern bei jedem Eintrag
+• Geprüft wird auf deinem Handy; nichts wird irgendwohin gesendet
+
+PASSWÖRTER IN ANDEREN APPS AUTOMATISCH AUSFÜLLEN
+• Trage gespeicherte Zugangsdaten in andere Apps und Browser ein, die Android-Autofill unterstützen
+• Speichere neue Logins direkt beim Anmelden, ohne den Passwortmanager zu öffnen
+• Ausgefüllt wird erst, wenn du mit Fingerabdruck, Gesicht oder Displaysperre bestätigst
+
+VERSCHLÜSSELTE BACKUP-DATEI
+• Sichere deine Passwörter in einer einzigen verschlüsselten Datei mit eigenem Backup-Passwort (Argon2id + AES-256-GCM)
+• Bewahre sie auf, wo du willst: auf dem Handy, auf dem Computer oder in dem Speicher, den du ohnehin nutzt
+• Wiederherstellen auf einem neuen Handy: Fehlendes wird ergänzt, gelöscht wird nie etwas
+
+EIN EINFACHES PASSWORTBUCH
+• Eine übersichtliche Liste mit Suche und Buchstaben-Symbolen – wie ein Passwortbuch, das nicht in einer Schublade verloren gehen kann
+• Vorschläge für Seitennamen schon beim Tippen
+• Das Feld für den Benutzernamen passt sich an: E-Mail, Telefonnummer, Kundennummer oder WLAN-Name
+• Helles und dunkles Design
+• Bei jedem Öffnen ein kurzes Zitat zum Thema Sicherheit
+• Ein Notizbereich für alltägliche Notizen (Geheimes gehört in die verschlüsselte Notiz eines Passworts)
+
+FÜR WEN DIESER PASSWORT-SAFE GEDACHT IST
+• Für alle, die einen lokalen Passwortmanager wollen, statt ihre Passwörter einem Cloud-Dienst anzuvertrauen
+• Für alle, die genug haben vom Notizbuch, von der Notizen-App oder von überall demselben Passwort
+• Für Familien und kleine Läden, die Zugangsdaten für Bank, E-Mail, WLAN und Bezahl-Apps an einem Ort offline aufbewahren
+
+WAS BIMIR LOCK NICHT IST
+Es gibt keine Cloud-Synchronisierung und kein Konto. Dein Tresor liegt also auf einem einzigen Handy: Bewahre eine Backup-Datei an einem sicheren Ort auf. Bimir Lock gleicht Passwörter nicht mit Listen von Datenlecks ab und erzeugt keine 2FA-Codes. Die App selbst ist derzeit auf Englisch.
+
+Kostenlos, ohne Werbung, ohne Abo und ohne In-App-Käufe: ein Offline-Passwort-Safe, entwickelt von einer einzelnen Person in Pokhara, Nepal.

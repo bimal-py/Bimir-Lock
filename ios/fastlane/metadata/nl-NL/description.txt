@@ -1,0 +1,49 @@
+Bimir Lock is een offline wachtwoordmanager die je wachtwoorden versleuteld op je eigen iPhone of iPad bewaart. Geen account om aan te maken, geen cloud om op te vertrouwen, geen advertenties. Sla elke login één keer op, open hem met je pincode of Face ID en laat hem automatisch invullen.
+
+JE WACHTWOORDEN BLIJVEN OP JE APPARAAT
+• Wachtwoorden en hun notities worden met AES-256-GCM versleuteld voordat ze worden opgeslagen
+• De sleutel staat in de iOS Keychain, alleen op dit apparaat, en wordt nooit gesynchroniseerd
+• Geen registratie, geen e-mail, geen server: er is geen account waar iemand kan inbreken
+• Werkt volledig offline: in het vliegtuig, in het buitenland of met mobiele data uit
+• Geen advertenties, geen analytics, geen tracking
+
+ALLEEN JIJ KUNT ZE OPENEN
+• Elk opgeslagen wachtwoord gaat alleen open met je 6-cijferige pincode, of met Face ID of Touch ID als je dat aanzet
+• Makkelijke pincodes zoals 123456 of 111111 worden geweigerd
+• Na zeven verkeerde pincodes op rij gaat het toetsenblok op slot: 30 seconden, daarna 1, 5 en 15 minuten
+• Meldingen bij een verkeerde pincode tonen elke blokkering en kunnen een foto maken van wie er probeerde te raden (optioneel; de foto's blijven op je apparaat)
+• Een getoond wachtwoord wordt na 30 seconden weer verborgen, en een gekopieerd wachtwoord wordt na 30 seconden van het klembord gewist
+
+STERKE WACHTWOORDEN, VOOR JE GEMAAKT
+• Wachtwoordgenerator van 8 tot 64 tekens, met of zonder cijfers en symbolen
+• Laat tekens weg die op elkaar lijken, zoals l, I, O en 0
+• Sterktemeter bij elk wachtwoord
+• Waarschuwt je voordat je een wachtwoord hergebruikt dat je al hebt opgeslagen
+
+WACHTWOORDCONTROLE
+• Vindt zwakke wachtwoorden en wachtwoorden die je op meer dan één site gebruikt
+• Laat zien wat je eerst moet aanpakken, met bij elk wachtwoord een knop om het te wijzigen
+• De controle gebeurt op je apparaat; er wordt niets verstuurd
+
+AUTOMATISCH INVULLEN
+• Bimir Lock werkt als wachtwoordaanbieder voor Automatisch invullen in Safari en andere apps
+• Zet het aan in de Instellingen van je iPhone, onder 'Automatisch invullen en wachtwoorden'
+• Er wordt niets ingevuld voordat je bevestigt met Face ID, Touch ID of je toegangscode
+
+BACK-UP IN EIGEN HAND
+• Zet alles in één versleuteld bestand, beveiligd met een eigen back-upwachtwoord (Argon2id + AES-256-GCM)
+• Bewaar het waar je wilt: in Bestanden, in iCloud Drive of op een computer
+• Terugzetten op een nieuwe iPhone: wat ontbreekt wordt toegevoegd, er wordt nooit iets verwijderd
+
+RUSTIG EN MAKKELIJK
+• Een overzichtelijke lijst met zoekfunctie en lettericoontjes
+• Suggesties voor sitenamen terwijl je typt
+• Het veld voor je gebruikersnaam past zich aan: e-mail, telefoonnummer, klantnummer of wifinetwerk
+• Licht en donker thema
+• Bij elke start een kort citaat over beveiliging
+• Een notitieruimte voor alledaagse notities (bewaar geheimen in de versleutelde notitie bij een wachtwoord)
+
+WAT HET NIET IS
+Er is geen cloudsynchronisatie en geen account, dus je kluis staat op één apparaat: bewaar een back-upbestand op een veilige plek. Bimir Lock controleert wachtwoorden niet op datalekken en maakt geen 2FA-codes. De app zelf is voorlopig in het Engels.
+
+Gratis, zonder advertenties en zonder in-app-aankopen. Gemaakt door één ontwikkelaar in Pokhara, Nepal.

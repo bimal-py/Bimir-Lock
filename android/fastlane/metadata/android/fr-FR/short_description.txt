@@ -1,0 +1,1 @@
+Gestionnaire et coffre-fort de mots de passe hors ligne, sans compte ni cloud.

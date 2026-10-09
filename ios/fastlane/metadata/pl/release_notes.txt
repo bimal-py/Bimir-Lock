@@ -1,0 +1,8 @@
+Bimir Lock jest już na iPhonie i iPadzie.
+• Hasła szyfrowane kluczem przechowywanym w iOS Keychain, tylko na tym urządzeniu
+• Dostawca haseł dla Autouzupełniania w Safari i innych aplikacjach
+• Kontrola haseł wyszukuje słabe i powtarzane hasła
+• Generator haseł i wskaźnik siły
+• Zaszyfrowany plik kopii zapasowej z własnym hasłem
+• 6-cyfrowy PIN, Face ID i alerty o błędnym PIN-ie
+• Jasny i ciemny motyw

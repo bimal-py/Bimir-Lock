@@ -1,0 +1,8 @@
+Bimir Lock arriva su iPhone e iPad.
+• Password cifrate con una chiave custodita in iOS Keychain, solo su questo dispositivo
+• Fornitore di password per l'inserimento automatico in Safari e nelle altre app
+• Il Controllo password trova le password deboli e riutilizzate
+• Generatore di password e indicatore di sicurezza
+• File di backup cifrato con una password dedicata
+• PIN a 6 cifre, Face ID e avvisi di PIN errato
+• Tema chiaro e scuro

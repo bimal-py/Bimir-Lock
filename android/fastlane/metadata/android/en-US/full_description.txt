@@ -1,23 +1,54 @@
-Welcome to Bimir-Lock, the pinnacle of mobile security, empowering you to protect your valuable data with ease. Whether you're safeguarding personal accounts or sensitive business information, Bimir-Lock is your trusted companion for seamless password security.
+Bimir Lock is an offline password manager for Android: a password keeper and password vault that stores your passwords encrypted on your own phone. No account, no cloud, no ads, no subscription. Save passwords once, open them with your PIN or fingerprint, and autofill them into the app in front of you.
 
-Key Features:
+A PASSWORD MANAGER WITHOUT AN ACCOUNT
+• Works offline: your password vault lives on this phone, not on someone's server
+• No sign-up and no email, so there is no account for anyone to break into
+• Passwords and their notes are encrypted with AES-256-GCM before they are saved
+• The key is kept in Android Keystore and never leaves the device
+• No ads, no analytics, no tracking
 
-🔒 Advanced Encryption: Keep your passwords secure with state-of-the-art encryption technology, ensuring your data remains inaccessible to unauthorized users.
+ONLY YOU CAN OPEN YOUR PASSWORDS
+• Every saved password opens only with your 6-digit PIN, or your fingerprint or face if you turn it on
+• Easy PINs like 123456 or 111111 are refused
+• Seven wrong PINs in a row lock the keypad: 30 seconds, then 1, 5 and 15 minutes
+• Wrong PIN alerts list every lockout and can photograph whoever was guessing (optional; photos stay on your phone)
+• A revealed password hides again after 30 seconds, and a copied one is cleared from the clipboard after 30 seconds
 
-🔐 Robust Authentication: Enjoy peace of mind with our secure authentication system, granting access only to authorized users and safeguarding your digital assets.
+PASSWORD GENERATOR
+• Create strong passwords from 8 to 64 characters, with numbers and symbols on or off
+• Leaves out look-alike characters such as l, I, O and 0
+• Strength meter on every password
+• Warns you before you reuse a password you already saved
 
-📱 Anytime Access: Access your passwords anytime, anywhere, with the convenience of mobile accessibility, putting you in control of your security wherever you go.
+PASSWORD CHECKUP
+• Finds weak passwords and passwords used on more than one site
+• Shows what to fix first, with a Change button on each
+• Checked on your phone; nothing is sent anywhere
 
-🛡️ Top-Notch Protection: Rest assured knowing Bimir-Lock provides top-notch security for your passwords, shielding them from potential threats and data breaches.
+AUTOFILL PASSWORDS IN OTHER APPS
+• Fill saved logins into other apps and browsers that support Android autofill
+• Save a new login when you sign in somewhere, without opening the password manager
+• Nothing is filled until you confirm with your fingerprint, face or screen lock
 
-🔄 User-Friendly Interface: Experience seamless password management with our intuitive interface, making it effortless to organize and access your credentials with just a few taps.
+ENCRYPTED BACKUP FILE
+• Back up your passwords to one encrypted file, locked with its own backup password (Argon2id + AES-256-GCM)
+• Keep it wherever you like: on the phone, on a computer or in the drive you already use
+• Restore on a new phone: it adds what is missing and never deletes anything
 
-🔑 Password Generator: Create strong, unique passwords effortlessly with our built-in password generator, ensuring maximum security for your accounts.
+A SIMPLE PASSWORD BOOK
+• A clean list with search and letter icons, like a password book that cannot be lost in a drawer
+• Site name suggestions as you type, and it remembers the names you add
+• The username field adapts: email, phone number, customer ID or Wi-Fi network
+• Light and dark themes
+• A short security quote each time you open it
+• A notes space for everyday notes (keep secrets in a password's encrypted note)
 
-📊 Activity Monitoring: Stay informed with real-time activity monitoring, allowing you to track access to your passwords and detect any suspicious activity.
+WHO THIS PASSWORD SAVER IS FOR
+• Anyone who wants a local password manager without handing their passwords to a cloud service
+• Anyone tired of the notebook, the notes app or the same password everywhere
+• Families and small shops keeping bank, email, Wi-Fi and wallet logins in one offline password locker
 
-📅 Regular Updates: Benefit from regular updates and enhancements, ensuring Bimir-Lock stays ahead of emerging threats and continues to deliver unparalleled security.
+WHAT IT IS NOT
+There is no cloud sync and no account, so your vault lives on one phone: keep a backup file somewhere safe. Bimir Lock does not check passwords against breach lists and does not make 2FA codes.
 
-📈 Performance Optimization: Enjoy optimal performance with our app's efficient design, minimizing resource usage while maximizing security and usability.
-
-Empower yourself with Bimir-Lock and take control of your password security like never before. Whether you're managing personal accounts or overseeing enterprise-level credentials, our app is designed to meet your needs with unparalleled security and convenience. Download Bimir-Lock today and experience the peace of mind that comes with knowing your data is protected by the best.
+Free, with no ads, no subscription and no in-app purchases: an offline password safe made by one developer in Pokhara, Nepal.

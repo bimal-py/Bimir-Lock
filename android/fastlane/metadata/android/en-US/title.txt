@@ -1,1 +1,1 @@
-Bimir lock
+Bimir Lock: Password Manager

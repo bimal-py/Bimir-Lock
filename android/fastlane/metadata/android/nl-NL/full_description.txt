@@ -1,0 +1,54 @@
+Bimir Lock is een offline wachtwoordmanager voor Android: een wachtwoordkluis die je wachtwoorden versleuteld op je eigen telefoon bewaart. Geen account, geen cloud, geen advertenties, geen abonnement. Wachtwoorden opslaan doe je één keer. Daarna open je ze met je pincode of vingerafdruk en vul je ze automatisch in, in de app waarin je op dat moment bezig bent.
+
+EEN WACHTWOORDMANAGER ZONDER ACCOUNT
+• Werkt offline: je wachtwoordkluis staat op deze telefoon, niet op de server van een ander
+• Geen registratie en geen e-mailadres, dus er is geen account waar iemand kan inbreken
+• Wachtwoorden en hun notities worden met AES-256-GCM versleuteld voordat ze worden opgeslagen
+• De sleutel staat in de Android Keystore en verlaat het apparaat nooit
+• Geen advertenties, geen analytics, geen tracking
+
+ALLEEN JIJ OPENT JE WACHTWOORDEN
+• Elk opgeslagen wachtwoord gaat alleen open met je 6-cijferige pincode, of met je vingerafdruk of gezicht als je dat aanzet
+• Makkelijke pincodes zoals 123456 of 111111 worden geweigerd
+• Na zeven verkeerde pincodes op rij gaat het toetsenblok op slot: 30 seconden, daarna 1, 5 en 15 minuten
+• Meldingen bij een verkeerde pincode tonen elke blokkering en kunnen een foto maken van wie er probeerde te raden (optioneel; de foto's blijven op je telefoon)
+• Een getoond wachtwoord wordt na 30 seconden weer verborgen, en een gekopieerd wachtwoord wordt na 30 seconden van het klembord gewist
+
+WACHTWOORDGENERATOR
+• Maak sterke wachtwoorden van 8 tot 64 tekens, met of zonder cijfers en symbolen
+• Laat tekens weg die op elkaar lijken, zoals l, I, O en 0
+• Sterktemeter bij elk wachtwoord
+• Waarschuwt je voordat je een wachtwoord hergebruikt dat je al hebt opgeslagen
+
+WACHTWOORDCONTROLE
+• Vindt zwakke wachtwoorden en wachtwoorden die je op meer dan één site gebruikt
+• Laat zien wat je eerst moet aanpakken, met bij elk wachtwoord een knop om het te wijzigen
+• De controle gebeurt op je telefoon; er wordt niets verstuurd
+
+WACHTWOORDEN AUTOMATISCH INVULLEN IN ANDERE APPS
+• Gebruik je opgeslagen inloggegevens in andere apps en browsers die Automatisch invullen van Android ondersteunen
+• Sla een nieuwe login op terwijl je ergens inlogt, zonder de wachtwoordmanager te openen
+• Er wordt niets ingevuld voordat je bevestigt met je vingerafdruk, gezicht of schermvergrendeling
+
+VERSLEUTELD BACK-UPBESTAND
+• Zet je wachtwoorden in één versleuteld back-upbestand, beveiligd met een eigen back-upwachtwoord (Argon2id + AES-256-GCM)
+• Bewaar het waar je wilt: op je telefoon, op een computer of in de opslagdienst die je al gebruikt
+• Terugzetten op een nieuwe telefoon: wat ontbreekt wordt toegevoegd, er wordt nooit iets verwijderd
+
+EEN EENVOUDIG WACHTWOORDBOEKJE
+• Een overzichtelijke lijst met zoekfunctie en lettericoontjes, als een wachtwoordboekje dat nooit zoekraakt in een la
+• Suggesties voor sitenamen terwijl je typt
+• Het veld voor je gebruikersnaam past zich aan: e-mail, telefoonnummer, klantnummer of wifinetwerk
+• Licht en donker thema
+• Bij elke start een kort citaat over beveiliging
+• Een notitieruimte voor alledaagse notities (bewaar geheimen in de versleutelde notitie bij een wachtwoord)
+
+VOOR WIE IS DEZE WACHTWOORDKLUIS?
+• Voor iedereen die een lokale wachtwoordmanager wil, zonder wachtwoorden aan een clouddienst toe te vertrouwen
+• Voor iedereen die genoeg heeft van het notitieboekje, de notitie-app of overal hetzelfde wachtwoord
+• Voor gezinnen en kleine winkels die inloggegevens voor bank, e-mail, wifi en betaalapps op één plek offline bewaren
+
+WAT HET NIET IS
+Er is geen cloudsynchronisatie en geen account, dus je kluis staat op één telefoon: bewaar een back-upbestand op een veilige plek. Bimir Lock controleert wachtwoorden niet op datalekken en maakt geen 2FA-codes. De app zelf is voorlopig in het Engels.
+
+Gratis, zonder advertenties, abonnement of in-app-aankopen: een offline wachtwoordkluis, gemaakt door één ontwikkelaar in Pokhara, Nepal.

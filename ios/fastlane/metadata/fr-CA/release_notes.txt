@@ -1,0 +1,8 @@
+Bimir Lock arrive sur iPhone et iPad.
+• Mots de passe chiffrés avec une clé conservée dans l'iOS Keychain, sur cet appareil seulement
+• Fournisseur de mots de passe pour le remplissage automatique dans Safari et d'autres apps
+• La vérification repère les mots de passe faibles ou réutilisés
+• Générateur de mots de passe et indicateur de robustesse
+• Fichier de sauvegarde chiffré, avec son propre mot de passe
+• NIP à 6 chiffres, Face ID et alertes de NIP erroné
+• Thèmes clair et sombre

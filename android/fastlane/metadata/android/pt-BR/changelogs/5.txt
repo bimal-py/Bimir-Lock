@@ -1,0 +1,8 @@
+O Bimir Lock 1.1 foi refeito do zero.
+• Agora as senhas são criptografadas com uma chave guardada no armazenamento seguro do celular
+• Preenchimento automático: preencha logins salvos em outros apps e salve novos
+• A Verificação de Senhas encontra senhas fracas e repetidas
+• Gerador de senhas e medidor de força
+• Arquivo de backup criptografado com senha própria
+• PIN de 6 dígitos, desbloqueio por digital e alertas de PIN errado
+• Novo visual com temas claro e escuro

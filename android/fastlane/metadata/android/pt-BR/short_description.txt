@@ -1,0 +1,1 @@
+Gerenciador de senhas offline, sem conta. Biometria e preenchimento automático.

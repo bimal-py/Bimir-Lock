@@ -1,0 +1,54 @@
+Bimir Lock to menedżer haseł offline na Androida: sejf na hasła i aplikacja do przechowywania haseł, która trzyma je zaszyfrowane na Twoim własnym telefonie. Bez konta, bez chmury, bez reklam i bez subskrypcji. Zapisz hasło raz, otwieraj je kodem PIN lub odciskiem palca i uzupełniaj automatycznie w aplikacji, z której właśnie korzystasz.
+
+MENEDŻER HASEŁ BEZ KONTA
+• Działa offline: Twój sejf na hasła jest w tym telefonie, a nie na czyimś serwerze
+• Bez rejestracji i bez adresu e-mail, więc nie ma konta, które ktoś mógłby przejąć
+• Hasła i notatki do nich są szyfrowane algorytmem AES-256-GCM, zanim zostaną zapisane
+• Klucz jest przechowywany w Android Keystore i nigdy nie opuszcza urządzenia
+• Bez reklam, bez analityki, bez śledzenia
+
+TYLKO TY OTWIERASZ SWOJE HASŁA
+• Każde zapisane hasło otwiera się tylko Twoim 6-cyfrowym kodem PIN albo, jeśli to włączysz, odciskiem palca lub twarzą
+• Łatwe kody PIN, takie jak 123456 czy 111111, są odrzucane
+• Siedem błędnych kodów PIN z rzędu blokuje klawiaturę: na 30 sekund, potem na 1, 5 i 15 minut
+• Alerty o błędnym PIN-ie pokazują każdą blokadę i mogą zrobić zdjęcie osobie, która zgadywała (opcjonalnie; zdjęcia zostają w telefonie)
+• Odkryte hasło znów się ukrywa po 30 sekundach, a skopiowane znika ze schowka po 30 sekundach
+
+GENERATOR HASEŁ
+• Twórz silne hasła od 8 do 64 znaków, z cyframi i symbolami lub bez nich
+• Pomija podobne do siebie znaki, takie jak l, I, O i 0
+• Wskaźnik siły przy każdym haśle
+• Ostrzega, zanim ponownie użyjesz hasła, które już masz zapisane
+
+KONTROLA HASEŁ
+• Wyszukuje słabe hasła i hasła używane w więcej niż jednym serwisie
+• Pokazuje, co poprawić najpierw, z przyciskiem zmiany przy każdym z nich
+• Sprawdzanie odbywa się w telefonie; nic nie jest nigdzie wysyłane
+
+AUTOUZUPEŁNIANIE HASEŁ W INNYCH APLIKACJACH
+• Wpisuj zapisane dane logowania w aplikacjach i przeglądarkach obsługujących autouzupełnianie Androida
+• Zapisuj nowe dane logowania od razu przy logowaniu, bez otwierania menedżera haseł
+• Nic nie zostanie wpisane, dopóki nie potwierdzisz odciskiem palca, twarzą lub blokadą ekranu
+
+ZASZYFROWANY PLIK KOPII ZAPASOWEJ
+• Zrób kopię zapasową haseł w jednym zaszyfrowanym pliku, chronionym osobnym hasłem kopii (Argon2id + AES-256-GCM)
+• Trzymaj go, gdzie chcesz: w telefonie, na komputerze lub na dysku, z którego już korzystasz
+• Przywróć na nowym telefonie: dodaje to, czego brakuje, i nigdy niczego nie usuwa
+
+PROSTY NOTES NA HASŁA
+• Przejrzysta lista z wyszukiwaniem i ikonami z literami, jak notes na hasła, który nie zgubi się w szufladzie
+• Podpowiedzi nazw serwisów podczas pisania: popularne strony i nazwy, które już zapisałeś
+• Pole nazwy użytkownika dopasowuje się: e-mail, numer telefonu, numer klienta lub sieć Wi-Fi
+• Jasny i ciemny motyw
+• Krótki cytat o bezpieczeństwie przy każdym otwarciu
+• Miejsce na codzienne notatki (sekrety trzymaj w zaszyfrowanej notatce przy haśle)
+
+DLA KOGO JEST TA APLIKACJA DO HASEŁ
+• Dla każdego, kto szuka lokalnego menedżera haseł i nie chce oddawać haseł usłudze w chmurze
+• Dla każdego, kto ma dość zeszytu, aplikacji z notatkami albo jednego hasła do wszystkiego
+• Dla rodzin i małych sklepów, które trzymają dane do banku, poczty, Wi-Fi i portfeli w jednym sejfie na hasła offline
+
+CZYM NIE JEST
+Nie ma synchronizacji w chmurze ani konta, więc Twój sejf jest na jednym telefonie: trzymaj plik kopii zapasowej w bezpiecznym miejscu. Bimir Lock nie sprawdza haseł w bazach wycieków i nie generuje kodów 2FA. Aplikacja jest na razie w języku angielskim.
+
+Za darmo, bez reklam, bez subskrypcji i bez zakupów w aplikacji: menedżer haseł offline stworzony przez jednego programistę z Pokhary w Nepalu.
