@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
-    <!-- Required in release builds too: the upgrader version check and the quotes
-         API call are runtime features. debug/profile manifests add this for the
-         Flutter tool only and are not merged into release. -->
+    <!-- Required in release builds too: the upgrader store-version check and the
+         links the user opens are runtime features. debug/profile manifests add this
+         for the Flutter tool only and are not merged into release. -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <!-- Wrong PIN alerts: the front camera photographs whoever enters 7 wrong
@@ -28,6 +28,26 @@
         <intent>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+
+        <!-- The rest match Callbreak's: Flutter's text-selection "process text"
+             actions, and url_launcher opening web pages (privacy policy, terms,
+             the developer's links) and an email app (Settings > Email). -->
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="http"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO"/>
+            <data android:scheme="mailto"/>
         </intent>
     </queries>
 
@@ -59,7 +79,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Android Autofill, save only. The system server binds this from outside
+        <!-- Android Autofill: fill and save. The system server binds this from outside
              our uid, so it has to be exported; android:permission is what keeps
              anything but the platform from binding it, and without that attribute
              the platform rejects the service and it never appears in the picker.
