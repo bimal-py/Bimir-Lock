@@ -11,7 +11,9 @@ listing/shots/raw/android_phone/<slug>.png   Android phone (Pixel 9 Pro AVD or y
 listing/shots/raw/android_tablet/<slug>.png  Pixel Tablet AVD, PORTRAIT    1600 x 2560
 ```
 
-All portrait. 8 slugs per device = 32 captures. If you skip the Android ones, the
+All portrait. 8 slugs per device = 32 captures. The App Store's 6.3" iPhone size
+(1206 x 2622, which Apple's 2026 table lists as required) is exported from the
+same iPhone captures — no extra screenshots needed. If you skip the Android ones, the
 iPhone/iPad captures are reused for Play (it works, but a real Android capture
 looks native: Android status bar, Android autofill dropdown).
 

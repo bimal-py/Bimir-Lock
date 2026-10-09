@@ -25,6 +25,7 @@ instead, with a warning — Play accepts it, but a real Android capture looks na
 
 Output
   listing/shots/out/<locale>/iphone/NN_<slug>.png        1320x2868  App Store 6.9"
+  listing/shots/out/<locale>/iphone_63/NN_<slug>.png     1206x2622  App Store 6.3" (same panel)
   listing/shots/out/<locale>/ipad/NN_<slug>.png          2064x2752  App Store 13"
   listing/shots/out/<locale>/phoneScreenshots/...        1080x1920  Play phone
   listing/shots/out/<locale>/sevenInchScreenshots/...    1600x2560  Play 7" tablet
@@ -40,7 +41,18 @@ import os
 import shutil
 import sys
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, features
+
+# Hindi, Nepali, Bengali, Thai and Arabic captions need complex text shaping (raqm),
+# or vowel signs land on the wrong letter and Arabic comes out unjoined and
+# backwards. Pillow's wheel carries raqm but loads fribidi at run time, and on this
+# Mac fribidi is Homebrew's, off the default search path — so re-run once with it on.
+_BREW_LIB = "/opt/homebrew/lib"
+if (not features.check("raqm") and not os.environ.get("BIMIR_SHOTS_REEXEC")
+        and os.path.isfile(os.path.join(_BREW_LIB, "libfribidi.0.dylib"))):
+    os.environ["DYLD_LIBRARY_PATH"] = _BREW_LIB + ":" + os.environ.get("DYLD_LIBRARY_PATH", "")
+    os.environ["BIMIR_SHOTS_REEXEC"] = "1"
+    os.execv(sys.executable, [sys.executable] + sys.argv)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SHOTS_RAW / SHOTS_OUT let a preview run from other captures without touching these.
@@ -54,22 +66,24 @@ F_MED = os.path.join(FONT_DIR, "GoogleSansFlex-Medium.ttf")
 
 # Google Sans Flex covers Latin, Greek, Cyrillic and Vietnamese. Other scripts take
 # the macOS system face for that script, so a localized caption never renders tofu.
+# lang -> (font file candidates, style names for the headline, for the subtitle)
+_HIRAGINO = "/System/Library/Fonts/\u30d2\u30e9\u30ae\u30ce\u89d2\u30b4\u30b7\u30c3\u30af {}.ttc"
 SYSTEM_FONTS = {
-    "hi": "/System/Library/Fonts/Kohinoor.ttc",
-    "ne": "/System/Library/Fonts/Kohinoor.ttc",
-    "mr": "/System/Library/Fonts/Kohinoor.ttc",
-    "bn": "/System/Library/Fonts/KohinoorBangla.ttc",
-    "ta": "/System/Library/Fonts/Supplemental/Tamil MN.ttc",
-    "te": "/System/Library/Fonts/KohinoorTelugu.ttc",
-    "ja": "/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc",
-    "ko": "/System/Library/Fonts/AppleSDGothicNeo.ttc",
-    "zh": "/System/Library/Fonts/Hiragino Sans GB.ttc",
-    "th": "/System/Library/Fonts/Supplemental/Thonburi.ttc",
-    "ar": "/System/Library/Fonts/GeezaPro.ttc",
-    "he": "/System/Library/Fonts/ArialHB.ttc",
-    "iw": "/System/Library/Fonts/ArialHB.ttc",
-    "fa": "/System/Library/Fonts/GeezaPro.ttc",
-    "ur": "/System/Library/Fonts/GeezaPro.ttc",
+    "hi": (["/System/Library/Fonts/Kohinoor.ttc"], ("Bold",), ("Medium",)),
+    "ne": (["/System/Library/Fonts/Kohinoor.ttc"], ("Bold",), ("Medium",)),
+    "mr": (["/System/Library/Fonts/Kohinoor.ttc"], ("Bold",), ("Medium",)),
+    "bn": (["/System/Library/Fonts/KohinoorBangla.ttc"], ("Bold",), ("Medium",)),
+    "ta": (["/System/Library/Fonts/Supplemental/Tamil MN.ttc"], ("Bold",), ("Regular",)),
+    "te": (["/System/Library/Fonts/KohinoorTelugu.ttc"], ("Bold",), ("Medium",)),
+    "ja": ([_HIRAGINO.format("W7"), _HIRAGINO.format("W4")], ("W7",), ("W4", "W7")),
+    "ko": (["/System/Library/Fonts/AppleSDGothicNeo.ttc"], ("Bold",), ("Medium",)),
+    "zh": (["/System/Library/Fonts/Hiragino Sans GB.ttc"], ("W6",), ("W3",)),
+    "th": (["/System/Library/Fonts/Supplemental/Thonburi.ttc"], ("Bold",), ("Regular",)),
+    "ar": (["/System/Library/Fonts/GeezaPro.ttc"], ("Bold",), ("Regular",)),
+    "fa": (["/System/Library/Fonts/GeezaPro.ttc"], ("Bold",), ("Regular",)),
+    "ur": (["/System/Library/Fonts/GeezaPro.ttc"], ("Bold",), ("Regular",)),
+    "he": (["/System/Library/Fonts/ArialHB.ttc"], ("Bold",), ("Regular",)),
+    "iw": (["/System/Library/Fonts/ArialHB.ttc"], ("Bold",), ("Regular",)),
 }
 
 # Brand: the logo crimson (#901743, the app's light-theme primary) on a near-white
@@ -102,6 +116,11 @@ PLAY_TABLET = Spec("tabletScreenshots", (1600, 2560), 0.060, 0.029, 0.70, 0.245,
 
 BAR_MODE = None  # --status-bar=… overrides panels.json for every folder
 
+# Extra exports of a finished panel. Apple's 2026 size table names the 6.3" class
+# (iPhone 17 / 16 / 18 Pro) as required next to the 6.9" one; fastlane files 1206x2622
+# under APP_IPHONE_61. Same artwork, so no extra captures are needed.
+EXTRA_SIZES = {"iphone": [("iphone_63", (1206, 2622))]}
+
 # set name in panels.json -> (spec, raw folder, fallback raw folder, output folders)
 SETS = {
     "iphone": (IPHONE, "iphone", None, ["iphone"]),
@@ -112,11 +131,14 @@ SETS = {
 }
 
 # Store locale codes differ between the two stores; captions are keyed by the Play one.
+# Play-only locales (ne-NP, es-US, zh-HK) map to None: no App Store screenshots.
 APPLE_LOCALE = {
-    "en-US": "en-US", "es-ES": "es-ES", "es-419": "es-MX", "pt-BR": "pt-BR", "de-DE": "de-DE",
-    "fr-FR": "fr-FR", "it-IT": "it", "nl-NL": "nl-NL", "pl-PL": "pl", "tr-TR": "tr",
-    "ru-RU": "ru", "uk": "uk", "id": "id", "vi": "vi", "th": "th", "ja-JP": "ja",
-    "ko-KR": "ko", "zh-CN": "zh-Hans", "zh-TW": "zh-Hant", "hi-IN": "hi", "ar": "ar-SA",
+    "en-US": "en-US", "es-ES": "es-ES", "es-419": "es-MX", "es-US": None, "pt-BR": "pt-BR",
+    "pt-PT": "pt-PT", "de-DE": "de-DE", "fr-FR": "fr-FR", "fr-CA": "fr-CA", "it-IT": "it",
+    "nl-NL": "nl-NL", "pl-PL": "pl", "tr-TR": "tr", "ru-RU": "ru", "uk": "uk", "id": "id",
+    "vi": "vi", "th": "th", "ja-JP": "ja", "ko-KR": "ko", "zh-CN": "zh-Hans",
+    "zh-TW": "zh-Hant", "zh-HK": None, "hi-IN": "hi", "bn-BD": "bn-BD", "ar": "ar-SA",
+    "ne-NP": None,
 }
 
 
@@ -341,19 +363,32 @@ def device(canvas, screen, spec):
 
 
 def font_for(locale, bold):
+    """(file, face index) for this locale's headline (bold) or subtitle face."""
     lang = locale.split("-")[0]
-    path = SYSTEM_FONTS.get(lang)
-    if path and os.path.isfile(path):
-        return path
-    return F_BOLD if bold else F_MED
+    if lang not in SYSTEM_FONTS:
+        return (F_BOLD if bold else F_MED), 0
+    files, bold_styles, med_styles = SYSTEM_FONTS[lang]
+    # styles in priority order, so a subtitle prefers W4 even when the W7 file comes first
+    for want in (bold_styles if bold else med_styles):
+        for path in files:
+            if not os.path.isfile(path):
+                continue
+            for i in range(32):
+                try:
+                    style = ImageFont.truetype(path, 12, index=i).getname()[1]
+                except OSError:
+                    break
+                if style == want:
+                    return path, i
+    existing = [p for p in files if os.path.isfile(p)]
+    return (existing[0], 0) if existing else ((F_BOLD if bold else F_MED), 0)
 
 
-def wrap(d, text, font, max_w):
-    # CJK and Thai have no spaces between words: break between characters instead.
-    if " " not in text.strip():
-        units, joiner = list(text), ""
-    else:
-        units, joiner = text.split(), " "
+def truetype(face, px):
+    return ImageFont.truetype(face[0], px, index=face[1])
+
+
+def _greedy(d, units, joiner, font, max_w):
     lines, cur = [], ""
     for u in units:
         trial = (cur + joiner + u) if cur else u
@@ -367,6 +402,28 @@ def wrap(d, text, font, max_w):
     return lines
 
 
+def wrap(d, text, font, max_w):
+    """Break into as few lines as fit, then even them out: no orphan word or
+    character on the last line ("Strong passwords / in one tap", not "… in / one tap")."""
+    # CJK and Thai have no spaces between words: break between characters instead.
+    if " " not in text.strip():
+        units, joiner = list(text), ""
+    else:
+        units, joiner = text.split(), " "
+    lines = _greedy(d, units, joiner, font, max_w)
+    if len(lines) < 2:
+        return lines
+    lo = max(d.textlength(u, font=font) for u in units)
+    hi = max_w
+    while hi - lo > 2:   # narrowest width that still gives the same number of lines
+        mid = (lo + hi) / 2
+        if len(_greedy(d, units, joiner, font, mid)) <= len(lines):
+            hi = mid
+        else:
+            lo = mid
+    return _greedy(d, units, joiner, font, hi)
+
+
 def caption(img, spec, head, sub, locale):
     w, h = spec.canvas
     d = ImageDraw.Draw(img)
@@ -374,13 +431,13 @@ def caption(img, spec, head, sub, locale):
     fb, fm = font_for(locale, True), font_for(locale, False)
 
     px = int(w * spec.head)
-    fh = ImageFont.truetype(fb, px)
+    fh = truetype(fb, px)
     lines = wrap(d, head, fh, w - 2 * margin)
     # shrink rather than run to three lines; two lines is fine
     while (len(lines) > 2 or any(d.textlength(l, font=fh) > w - 2 * margin for l in lines)) \
             and px > w * spec.head * 0.70:
         px = int(px * 0.95)
-        fh = ImageFont.truetype(fb, px)
+        fh = truetype(fb, px)
         lines = wrap(d, head, fh, w - 2 * margin)
 
     line_h = int(px * 1.14)
@@ -397,12 +454,12 @@ def caption(img, spec, head, sub, locale):
     d.rounded_rectangle([w / 2 - rw / 2, ry, w / 2 + rw / 2, ry + rh], radius=rh // 2, fill=RULE)
 
     sp = int(w * spec.sub)
-    fs = ImageFont.truetype(fm, sp)
+    fs = truetype(fm, sp)
     y = ry + rh + int(sp * 0.9)
     sub_lines = wrap(d, sub, fs, w - 2 * margin)
     while len(sub_lines) > 2 and sp > w * spec.sub * 0.75:
         sp = int(sp * 0.95)
-        fs = ImageFont.truetype(fm, sp)
+        fs = truetype(fm, sp)
         sub_lines = wrap(d, sub, fs, w - 2 * margin)
     for ln in sub_lines:
         d.text((w / 2, y), ln, font=fs, fill=SUB, anchor="ma")
@@ -474,6 +531,10 @@ def build(locale, captions, panels):
             for out_folder in outs:
                 dst = os.path.join(OUT, locale, out_folder, f"{i:02d}_{slug}.png")
                 img.save(dst, optimize=True)
+            for extra, size in EXTRA_SIZES.get(set_name, []):
+                os.makedirs(os.path.join(OUT, locale, extra), exist_ok=True)
+                img.resize(size, Image.LANCZOS).save(
+                    os.path.join(OUT, locale, extra, f"{i:02d}_{slug}.png"), optimize=True)
             made.append(os.path.join(OUT, locale, outs[0], f"{i:02d}_{slug}.png"))
         contact_sheet(made, os.path.join(OUT, f"_contact_{locale}_{set_name}.png"))
         report.append((set_name, len(made), len(slugs), missing, borrowed))
@@ -488,7 +549,7 @@ def install(locale):
         shutil.rmtree(dst, ignore_errors=True)
         os.makedirs(dst)
         # deliver reads one flat folder per locale and sorts by name, so prefix the set
-        for sub, tag in (("iphone", "a"), ("ipad", "b")):
+        for sub, tag in (("iphone", "a"), ("iphone_63", "c"), ("ipad", "b")):
             d = os.path.join(src, sub)
             for f in sorted(os.listdir(d)) if os.path.isdir(d) else []:
                 shutil.copyfile(os.path.join(d, f), os.path.join(dst, f"{tag}{f}"))
@@ -512,6 +573,9 @@ def main():
             BAR_MODE = a.split("=", 1)[1]
             if BAR_MODE not in ("keep", "replace", "add"):
                 sys.exit("--status-bar must be keep, replace or add")
+    if not features.check("raqm"):
+        print("warning: no raqm text shaping — Devanagari, Bengali, Thai and Arabic "
+              "captions will render wrongly (brew install libraqm)")
     with open(os.path.join(CFG, "panels.json"), encoding="utf-8") as f:
         panels = json.load(f)
     cap_dir = os.path.join(CFG, "captions")
