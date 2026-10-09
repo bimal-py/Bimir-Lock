@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Palavras-passe a sete chaves",
+    "sub": "Cofre offline. Sem conta, sem nuvem."
+  },
+  "autofill": {
+    "head": "Preencha palavras-passe em apps",
+    "sub": "Depois do Face ID, da impressão digital ou do bloqueio"
+  },
+  "generator": {
+    "head": "Palavras-passe fortes num toque",
+    "sub": "Escolha o comprimento, os números e os símbolos"
+  },
+  "checkup": {
+    "head": "Encontre palavras-passe fracas",
+    "sub": "E as repetidas, com o que deve corrigir primeiro"
+  },
+  "unlock": {
+    "head": "Só se abrem para si",
+    "sub": "PIN de 6 dígitos, impressão digital ou Face ID"
+  },
+  "alerts": {
+    "head": "Veja quem tentou entrar",
+    "sub": "Foto opcional após 7 PINs errados, só neste telemóvel"
+  },
+  "backup": {
+    "head": "Uma cópia de segurança só sua",
+    "sub": "Um ficheiro encriptado com palavra-passe própria"
+  },
+  "dark": {
+    "head": "Descanso para os olhos à noite",
+    "sub": "Temas claro e escuro"
+  }
+}

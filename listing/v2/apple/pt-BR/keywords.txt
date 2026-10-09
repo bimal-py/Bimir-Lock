@@ -1,0 +1,1 @@
+senha,guardar,salvar,gerador,seguras,login,backup,pin,biometria,digital,local,privado,nuvem

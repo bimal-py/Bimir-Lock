@@ -1,0 +1,8 @@
+Bimir Lock 1.1 è stato riscritto da zero.
+• Ora le password sono cifrate con una chiave custodita nell'archivio sicuro del telefono
+• Compilazione automatica: inserisci gli accessi salvati nelle altre app e salvane di nuovi
+• Il Controllo password trova le password deboli e riutilizzate
+• Generatore di password e indicatore di sicurezza
+• File di backup cifrato con una password dedicata
+• PIN a 6 cifre, sblocco con impronta e avvisi di PIN errato
+• Un nuovo design con tema chiaro e scuro

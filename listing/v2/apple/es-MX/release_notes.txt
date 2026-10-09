@@ -1,0 +1,8 @@
+Bimir Lock, ahora en iPhone y iPad.
+• Contraseñas encriptadas con una clave guardada en el iOS Keychain, solo en este dispositivo
+• Proveedor de contraseñas de Autollenado para Safari y otras apps
+• La Revisión de contraseñas encuentra contraseñas débiles y repetidas
+• Generador de contraseñas y medidor de seguridad
+• Archivo de respaldo encriptado con su propia contraseña
+• PIN de 6 dígitos, Face ID y alertas de PIN incorrecto
+• Temas claro y oscuro

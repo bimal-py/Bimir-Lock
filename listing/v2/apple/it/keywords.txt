@@ -1,0 +1,1 @@
+manager,gestione,generatore,salvare,salva,sicure,archivio,credenziali,locale,backup,pin,impronta

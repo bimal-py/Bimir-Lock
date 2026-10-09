@@ -1,0 +1,1 @@
+Gestor de contraseñas offline: sin cuenta, sin nube. Huella y autocompletado.

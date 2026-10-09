@@ -1,0 +1,8 @@
+O Bimir Lock 1.1 foi refeito de raiz.
+• Palavras-passe encriptadas com uma chave guardada no armazenamento seguro do telemóvel
+• Preenchimento automático: preencha credenciais noutras apps e guarde novas
+• A Verificação de palavras-passe encontra as fracas e as repetidas
+• Gerador de palavras-passe e medidor de força
+• Cópia de segurança encriptada com palavra-passe própria
+• PIN de 6 dígitos, desbloqueio por impressão digital e alertas de PIN errado
+• Novo design com temas claro e escuro

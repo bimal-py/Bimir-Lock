@@ -1,0 +1,54 @@
+O Bimir Lock é um gestor de palavras-passe offline para Android: um cofre que guarda as suas palavras-passe encriptadas no seu próprio telemóvel. Sem conta, sem nuvem, sem publicidade, sem subscrição. Guarde cada palavra-passe uma vez, abra-a com o PIN ou a impressão digital e preencha-a automaticamente na app que tem à frente.
+
+UM GESTOR DE PASSWORDS SEM CONTA
+• Funciona offline: o seu cofre de palavras-passe vive neste telemóvel, não no servidor de outra pessoa
+• Sem registo e sem e-mail, por isso não há nenhuma conta que alguém possa invadir
+• Cada palavra-passe, juntamente com a respetiva nota, é encriptada com AES-256-GCM antes de ser guardada
+• A chave fica no Android Keystore e nunca sai do dispositivo
+• Sem publicidade, sem estatísticas de utilização, sem rastreio
+
+AS SUAS PALAVRAS-PASSE SÓ ABREM PARA SI
+• Cada palavra-passe guardada só abre com o seu PIN de 6 dígitos, ou com a impressão digital ou o rosto, se os ativar
+• PINs fáceis como 123456 ou 111111 são recusados
+• Sete PINs errados seguidos bloqueiam o teclado: 30 segundos, depois 1, 5 e 15 minutos
+• Os alertas de PIN errado registam cada bloqueio e podem fotografar quem estava a tentar adivinhar (opcional; as fotos ficam no seu telemóvel)
+• Uma palavra-passe revelada volta a ficar oculta ao fim de 30 segundos, e uma copiada é apagada da área de transferência ao fim de 30 segundos
+
+GERADOR DE PALAVRAS-PASSE
+• Crie palavras-passe fortes de 8 a 64 caracteres, com ou sem números e símbolos
+• Deixa de fora caracteres parecidos, como l, I, O e 0
+• Medidor de força em cada palavra-passe
+• Avisa-o antes de reutilizar uma palavra-passe que já guardou
+
+VERIFICAÇÃO DE PALAVRAS-PASSE
+• Encontra palavras-passe fracas e palavras-passe usadas em mais de um site
+• Mostra o que deve corrigir primeiro, com um botão para alterar cada uma
+• Tudo é verificado no seu telemóvel; nada é enviado para lado nenhum
+
+PREENCHIMENTO AUTOMÁTICO NOUTRAS APPS
+• Preencha credenciais guardadas noutras apps e browsers compatíveis com o preenchimento automático do Android
+• Guarde uma credencial nova quando inicia sessão em algum lado, sem abrir o gestor de passwords
+• Nada é preenchido até confirmar com a impressão digital, o rosto ou o bloqueio de ecrã
+
+CÓPIA DE SEGURANÇA ENCRIPTADA
+• Faça uma cópia de segurança das suas palavras-passe num único ficheiro encriptado, protegido por uma palavra-passe própria (Argon2id + AES-256-GCM)
+• Guarde-o onde quiser: no telemóvel, no computador ou na drive que já usa
+• Restaure num telemóvel novo: acrescenta o que falta e nunca apaga nada
+
+UM CADERNO DE PALAVRAS-PASSE SIMPLES
+• Uma lista limpa, com pesquisa e ícones com a inicial, como um caderno de palavras-passe que não se perde numa gaveta
+• Sugestões de sites e apps conhecidos à medida que escreve
+• O campo de utilizador adapta-se: e-mail, número de telefone, número de cliente ou rede Wi-Fi
+• Temas claro e escuro
+• Uma pequena citação sobre segurança sempre que abre a app
+• Um espaço para notas do dia a dia (os segredos ficam melhor na nota encriptada de cada palavra-passe)
+
+PARA QUEM É O BIMIR LOCK
+• Para quem quer um gestor de palavras-passe local, sem entregar as suas palavras-passe a um serviço na nuvem
+• Para quem está farto do caderninho, da app de notas ou da mesma palavra-passe em todo o lado
+• Para famílias e pequenos negócios que querem guardar as credenciais do banco, do e-mail, do Wi-Fi e das carteiras digitais num único cofre offline
+
+O QUE NÃO É
+Não há sincronização na nuvem nem conta, por isso o seu cofre vive num único telemóvel: guarde um ficheiro de cópia de segurança num lugar seguro. O Bimir Lock não verifica palavras-passe em listas de fugas de dados e não gera códigos 2FA. Por agora, a aplicação está em inglês.
+
+Gratuito, sem publicidade, sem subscrição e sem compras na app: um gestor de passwords offline feito por um único programador em Pokhara, no Nepal.

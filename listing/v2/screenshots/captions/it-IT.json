@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Le tue password, sotto chiave",
+    "sub": "Cassaforte offline. Niente account, niente cloud."
+  },
+  "autofill": {
+    "head": "Password inserite in altre app",
+    "sub": "Dopo Face ID, impronta o blocco schermo"
+  },
+  "generator": {
+    "head": "Password robuste con un tocco",
+    "sub": "Scegli lunghezza, numeri e simboli"
+  },
+  "checkup": {
+    "head": "Trova password deboli e ripetute",
+    "sub": "Il Controllo password ti dice cosa sistemare prima"
+  },
+  "unlock": {
+    "head": "Ogni password, solo per te",
+    "sub": "PIN a 6 cifre, impronta o Face ID"
+  },
+  "alerts": {
+    "head": "Scopri chi ha provato a entrare",
+    "sub": "Foto facoltativa dopo 7 PIN errati, resta sul telefono"
+  },
+  "backup": {
+    "head": "Un backup che apri solo tu",
+    "sub": "Un file cifrato con la sua password. Tienilo dove vuoi."
+  },
+  "dark": {
+    "head": "Riposante per gli occhi di sera",
+    "sub": "Tema chiaro e scuro"
+  }
+}

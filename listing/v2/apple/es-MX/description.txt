@@ -1,0 +1,49 @@
+Bimir Lock es un gestor de contraseñas offline que guarda tus contraseñas encriptadas en tu propio iPhone o iPad. Sin cuenta que crear, sin nube en la cual confiar, sin anuncios. Guarda cada acceso una vez, ábrelo con tu PIN o con Face ID y complétalo con Autollenado.
+
+TUS CONTRASEÑAS SE QUEDAN EN TU DISPOSITIVO
+• Cada contraseña, junto con su nota, se encripta con AES-256-GCM antes de guardarse
+• La clave se guarda en el iOS Keychain, solo en este dispositivo, y nunca se sincroniza
+• Sin registro, sin correo, sin servidor: no hay ninguna cuenta que alguien pueda hackear
+• Funciona totalmente offline: en un avión, en el extranjero o con los datos móviles apagados
+• Sin anuncios, sin estadísticas de uso, sin rastreo
+
+SOLO TÚ PUEDES ABRIRLAS
+• Cada contraseña guardada se abre solo con tu PIN de 6 dígitos, o con Face ID o Touch ID si los activas
+• Se rechazan los PIN fáciles como 123456 o 111111
+• Siete PIN incorrectos seguidos bloquean el teclado: 30 segundos, luego 1, 5 y 15 minutos
+• Las alertas de PIN incorrecto registran cada bloqueo y pueden tomarle una foto a quien intentaba adivinarlo (opcional; las fotos se quedan en tu dispositivo)
+• Una contraseña visible se vuelve a ocultar a los 30 segundos, y una copiada se borra del portapapeles a los 30 segundos
+
+CONTRASEÑAS SEGURAS, HECHAS PARA TI
+• Generador de contraseñas de 8 a 64 caracteres, con o sin números y símbolos
+• Deja fuera los caracteres que se confunden, como l, I, O y 0
+• Medidor de seguridad en cada contraseña
+• Te avisa antes de que repitas una contraseña que ya guardaste
+
+REVISIÓN DE CONTRASEÑAS
+• Encuentra contraseñas débiles y contraseñas que usas en más de un sitio
+• Te muestra qué arreglar primero, con un botón para cambiar cada una
+• Todo se revisa en tu dispositivo; no se envía nada a ningún lado
+
+AUTOLLENADO
+• Bimir Lock funciona como proveedor de contraseñas de Autollenado en Safari y otras apps
+• Actívalo en la Configuración del iPhone, en Autollenado y contraseñas
+• No se completa nada hasta que confirmas con Face ID, Touch ID o tu código
+
+RESPALDO BAJO TU CONTROL
+• Respalda en un solo archivo encriptado, protegido con su propia contraseña de respaldo (Argon2id + AES-256-GCM)
+• Guárdalo donde quieras: en Archivos, en iCloud Drive o en una computadora
+• Restaura en un iPhone nuevo: agrega lo que falta y nunca borra nada
+
+TRANQUILA Y FÁCIL DE USAR
+• Una lista limpia con búsqueda e íconos con la inicial
+• Sugerencias de nombres de sitios mientras escribes
+• El campo de usuario se adapta: correo, número de teléfono, número de cliente o red Wi-Fi
+• Temas claro y oscuro
+• Una breve frase sobre seguridad cada vez que la abres
+• Un espacio para notas del día a día (los secretos, mejor en la nota encriptada de cada contraseña)
+
+LO QUE NO ES
+No hay sincronización en la nube ni cuenta, así que tu bóveda vive en un solo dispositivo: guarda un archivo de respaldo en un lugar seguro. Bimir Lock no revisa tus contraseñas contra listas de filtraciones y no genera códigos 2FA. Por ahora, la app está en inglés.
+
+Gratis, sin anuncios y sin compras dentro de la app. Creada por un solo desarrollador en Pokhara, Nepal.

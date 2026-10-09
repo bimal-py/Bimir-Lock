@@ -1,0 +1,8 @@
+O Bimir Lock chega ao iPhone e ao iPad.
+• Palavras-passe encriptadas com uma chave guardada no iOS Keychain, só neste dispositivo
+• Fornecedor de palavras-passe para o preenchimento automático no Safari e noutras apps
+• A Verificação de palavras-passe encontra as fracas e as repetidas
+• Gerador de palavras-passe e medidor de força
+• Ficheiro de cópia de segurança encriptado com palavra-passe própria
+• PIN de 6 dígitos, Face ID e alertas de PIN errado
+• Temas claro e escuro

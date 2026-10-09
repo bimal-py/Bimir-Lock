@@ -1,0 +1,54 @@
+Bimir Lock è un gestore password offline per Android: una cassaforte per le password che le conserva cifrate sul tuo telefono. Niente account, niente cloud, niente pubblicità, niente abbonamento. Salva ogni password una volta, aprila con il PIN o con l'impronta e inseriscila in automatico nell'app che hai davanti.
+
+UN GESTORE PASSWORD SENZA ACCOUNT
+• Funziona offline: la tua cassaforte per le password vive su questo telefono, non sul server di qualcun altro
+• Nessuna registrazione e nessuna email: non c'è alcun account che qualcuno possa violare
+• Ogni password, insieme alla sua nota, viene cifrata con AES-256-GCM prima di essere salvata
+• La chiave resta in Android Keystore e non lascia mai il dispositivo
+• Niente pubblicità, niente statistiche d'uso, niente tracciamento
+
+LE TUE PASSWORD SI APRONO SOLO PER TE
+• Ogni password salvata si apre solo con il tuo PIN a 6 cifre, oppure con impronta o volto se li attivi
+• I PIN troppo facili, come 123456 o 111111, vengono rifiutati
+• Sette PIN sbagliati di fila bloccano il tastierino: 30 secondi, poi 1, 5 e 15 minuti
+• Gli avvisi di PIN errato elencano ogni blocco e possono scattare una foto a chi stava tentando di indovinare (facoltativo; le foto restano sul tuo telefono)
+• Una password mostrata si nasconde di nuovo dopo 30 secondi, e una copiata viene cancellata dagli appunti dopo 30 secondi
+
+GENERATORE DI PASSWORD
+• Crea password robuste da 8 a 64 caratteri, con o senza numeri e simboli
+• Esclude i caratteri che si confondono, come l, I, O e 0
+• Indicatore di sicurezza su ogni password
+• Ti avvisa prima che tu riutilizzi una password già salvata
+
+CONTROLLO PASSWORD
+• Trova le password deboli e quelle usate su più di un sito
+• Ti mostra cosa sistemare per primo, con un pulsante per cambiare ciascuna
+• Il controllo avviene sul telefono; non viene inviato nulla da nessuna parte
+
+COMPILAZIONE AUTOMATICA NELLE ALTRE APP
+• Inserisci gli accessi salvati nelle altre app e nei browser che supportano la compilazione automatica di Android
+• Salva un nuovo accesso quando entri da qualche parte, senza aprire il gestore password
+• Non viene compilato nulla finché non confermi con impronta, volto o blocco schermo
+
+BACKUP CIFRATO
+• Salva il backup delle password in un unico file cifrato, protetto da una password di backup dedicata (Argon2id + AES-256-GCM)
+• Conservalo dove vuoi: sul telefono, sul computer o nello spazio di archiviazione che usi già
+• Ripristina su un telefono nuovo: aggiunge ciò che manca e non cancella mai nulla
+
+UN QUADERNO DELLE PASSWORD, MA SEMPLICE
+• Un elenco pulito con ricerca e icone con l'iniziale, come un quaderno delle password che non si perde in un cassetto
+• Suggerimenti di siti e app conosciuti mentre scrivi
+• Il campo utente si adatta: email, numero di telefono, codice cliente o rete Wi-Fi
+• Tema chiaro e scuro
+• Una breve citazione sulla sicurezza ogni volta che la apri
+• Uno spazio per le note di tutti i giorni (i segreti mettili nella nota cifrata di ogni password)
+
+A CHI SERVE QUESTA APP PER SALVARE LE PASSWORD
+• A chi vuole un gestore password locale, senza affidare le proprie password a un servizio cloud
+• A chi è stanco del quaderno, dell'app delle note o della stessa password ovunque
+• A famiglie e piccoli negozi che vogliono tenere le password di banca, email, Wi-Fi e portafogli digitali in un'unica cassaforte offline
+
+COSA NON È
+Non c'è sincronizzazione cloud e non c'è un account, quindi la tua cassaforte vive su un solo telefono: tieni un file di backup in un posto sicuro. Bimir Lock non controlla le password nelle liste di violazioni di dati e non genera codici 2FA. Per ora l'app è in inglese.
+
+Gratis, senza pubblicità, senza abbonamento e senza acquisti in-app: un password manager offline creato da un unico sviluppatore a Pokhara, in Nepal.

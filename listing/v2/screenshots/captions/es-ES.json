@@ -1,0 +1,34 @@
+{
+  "vault": {
+    "head": "Tus contraseñas, bajo llave",
+    "sub": "Caja fuerte offline. Sin cuenta, sin nube."
+  },
+  "autofill": {
+    "head": "Autocompleta en otras apps",
+    "sub": "Tras Face ID, tu huella o el bloqueo de pantalla"
+  },
+  "generator": {
+    "head": "Contraseñas seguras con un toque",
+    "sub": "Elige la longitud, los números y los símbolos"
+  },
+  "checkup": {
+    "head": "Encuentra contraseñas débiles",
+    "sub": "Y las repetidas. Te dice qué arreglar primero."
+  },
+  "unlock": {
+    "head": "Solo se abren para ti",
+    "sub": "PIN de 6 dígitos, huella o Face ID"
+  },
+  "alerts": {
+    "head": "Mira quién ha intentado entrar",
+    "sub": "Foto opcional tras 7 PIN incorrectos, solo en tu móvil"
+  },
+  "backup": {
+    "head": "Una copia que solo tú abres",
+    "sub": "Un archivo cifrado con su propia contraseña"
+  },
+  "dark": {
+    "head": "Descanso para tus ojos de noche",
+    "sub": "Temas claro y oscuro"
+  }
+}
