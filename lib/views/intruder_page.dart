@@ -22,32 +22,65 @@ class IntruderPage extends StatefulWidget {
   State<IntruderPage> createState() => _IntruderPageState();
 }
 
-class _IntruderPageState extends State<IntruderPage> {
+class _IntruderPageState extends State<IntruderPage>
+    with WidgetsBindingObserver {
   bool? _photoOn;
   bool _checking = false;
+
+  /// The photo is switched on, but the camera was refused or turned off in the
+  /// phone's settings since: locks would be listed with no photo, silently.
+  bool _cameraOff = false;
   List<IntruderEvent>? _events;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _load();
     IntruderWatch.markSeen();
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Back from the phone's settings, where the camera may just have been
+    // allowed (or taken away).
+    if (state == AppLifecycleState.resumed) _load();
+  }
+
   Future<void> _load() async {
     final bool on = await IntruderWatch.isEnabled();
+    final bool cameraOff = on && !await AppPermissions.cameraGranted();
     final List<IntruderEvent> events = await IntruderWatch.events();
     if (!mounted) return;
     setState(() {
       _photoOn = on;
+      _cameraOff = cameraOff;
       _events = events;
     });
+  }
+
+  /// Asks again while the phone still will; otherwise offers its settings.
+  Future<void> _allowCamera() async {
+    await AppPermissions.camera(
+      context,
+      why: 'Wrong PIN alerts take the photo with the front camera.',
+    );
+    await _load();
   }
 
   Future<void> _toggle(bool on) async {
     if (!on) {
       await IntruderWatch.setEnabled(false);
-      setState(() => _photoOn = false);
+      setState(() {
+        _photoOn = false;
+        _cameraOff = false;
+      });
       return;
     }
     setState(() => _checking = true);
@@ -63,6 +96,7 @@ class _IntruderPageState extends State<IntruderPage> {
     setState(() {
       _checking = false;
       _photoOn = ok;
+      _cameraOff = false;
     });
     // A refusal was already explained (and Settings offered) by AppPermissions.
     if (allowed && !ok) {
@@ -121,7 +155,11 @@ class _IntruderPageState extends State<IntruderPage> {
                     color: p.primarySoft,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Icon(LucideIcons.camera, size: 18, color: p.onPrimarySoft),
+                  child: Icon(
+                    LucideIcons.camera,
+                    size: 18,
+                    color: p.onPrimarySoft,
+                  ),
                 ),
                 title: const Text('Take a photo'),
                 subtitle: Text(
@@ -131,11 +169,30 @@ class _IntruderPageState extends State<IntruderPage> {
                 onChanged: _photoOn == null || _checking ? null : _toggle,
               ),
             ),
+            if (_cameraOff) ...[
+              const SizedBox(height: Space.md),
+              Notice(
+                tone: Tone.warning,
+                icon: LucideIcons.cameraOff,
+                title: 'Camera access is off',
+                message:
+                    'Take a photo is on, but Bimir Lock is not allowed to use the camera, so locks are listed without a photo.',
+                action: TextButton(
+                  onPressed: _allowCamera,
+                  child: const Text('Allow camera'),
+                ),
+              ),
+            ],
             const SizedBox(height: Space.xl),
             const _Schedule(),
             const SizedBox(height: Space.xl),
             Padding(
-              padding: const EdgeInsets.fromLTRB(Space.xs, 0, Space.xs, Space.sm),
+              padding: const EdgeInsets.fromLTRB(
+                Space.xs,
+                0,
+                Space.xs,
+                Space.sm,
+              ),
               child: Eyebrow('Recent'),
             ),
             if (events == null)
@@ -270,7 +327,9 @@ class _EventRowState extends State<_EventRow> {
     final DateTime day = DateTime(at.year, at.month, at.day);
     final String time = DateFormat.jm().format(at);
     if (day == today) return 'Today, $time';
-    if (day == today.subtract(const Duration(days: 1))) return 'Yesterday, $time';
+    if (day == today.subtract(const Duration(days: 1))) {
+      return 'Yesterday, $time';
+    }
     return '${DateFormat('d MMM y').format(at)}, $time';
   }
 
@@ -295,7 +354,12 @@ class _EventRowState extends State<_EventRow> {
                       : photoRect(_thumb.currentContext!),
                 ),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(Space.lg, Space.md, Space.xs, Space.md),
+            padding: const EdgeInsets.fromLTRB(
+              Space.lg,
+              Space.md,
+              Space.xs,
+              Space.md,
+            ),
             child: Row(
               children: [
                 Container(
@@ -312,8 +376,11 @@ class _EventRowState extends State<_EventRow> {
                       : Image.file(
                           photo,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, _, _) =>
-                              Icon(LucideIcons.imageOff, size: 22, color: p.muted),
+                          errorBuilder: (_, _, _) => Icon(
+                            LucideIcons.imageOff,
+                            size: 22,
+                            color: p.muted,
+                          ),
                         ),
                 ),
                 const SizedBox(width: Space.lg),
@@ -327,7 +394,9 @@ class _EventRowState extends State<_EventRow> {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        photo == null ? '${_when(event.at)} · no photo' : _when(event.at),
+                        photo == null
+                            ? '${_when(event.at)} · no photo'
+                            : _when(event.at),
                         style: t.bodySmall?.copyWith(color: p.muted),
                       ),
                     ],

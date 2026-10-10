@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:bimir_lock/utils/helper/pin_guard.dart';
+import 'package:bimir_lock/utils/helper/app_permissions.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
@@ -114,7 +115,11 @@ class IntruderWatch {
 
   static Future<void> _onLock(int attempt) async {
     String? photo;
-    if (await isEnabled()) photo = await _capture();
+    // Only with the camera already allowed: opening it otherwise would put the
+    // system's permission prompt in front of whoever is guessing.
+    if (await isEnabled() && await AppPermissions.cameraGranted()) {
+      photo = await _capture();
+    }
     await _append(
       IntruderEvent(at: DateTime.now(), attempt: attempt, photo: photo),
     );
