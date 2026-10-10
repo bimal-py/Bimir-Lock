@@ -1,7 +1,7 @@
 import 'dart:io' show Platform;
 
-import 'package:app_settings/app_settings.dart';
 import 'package:bimir_lock/core/utils/helpers/dialog/dialog.dart';
+import 'package:bimir_lock/utils/helper/autofill_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -95,10 +95,9 @@ class AppPermissions {
   /// Android. iOS has no link to Face ID & Passcode, so the Settings app
   /// opens on this app's page instead.
   static Future<void> openSecurity() async {
-    try {
-      Platform.isAndroid
-          ? await AppSettings.openAppSettings(type: AppSettingsType.security)
-          : await openAppSettings();
-    } catch (_) {}
+    if (Platform.isAndroid && await AutofillHelper().openSecuritySettings()) {
+      return;
+    }
+    await openAppPage();
   }
 }

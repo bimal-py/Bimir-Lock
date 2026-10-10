@@ -29,7 +29,9 @@ if (keystorePropertiesFile.exists()) {
 }
 android {
     namespace "com.cklamib.bimirLock"
-    compileSdk = 36
+    // 37: permission_handler_android compiles against it, and a newer compileSdk
+    // is backward compatible. targetSdk (runtime behaviour) stays at 36.
+    compileSdk = 37
     ndkVersion flutter.ndkVersion
 
     compileOptions {

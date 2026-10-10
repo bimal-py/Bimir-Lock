@@ -34,6 +34,7 @@ class MainActivity : FlutterFragmentActivity() {
                     "isAutofillEnabled" -> result.success(autofillEnabled())
                     "openAutofillSettings" -> result.success(openAutofillSettings())
                     "disableAutofillService" -> result.success(disableAutofillService())
+                    "openSecuritySettings" -> result.success(openSecuritySettings())
                     else -> result.notImplemented()
                 }
             } catch (t: Throwable) {
@@ -122,6 +123,17 @@ class MainActivity : FlutterFragmentActivity() {
             false
         } catch (t: Throwable) {
             Log.w(TAG, "could not open autofill settings", t)
+            false
+        }
+    }
+
+    // Where fingerprints and face unlock are enrolled, for "Set up fingerprint first".
+    private fun openSecuritySettings(): Boolean {
+        return try {
+            startActivity(Intent(Settings.ACTION_SECURITY_SETTINGS))
+            true
+        } catch (t: Throwable) {
+            Log.w(TAG, "could not open security settings", t)
             false
         }
     }

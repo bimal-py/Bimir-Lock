@@ -37,4 +37,9 @@ class AutofillHelper {
   Future<bool> openSettings() => _invokeBool("openAutofillSettings");
 
   Future<bool> disableService() => _invokeBool("disableAutofillService");
+
+  // The phone's security settings, where a fingerprint or face is enrolled.
+  // Rides this channel because it is the app's one Android channel. False on
+  // iOS, or when the phone has no such screen.
+  Future<bool> openSecuritySettings() => _invokeBool("openSecuritySettings");
 }
