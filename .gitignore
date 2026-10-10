@@ -75,3 +75,6 @@ android/key.properties
 # by download_store_details.
 **/review_information/phone_number.txt
 **/store_details/contact_phone.txt
+
+# Gradle output from release builds
+/android/build/
