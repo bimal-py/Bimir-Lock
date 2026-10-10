@@ -78,6 +78,29 @@ const List<FaqEntry> faqEntries = <FaqEntry>[
   ),
   FaqEntry(
     topic: FaqTopic.unlock,
+    question: 'My phone has no fingerprint or Face ID. Can I still use it?',
+    answer:
+        'Yes. Your 6-digit PIN opens everything, and nothing else is needed. '
+        'The one difference: a forgotten PIN can only be reset with '
+        'fingerprint or Face ID unlock, so on a phone without them keep a '
+        'backup file (Settings › Backup) somewhere safe. Bimir Lock never '
+        'accepts the phone\'s own screen-lock PIN in place of its PIN, because '
+        'anyone who knows that could then open your passwords.',
+    tags: <String>['pin only', 'no biometrics', 'old phone', 'screen lock pin'],
+  ),
+  FaqEntry(
+    topic: FaqTopic.unlock,
+    question: 'Why can\'t I turn on fingerprint or Face ID unlock?',
+    answer:
+        'Settings › Security says why. If nothing is set up yet, add a '
+        'fingerprint or face in the phone\'s own settings first. On iPhone, '
+        'Face ID may be switched off for Bimir Lock: allow it in the phone\'s '
+        'Settings under Bimir Lock. Tap the row and Bimir Lock opens the right '
+        'settings page. Your PIN keeps working either way.',
+    tags: <String>['biometric not working', 'enable', 'switch greyed'],
+  ),
+  FaqEntry(
+    topic: FaqTopic.unlock,
     question: 'What are Wrong PIN alerts?',
     answer:
         'Settings › Security › Wrong PIN alerts lists every time the keypad '
@@ -269,6 +292,17 @@ const List<FaqEntry> faqEntries = <FaqEntry>[
         'Take a photo, to photograph whoever is typing each time wrong PINs '
         'lock the keypad. Photos stay on your phone.',
     tags: <String>['camera permission'],
+  ),
+  FaqEntry(
+    topic: FaqTopic.privacy,
+    question: 'I refused the camera. How do I allow it again?',
+    answer:
+        'Try the same thing again (a profile photo, or Wrong PIN alerts › Take '
+        'a photo). If the phone no longer asks, Bimir Lock shows "Camera '
+        'access is off" with an Open Settings button: turn on Camera for Bimir '
+        'Lock there and come back. Choosing a photo from your library needs '
+        'no permission at all.',
+    tags: <String>['permission denied', 'allow camera', 'open settings', 'photos'],
   ),
   FaqEntry(
     topic: FaqTopic.privacy,
