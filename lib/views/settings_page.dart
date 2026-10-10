@@ -233,16 +233,14 @@ class _SettingsPageState extends State<SettingsPage> {
               () => ac.available && !ac.on
                   ? Padding(
                       padding: const EdgeInsets.only(top: Space.xl),
-                      child: Notice(
-                        tone: Tone.secure,
+                      // Dashed, and the whole of it the button: it marks
+                      // something that is not switched on yet.
+                      child: DashedAction(
                         icon: LucideIcons.textCursorInput,
                         title: 'AutoFill is off',
                         message:
-                            'Turn it on to fill your saved passwords in other apps.',
-                        action: TextButton(
-                          onPressed: () => offerAutofill(context),
-                          child: const Text('Turn on'),
-                        ),
+                            'Tap to turn it on and fill your saved passwords in other apps.',
+                        onTap: () => offerAutofill(context),
                       ),
                     )
                   : const SizedBox.shrink(),

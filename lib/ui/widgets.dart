@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show PathMetric;
 
 import 'package:bimir_lock/core/core.dart';
 import 'package:bimir_lock/ui/password_tools.dart';
@@ -244,6 +245,110 @@ class Notice extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Something that is off and can be switched on: a dashed outline around the
+/// words, the whole of it one button. The dashes say "not there yet" the way a
+/// solid card says "here it is", so no separate button is needed.
+class DashedAction extends StatelessWidget {
+  const DashedAction({
+    super.key,
+    required this.title,
+    required this.message,
+    required this.onTap,
+    this.icon,
+  });
+
+  final String title;
+  final String message;
+  final VoidCallback onTap;
+  final IconData? icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme s = Theme.of(context).colorScheme;
+    final TextTheme t = Theme.of(context).textTheme;
+    final BorderRadius radius = BorderRadius.circular(Radii.card);
+    return Semantics(
+      button: true,
+      child: CustomPaint(
+        foregroundPainter: _DashedBorder(color: s.primary, radius: Radii.card),
+        child: Material(
+          color: s.primaryContainer.withValues(alpha: 0.35),
+          borderRadius: radius,
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.all(Space.lg),
+              child: Row(
+                children: [
+                  if (icon != null) ...[
+                    Icon(icon, size: 20, color: s.primary),
+                    const SizedBox(width: Space.md),
+                  ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(title, style: t.titleSmall),
+                        const SizedBox(height: 2),
+                        Text(
+                          message,
+                          style: t.bodyMedium?.copyWith(
+                            color: s.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: Space.sm),
+                  Icon(LucideIcons.chevronRight, size: 20, color: s.primary),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DashedBorder extends CustomPainter {
+  const _DashedBorder({required this.color, required this.radius});
+
+  final Color color;
+  final double radius;
+
+  static const double _dash = 6;
+  static const double _gap = 4;
+  static const double _width = 1.4;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = _width
+      ..strokeCap = StrokeCap.round;
+    // Inset by half the stroke so the line sits inside the card's edge.
+    final Path outline = Path()
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          (Offset.zero & size).deflate(_width / 2),
+          Radius.circular(radius),
+        ),
+      );
+    for (final PathMetric metric in outline.computeMetrics()) {
+      for (double at = 0; at < metric.length; at += _dash + _gap) {
+        canvas.drawPath(metric.extractPath(at, at + _dash), paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(_DashedBorder old) =>
+      old.color != color || old.radius != radius;
 }
 
 /// Four segments and a word: red for weak, amber for fair, brand for strong.
