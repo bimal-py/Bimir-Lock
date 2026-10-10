@@ -14,6 +14,9 @@ class BiometricController extends GetxController with WidgetsBindingObserver {
   final StorageHelper storageHelper = StorageHelper();
 
   RxBool isAvailable = false.obs;
+
+  /// Why it is (not) available, for Settings to explain and offer the fix.
+  Rx<BiometricState> state = BiometricState.noHardware.obs;
   RxBool isEnabled = false.obs;
   RxString label = "fingerprint".obs;
   bool _busy = false;
@@ -41,6 +44,11 @@ class BiometricController extends GetxController with WidgetsBindingObserver {
 
   Future<void> refreshStatus() async {
     isAvailable.value = await helper.isAvailable();
+    // "Ready" only when the stricter availability check agrees.
+    final BiometricState now = await helper.state();
+    state.value = now == BiometricState.ready && !isAvailable.value
+        ? BiometricState.notEnrolled
+        : now;
     isEnabled.value = await storageHelper.readBiometricUnlock();
     label.value = await helper.label();
   }
@@ -51,6 +59,7 @@ class BiometricController extends GetxController with WidgetsBindingObserver {
   Future<void> toggle(
     bool value, {
     required Future<bool> Function() confirmPin,
+    Future<void> Function(BiometricState why)? onUnavailable,
   }) async {
     if (_busy) return;
     _busy = true;
@@ -67,7 +76,11 @@ class BiometricController extends GetxController with WidgetsBindingObserver {
       }
       await refreshStatus();
       if (!isAvailable.value) {
-        _toast("Set up ${label.value} in your phone's settings first.");
+        // Settings explains why and offers the way to fix it; without that,
+        // the old one-line note.
+        onUnavailable != null
+            ? await onUnavailable(state.value)
+            : _toast("Set up ${label.value} in your phone's settings first.");
         return;
       }
       if (!await confirmPin()) return;

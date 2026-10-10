@@ -14,6 +14,8 @@ import 'package:bimir_lock/ui/tokens.dart';
 import 'package:bimir_lock/ui/unlock.dart';
 import 'package:bimir_lock/ui/widgets.dart';
 import 'package:bimir_lock/utils/constants.dart';
+import 'package:bimir_lock/utils/helper/app_permissions.dart';
+import 'package:bimir_lock/utils/helper/biometric_helper.dart';
 import 'package:bimir_lock/utils/helper/app_reset.dart';
 import 'package:bimir_lock/utils/helper/feedback.dart';
 import 'package:bimir_lock/utils/helper/intruder_watch.dart';
@@ -148,6 +150,48 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
+  /// Why fingerprint / face unlock cannot be switched on here, and the way
+  /// to fix it where there is one.
+  Future<void> _explainBiometric(BiometricState why) async {
+    final String how = bc.label.value;
+    switch (why) {
+      case BiometricState.ready:
+        return;
+      case BiometricState.notEnrolled:
+        final bool open = await DialogUtils.showConfirmationDialog(
+          context,
+          title: 'Set up $how first',
+          message:
+              'Bimir Lock can open with your $how once it is set up on this phone. Add it in the phone\'s settings, then come back and switch this on. Your PIN keeps working either way.',
+          confirmText: 'Open Settings',
+          cancelText: 'Not now',
+          icon: _isFace(how)
+              ? LucideIcons.scanFace
+              : LucideIcons.fingerprintPattern,
+        );
+        if (open) await AppPermissions.openSecurity();
+      case BiometricState.blocked:
+        await AppPermissions.offerSettings(
+          context,
+          title: '$how is off for Bimir Lock',
+          message:
+              'Allow $how for Bimir Lock in your phone\'s settings (or set it up under Face ID & Passcode), then come back and switch this on. Your PIN keeps working either way.',
+          icon: _isFace(how)
+              ? LucideIcons.scanFace
+              : LucideIcons.fingerprintPattern,
+        );
+      case BiometricState.noHardware:
+        await DialogUtils.showInformationDialog(
+          context,
+          title: 'No fingerprint or face unlock',
+          message:
+              'This phone cannot unlock with a fingerprint or a face, so your PIN opens everything. A forgotten PIN cannot be reset here: keep a backup file (Settings › Backup) somewhere safe.',
+          icon: LucideIcons.keyRound,
+        );
+    }
+    await bc.refreshStatus();
+  }
+
   bool _isFace(String label) => label.toLowerCase().contains('face');
 
   @override
@@ -210,6 +254,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         title: 'Forgot PIN?',
                         subtitle: bc.canUse
                             ? 'Reset it with ${bc.label.value}'
+                            : bc.state.value == BiometricState.noHardware
+                            ? "Can't be reset on this phone. Keep a backup file."
                             : 'Needs ${bc.label.value} unlock to be on',
                         onTap: () async {
                           await forgotPin(context);
@@ -252,21 +298,39 @@ class _SettingsPageState extends State<SettingsPage> {
                       icon: _isFace(bc.label.value)
                           ? LucideIcons.scanFace
                           : LucideIcons.fingerprintPattern,
-                      title: 'Unlock with ${bc.label.value}',
-                      subtitle: bc.isAvailable.value
-                          ? 'Instead of typing the PIN'
-                          : 'Set it up in your phone\'s settings first',
+                      title: bc.state.value == BiometricState.noHardware
+                          ? 'Fingerprint or face unlock'
+                          : 'Unlock with ${bc.label.value}',
+                      subtitle: switch (bc.state.value) {
+                        BiometricState.ready => 'Instead of typing the PIN',
+                        BiometricState.notEnrolled =>
+                          'Set up ${bc.label.value} on this phone first',
+                        BiometricState.blocked =>
+                          '${bc.label.value} is off for Bimir Lock',
+                        BiometricState.noHardware =>
+                          'Not on this phone. Your PIN opens everything.',
+                      },
+                      // What to do about it, when it cannot simply be
+                      // switched on.
+                      onTap: bc.state.value == BiometricState.ready
+                          ? null
+                          : () => _explainBiometric(bc.state.value),
                       trailing: Switch(
                         value: bc.isEnabled.value,
-                        onChanged: (bool v) => bc.toggle(
-                          v,
-                          confirmPin: () => confirmIdentity(
-                            context,
-                            title: 'Confirm your PIN',
-                            message: 'To turn on ${bc.label.value} unlock.',
-                            allowBiometric: false,
-                          ),
-                        ),
+                        // Nothing to switch on a phone that has neither.
+                        onChanged: bc.state.value == BiometricState.noHardware
+                            ? null
+                            : (bool v) => bc.toggle(
+                                v,
+                                confirmPin: () => confirmIdentity(
+                                  context,
+                                  title: 'Confirm your PIN',
+                                  message:
+                                      'To turn on ${bc.label.value} unlock.',
+                                  allowBiometric: false,
+                                ),
+                                onUnavailable: _explainBiometric,
+                              ),
                       ),
                     ),
                     // Left out where the OS has no autofill framework for us.

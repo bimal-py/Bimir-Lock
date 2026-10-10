@@ -15,6 +15,23 @@ enum BiometricOutcome {
   failed,
 }
 
+/// What this phone can do about fingerprint / face unlock right now. The app
+/// PIN works in every one of these; biometrics only ever stand in for typing it.
+enum BiometricState {
+  /// A fingerprint or face is set up and the app may use it.
+  ready,
+
+  /// The phone can do it, but nothing is enrolled yet (phone settings).
+  notEnrolled,
+
+  /// On iPhone / iPad: Face ID or Touch ID is not available to this app —
+  /// switched off for Bimir Lock in Settings, or not set up on the device.
+  blocked,
+
+  /// No fingerprint reader or face unlock at all. PIN only.
+  noHardware,
+}
+
 // Every local_auth call goes through here so no exception can reach a widget.
 // Biometrics only ever stand in for typing the access PIN; they never replace it.
 class BiometricHelper {
@@ -28,6 +45,27 @@ class BiometricHelper {
     } catch (e) {
       log("biometric availability check failed: ${e.runtimeType}");
       return false;
+    }
+  }
+
+  /// Why biometric unlock can or cannot be switched on, so Settings can say
+  /// what to do about it instead of only "not available".
+  Future<BiometricState> state() async {
+    try {
+      // True when the hardware exists, enrolled or not.
+      if (!await _auth.canCheckBiometrics) {
+        // Every iPhone and iPad this app runs on has Face ID or Touch ID, so
+        // "cannot check" there means it is off for this app or not set up.
+        return Platform.isIOS
+            ? BiometricState.blocked
+            : BiometricState.noHardware;
+      }
+      return (await _auth.getAvailableBiometrics()).isEmpty
+          ? BiometricState.notEnrolled
+          : BiometricState.ready;
+    } catch (e) {
+      log("biometric state check failed: ${e.runtimeType}");
+      return BiometricState.noHardware;
     }
   }
 

@@ -56,8 +56,10 @@ Future<void> forgotPin(BuildContext context) async {
   final bool erase = await DialogUtils.showConfirmationDialog(
     context,
     title: "Your PIN can't be reset",
-    message:
-        "Only $how unlock can prove it is you, and it is off. Without your PIN, the way back in is to erase Bimir Lock on this phone, set it up again, and restore your passwords from a backup file.\n\nWhile you know your PIN, turn on $how unlock in Settings so this never happens.",
+    message: bc.state.value == BiometricState.noHardware
+        // A phone with a PIN and nothing else: there is nothing to turn on.
+        ? "This phone has no fingerprint or face unlock to prove it is you. Without your PIN, the way back in is to erase Bimir Lock on this phone, set it up again, and restore your passwords from a backup file.\n\nWhile you know your PIN, keep a backup file (Settings › Backup) somewhere safe."
+        : "Only $how unlock can prove it is you, and it is off. Without your PIN, the way back in is to erase Bimir Lock on this phone, set it up again, and restore your passwords from a backup file.\n\nWhile you know your PIN, turn on $how unlock in Settings so this never happens.",
     confirmText: 'Erase and start again',
     cancelText: 'Not now',
     dialogType: DialogType.danger,
