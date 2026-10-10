@@ -9,7 +9,7 @@ Features to look at:
 - The first time the vault opens (once a PIN is set), a dialog offers Wrong PIN alerts photos with a "Take a photo" switch, on by default; the camera permission is asked for only if it stays on. You can also change it in Settings > Security > Wrong PIN alerts.
 - Wrong PINs: 10 in a row lock the keypad for 30 seconds, then 7 more for 1 minute, 5 more for 5 minutes, and every 3 more for 15 minutes. If "Take a photo" is on, the front camera photographs whoever was guessing. Photos stay on the device; nothing is uploaded.
 - Settings > Backup: creates an encrypted file (Argon2id + AES-256-GCM, with its own password) through the system save dialog; Restore adds entries from such a file.
-- AutoFill: the app includes a Credential Provider extension. Turn it on in iOS Settings > General > AutoFill & Passwords > Bimir Lock. In any login field, choose Passwords > Bimir Lock; the list opens after Face ID or the device passcode. The extension fills only (iOS offers no API for third-party save prompts).
+- AutoFill: the app includes a Credential Provider extension. The same steps are shown in the app (a one-time dialog on the vault, and Settings > Security > AutoFill, which also shows whether it is on). Turn it on in iOS Settings > General > AutoFill & Passwords > Bimir Lock. In any login field, choose Passwords > Bimir Lock; the list opens after Face ID or the device passcode. The extension fills only (iOS offers no API for third-party save prompts).
 
 Network: the only connection the app makes is a version check against the App Store. No analytics, ads, tracking or third-party SDKs.
 
