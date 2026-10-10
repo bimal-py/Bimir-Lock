@@ -110,7 +110,7 @@ listing and the 1.1.1 build to go live together.
 **Feature graphic:** `tool/make_feature_graphic.py --install`, or see `FEATURE_GRAPHIC_PROMPT.md`.
 **Video:** none (optional; a 30-second screen recording of add → generate → autofill would help).
 
-### Release 1.1.1 (versionCode 6)
+### Release 1.1.1 (versionCode 7)
 
 You build the AAB; then `cd android && bundle exec fastlane deploy` puts it on
 production as a **draft** with the changelogs from `listing/v2/play/<locale>/changelog.txt`.
