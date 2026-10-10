@@ -58,7 +58,9 @@ one App Store Connect team (DBZRMJ85NN). Neither key is in the repo:
 On a new machine, copy `android/fastlane/.env` and `ios/fastlane/appstore_api_key.json`
 from the Callbreak repo — they are identical.
 
-Verified 2026-10-10: `probe` reads Play (`com.cklamib.bimirLock`, production code 3,
+Uploaded 2026-10-10: Play listing text (30 locales) and the en-US feature graphic; App Store
+text for 26 locales as a draft on 1.1.1, with categories and the review contact. Verified
+2026-10-10: `probe` reads Play (`com.cklamib.bimirLock`, production code 3,
 en-US only) and App Store Connect (app id 6821090857, version 1.0 in Prepare for
 Submission, nothing written yet).
 
@@ -100,7 +102,7 @@ cd ../ios     && bundle exec fastlane upload_listing      # text + screenshots
 
 ## Lanes
 
-**Android** (`cd android`): `probe`, `tracks`, `download_listing`,
+**Android** (`cd android`): `probe`, `tracks`, `images` (live graphics vs disk, by checksum), `download_listing`,
 `download_store_details`, `upload_listing`, `upload_images`, `upload_changelogs`,
 `deploy` (uploads an AAB you already built as a **draft** release — it never builds).
 

@@ -137,6 +137,40 @@ platform :android do
     end
   end
 
+  # Count the live graphics for a locale and check them against what is on disk.
+  #
+  #   bundle exec fastlane images            # en-US
+  #   bundle exec fastlane images locale:ne-NP
+  #
+  # `supply` prints success for an image upload whatever happened to it, so this
+  # compares SHA-256 sums: "same as local" means the file on disk is the one live.
+  # Read-only.
+  desc "List the live Play graphics for a locale and compare them with disk"
+  lane :images do |options|
+    require 'supply'
+    require 'digest'
+
+    locale = options[:locale] || "en-US"
+    Dir.chdir("..") do
+      Supply.config = FastlaneCore::Configuration.create(Supply::Options.available_options, {})
+      client = Supply::Client.make_from_config
+      client.begin_edit(package_name: Supply.config[:package_name])
+      begin
+        base = File.join(Supply.config[:metadata_path] || "fastlane/metadata/android", locale, "images")
+        %w[featureGraphic icon phoneScreenshots sevenInchScreenshots tenInchScreenshots].each do |type|
+          remote = client.fetch_images(image_type: type, language: locale)
+          local = Dir.glob([File.join(base, "#{type}.{png,jpg,jpeg}"), File.join(base, type, "*.{png,jpg,jpeg}")]).sort
+          sums = local.map { |f| Digest::SHA256.file(f).hexdigest }
+          same = remote.map(&:sha256).sort == sums.sort
+          UI.message(format("  %-22s live %d  local %d  %s", type, remote.size, local.size,
+                            same ? "same as local" : "DIFFERENT from local"))
+        end
+      ensure
+        client.abort_current_edit
+      end
+    end
+  end
+
   # Print what is actually in each track, with version codes.
   #
   #   bundle exec fastlane tracks

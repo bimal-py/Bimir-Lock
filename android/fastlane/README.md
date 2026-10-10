@@ -47,6 +47,14 @@ Download Play Console store settings (support email, phone, website)
 
 Print the live Play listing — locales, titles and field lengths
 
+### android images
+
+```sh
+[bundle exec] fastlane android images
+```
+
+List the live Play graphics for a locale and compare them with disk
+
 ### android tracks
 
 ```sh

@@ -92,7 +92,17 @@ platform :ios do
 
     existing = app.get_edit_app_store_version
     if existing
-      UI.success("editable version already exists: #{existing.version_string} [#{existing.app_store_state}]")
+      wanted = options[:version]
+      if wanted.nil? || wanted.to_s == existing.version_string
+        UI.success("editable version already exists: #{existing.version_string} [#{existing.app_store_state}]")
+        next
+      end
+      # A draft with another number (App Store Connect starts a new app at "1.0"):
+      # rename it, which is what ensure_version! does to an editable version.
+      UI.message("renaming editable version #{existing.version_string} -> #{wanted}")
+      app.ensure_version!(wanted.to_s, platform: Spaceship::ConnectAPI::Platform::IOS)
+      renamed = app.get_edit_app_store_version
+      UI.success("editable version is now #{renamed.version_string} [#{renamed.app_store_state}]")
       next
     end
 
@@ -208,6 +218,22 @@ platform :ios do
     UI.message("app-level name/subtitle, editable record (#{infos.size} locale(s)):")
     infos.sort_by(&:locale).each do |i|
       UI.message(format("  %-7s %-32s | %s", i.locale, i.name.to_s, i.subtitle.to_s))
+    end
+
+    # Categories and the App Review contact: deliver uploads both, and neither shows
+    # in the per-locale tables below.
+    begin
+      UI.message("categories: #{info&.primary_category&.id || '-'} / #{info&.secondary_category&.id || '-'}")
+      detail = (edit || live)&.fetch_app_store_review_detail
+      if detail
+        UI.message("review contact: #{detail.contact_first_name} #{detail.contact_last_name}, " \
+                   "#{detail.contact_email}, phone #{detail.contact_phone.to_s.empty? ? 'missing' : 'set'}, " \
+                   "notes #{detail.notes.to_s.length} chars, demo account required: #{detail.demo_account_required}")
+      else
+        UI.important("review contact: none yet")
+      end
+    rescue => e
+      UI.important("could not read categories / review contact: #{e.message}")
     end
 
     locales = (edit || live)&.get_app_store_version_localizations || []
