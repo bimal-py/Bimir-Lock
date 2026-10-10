@@ -15,7 +15,7 @@ uses. Neither file is in git.
 
 ## 1. Bump the version
 
-`pubspec.yaml`, e.g. `1.1.1+5` → `1.1.2+6`. The number after `+` is the Play
+`pubspec.yaml`, e.g. `1.1.1+6` → `1.1.2+7`. The number after `+` is the Play
 version code and must always go up. `assemble_listing.py` names the Play
 changelog file after it.
 
