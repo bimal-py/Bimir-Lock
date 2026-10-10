@@ -173,10 +173,11 @@ const List<FaqEntry> faqEntries = <FaqEntry>[
     topic: FaqTopic.autofill,
     question: 'How do I turn on AutoFill on iPhone or iPad?',
     answer:
-        'In the iPhone\'s Settings, go to General › AutoFill & Passwords (on '
-        'iOS 17 and earlier: Passwords › Password Options) and turn on Bimir '
-        'Lock. In a sign-in field, tap Passwords or the key above the keyboard '
-        'and choose Bimir Lock.',
+        'Settings › Security › AutoFill in Bimir Lock shows whether it is on '
+        'and takes you there. Or, in the iPhone\'s Settings, go to General › '
+        'AutoFill & Passwords (on iOS 17 and earlier: Passwords › Password '
+        'Options) and turn on Bimir Lock. Then, in a sign-in field, tap '
+        'Passwords or the key above the keyboard and choose Bimir Lock.',
     tags: <String>['ios autofill', 'iphone fill', 'password provider'],
   ),
   FaqEntry(

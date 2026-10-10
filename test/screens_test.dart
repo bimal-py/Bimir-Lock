@@ -10,6 +10,7 @@
 //   SCREENSHOT_DIR=/tmp/shots FONT_DIR=$FLUTTER_ROOT/bin/cache/artifacts/material_fonts \
 //     flutter test test/screens_test.dart
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -27,6 +28,7 @@ import 'package:bimir_lock/modules/notes/notes_bootstrap.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:bimir_lock/models/user_model.dart';
 import 'package:bimir_lock/utils/pages.dart';
+import 'package:bimir_lock/utils/helper/autofill_helper.dart';
 import 'package:bimir_lock/views/homePage/add_password.dart';
 import 'package:bimir_lock/views/homePage/home_page.dart';
 import 'package:bimir_lock/views/homePage/password_detail.dart';
@@ -36,6 +38,7 @@ import 'package:bimir_lock/views/intruder_page.dart';
 import 'package:bimir_lock/ui/photo_preview.dart';
 import 'package:bimir_lock/ui/site_field.dart';
 import 'package:bimir_lock/ui/intruder_prompt.dart';
+import 'package:bimir_lock/ui/autofill_guide.dart';
 import 'package:bimir_lock/widgets/backup_dialogs.dart';
 import 'package:bimir_lock/views/pin/set_access_pin.dart';
 import 'package:bimir_lock/views/settings_page.dart';
@@ -171,6 +174,18 @@ Future<void> _loadFonts() async {
   }
 }
 
+/// A phone that has the autofill framework, with Bimir Lock not switched on.
+class _AutofillOff extends AutofillHelper {
+  @override
+  Future<bool> isSupported() async => true;
+
+  @override
+  Future<bool> isEnabled() async => false;
+
+  @override
+  Future<bool> openSettings() async => true;
+}
+
 final GlobalKey _boundary = GlobalKey();
 
 Future<void> _pumpApp(
@@ -183,6 +198,7 @@ Future<void> _pumpApp(
   List<PasswordTable>? entries,
   Set<String> tours = const <String>{},
   Map<String, Object> prefs = const <String, Object>{},
+  bool autofillOff = false,
 }) async {
   tester.view.physicalSize = c.size * 2;
   tester.view.devicePixelRatio = 2;
@@ -194,10 +210,12 @@ Future<void> _pumpApp(
 
   Get.reset();
   IntruderPrompt.debugReset();
-  // The one-time Wrong PIN alerts prompt counts as seen unless a case says
-  // otherwise, so it does not cover every vault render.
+  AutofillPrompt.debugReset();
+  // The one-time prompts count as seen unless a case says otherwise, so they
+  // do not cover every vault render.
   SharedPreferences.setMockInitialValues(<String, Object>{
     IntruderPrompt.shownKey: true,
+    AutofillPrompt.shownKey: true,
     ...prefs,
   });
   final _FakeCore core = _FakeCore(
@@ -207,7 +225,10 @@ Future<void> _pumpApp(
   );
   Get.put<CoreController>(core);
   Get.put(BiometricController(), permanent: true);
-  Get.put(AutofillController(), permanent: true);
+  Get.put(
+    AutofillController(helper: autofillOff ? _AutofillOff() : null),
+    permanent: true,
+  );
   Get.put<HomePageController>(_FakeHome(entries ?? _sample()));
   CoachMarks.debugReset();
   CoachMarks.store = _Tours(unseen: tours);
@@ -464,6 +485,46 @@ void main() {
         );
         expect(find.text('Recent quotes'), findsOneWidget);
         await _shot(tester, '${c.name}-28-recent-quotes');
+      });
+
+      testWidgets('AutoFill off: the Settings notice', (WidgetTester tester) async {
+        await _pumpApp(
+          tester,
+          c,
+          route: SettingsPage.routeName,
+          user: _user,
+          autofillOff: true,
+        );
+        expect(find.text('AutoFill is off'), findsOneWidget);
+        await _shot(tester, '${c.name}-31-settings-autofill-off');
+      });
+
+      testWidgets('AutoFill off: offered once on the vault', (WidgetTester tester) async {
+        await _pumpApp(
+          tester,
+          c,
+          route: HomePage.routeName,
+          user: _user,
+          autofillOff: true,
+          prefs: <String, Object>{AutofillPrompt.shownKey: false},
+        );
+        expect(find.text('Fill passwords with AutoFill'), findsOneWidget);
+        await _shot(tester, '${c.name}-32-autofill-prompt');
+      });
+
+      testWidgets('iPhone AutoFill guide', (WidgetTester tester) async {
+        await _pumpApp(tester, c, route: SettingsPage.routeName, user: _user);
+        final BuildContext context = tester.element(find.byType(Scaffold).first);
+        unawaited(showAutofillGuide(context, enabled: false, ios: true));
+        await _settle(tester);
+        expect(find.text('Turn on'), findsOneWidget);
+        await _shot(tester, '${c.name}-29-autofill-guide');
+        await tester.tap(find.text('Not now'));
+        await _settle(tester);
+        unawaited(showAutofillGuide(context, enabled: true, ios: true));
+        await _settle(tester);
+        expect(find.text('AutoFill is on'), findsOneWidget);
+        await _shot(tester, '${c.name}-30-autofill-guide-on');
       });
 
       testWidgets('wrong PIN alerts prompt', (WidgetTester tester) async {

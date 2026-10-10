@@ -1,3 +1,4 @@
+import AuthenticationServices
 import Flutter
 import UIKit
 
@@ -138,9 +139,39 @@ import UIKit
       switch call.method {
       case "databaseDirectory":
         result(AppDelegate.databaseDirectory())
+      case "autofillEnabled":
+        AppDelegate.autofillEnabled(result)
+      case "openAutofillSettings":
+        AppDelegate.openAutofillSettings(result)
       default:
         result(FlutterMethodNotImplemented)
       }
+    }
+  }
+
+  /// Whether Bimir Lock is switched on under Settings › General › AutoFill & Passwords.
+  private static func autofillEnabled(_ result: @escaping FlutterResult) {
+    ASCredentialIdentityStore.shared.getState { state in
+      DispatchQueue.main.async { result(state.isEnabled) }
+    }
+  }
+
+  /// The shortest way to switching AutoFill on that this iOS has: Apple's own "turn on"
+  /// prompt (18+), the AutoFill & Passwords page for this app (17), or the Settings app.
+  /// Answers whether it is now on (18+) or whether the page opened.
+  private static func openAutofillSettings(_ result: @escaping FlutterResult) {
+    if #available(iOS 18.0, *) {
+      ASSettingsHelper.requestToTurnOnCredentialProviderExtension { turnedOn in
+        DispatchQueue.main.async { result(turnedOn) }
+      }
+    } else if #available(iOS 17.0, *) {
+      ASSettingsHelper.openCredentialProviderAppSettings { error in
+        DispatchQueue.main.async { result(error == nil) }
+      }
+    } else if let url = URL(string: UIApplication.openSettingsURLString) {
+      UIApplication.shared.open(url, options: [:]) { opened in result(opened) }
+    } else {
+      result(false)
     }
   }
 

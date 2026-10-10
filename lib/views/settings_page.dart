@@ -7,6 +7,7 @@ import 'package:bimir_lock/controller/biometric/biometric_controller.dart';
 import 'package:bimir_lock/core/core_controller.dart';
 import 'package:bimir_lock/main.dart';
 import 'package:bimir_lock/modules/settings_ui/settings_ui.dart';
+import 'package:bimir_lock/ui/autofill_guide.dart';
 import 'package:bimir_lock/ui/coach_marks.dart';
 import 'package:bimir_lock/ui/forgot_pin.dart';
 import 'package:bimir_lock/ui/photo_preview.dart';
@@ -226,6 +227,26 @@ class _SettingsPageState extends State<SettingsPage> {
                 textAlign: TextAlign.center,
               ),
             ),
+            // For as long as AutoFill is off on a phone that has it: the
+            // feature people most often never find. Re-read on every resume.
+            Obx(
+              () => ac.available && !ac.on
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: Space.xl),
+                      child: Notice(
+                        tone: Tone.secure,
+                        icon: LucideIcons.textCursorInput,
+                        title: 'AutoFill is off',
+                        message:
+                            'Turn it on to fill your saved passwords in other apps.',
+                        action: TextButton(
+                          onPressed: () => offerAutofill(context),
+                          child: const Text('Turn on'),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
             const SizedBox(height: Space.xxl),
             const SettingsSectionHeader(label: 'Appearance'),
             const SettingsThemePicker(),
@@ -333,6 +354,17 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                       ),
                     ),
+                    // iPhone / iPad: the switch is in the phone's settings, so
+                    // this row says whether it is on and how to get there.
+                    if (Platform.isIOS)
+                      SettingRow(
+                        icon: LucideIcons.textCursorInput,
+                        title: 'AutoFill',
+                        subtitle: ac.iosEnabled.value
+                            ? 'On. Fills passwords in Safari and other apps'
+                            : 'Off. Tap to see how to turn it on',
+                        onTap: () => offerAutofill(context),
+                      ),
                     // Left out where the OS has no autofill framework for us.
                     if (ac.isSupported.value)
                       SettingRow(

@@ -8,6 +8,7 @@ import 'package:bimir_lock/ui/coach_marks.dart';
 import 'package:bimir_lock/ui/tokens.dart';
 import 'package:bimir_lock/ui/unlock.dart';
 import 'package:bimir_lock/ui/widgets.dart';
+import 'package:bimir_lock/ui/autofill_guide.dart';
 import 'package:bimir_lock/ui/intruder_prompt.dart';
 import 'package:bimir_lock/utils/helper/intruder_watch.dart';
 import 'package:bimir_lock/utils/helper/vault_crypto.dart';
@@ -336,8 +337,10 @@ class _VaultTourState extends State<_VaultTour> {
         await CoachMarks.store.markSeen(CoachTours.vaultBasics);
       }
       if (!mounted) return;
-      // The Wrong PIN alerts photo is offered once, before any tips, so the
-      // two never stack.
+      // Two one-time offers, one after the other and before any tips, so
+      // nothing stacks: AutoFill first, then the Wrong PIN alerts photo.
+      await AutofillPrompt.maybeShow(context);
+      if (!mounted) return;
       await IntruderPrompt.maybeShow(context);
       if (!mounted) return;
       CoachMarks.showParts(

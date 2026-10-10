@@ -43,3 +43,29 @@ class AutofillHelper {
   // iOS, or when the phone has no such screen.
   Future<bool> openSecuritySettings() => _invokeBool("openSecuritySettings");
 }
+
+// iPhone and iPad: Bimir Lock is an AutoFill password provider, switched on by
+// the user under Settings > General > AutoFill & Passwords. Same rule as above:
+// every call answers with a safe default instead of throwing.
+class IosAutofill {
+  static const MethodChannel _channel = MethodChannel(
+    "com.cklamib.bimirLock/native",
+  );
+
+  static Future<bool> _invokeBool(String method) async {
+    if (!Platform.isIOS) return false;
+    try {
+      return await _channel.invokeMethod<bool>(method) ?? false;
+    } catch (e) {
+      log("=================>>>>>> ios autofill $method error: $e");
+      return false;
+    }
+  }
+
+  // Is Bimir Lock switched on as an AutoFill provider.
+  static Future<bool> isEnabled() => _invokeBool("autofillEnabled");
+
+  // iOS 18+: Apple's own "turn on" prompt, true when it is now on. iOS 17:
+  // opens the AutoFill settings for this app. Older: the Settings app.
+  static Future<bool> turnOn() => _invokeBool("openAutofillSettings");
+}
