@@ -47,6 +47,14 @@ List the App Store locales this app accepts, vs what is on disk
 
 Upload the App Store listing (no binary)
 
+### ios upload_screenshots
+
+```sh
+[bundle exec] fastlane ios upload_screenshots
+```
+
+Upload App Store screenshots only (no text, no binary)
+
 ### ios probe
 
 ```sh

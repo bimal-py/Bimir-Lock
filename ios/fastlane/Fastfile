@@ -190,6 +190,7 @@ platform :ios do
   # Push ios/fastlane/screenshots/** only — no names, keywords or descriptions.
   #
   #   bundle exec fastlane upload_screenshots
+  #   bundle exec fastlane upload_screenshots path:/tmp/only_en   # some locales only
   #
   # For when the pictures change and the words do not (or were uploaded already):
   # `upload_listing` would re-send every text field in metadata/ as well. deliver
@@ -197,12 +198,11 @@ platform :ios do
   # with no folder keeps what it has, and shows the primary language's set on the
   # store if it has none. Lands on the editable version as a draft.
   desc "Upload App Store screenshots only (no text, no binary)"
-  lane :upload_screenshots do
-    deliver(
-      force: true,
-      skip_metadata: true,
-      skip_screenshots: false
-    )
+  lane :upload_screenshots do |options|
+    # path: another folder of <locale>/ sets, to send only some locales.
+    args = { force: true, skip_metadata: true, skip_screenshots: false }
+    args[:screenshots_path] = File.expand_path(options[:path]) if options[:path]
+    deliver(**args)
   end
 
   # Auth + app-existence probe. Prints what App Store Connect actually holds
@@ -260,6 +260,17 @@ platform :ios do
       UI.message(format("  %-7s desc %4d  keywords %3d  promo %3d  whatsnew %3d", l.locale,
                         l.description.to_s.length, l.keywords.to_s.length,
                         l.promotional_text.to_s.length, l.whats_new.to_s.length))
+    end
+
+    # Screenshots by device class. A locale with none shows the primary language's
+    # set on the store; the version cannot be submitted until the primary has an
+    # iPhone set and (for an iPad app) an iPad 13" set.
+    UI.message("screenshots:")
+    locales.sort_by(&:locale).each do |l|
+      sets = l.get_app_screenshot_sets(includes: "appScreenshots")
+      next if sets.empty?
+      summary = sets.map { |set| "#{set.screenshot_display_type.sub('APP_', '')} #{(set.app_screenshots || []).size}" }
+      UI.message(format("  %-7s %s", l.locale, summary.sort.join(", ")))
     end
   end
 
