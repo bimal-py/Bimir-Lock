@@ -45,6 +45,7 @@ import 'package:bimir_lock/views/settings_page.dart';
 import 'package:bimir_lock/views/user/add_user_detail.dart';
 import 'package:bimir_lock/views/faq/faq_page.dart';
 import 'package:bimir_lock/views/quotes_page.dart';
+import 'package:bimir_lock/views/homePage/checkup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -53,6 +54,10 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:shared_preferences/shared_preferences.dart';
 
 final String? _shotDir = Platform.environment['SCREENSHOT_DIR'];
+
+/// Set to listing/shots/raw to render the eight store screens (see the "store"
+/// groups at the end of main) at App Store pixel sizes, one file per slug.
+final String? _storeDir = Platform.environment['STORE_SHOT_DIR'];
 final String? _fontDir = Platform.environment['FONT_DIR'];
 
 class _FakeCore extends CoreController {
@@ -112,12 +117,24 @@ List<PasswordTable> _sample() {
 }
 
 class _Case {
-  const _Case(this.name, this.size, {this.textScale = 1.0, this.dark = false});
+  const _Case(
+    this.name,
+    this.size, {
+    this.textScale = 1.0,
+    this.dark = false,
+    this.dpr = 2,
+  });
   final String name;
   final Size size;
   final double textScale;
   final bool dark;
+
+  /// Device pixel ratio: 2 for the layout checks, the real one for store shots.
+  final double dpr;
 }
+
+/// The pixel ratio of the case being rendered, for [_shot] to capture at.
+double _pixelRatio = 2;
 
 const List<_Case> _cases = <_Case>[
   _Case('phone', Size(390, 844)),
@@ -200,8 +217,9 @@ Future<void> _pumpApp(
   Map<String, Object> prefs = const <String, Object>{},
   bool autofillOff = false,
 }) async {
-  tester.view.physicalSize = c.size * 2;
-  tester.view.devicePixelRatio = 2;
+  _pixelRatio = c.dpr;
+  tester.view.physicalSize = c.size * c.dpr;
+  tester.view.devicePixelRatio = c.dpr;
   tester.platformDispatcher.textScaleFactorTestValue = c.textScale;
   addTearDown(() {
     tester.view.reset();
@@ -273,13 +291,13 @@ Future<void> _settle(WidgetTester tester) async {
   }
 }
 
-Future<void> _shot(WidgetTester tester, String name) async {
-  final String? dir = _shotDir;
+Future<void> _shot(WidgetTester tester, String name, {String? into}) async {
+  final String? dir = into ?? _shotDir;
   if (dir == null) return;
   await tester.runAsync(() async {
     final RenderRepaintBoundary b =
         _boundary.currentContext!.findRenderObject()! as RenderRepaintBoundary;
-    final ui.Image image = await b.toImage(pixelRatio: 2);
+    final ui.Image image = await b.toImage(pixelRatio: _pixelRatio);
     final ByteData? png = await image.toByteData(
       format: ui.ImageByteFormat.png,
     );
@@ -697,5 +715,121 @@ void main() {
         await _shot(tester, '${c.name}-16-note-editor');
       });
     });
+  }
+
+  // ---------------------------------------------------------------- store
+  //
+  // The eight screens of the store listing (listing/v2/screenshots/panels.json),
+  // rendered by the app's own widgets at the stores' pixel sizes:
+  //
+  //   STORE_SHOT_DIR=listing/shots/raw FONT_DIR=... \
+  //     flutter test test/screens_test.dart --plain-name "store "
+  //
+  // No device is involved, so there is no status bar: the heights below leave
+  // room for the one tool/make_screenshots.py draws ("add" in panels.json),
+  // which brings each file to exactly 1320x2868 (iPhone 6.9") and 2064x2752
+  // (iPad 13"). Real captures from a device can replace any of these files.
+  if (_storeDir != null) {
+    for (final (String folder, Size size, double dpr) in <(String, Size, double)>[
+      ('iphone', const Size(440, 956 - 62), 3),
+      ('ipad', const Size(1032, 1376 - 24), 2),
+    ]) {
+      final _Case light = _Case('store-$folder', size, dpr: dpr);
+      final _Case dark = _Case('store-$folder-dark', size, dpr: dpr, dark: true);
+      final String into = '$_storeDir/$folder';
+      // A 6-digit PIN, as every new one is: six cells on the keypad, and no
+      // "yours has 4 digits" nudge in Settings.
+      const String pin = '482613';
+
+      // Images (the brand mark) decode on real time, which a widget test does
+      // not advance by itself: give them a moment before the picture is taken.
+      Future<void> shoot(WidgetTester tester, String slug) async {
+        await tester.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 300)),
+        );
+        await _settle(tester);
+        await _shot(tester, slug, into: into);
+      }
+
+      group('store $folder', () {
+        testWidgets('vault', (WidgetTester tester) async {
+          await _pumpApp(tester, light, route: HomePage.routeName, user: _user, pin: pin);
+          await shoot(tester, 'vault');
+        });
+
+        testWidgets('dark', (WidgetTester tester) async {
+          await _pumpApp(tester, dark, route: HomePage.routeName, user: _user, pin: pin);
+          await shoot(tester, 'dark');
+        });
+
+        testWidgets('autofill', (WidgetTester tester) async {
+          await _pumpApp(tester, light, route: HomePage.routeName, user: _user, pin: pin);
+          unawaited(
+            showAutofillGuide(navigatorKey.currentContext!, enabled: false, ios: true),
+          );
+          await _settle(tester);
+          await shoot(tester, 'autofill');
+        });
+
+        testWidgets('generator', (WidgetTester tester) async {
+          await _pumpApp(tester, light, route: AddPasswordPage.routeName, user: _user, pin: pin);
+          await tester.enterText(find.byType(TextFormField).at(0), 'Spotify');
+          await tester.enterText(find.byType(TextFormField).at(1), 'sita.sharma@gmail.com');
+          final Finder gen = find.text('Generate a password');
+          await tester.ensureVisible(gen);
+          await tester.tap(gen);
+          await _settle(tester);
+          FocusManager.instance.primaryFocus?.unfocus();
+          await _settle(tester);
+          await shoot(tester, 'generator');
+        });
+
+        testWidgets('checkup', (WidgetTester tester) async {
+          await _pumpApp(tester, light, route: CheckupPage.routeName, user: _user, pin: pin);
+          await shoot(tester, 'checkup');
+        });
+
+        testWidgets('unlock', (WidgetTester tester) async {
+          await _pumpApp(tester, light, route: HomePage.routeName, user: _user, pin: pin);
+          await tester.tap(find.text('Amazon'));
+          await _settle(tester);
+          await tester.tap(find.text('1').last);
+          await tester.tap(find.text('9').last);
+          await _settle(tester);
+          await shoot(tester, 'unlock');
+        });
+
+        testWidgets('alerts', (WidgetTester tester) async {
+          final int now = DateTime(2026, 10, 9, 15, 42).millisecondsSinceEpoch;
+          await _pumpApp(
+            tester,
+            light,
+            route: IntruderPage.routeName,
+            user: _user,
+            pin: pin,
+            prefs: <String, Object>{
+              'intruder_photo_on': true,
+              'intruder_log':
+                  '[{"at":$now,"attempt":17,"photo":null},{"at":${now - 86400000},"attempt":10,"photo":null}]',
+            },
+          );
+          await shoot(tester, 'alerts');
+        });
+
+        testWidgets('backup', (WidgetTester tester) async {
+          await _pumpApp(tester, light, route: HomePage.routeName, user: _user, pin: pin);
+          unawaited(showBackupPasswordDialog(navigatorKey.currentContext!, confirm: true));
+          await _settle(tester);
+          final Finder fields = find.descendant(
+            of: find.byType(Dialog),
+            matching: find.byType(TextField),
+          );
+          await tester.enterText(fields.at(0), 'violet-harbour-42-lantern');
+          await tester.enterText(fields.at(1), 'violet-harbour-42-lantern');
+          await _settle(tester);
+          await shoot(tester, 'backup');
+        });
+      });
+    }
   }
 }

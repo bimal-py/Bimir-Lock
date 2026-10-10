@@ -78,3 +78,9 @@ android/key.properties
 
 # Gradle output from release builds
 /android/build/
+
+# Framed store panels: generated for every locale by tool/make_screenshots.py --all
+# --install from listing/shots/raw/ + listing/v2/screenshots/ (hundreds of MB).
+# The raw captures and captions are what is committed.
+/ios/fastlane/screenshots/
+/android/fastlane/metadata/android/*/images/*Screenshots/

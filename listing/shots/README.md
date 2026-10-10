@@ -1,5 +1,13 @@
 # Screenshots — what to capture
 
+> **Today (2026-10-10) `raw/iphone` and `raw/ipad` hold test renders, not device
+> captures:** the app's own widgets drawn at App Store pixel sizes by
+> `STORE_SHOT_DIR=listing/shots/raw FONT_DIR=$FLUTTER_ROOT/bin/cache/artifacts/material_fonts flutter test test/screens_test.dart --plain-name "store "`.
+> They have no status bar, so `panels.json` says `"add"` for those folders, and the
+> AutoFill panel shows the in-app guide rather than the system sheet. Replace any
+> file with a real capture (same name) and set that folder to `"replace"`.
+> The framed panels themselves are generated and gitignored.
+
 Raw captures go here with **exact file names**. No frames, no captions, no
 resizing: `tool/make_screenshots.py` adds the crimson panel, the device frame,
 the headline and a clean 9:41 status bar.

@@ -187,6 +187,24 @@ platform :ios do
     )
   end
 
+  # Push ios/fastlane/screenshots/** only — no names, keywords or descriptions.
+  #
+  #   bundle exec fastlane upload_screenshots
+  #
+  # For when the pictures change and the words do not (or were uploaded already):
+  # `upload_listing` would re-send every text field in metadata/ as well. deliver
+  # REPLACES a locale's whole screenshot set with what is in its folder; a locale
+  # with no folder keeps what it has, and shows the primary language's set on the
+  # store if it has none. Lands on the editable version as a draft.
+  desc "Upload App Store screenshots only (no text, no binary)"
+  lane :upload_screenshots do
+    deliver(
+      force: true,
+      skip_metadata: true,
+      skip_screenshots: false
+    )
+  end
+
   # Auth + app-existence probe. Prints what App Store Connect actually holds
   # without changing anything — run this first when deliver misbehaves, to tell
   # "bad credentials" apart from "no editable version".

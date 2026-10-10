@@ -55,14 +55,17 @@ class _IntruderPageState extends State<IntruderPage>
 
   Future<void> _load() async {
     final bool on = await IntruderWatch.isEnabled();
-    final bool cameraOff = on && !await AppPermissions.cameraGranted();
     final List<IntruderEvent> events = await IntruderWatch.events();
     if (!mounted) return;
     setState(() {
       _photoOn = on;
-      _cameraOff = cameraOff;
       _events = events;
     });
+    // After the page has its content: asking the phone about the camera must
+    // not hold up the switch and the list.
+    final bool cameraOff = on && !await AppPermissions.cameraGranted();
+    if (!mounted) return;
+    setState(() => _cameraOff = cameraOff);
   }
 
   /// Asks again while the phone still will; otherwise offers its settings.

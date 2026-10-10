@@ -43,9 +43,9 @@
     ]
   },
   "status_bar": {
-    "_comment": "keep = capture already has a clean bar (simulator override / Android demo mode); replace = paint a clean 9:41 bar over a real-device bar; add = capture has no bar (flutter test harness).",
-    "iphone": "replace",
-    "ipad": "replace",
+    "_comment": "add = the capture has no status bar (the flutter-test store renders in listing/shots/raw, which leave room for one); replace = paint a clean 9:41 bar over a real device's; keep = the capture already has a clean bar (simulator override / Android demo mode). The iphone and ipad folders hold test renders today: switch a folder to replace when you put real device captures in it.",
+    "iphone": "add",
+    "ipad": "add",
     "android_phone": "replace",
     "android_tablet": "replace"
   }
