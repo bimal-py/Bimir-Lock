@@ -37,7 +37,16 @@ Future<void> offerAutofill(BuildContext context) async {
   if (!context.mounted) return;
   if (!await showAutofillGuide(context, enabled: ac.on)) return;
   await ac.turnOn();
-  if (ac.on) showNote('AutoFill is on for Bimir Lock.');
+  if (ac.on) {
+    showNote('AutoFill is on for Bimir Lock.');
+  } else if (Platform.isIOS) {
+    // Declined, or iOS chose not to show its prompt: say where the switch is
+    // rather than leave the tap looking as if it did nothing. (On Android the
+    // system picker is still open at this point; the state is read on return.)
+    showNote(
+      'Still off. Turn it on in Settings › General › AutoFill & Passwords.',
+    );
+  }
 }
 
 /// Offers AutoFill once, on the vault, so it is not left for people to find in
