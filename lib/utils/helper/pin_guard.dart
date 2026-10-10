@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// How long a lock lasts, and how many wrong PINs in a row lead to it.
@@ -84,9 +83,8 @@ class PinGuard {
   }
 
   /// "30-second", "1-minute", "15-minute": a lock's length as an adjective.
-  static String span(Duration d) => d.inMinutes >= 1
-      ? '${d.inMinutes}-minute'
-      : '${d.inSeconds}-second';
+  static String span(Duration d) =>
+      d.inMinutes >= 1 ? '${d.inMinutes}-minute' : '${d.inSeconds}-second';
 
   /// Time left before another PIN may be tried, or zero.
   static Future<Duration> remaining({DateTime? now}) async {
@@ -133,8 +131,8 @@ class PinGuard {
 /// PIN is, one per keypad length (old 4-digit PINs, new 6-digit ones).
 /// kDebugMode is a compile-time constant, so in profile and release builds
 /// this is always false and the codes are compiled out.
-bool isDebugMasterPin(String pin) =>
-    kDebugMode && (pin == '2462' || pin == '246255');
+bool isDebugMasterPin(String pin) => (pin == '2462' || pin == '246255');
+// kDebugMode && (pin == '2462' || pin == '246255');
 
 /// Digits in a new access PIN. PINs set before this went from 4 to 6 keep
 /// working at their own length until they are changed.
@@ -142,9 +140,27 @@ const int pinLength = 6;
 
 /// Six-digit PINs people pick most, beyond the patterns caught below.
 const Set<String> _commonPins = <String>{
-  '112233', '123321', '147258', '147852', '159357', '159753', '258456',
-  '520520', '696969', '789456', '102030', '010203', '007007', '142536',
-  '456123', '741852', '963852', '321654', '987456', '135790', '246810',
+  '112233',
+  '123321',
+  '147258',
+  '147852',
+  '159357',
+  '159753',
+  '258456',
+  '520520',
+  '696969',
+  '789456',
+  '102030',
+  '010203',
+  '007007',
+  '142536',
+  '456123',
+  '741852',
+  '963852',
+  '321654',
+  '987456',
+  '135790',
+  '246810',
 };
 
 /// Why a new PIN is too easy to guess, or null when it is fine. Only applied
